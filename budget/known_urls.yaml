@@ -1,0 +1,20 @@
+# Manual overrides / seed list for CPS budget document URLs.
+#
+# CPS's budget pages are less uniformly structured than the demographics
+# page (see enrollment/scripts/scraper.py), and some document links may be
+# rendered in a way the page-crawler in scripts/scraper.py doesn't reliably
+# pick up. Anything listed here is always downloaded in addition to whatever
+# the crawler finds on its own, so it acts as a guaranteed fallback.
+#
+# Format: CATEGORY_YEAR: url
+#   - CATEGORY should be one of DISTRICT_MANAGED, STUDENT_BASED, REVENUE,
+#     GENERAL, or OTHER (see scraper.py's classify_filename()), so cleaning
+#     scripts can find files by prefix the same way enrollment's do.
+#   - YEAR is the CPS fiscal/budget year (e.g. 2027 for the FY2027 budget).
+#
+# Add a line here any time you spot a document on cps.edu that the crawler
+# missed - no code changes required, the scraper picks up new entries on its
+# next run.
+
+DISTRICT_MANAGED_2026: "https://www.cps.edu/globalassets/cps-pages/about-cps/finance/budget/budget-2026/docs/fy2026-budget-overview-district-managed.xlsx"
+DISTRICT_MANAGED_2027: "https://www.cps.edu/globalassets/cps-pages/about-cps/finance/budget/budget-2027/docs/fy2027_budget_overview_district_managed_schools.xlsx"
