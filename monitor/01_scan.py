@@ -10,7 +10,10 @@ Last-Modified/ETag/size, and diffs the result against the previous run.
 For spreadsheet-shaped files (csv/tsv/xlsx/xlsm/xls, plus publicly-shared
 Google Sheets) it also downloads the file (capped at MAX_SPREADSHEET_BYTES)
 and reads just the header row, so the dashboard can show column names and
-you can search by them without opening each file.
+you can search by them without opening each file -- but only when the
+file's Last-Modified/ETag/size have actually changed since last run; an
+unchanged file reuses its cached columns instead of being re-downloaded,
+which is what keeps repeat runs fast.
 
 Outputs (all under monitor/data/, all committed to the repo so history
 survives even if CPS reorganizes or removes something later):
@@ -388,6 +391,33 @@ def compute_diff(old_state, new_state):
     return diff
 
 
+def cached_columns_if_unchanged(old_state, url, head):
+    """If this file's Last-Modified/ETag/size all match what we saw last
+    run, skip re-downloading it and reuse the cached column data instead.
+    Most weeks almost nothing on cps.edu actually changes, so this is the
+    single biggest lever on run time -- a full run downloads every
+    spreadsheet once; every run after that only downloads new/changed ones.
+
+    Returns None (meaning "go download it") when we can't be sure it's
+    unchanged: no prior record, or no comparable metadata at all (some
+    globalassets paths never send Last-Modified/ETag/Content-Length)."""
+    om = old_state.get("files", {}).get(url)
+    if not om:
+        return None
+    comparable = head.get("last_modified") or head.get("etag") or head.get("content_length")
+    if not comparable:
+        return None
+    if (head.get("last_modified") == om.get("last_modified")
+            and head.get("etag") == om.get("etag")
+            and head.get("content_length") == om.get("content_length")):
+        return {
+            "columns": om.get("columns", []),
+            "sheet_names": om.get("sheet_names", []),
+            "columns_error": om.get("columns_error"),
+        }
+    return None
+
+
 def main():
     seed_pages, allowed_prefixes, api_services = load_config()
     session = requests.Session()
@@ -398,18 +428,26 @@ def main():
     print(f"Visited {len(visited)} pages -> {len(files)} files, {len(google_docs)} Google Sheet/Doc links")
 
     print("Checking file headers (Last-Modified/ETag/size) ...")
+    old_state = load_state()  # loaded early so the spreadsheet cache check below can use it
     new_state = {"files": {}, "google_docs": {}, "api_services": {}, "last_scan": now_iso()}
+    downloaded, cache_hits = 0, 0
     for i, (url, meta) in enumerate(files.items(), 1):
         if i % 25 == 0:
-            print(f"  ... {i}/{len(files)}")
+            print(f"  ... {i}/{len(files)}  (downloaded {downloaded}, reused from cache {cache_hits})")
         head = head_or_get_metadata(session, url)
         time.sleep(REQUEST_DELAY)
 
         ext = urlparse(url).path.lower().rsplit(".", 1)[-1]
         cols = {"columns": [], "sheet_names": [], "columns_error": None}
         if ext in SPREADSHEET_EXTENSIONS and head.get("status_code", 200) < 400:
-            cols = extract_spreadsheet_columns(session, url, ext)
-            time.sleep(REQUEST_DELAY)
+            cached = cached_columns_if_unchanged(old_state, url, head)
+            if cached is not None:
+                cols = cached
+                cache_hits += 1
+            else:
+                cols = extract_spreadsheet_columns(session, url, ext)
+                downloaded += 1
+                time.sleep(REQUEST_DELAY)
 
         new_state["files"][url] = {
             "category": guess_category(url),
@@ -448,7 +486,6 @@ def main():
     print("Checking api.cps.edu services ...")
     new_state["api_services"] = check_api_services(session, api_services)
 
-    old_state = load_state()
     diff = compute_diff(old_state, new_state)
 
     # scrape_id is the single identifier that ties state.json, this run's
@@ -479,6 +516,7 @@ def main():
         }) + "\n")
 
     print(f"\nscrape_id={scrape_id}  run_number={run_number}")
+    print(f"Spreadsheet headers: {downloaded} downloaded, {cache_hits} reused from cache (unchanged)")
     print(f"New: {len(diff['new_files'])}  Changed: {len(diff['changed_files'])}  "
           f"Removed: {len(diff['removed_files'])}  New Google Docs: {len(diff['new_google_docs'])}")
 

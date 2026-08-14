@@ -46,10 +46,14 @@ def load_run_log():
         return []
     runs = []
     with open(LOG_FILE, "r", encoding="utf-8") as f:
-        for line in f:
+        for lineno, line in enumerate(f, 1):
             line = line.strip()
-            if line:
+            if not line:
+                continue
+            try:
                 runs.append(json.loads(line))
+            except json.JSONDecodeError as e:
+                print(f"  [skip] run_log.jsonl line {lineno} is not valid JSON ({e})")
     return runs
 
 
@@ -191,16 +195,34 @@ def build_latest(state, run_log):
 
 def copy_recent_diffs(api_dir):
     """Mirror the N most recent per-run diffs into api/changes/<scrape_id>.json
-    -- filenames already match scrape_id since 01_scan.py names them that way."""
+    -- filenames already match scrape_id since 01_scan.py names them that way.
+
+    Tolerant of a messy diffs/ folder (empty files, non-.json files, a
+    truncated file from an interrupted prior run) -- one bad file shouldn't
+    take down the whole export, so we skip and warn instead of crashing."""
     changes_dir = os.path.join(api_dir, "changes")
     os.makedirs(changes_dir, exist_ok=True)
     if not os.path.isdir(DIFFS_DIR):
         return
-    fnames = sorted(os.listdir(DIFFS_DIR), reverse=True)[:RUNS_HISTORY_SHOWN]
+    fnames = sorted(
+        (f for f in os.listdir(DIFFS_DIR) if f.lower().endswith(".json")),
+        reverse=True,
+    )[:RUNS_HISTORY_SHOWN]
+    copied = 0
     for fname in fnames:
-        with open(os.path.join(DIFFS_DIR, fname), "r", encoding="utf-8") as f:
-            diff = json.load(f)
+        src = os.path.join(DIFFS_DIR, fname)
+        if os.path.getsize(src) == 0:
+            print(f"  [skip] {fname} is empty")
+            continue
+        try:
+            with open(src, "r", encoding="utf-8") as f:
+                diff = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"  [skip] {fname} is not valid JSON ({e})")
+            continue
         save_json(os.path.join(changes_dir, fname), diff)
+        copied += 1
+    print(f"  copied {copied}/{len(fnames)} diff files into {changes_dir}")
 
 
 def build_index(latest):
