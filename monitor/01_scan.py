@@ -7,6 +7,11 @@ domain. Crawls cps.edu (from monitor/known_urls.yaml) plus the
 api.cps.edu service list, checks every downloadable file it finds for
 Last-Modified/ETag/size, and diffs the result against the previous run.
 
+For spreadsheet-shaped files (csv/tsv/xlsx/xlsm/xls, plus publicly-shared
+Google Sheets) it also downloads the file (capped at MAX_SPREADSHEET_BYTES)
+and reads just the header row, so the dashboard can show column names and
+you can search by them without opening each file.
+
 Outputs (all under monitor/data/, all committed to the repo so history
 survives even if CPS reorganizes or removes something later):
   state.json          - current full inventory snapshot (overwritten each run)
@@ -16,7 +21,9 @@ survives even if CPS reorganizes or removes something later):
 monitor/02_render.py reads these to build the static dashboard that gets
 published to GitHub Pages.
 """
+import csv
 import hashlib
+import io
 import json
 import os
 import re
@@ -28,6 +35,12 @@ from urllib.parse import urljoin, urlparse, urldefrag
 import requests
 import yaml
 from bs4 import BeautifulSoup
+import openpyxl
+
+try:
+    import xlrd  # legacy .xls only; optional -- degrades gracefully if absent
+except ImportError:
+    xlrd = None
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(HERE, "data")
@@ -48,6 +61,13 @@ REQUEST_TIMEOUT = 20
 REQUEST_DELAY = 0.4
 HEADERS = {"User-Agent": "chicago-education-data-monitor/1.0"}
 YEAR_RE = re.compile(r"(20\d{2})")
+
+# Extensions we actually open up and read a header row from. Everything
+# else (pdf/docx/pptx/zip/json) just gets the HEAD-based metadata above --
+# opening those wouldn't give us "column headers" anyway.
+SPREADSHEET_EXTENSIONS = {"csv", "tsv", "xlsx", "xlsm", "xls"}
+MAX_SPREADSHEET_BYTES = 20 * 1024 * 1024  # skip header-parsing past this size
+MAX_COLUMNS_KEPT = 60  # sanity cap so one malformed row doesn't blow up the UI
 
 
 def now_iso():
@@ -115,7 +135,17 @@ def guess_year(url, link_text=""):
 
 def guess_format(url):
     if is_google_doc(url):
-        return "Google Sheet/Doc (external)"
+        path = urlparse(url).path.lower()
+        netloc = urlparse(url).netloc.lower()
+        if "spreadsheets" in path or netloc == "sheets.google.com":
+            return "Google Sheet (external)"
+        if "/document/" in path:
+            return "Google Doc (external)"
+        if "/presentation/" in path:
+            return "Google Slides (external)"
+        if "/forms/" in path:
+            return "Google Form (external)"
+        return "Google Doc/Sheet (external)"
     ext = urlparse(url).path.lower().rsplit(".", 1)[-1]
     return {
         "pdf": "PDF", "xlsx": "Spreadsheet (xlsx)", "xls": "Spreadsheet (xls)",
@@ -128,6 +158,95 @@ def guess_format(url):
 
 def sha256_of(text):
     return hashlib.sha256(text.encode("utf-8", "ignore")).hexdigest()[:16]
+
+
+def _download_bytes(session, url, max_bytes=MAX_SPREADSHEET_BYTES):
+    """Stream a URL into memory, bailing out early if it exceeds max_bytes.
+    Returns (bytes_or_None, error_string_or_None)."""
+    try:
+        with session.get(url, timeout=REQUEST_TIMEOUT, stream=True) as r:
+            if r.status_code != 200:
+                return None, f"http {r.status_code}"
+            buf = bytearray()
+            for chunk in r.iter_content(65536):
+                buf.extend(chunk)
+                if len(buf) > max_bytes:
+                    return None, f"file exceeds {max_bytes // (1024 * 1024)}MB, skipped"
+            return bytes(buf), None
+    except requests.RequestException as e:
+        return None, str(e)
+
+
+def _clean_header_row(values):
+    cols = []
+    for v in values:
+        if v is None:
+            continue
+        s = str(v).strip()
+        if s:
+            cols.append(s)
+    return cols[:MAX_COLUMNS_KEPT]
+
+
+def extract_spreadsheet_columns(session, url, ext):
+    """Download a csv/tsv/xlsx/xlsm/xls file (capped) and read just the
+    header row (+ sheet names for workbook formats). Never raises --
+    failures are surfaced as columns_error so the run doesn't die on one
+    bad file."""
+    content, err = _download_bytes(session, url)
+    if err:
+        return {"columns": [], "sheet_names": [], "columns_error": err}
+    try:
+        if ext in ("csv", "tsv"):
+            text = content.decode("utf-8", errors="replace")
+            try:
+                dialect = csv.Sniffer().sniff(text[:4096], delimiters=",\t;|")
+            except csv.Error:
+                dialect = csv.excel_tab if ext == "tsv" else csv.excel
+            reader = csv.reader(io.StringIO(text), dialect)
+            first_row = next(reader, [])
+            return {"columns": _clean_header_row(first_row), "sheet_names": [], "columns_error": None}
+        elif ext in ("xlsx", "xlsm"):
+            wb = openpyxl.load_workbook(io.BytesIO(content), read_only=True, data_only=True)
+            sheet_names = wb.sheetnames
+            ws = wb[sheet_names[0]]
+            first_row = next(ws.iter_rows(min_row=1, max_row=1, values_only=True), ())
+            columns = _clean_header_row(first_row)
+            wb.close()
+            return {"columns": columns, "sheet_names": sheet_names, "columns_error": None}
+        elif ext == "xls":
+            if xlrd is None:
+                return {"columns": [], "sheet_names": [], "columns_error": "xlrd not installed"}
+            wb = xlrd.open_workbook(file_contents=content)
+            sheet_names = wb.sheet_names()
+            sheet = wb.sheet_by_index(0)
+            first_row = sheet.row_values(0) if sheet.nrows else []
+            return {"columns": _clean_header_row(first_row), "sheet_names": sheet_names, "columns_error": None}
+    except Exception as e:  # noqa: BLE001 -- a malformed file must not kill the scan
+        return {"columns": [], "sheet_names": [], "columns_error": f"parse error: {e}"}
+    return {"columns": [], "sheet_names": [], "columns_error": "unsupported format"}
+
+
+def extract_gsheet_columns(session, url):
+    """Try the public CSV export of a Google Sheet to read its header row.
+    Only works if the sheet is shared 'anyone with the link can view' --
+    otherwise we just record why it's unavailable."""
+    if "/spreadsheets/" not in urlparse(url).path and "sheets.google.com" not in urlparse(url).netloc.lower():
+        return {"columns": [], "columns_error": "not a Google Sheet"}
+    m = re.search(r"/d/([a-zA-Z0-9_-]+)", url)
+    if not m:
+        return {"columns": [], "columns_error": "could not parse sheet ID"}
+    export_url = f"https://docs.google.com/spreadsheets/d/{m.group(1)}/export?format=csv"
+    content, err = _download_bytes(session, export_url)
+    if err:
+        return {"columns": [], "columns_error": f"unavailable ({err}) -- likely not publicly shared"}
+    try:
+        text = content.decode("utf-8", errors="replace")
+        reader = csv.reader(io.StringIO(text))
+        first_row = next(reader, [])
+        return {"columns": _clean_header_row(first_row), "columns_error": None}
+    except Exception as e:  # noqa: BLE001
+        return {"columns": [], "columns_error": f"parse error: {e}"}
 
 
 def crawl(seed_pages, allowed_prefixes, max_pages=MAX_PAGES):
@@ -274,25 +393,44 @@ def main():
             print(f"  ... {i}/{len(files)}")
         head = head_or_get_metadata(session, url)
         time.sleep(REQUEST_DELAY)
+
+        ext = urlparse(url).path.lower().rsplit(".", 1)[-1]
+        cols = {"columns": [], "sheet_names": [], "columns_error": None}
+        if ext in SPREADSHEET_EXTENSIONS and head.get("status_code", 200) < 400:
+            cols = extract_spreadsheet_columns(session, url, ext)
+            time.sleep(REQUEST_DELAY)
+
         new_state["files"][url] = {
             "category": guess_category(url),
             "format": guess_format(url),
             "year_guess": guess_year(url, meta["link_text"]),
             "title_guess": meta["link_text"] or os.path.basename(urlparse(url).path),
+            "filename": os.path.basename(urlparse(url).path),
             "found_on_pages": meta["found_on"],
             "last_modified": head.get("last_modified"),
             "etag": head.get("etag"),
             "content_length": head.get("content_length"),
             "content_type": head.get("content_type"),
             "http_error": head.get("error"),
+            "columns": cols["columns"],
+            "sheet_names": cols["sheet_names"],
+            "columns_error": cols["columns_error"],
             "last_checked": now_iso(),
         }
     for url, meta in google_docs.items():
+        fmt = guess_format(url)
+        cols = {"columns": [], "columns_error": None}
+        if fmt == "Google Sheet (external)":
+            cols = extract_gsheet_columns(session, url)
+            time.sleep(REQUEST_DELAY)
         new_state["google_docs"][url] = {
             "category": guess_category(meta["found_on"][0]) if meta["found_on"] else "",
+            "format": fmt,
             "title_guess": meta["link_text"],
             "found_on_pages": meta["found_on"],
-            "note": "Google Sheet/Doc -- no HTTP Last-Modified available this way.",
+            "columns": cols["columns"],
+            "columns_error": cols["columns_error"],
+            "note": "Google Doc/Sheet -- no HTTP Last-Modified available this way.",
             "last_checked": now_iso(),
         }
 
