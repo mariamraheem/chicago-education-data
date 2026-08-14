@@ -43,6 +43,11 @@ jobs:
       - name: Render React dashboard
         run: python monitor/03_render_dashboard.py
 
+      - name: Add enrollment dashboard
+        run: |
+          mkdir -p monitor/site/enrollment
+          cp enrollment/dashboard/index.html monitor/site/enrollment/index.html
+          
       - name: Commit updated inventory data
         run: |
           git config user.name "github-actions[bot]"
