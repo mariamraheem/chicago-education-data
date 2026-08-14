@@ -41,6 +41,62 @@ CSVs), the full history of every workbook CPS has ever published stays
 available here even if CPS reorganizes or removes something from their site
 later.
 
+- **monitor/** - broad, shallow, site-wide watch. Not a domain scraper like
+  enrollment/ or budget/ -- it doesn't clean or compile anything. It crawls
+  cps.edu from a seed list plus the api.cps.edu service directory, and
+  publishes a live dashboard of every downloadable file it finds (with
+  Last-Modified/ETag/size) and what's changed since the last run. Use it to
+  spot new CPS data drops, then wire the interesting ones into enrollment/
+  or budget/ (or a new domain) once you know they're worth cleaning.
+
+### monitor/ stages
+
+Two stages instead of three, since there's no cleaning to do here:
+
+1. **Scan** (`01_scan.py`) - crawl cps.edu from `monitor/known_urls.yaml`,
+   check every downloadable file's HTTP headers, diff against
+   `monitor/data/state.json` from the previous run.
+2. **Render** (`02_render.py`) - build the static dashboard
+   (`monitor/site/index.html`) from the current state + recent diffs.
+
+```bash
+pip install -r monitor/requirements.txt
+python monitor/01_scan.py
+python monitor/02_render.py
+open monitor/site/index.html   # preview locally
+```
+
+`monitor/data/` (state.json, run_log.jsonl, diffs/) is committed to the
+repo the same way raw source files are for enrollment/budget, so you get
+full history of what CPS published and when, even after they reorganize.
+`monitor/site/` is NOT committed -- it's rebuilt fresh each run and
+published straight to GitHub Pages via `actions/deploy-pages`.
+
+**One-time manual setup:** in the repo's Settings -> Pages, set
+**Source: GitHub Actions** (instead of "Deploy from a branch"). After that,
+`update-monitor.yml` runs weekly (Monday 07:00 UTC) and on-demand via the
+Actions tab, same as `update-enrollment.yml`/`update-budget.yml`.
+
+### What it doesn't catch (yet)
+
+- **Google Sheets.** Several of CPS's current-year Metrics reports (e.g.
+  the 2025-method attendance/dropout/graduation rates) are linked out to
+  `docs.google.com` instead of hosted as files. The dashboard flags when
+  these links appear/disappear, but can't tell you when the sheet content
+  itself changes without a Google Drive API key (`files.get(fileId,
+  fields="modifiedTime")`) -- there's a hook for this noted in
+  `01_scan.py` if you want to add it later.
+- **API data.** `api.cps.edu`'s 10 services are live APIs, not files.
+  `01_scan.py` only hashes each service's docs/swagger page, so it'll
+  tell you if the API *surface* changes but not if e.g. School Profile
+  API adds a new school. If you want that, add an endpoint-specific check
+  (query it, hash/diff the JSON response) the same way `compute_diff()`
+  handles files.
+- **Full site coverage.** It's a bounded crawl (`MAX_PAGES` in
+  `01_scan.py`, and only follows links under the path prefixes in
+  `known_urls.yaml`). If a data hub page goes unfound, add its URL to
+  `seed_pages` in `monitor/known_urls.yaml`.
+
 ## Running locally
 
 ```bash

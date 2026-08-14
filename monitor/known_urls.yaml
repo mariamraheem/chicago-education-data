@@ -1,0 +1,88 @@
+# monitor/known_urls.yaml
+#
+# Seed pages for the broad site-wide watch, and the path prefixes the
+# crawler is allowed to follow links into. Mirrors the manual-fallback
+# role that budget/known_urls.yaml plays for 01_scrape.py -- add a hub
+# page here any time you spot one the crawler missed. Check
+# monitor/data/run_log.jsonl's pages_visited count over time as a rough
+# coverage sanity check.
+
+seed_pages:
+  - https://www.cps.edu/about/
+  - https://www.cps.edu/about/stats-facts/
+  - https://www.cps.edu/about/whats-new-on-cps-edu/
+  - https://www.cps.edu/about/district-data/
+  - https://www.cps.edu/about/district-data/metrics/
+  - https://www.cps.edu/about/district-data/metrics/continuous-improvement-and-data-transparency/
+  - https://www.cps.edu/about/district-data/metrics/school-performance/
+  - https://www.cps.edu/about/district-data/metrics/sqrp/
+  - https://www.cps.edu/about/district-data/metrics/surveys/
+  - https://www.cps.edu/about/district-data/metrics/accountability-reports/
+  - https://www.cps.edu/about/district-data/metrics/assessment-reports/
+  - https://www.cps.edu/about/district-data/metrics/annual-regional-analysis-information/
+  - https://www.cps.edu/about/district-data/demographics/
+  - https://www.cps.edu/about/district-data/health-data/
+  - https://www.cps.edu/about/district-data/charter-contract-and-options-data/
+  - https://www.cps.edu/about/district-data/conduct-primary-research/
+  - https://www.cps.edu/about/surveys/
+  - https://www.cps.edu/about/finance/
+  - https://www.cps.edu/about/finance/annual-financial-report/
+  - https://www.cps.edu/about/finance/budget/
+  - https://www.cps.edu/about/finance/budget/budget-2026/
+  - https://www.cps.edu/about/finance/budget/budget-2026/more-information-2026/
+  - https://www.cps.edu/about/finance/budget/budget-2026/budget-overview-2026/
+  - https://www.cps.edu/about/finance/budget/budget-2026/revenue-2026/
+  - https://www.cps.edu/about/finance/budget/budget-2026/schools-and-networks-2026/
+  - https://www.cps.edu/about/finance/budget/budget-2026/pensions-2026/
+  - https://www.cps.edu/about/finance/budget/budget-2026/capital-2026/
+  - https://www.cps.edu/about/finance/budget/budget-2026/debt-management-2026/
+  - https://www.cps.edu/about/finance/budget/budget-2026/fund-descriptions-2026/
+  - https://www.cps.edu/about/finance/budget/budget-2026/cash-management-2026/
+  - https://www.cps.edu/about/finance/budget/budget-2026/readers-guide-2026/
+  - https://www.cps.edu/about/finance/budget/budget-2026/community-engagement/
+  - https://www.cps.edu/about/finance/capital-plan/
+  - https://www.cps.edu/about/finance/emergency-relief-funding/
+  - https://www.cps.edu/about/freedom-of-information-act-foia/
+  - https://www.cps.edu/about/local-school-councils/
+  - https://www.cps.edu/about/local-school-councils/lsc-elections/
+  - https://www.cps.edu/about/chicago-board-of-education/
+  - https://www.cps.edu/about/policies/
+  - https://www.cps.edu/sites/cps-policy-rules/
+  - https://www.cps.edu/about/labor-relations/
+  - https://www.cps.edu/about/leadership/
+  - https://www.cps.edu/about/departments/
+  - https://www.cps.edu/about/non-district-school-management/
+  - https://www.cps.edu/about/school-transitions/
+  - https://www.cps.edu/schools/profiles/
+  - https://www.cps.edu/schools/networks/
+  - https://www.cps.edu/academics/student-assessments/
+  - https://www.cps.edu/academics/high-school-course-catalog/
+  - https://www.cps.edu/procurement/
+  - https://www.cps.edu/press-releases/
+  - https://www.cps.edu/media/
+
+allowed_path_prefixes:
+  - /about/
+  - /schools/
+  - /academics/
+  - /procurement/
+  - /press-releases/
+  - /media/
+  - /sites/
+  - /globalassets/
+  - /contentassets/
+
+# api.cps.edu service docs. These are live APIs, not files -- see the
+# README section on monitor/ for what "changed" means here (docs/schema
+# hash only, not the underlying data).
+api_services:
+  Maps API: https://api.cps.edu/maps/
+  School Profile API: https://api.cps.edu/schoolprofile/
+  School Actions API: https://api.cps.edu/schoolactions/
+  Calendar API: https://api.cps.edu/calendar/
+  District API: https://api.cps.edu/district/
+  Health API: https://api.cps.edu/health/
+  LSC API: https://api.cps.edu/lsc/
+  Procurement API: https://api.cps.edu/procurement/
+  Facilities API: https://api.cps.edu/facilities/swagger
+  PRTO API: https://api.cps.edu/prto/swagger

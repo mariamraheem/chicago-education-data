@@ -1,0 +1,62 @@
+name: Update Monitor
+
+on:
+  schedule:
+    # Weekly, Monday 07:00 UTC. This is a broad shallow scan (headers only,
+    # not full downloads) so it's cheap enough to run more often than the
+    # monthly enrollment/budget scrapers -- change to `0 7 * * *` for daily
+    # if you want tighter latency on catching new drops.
+    - cron: "0 7 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Only one Pages deployment at a time; don't cancel one that's already running.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  scan-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r monitor/requirements.txt
+
+      - name: Scan cps.edu + api.cps.edu
+        run: python monitor/01_scan.py
+
+      - name: Render dashboard
+        run: python monitor/02_render.py
+
+      - name: Commit updated inventory data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add monitor/data
+          git diff --cached --quiet || git commit -m "monitor: scan $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push
+
+      - name: Upload dashboard artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: monitor/site
+
+  deploy:
+    needs: scan-and-build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
