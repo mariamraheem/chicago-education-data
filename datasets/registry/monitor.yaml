@@ -1,0 +1,43 @@
+dataset_id: monitor
+title: Chicago Education Data Monitor inventory
+domain: monitor
+description: >-
+  Existing bounded CPS website and API-service monitor that tracks source
+  metadata, changes, and spreadsheet column headers.
+source:
+  url: https://www.cps.edu/
+  publisher: Chicago Public Schools
+  source_type: bounded_site_inventory_and_api_service_monitor
+  metadata_status: verified_from_existing_monitor
+refresh:
+  cadence: weekly
+  manual_refresh_eligible: true
+  metadata_status: verified_from_existing_workflow
+ingestion:
+  method: existing_monitor_scan
+  expected_file_types: [pdf, xls, xlsx, xlsm, csv, tsv, doc, docx, ppt, pptx, zip, json]
+  metadata_status: verified_from_existing_monitor
+schema:
+  grain: one_record_per_discovered_source_url_per_scan
+  primary_keys: [url]
+  time_field: last_checked
+  geography_or_school_identifiers: []
+  required_fields: [url]
+  uniqueness_rules: [url_is_unique_within_a_scan]
+  metadata_status: verified_from_existing_monitor_export
+quality:
+  row_count_thresholds: {}
+  change_thresholds: {}
+  allowed_values: {}
+  metadata_status: placeholder_pending_operational_baselines
+public_output:
+  path: monitor/site/api/
+  format: [json, csv]
+  versioning: latest_snapshot_with_git_history_and_rolling_run_history
+  retention: state_snapshot_plus_git_history_and_recent_static_api_history
+  metadata_status: verified_from_existing_monitor
+governance:
+  pii_assessment: source_inventory_only; review_required_before_any_new_content_publication
+  public_use_notes: Existing public monitor inventory; this registry entry does not change its GitHub Pages deployment.
+provenance:
+  fields: [url, etag, last_modified, content_length, last_checked, scrape_id, run_number, code_version]

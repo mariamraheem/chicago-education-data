@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CPS data product contract",
+  "type": "object",
+  "required": ["dataset_id", "registry_dataset_id", "version", "grain", "fields", "primary_keys", "legacy_pipeline"],
+  "properties": {
+    "dataset_id": {"type": "string", "minLength": 1},
+    "registry_dataset_id": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "minLength": 1},
+    "grain": {"type": "string", "minLength": 1},
+    "primary_keys": {"type": "array", "items": {"type": "string"}},
+    "time_field": {"type": "string"},
+    "reporting_period_format": {"type": "string"},
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "properties": {
+          "name": {"type": "string"},
+          "type": {"type": "string"},
+          "required": {"type": "boolean"},
+          "allowed_values": {"type": "array"}
+        }
+      }
+    },
+    "quality": {"type": "object"},
+    "public_output": {"type": "object"},
+    "legacy_pipeline": {"type": "object"}
+  }
+}

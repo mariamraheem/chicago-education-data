@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CPS data product run manifest",
+  "type": "object",
+  "required": ["run_id", "dataset_id", "started_at", "processing_status", "validation_status", "code_version"],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "dataset_id": {"type": "string", "minLength": 1},
+    "started_at": {"type": "string", "format": "date-time"},
+    "ended_at": {"type": ["string", "null"], "format": "date-time"},
+    "source_url": {"type": ["string", "null"]},
+    "source_file_name": {"type": ["string", "null"]},
+    "source_checksum_or_etag": {"type": ["string", "null"]},
+    "source_files": {"type": "array", "items": {"type": "object"}},
+    "reporting_period": {"type": ["string", "null"]},
+    "processing_status": {"enum": ["pending", "running", "succeeded", "failed", "skipped"]},
+    "validation_status": {"enum": ["not_run", "passed", "warning", "failed"]},
+    "row_count": {"type": ["integer", "null"], "minimum": 0},
+    "warnings": {"type": "array", "items": {"type": "string"}},
+    "errors": {"type": "array", "items": {"type": "string"}},
+    "processed_output": {"type": ["string", "null"]},
+    "comparison": {"type": ["object", "null"]},
+    "code_version": {"type": "string", "minLength": 1}
+  }
+}
