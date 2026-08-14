@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPS Enrollment Data</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f7f7f5;
+    }
+    .card {
+      background: white;
+      border: 1px solid #e5e5e5;
+      border-radius: 14px;
+      padding: 22px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th {
+      text-align: left;
+      font-size: 12px;
+      color: #666;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+    tr:hover {
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+<div class="max-w-7xl mx-auto px-6 py-8">
+  <!-- Header -->
+  <div class="flex items-start justify-between mb-8">
+    <div>
+      <div class="text-sm text-gray-500 mb-2">
+        Chicago Education Data
+      </div>
+      <h1 class="text-3xl font-bold tracking-tight">
+        Enrollment
+      </h1>
+      <p class="text-gray-600 mt-2">
+        20th Day Membership
+      </p>
+    </div>
+    <div class="flex gap-3">
+      <button
+        onclick="refreshData()"
+        class="px-4 py-2 rounded-lg bg-black text-white text-sm font-medium hover:bg-gray-800">
+        Refresh
+      </button>
+      <button
+        onclick="downloadCSV()"
+        class="px-4 py-2 rounded-lg border border-gray-300 bg-white text-sm font-medium hover:bg-gray-50">
+        Download CSV
+      </button>
+    </div>
+  </div>
+  <!-- Status -->
+  <div class="card mb-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <div class="text-sm text-gray-500">
+          Dataset status
+        </div>
+        <div class="flex items-center gap-2 mt-1">
+          <div
+            id="statusDot"
+            class="w-2.5 h-2.5 rounded-full bg-gray-400">
+          </div>
+          <span
+            id="statusText"
+            class="font-semibold">
+            Loading...
+          </span>
+        </div>
+      </div>
+      <div class="text-right">
+        <div class="text-xs text-gray-500">
+          Last refreshed
+        </div>
+        <div
+          id="lastUpdated"
+          class="font-medium">
+          —
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- KPI cards -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+    <div class="card">
+      <div class="text-sm text-gray-500">
+        Students
+      </div>
+      <div
+        id="totalStudents"
+        class="text-3xl font-bold mt-2">
+        —
+      </div>
+    </div>
+    <div class="card">
+      <div class="text-sm text-gray-500">
+        Schools
+      </div>
+      <div
+        id="totalSchools"
+        class="text-3xl font-bold mt-2">
+        —
+      </div>
+    </div>
+    <div class="card">
+      <div class="text-sm text-gray-500">
+        School years
+      </div>
+      <div
+        id="schoolYears"
+        class="text-3xl font-bold mt-2">
+        —
+      </div>
+    </div>
+    <div class="card">
+      <div class="text-sm text-gray-500">
+        Latest year
+      </div>
+      <div
+        id="latestYear"
+        class="text-3xl font-bold mt-2">
+        —
+      </div>
+    </div>
+  </div>
+  <!-- Chart -->
+  <div class="card mb-6">
+    <div class="flex justify-between items-center mb-5">
+      <div>
+        <h2 class="font-semibold text-lg">
+          Enrollment trend
+        </h2>
+        <p class="text-sm text-gray-500">
+          Total membership by school year
+        </p>
+      </div>
+    </div>
+    <div style="height:320px">
+      <canvas id="trendChart"></canvas>
+    </div>
+  </div>
+  <!-- Filters -->
+  <div class="card mb-6">
+    <div class="flex flex-col md:flex-row gap-4">
+      <input
+        id="search"
+        type="text"
+        placeholder="Search school..."
+        class="border border-gray-300 rounded-lg px-3 py-2 text-sm flex-1"
+        oninput="renderTable()"
+      />
+      <select
+        id="yearFilter"
+        class="border border-gray-300 rounded-lg px-3 py-2 text-sm"
+        onchange="renderTable()">
+        <option value="">All years</option>
+      </select>
+      <select
+        id="gradeFilter"
+        class="border border-gray-300 rounded-lg px-3 py-2 text-sm"
+        onchange="renderTable()">
+        <option value="">All grades</option>
+      </select>
+    </div>
+  </div>
+  <!-- Table -->
+  <div class="card">
+    <div class="flex justify-between items-center mb-4">
+      <div>
+        <h2 class="font-semibold text-lg">
+          Data viewer
+        </h2>
+        <p
+          id="rowCount"
+          class="text-sm text-gray-500">
+        </p>
+      </div>
+    </div>
+    <div class="overflow-x-auto">
+      <table>
+        <thead id="tableHead"></thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+let DATA = [];
+let FILTERED = [];
+let chart = null;
+/*
+ * Temporary development data source.
+ *
+ * Once the pipeline produces a frontend-ready JSON file,
+ * replace this path with that generated product.
+ */
+const DATA_SOURCE = "../../tests/fixtures/general_enrollment_sample.csv";
+async function refreshData() {
+  setStatus("Loading", "gray");
+  try {
+    const response = await fetch(DATA_SOURCE);
+    if (!response.ok) {
+      throw new Error("Could not load enrollment data");
+    }
+    const text = await response.text();
+    DATA = parseCSV(text);
+    initializeFilters();
+    renderDashboard();
+    setStatus("Development dataset loaded", "green");
+    document.getElementById("lastUpdated").textContent =
+      new Date().toLocaleString();
+  } catch (error) {
+    console.error(error);
+    setStatus("Unable to load data", "red");
+  }
+}
+function parseCSV(text) {
+  const lines = text
+    .trim()
+    .split(/\r?\n/);
+  const headers = lines[0]
+    .split(",")
+    .map(x => x.trim());
+  return lines
+    .slice(1)
+    .map(line => {
+      const values = line.split(",");
+      const row = {};
+      headers.forEach((header, i) => {
+        row[header] = values[i] ?? "";
+      });
+      return row;
+    });
+}
+function initializeFilters() {
+  const years = uniqueValues(DATA, [
+    "school_year",
+    "year",
+    "School Year"
+  ]);
+  const grades = uniqueValues(DATA, [
+    "grade",
+    "Grade"
+  ]);
+  const yearFilter =
+    document.getElementById("yearFilter");
+  const gradeFilter =
+    document.getElementById("gradeFilter");
+  yearFilter.innerHTML =
+    '<option value="">All years</option>';
+  gradeFilter.innerHTML =
+    '<option value="">All grades</option>';
+  years.forEach(year => {
+    yearFilter.innerHTML +=
+      `<option value="${escapeHtml(year)}">${escapeHtml(year)}</option>`;
+  });
+  grades.forEach(grade => {
+    gradeFilter.innerHTML +=
+      `<option value="${escapeHtml(grade)}">${escapeHtml(grade)}</option>`;
+  });
+}
+function renderDashboard() {
+  updateKPIs();
+  renderChart();
+  renderTable();
+}
+function updateKPIs() {
+  const schools = uniqueValues(DATA, [
+    "school_id",
+    "School ID",
+    "school_name",
+    "School Name"
+  ]);
+  const years = uniqueValues(DATA, [
+    "school_year",
+    "year",
+    "School Year"
+  ]);
+  document.getElementById("totalStudents").textContent =
+    formatNumber(calculateEnrollment(DATA));
+  document.getElementById("totalSchools").textContent =
+    formatNumber(schools.length);
+  document.getElementById("schoolYears").textContent =
+    years.length;
+  document.getElementById("latestYear").textContent =
+    years.length ? years.sort().at(-1) : "—";
+}
+function calculateEnrollment(rows) {
+  const possibleColumns = [
+    "enrollment",
+    "membership",
+    "count",
+    "Enrollment",
+    "Membership"
+  ];
+  const column =
+    possibleColumns.find(c =>
+      rows.length &&
+      Object.prototype.hasOwnProperty.call(rows[0], c)
+    );
+  if (!column) return 0;
+  return rows.reduce(
+    (sum, row) =>
+      sum + (Number(row[column]) || 0),
+    0
+  );
+}
+function renderChart() {
+  const yearColumns = [
+    "school_year",
+    "year",
+    "School Year"
+  ];
+  const enrollmentColumns = [
+    "enrollment",
+    "membership",
+    "count",
+    "Enrollment",
+    "Membership"
+  ];
+  if (!DATA.length) return;
+  const yearColumn =
+    yearColumns.find(c => c in DATA[0]);
+  const enrollmentColumn =
+    enrollmentColumns.find(c => c in DATA[0]);
+  if (!yearColumn || !enrollmentColumn) return;
+  const totals = {};
+  DATA.forEach(row => {
+    const year = row[yearColumn];
+    totals[year] =
+      (totals[year] || 0) +
+      (Number(row[enrollmentColumn]) || 0);
+  });
+  const years =
+    Object.keys(totals).sort();
+  const values =
+    years.map(year => totals[year]);
+  if (chart) {
+    chart.destroy();
+  }
+  chart = new Chart(
+    document.getElementById("trendChart"),
+    {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "Enrollment",
+            data: values,
+            tension: 0.25,
+            borderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: false,
+            ticks: {
+              callback: value =>
+                value.toLocaleString()
+            }
+          }
+        }
+      }
+    }
+  );
+}
+function renderTable() {
+  const search =
+    document.getElementById("search")
+      .value
+      .toLowerCase();
+  const year =
+    document.getElementById("yearFilter")
+      .value;
+  const grade =
+    document.getElementById("gradeFilter")
+      .value;
+  FILTERED =
+    DATA.filter(row => {
+      const text =
+        Object.values(row)
+          .join(" ")
+          .toLowerCase();
+      const matchesSearch =
+        !search ||
+        text.includes(search);
+      const yearValue =
+        row.school_year ||
+        row.year ||
+        row["School Year"] ||
+        "";
+      const gradeValue =
+        row.grade ||
+        row.Grade ||
+        "";
+      return (
+        matchesSearch &&
+        (!year || yearValue === year) &&
+        (!grade || gradeValue === grade)
+      );
+    });
+  const headers =
+    DATA.length
+      ? Object.keys(DATA[0])
+      : [];
+  document.getElementById("tableHead").innerHTML =
+    `<tr>
+      ${headers.map(h => `<th>${escapeHtml(h)}</th>`).join("")}
+    </tr>`;
+  document.getElementById("tableBody").innerHTML =
+    FILTERED
+      .slice(0, 500)
+      .map(row =>
+        `<tr>
+          ${headers.map(h =>
+            `<td>${escapeHtml(row[h])}</td>`
+          ).join("")}
+        </tr>`
+      )
+      .join("");
+  document.getElementById("rowCount").textContent =
+    `${FILTERED.length.toLocaleString()} rows`;
+}
+function downloadCSV() {
+  if (!FILTERED.length) return;
+  const headers =
+    Object.keys(FILTERED[0]);
+  const csv = [
+    headers.join(","),
+    ...FILTERED.map(row =>
+      headers
+        .map(header =>
+          `"${String(row[header] ?? "")
+            .replace(/"/g, '""')}"`
+        )
+        .join(",")
+    )
+  ].join("\n");
+  const blob =
+    new Blob([csv], {
+      type: "text/csv;charset=utf-8;"
+    });
+  const url =
+    URL.createObjectURL(blob);
+  const a =
+    document.createElement("a");
+  a.href = url;
+  a.download = "cps-enrollment.csv";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+function uniqueValues(rows, columns) {
+  if (!rows.length) return [];
+  const column =
+    columns.find(c => c in rows[0]);
+  if (!column) return [];
+  return [
+    ...new Set(
+      rows
+        .map(row => row[column])
+        .filter(Boolean)
+    )
+  ];
+}
+function setStatus(text, color) {
+  const dot =
+    document.getElementById("statusDot");
+  const status =
+    document.getElementById("statusText");
+  status.textContent = text;
+  dot.className =
+    "w-2.5 h-2.5 rounded-full " +
+    (
+      color === "green"
+        ? "bg-green-500"
+        : color === "red"
+          ? "bg-red-500"
+          : "bg-gray-400"
+    );
+}
+function formatNumber(number) {
+  return Number(number || 0)
+    .toLocaleString();
+}
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+refreshData();
+</script>
+</body>
+</html>

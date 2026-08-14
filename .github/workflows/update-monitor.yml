@@ -2,12 +2,10 @@ name: Update Monitor
 
 on:
   schedule:
-    # Weekly, Monday 07:00 UTC. Mostly a shallow header-only scan, except
-    # spreadsheet-shaped files (csv/tsv/xlsx/xlsm/xls, public Google Sheets)
-    # get fully downloaded (capped at 01_scan.py's MAX_SPREADSHEET_BYTES) so
-    # we can read their header row -- still cheap enough to run more often
-    # than the monthly enrollment/budget scrapers -- change to `0 7 * * *`
-    # for daily if you want tighter latency on catching new drops.
+    # Weekly, Monday 07:00 UTC. This is a broad shallow scan (headers only,
+    # not full downloads) so it's cheap enough to run more often than the
+    # monthly enrollment/budget scrapers -- change to `0 7 * * *` for daily
+    # if you want tighter latency on catching new drops.
     - cron: "0 7 * * 1"
   workflow_dispatch: {}
 
@@ -37,11 +35,13 @@ jobs:
       - name: Scan cps.edu + api.cps.edu
         run: python monitor/01_scan.py
 
-      - name: Export static JSON/CSV API
-        run: python monitor/02_export_api.py
+      - name: Render dashboard
+        run: python monitor/02_render.py
 
-      - name: Render React dashboard
-        run: python monitor/03_render_dashboard.py
+      - name: Add enrollment dashboard
+        run: |
+          mkdir -p monitor/site/enrollment
+          cp enrollment/dashboard/index.html monitor/site/enrollment/index.html
 
       - name: Commit updated inventory data
         run: |

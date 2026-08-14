@@ -1,0 +1,63 @@
+dataset_id: enrollment_20th_day_membership
+registry_dataset_id: enrollment_20th_day_membership
+title: CPS 20th Day Membership canonical product
+version: "1.0.0"
+description: >-
+  A long-form, grade-level product generated from the existing GENERAL
+  20th-day enrollment cleaner. This is a wrapper contract, not a replacement
+  for the scraper or cleaner.
+grain: one record per school, school year, and reported grade; grade ALL represents the source's reported Total
+primary_keys: [school_year, school_id, grade]
+time_field: school_year
+reporting_period_format: YYYY-YYYY
+source:
+  landing_page: https://www.cps.edu/about/district-data/demographics/
+  source_file_pattern: GENERAL_*.xls*
+  source_type: CPS demographics GENERAL workbook
+  status: verified_from_existing_scripts
+legacy_pipeline:
+  scraper: enrollment/scripts/01_scrape.py
+  scraper_functions: [get_cps_reports, download_cps_reports]
+  cleaner: enrollment/scripts/02_clean.py
+  cleaner_function: clean_general_files
+  legacy_output: enrollment/data/clean/enrollment_general_clean.csv
+  preserved_behavior: >-
+    Header detection, source-year extraction, historical column handling,
+    grade normalization, and District Total exclusion remain in the legacy cleaner.
+fields:
+  - name: school_year
+    type: string
+    required: true
+    description: Existing cleaner's Year field, derived from the GENERAL source filename.
+  - name: school_id
+    type: string
+    required: true
+    description: School ID where available; legacy historical alternatives are normalized by the wrapper.
+  - name: school_name
+    type: string
+    required: true
+  - name: grade
+    type: string
+    required: true
+    allowed_values: [ALL, PE, PK, K, Grade 1, Grade 2, Grade 3, Grade 4, Grade 5, Grade 6, Grade 7, Grade 8, Grade 9, Grade 10, Grade 11, Grade 12]
+  - name: enrollment
+    type: integer
+    required: true
+    description: Existing GENERAL Total or grade-level count. ALL is not additive with grade rows.
+quality:
+  required_columns: [school_year, school_id, school_name, grade, enrollment]
+  primary_key: [school_year, school_id, grade]
+  school_year_format: YYYY-YYYY
+  enrollment_rule: non_negative_integer
+  row_count_change_ratio: 0.5
+  row_count_change_ratio_status: provisional_until_real_baselines_are_reviewed
+public_output:
+  root: data-products/enrollment_20th_day_membership/
+  version_path: "{school_year}/{run_id}/membership.csv"
+  frontend_summary: "{school_year}/{run_id}/summary.json"
+  frontend_lookup: "{school_year}/{run_id}/schools.json"
+  latest_approved_pointer: latest.json
+  pages_deployment: unchanged_not_published_in_phase_2
+known_limitations:
+  - No raw GENERAL workbook is committed on this branch, so historical validation baselines are unavailable.
+  - Per-file source URLs are not persisted by the existing cleaner; the wrapper records the known landing page and local source-file provenance.

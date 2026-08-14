@@ -1,0 +1,49 @@
+dataset_id: enrollment_20th_day_membership
+title: CPS 20th Day Membership
+domain: enrollment
+description: >-
+  Grade-level canonical product wrapped around the existing GENERAL 20th-day
+  enrollment cleaner. It intentionally excludes race, EL, and IEP dimensions,
+  which are processed by separate existing report paths.
+source:
+  url: https://www.cps.edu/about/district-data/demographics/
+  publisher: Chicago Public Schools
+  source_type: CPS demographics page linked GENERAL workbooks
+  metadata_status: verified_from_enrollment_scripts
+refresh:
+  cadence: unknown
+  manual_refresh_eligible: true
+  metadata_status: unresolved_source_publication_cadence
+reporting_period:
+  field: school_year
+  format: YYYY-YYYY
+  derivation: existing_scraper_extract_school_year_and_GENERAL_filename
+  metadata_status: verified_from_enrollment_scripts
+ingestion:
+  method: existing_enrollment_scripts_01_scrape_and_02_clean
+  expected_file_types: [xls, xlsx]
+  source_file_pattern: GENERAL_*.xls*
+  metadata_status: verified_from_enrollment_scripts
+schema:
+  grain: one_school_school_year_grade_or_ALL_record
+  primary_keys: [school_year, school_id, grade]
+  school_identifier: school_id
+  school_year_field: school_year
+  required_fields: [school_year, school_id, school_name, grade, enrollment]
+  metadata_status: derived_from_existing_GENERAL_cleaner
+quality:
+  row_count_thresholds: {}
+  change_thresholds:
+    maximum_change_ratio: 0.5
+    metadata_status: provisional_review_before_automation
+  allowed_values: {}
+public_output:
+  path: data-products/enrollment_20th_day_membership/
+  format: [csv, json]
+  status: public_candidate_not_published_to_pages
+  versioning: reporting_period_and_run_id_directories_with_latest_approved_pointer
+governance:
+  pii_assessment: unresolved_review_required_before_public_release
+  public_use_notes: Existing CPS aggregate enrollment source; no release decision is made by this registry.
+provenance:
+  fields: [source_url, source_file_name, retrieval_timestamp, source_checksum_sha256, reporting_period, run_id, processed_at, code_version]

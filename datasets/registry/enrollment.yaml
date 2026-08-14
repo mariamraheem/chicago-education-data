@@ -1,0 +1,45 @@
+dataset_id: enrollment
+title: CPS enrollment and demographics
+domain: enrollment
+description: >-
+  Existing pipeline for CPS 20th-day enrollment and demographics reports,
+  including GENERAL, RACE, and EL/IEP report families.
+data_products:
+  - enrollment_20th_day_membership
+source:
+  url: https://www.cps.edu/about/district-data/demographics/
+  publisher: Chicago Public Schools
+  source_type: html_indexed_workbooks
+  metadata_status: verified_from_existing_scraper
+refresh:
+  cadence: unknown
+  manual_refresh_eligible: true
+  metadata_status: placeholder_pending_source_policy
+ingestion:
+  method: existing_enrollment_scripts
+  expected_file_types: [xls, xlsx]
+  metadata_status: verified_from_existing_scripts
+schema:
+  grain: school_year_for_general_and_race_reports; network_year_for_existing_aggregate_outputs
+  primary_keys: [Year, School ID]
+  time_field: Year
+  geography_or_school_identifiers: [School ID, School Name, Networks]
+  required_fields: []
+  uniqueness_rules: []
+  metadata_status: partially_verified_schema_varies_by_report
+quality:
+  row_count_thresholds: {}
+  change_thresholds: {}
+  allowed_values: {}
+  metadata_status: placeholder_pending_baseline_and_contract_review
+public_output:
+  path: enrollment/data/clean/
+  format: csv
+  versioning: currently_file_based_without_explicit_dataset_versions
+  retention: existing_repository_history
+  metadata_status: verified_from_existing_scripts
+governance:
+  pii_assessment: unverified_review_required_before_public_data_product_release
+  public_use_notes: Existing source-derived outputs; publication rules have not yet been formalized.
+provenance:
+  fields: [source_url, source_file_name, source_checksum_or_etag, reporting_period, run_id, processed_at, code_version]

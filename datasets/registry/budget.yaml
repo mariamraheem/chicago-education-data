@@ -1,0 +1,43 @@
+dataset_id: budget
+title: CPS budget documents
+domain: budget
+description: >-
+  Existing pipeline for CPS budget workbooks, currently focused on district
+  managed funds with support for additional document categories.
+source:
+  url: https://www.cps.edu/about/finance/budget/
+  publisher: Chicago Public Schools
+  source_type: html_indexed_workbooks_with_manual_url_overrides
+  metadata_status: verified_from_existing_scraper
+refresh:
+  cadence: unknown
+  manual_refresh_eligible: true
+  metadata_status: placeholder_pending_source_policy
+ingestion:
+  method: existing_budget_scripts
+  expected_file_types: [xls, xlsx]
+  metadata_status: verified_from_existing_scripts
+schema:
+  grain: unverified_varies_by_workbook_and_sheet
+  primary_keys: []
+  time_field: fiscal_year
+  geography_or_school_identifiers: []
+  required_fields: []
+  uniqueness_rules: []
+  metadata_status: placeholder_pending_real_workbook_validation
+quality:
+  row_count_thresholds: {}
+  change_thresholds: {}
+  allowed_values: {}
+  metadata_status: placeholder_pending_real_workbook_validation
+public_output:
+  path: budget/data/clean/
+  format: csv
+  versioning: currently_file_based_without_explicit_dataset_versions
+  retention: existing_repository_history
+  metadata_status: verified_from_existing_scripts
+governance:
+  pii_assessment: unverified_review_required_before_public_data_product_release
+  public_use_notes: Existing source-derived outputs; budget schema has not yet been formally contracted.
+provenance:
+  fields: [source_url, source_file_name, source_checksum_or_etag, reporting_period, run_id, processed_at, code_version]
