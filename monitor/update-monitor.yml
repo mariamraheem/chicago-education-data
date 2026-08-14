@@ -37,8 +37,11 @@ jobs:
       - name: Scan cps.edu + api.cps.edu
         run: python monitor/01_scan.py
 
-      - name: Render dashboard
-        run: python monitor/02_render.py
+      - name: Export static JSON/CSV API
+        run: python monitor/02_export_api.py
+
+      - name: Render React dashboard
+        run: python monitor/03_render_dashboard.py
 
       - name: Commit updated inventory data
         run: |

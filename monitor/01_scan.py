@@ -335,6 +335,17 @@ def load_state():
     return {"files": {}, "google_docs": {}, "api_services": {}, "last_scan": None}
 
 
+def count_prior_runs():
+    """Number of completed runs so far, from run_log.jsonl line count.
+    Used to assign the next run_number -- a simple incrementing counter
+    is easier for a human (or an API consumer) to reason about than the
+    scrape_id timestamp alone."""
+    if not os.path.exists(LOG_FILE):
+        return 0
+    with open(LOG_FILE, "r", encoding="utf-8") as f:
+        return sum(1 for line in f if line.strip())
+
+
 def save_json(path, obj):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
@@ -440,13 +451,22 @@ def main():
     old_state = load_state()
     diff = compute_diff(old_state, new_state)
 
+    # scrape_id is the single identifier that ties state.json, this run's
+    # diff file, the run_log entry, and (once 02_export_api.py runs) the
+    # api/ export together -- generate it once, use it everywhere below.
+    scrape_id = new_state["last_scan"].replace(":", "").replace("+00:00", "Z")
+    run_number = count_prior_runs() + 1
+    new_state["scrape_id"] = scrape_id
+    new_state["run_number"] = run_number
+
     save_json(STATE_FILE, new_state)
-    ts = new_state["last_scan"].replace(":", "").replace("+00:00", "Z")
-    save_json(os.path.join(DIFFS_DIR, f"{ts}.json"), {"scan_time": new_state["last_scan"], **diff})
+    save_json(os.path.join(DIFFS_DIR, f"{scrape_id}.json"), {"scan_time": new_state["last_scan"], **diff})
 
     os.makedirs(DATA_DIR, exist_ok=True)
     with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(json.dumps({
+            "scrape_id": scrape_id,
+            "run_number": run_number,
             "scan_time": new_state["last_scan"],
             "pages_visited": len(visited),
             "total_files": len(new_state["files"]),
@@ -458,7 +478,8 @@ def main():
             "changed_api_services": len(diff["changed_api_services"]),
         }) + "\n")
 
-    print(f"\nNew: {len(diff['new_files'])}  Changed: {len(diff['changed_files'])}  "
+    print(f"\nscrape_id={scrape_id}  run_number={run_number}")
+    print(f"New: {len(diff['new_files'])}  Changed: {len(diff['changed_files'])}  "
           f"Removed: {len(diff['removed_files'])}  New Google Docs: {len(diff['new_google_docs'])}")
 
 
