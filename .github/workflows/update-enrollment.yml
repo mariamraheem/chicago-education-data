@@ -9,7 +9,7 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   scrape-clean-compile:
@@ -36,16 +36,13 @@ jobs:
       - name: Build frontend-ready dashboard data
         run: python enrollment/scripts/04_build_dashboard_data.py
 
-      # No commit/push here on purpose -- main requires changes to go
-      # through a pull request, and that's a decision for a person, not
-      # this workflow. Download the artifact below from the run's summary
-      # page and add whichever files you want into the repo yourself.
-      - name: Upload scraped/clean/compiled data as a run artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: enrollment-data-${{ github.run_id }}
-          path: |
-            enrollment/data/raw
-            enrollment/data/clean
-            enrollment/dashboard/enrollment_dashboard_data.csv
-          retention-days: 14
+      - name: Build race/EL/IEP demographic trend data
+        run: python enrollment/scripts/05_build_demographics_data.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add enrollment/data enrollment/dashboard
+          git diff --cached --quiet || git commit -m "enrollment: scrape/clean/compile $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push

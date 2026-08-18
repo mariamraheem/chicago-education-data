@@ -1,32 +1,25 @@
-name: Update Enrollment Dashboard
+name: Update Site
 
-# Scrapes/cleans/compiles/builds enrollment data AND deploys the dashboard
-# to GitHub Pages, all in one run -- no monitor crawl, no git commit.
+# Fast site assembly + deploy -- NO scraping here. It assumes
+# update-enrollment.yml and update-budget.yml have already committed fresh
+# data to main (they run on their own schedule / on demand), and just
+# copies what's currently committed into a Pages site: the landing page,
+# the enrollment tab, the budget tab, and a JSON export API + manifest for
+# all of it. Runs in seconds, so it's safe to fire on every push that
+# touches either dashboard's files, not just manually.
 #
-# This is the "skip-git" version: main has a ruleset requiring changes to
-# go through a pull request, which blocks a plain `git push` from this
-# workflow. Rather than fight that, this workflow just never commits --
-# it re-scrapes/rebuilds fresh data every run and publishes straight to
-# Pages (a separate deploy mechanism from git push, so the ruleset doesn't
-# apply to it at all). Trade-off: raw scraped files (enrollment/data/raw)
-# and clean/compiled CSVs are NOT archived in git history this way -- they
-# only exist as this run's temporary build output. If/when you want that
-# archive back, see enrollment/scripts/01-04 run the same way from
-# update-enrollment.yml, which uploads the same output as a downloadable
-# artifact instead of committing it.
-#
-# Note: this replaces whatever is currently live on Pages with just the
-# enrollment dashboard. If update-monitor.yml's own site content is live at
-# the time this runs, this deploy overwrites it (and vice versa -- the next
-# update-monitor.yml run will overwrite this). The two workflows are not
-# coordinated; whichever ran most recently is what's live.
+# Note: this replaces whatever is currently live on Pages, including
+# update-monitor.yml's own site content if that's what's live at the time.
+# The two are not coordinated; whichever workflow ran most recently wins.
 
 on:
-  schedule:
-    # Monthly, 1st of the month, 06:30 UTC -- half an hour after
-    # update-enrollment.yml's schedule, purely so they don't contend for
-    # the "pages" concurrency group at the exact same minute.
-    - cron: "30 6 1 * *"
+  push:
+    branches: [main]
+    paths:
+      - "enrollment/dashboard/**"
+      - "budget/dashboard/**"
+      - "site-landing/**"
+      - "scripts/build_site_manifest.py"
   workflow_dispatch: {}
 
 permissions:
@@ -48,27 +41,17 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      - name: Scrape CPS demographics reports
-        run: python enrollment/scripts/01_scrape.py
-
-      - name: Clean GENERAL/RACE files
-        run: python enrollment/scripts/02_clean.py
-
-      - name: Compile network/district aggregates
-        run: python enrollment/scripts/03_compile.py
-
-      - name: Build frontend-ready dashboard data
-        run: python enrollment/scripts/04_build_dashboard_data.py
-
-      - name: Prepare Pages site from enrollment/dashboard/
+      - name: Assemble Pages site
         run: |
-          mkdir -p site
-          cp -r enrollment/dashboard/. site/
+          mkdir -p site/enrollment site/budget
+          cp -r site-landing/. site/
+          cp -r enrollment/dashboard/. site/enrollment/
+          cp -r budget/dashboard/. site/budget/
 
-      - name: Upload dashboard artifact
+      - name: Build JSON export API + manifest
+        run: python scripts/build_site_manifest.py
+
+      - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: site
