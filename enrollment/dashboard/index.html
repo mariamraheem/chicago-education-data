@@ -209,12 +209,13 @@ let DATA = [];
 let FILTERED = [];
 let chart = null;
 /*
- * Temporary development data source.
- *
- * Once the pipeline produces a frontend-ready JSON file,
- * replace this path with that generated product.
+ * enrollment/scripts/04_build_dashboard_data.py writes this file next to
+ * index.html (and a copy under enrollment/data/clean/ for the pipeline's
+ * own history), so a same-directory relative path resolves both when this
+ * file is opened straight out of the repo and when it's copied wholesale
+ * into monitor/site/enrollment/ and deployed to GitHub Pages.
  */
-const DATA_SOURCE = "../../tests/fixtures/general_enrollment_sample.csv";
+const DATA_SOURCE = "./enrollment_dashboard_data.csv";
 async function refreshData() {
   setStatus("Loading", "gray");
   try {
@@ -226,7 +227,7 @@ async function refreshData() {
     DATA = parseCSV(text);
     initializeFilters();
     renderDashboard();
-    setStatus("Development dataset loaded", "green");
+    setStatus("Dataset loaded", "green");
     document.getElementById("lastUpdated").textContent =
       new Date().toLocaleString();
   } catch (error) {

@@ -382,12 +382,21 @@ def main():
     session = requests.Session()
     session.headers.update(HEADERS)
 
+    # Loaded up front (not after the crawl, as before) so the per-file loop
+    # below can skip re-downloading/re-parsing spreadsheets whose
+    # Last-Modified/ETag/size haven't changed since the last run -- that
+    # re-parse was happening unconditionally on every run and was the
+    # single biggest contributor to this workflow's runtime.
+    old_state = load_state()
+    old_files = old_state.get("files", {})
+
     print("Crawling cps.edu ...")
     files, google_docs, visited = crawl(seed_pages, allowed_prefixes)
     print(f"Visited {len(visited)} pages -> {len(files)} files, {len(google_docs)} Google Sheet/Doc links")
 
     print("Checking file headers (Last-Modified/ETag/size) ...")
     new_state = {"files": {}, "google_docs": {}, "api_services": {}, "last_scan": now_iso()}
+    skipped_unchanged = 0
     for i, (url, meta) in enumerate(files.items(), 1):
         if i % 25 == 0:
             print(f"  ... {i}/{len(files)}")
@@ -396,9 +405,28 @@ def main():
 
         ext = urlparse(url).path.lower().rsplit(".", 1)[-1]
         cols = {"columns": [], "sheet_names": [], "columns_error": None}
+        old_meta = old_files.get(url)
+        unchanged = (
+            old_meta is not None
+            and head.get("last_modified") == old_meta.get("last_modified")
+            and head.get("etag") == old_meta.get("etag")
+            and head.get("content_length") == old_meta.get("content_length")
+            # Only trust "unchanged" if the previous run actually managed to
+            # read columns for this file -- otherwise a transient failure
+            # would permanently freeze columns_error instead of retrying.
+            and (old_meta.get("columns") or old_meta.get("columns_error") is None)
+        )
         if ext in SPREADSHEET_EXTENSIONS and head.get("status_code", 200) < 400:
-            cols = extract_spreadsheet_columns(session, url, ext)
-            time.sleep(REQUEST_DELAY)
+            if unchanged:
+                cols = {
+                    "columns": old_meta.get("columns", []),
+                    "sheet_names": old_meta.get("sheet_names", []),
+                    "columns_error": old_meta.get("columns_error"),
+                }
+                skipped_unchanged += 1
+            else:
+                cols = extract_spreadsheet_columns(session, url, ext)
+                time.sleep(REQUEST_DELAY)
 
         new_state["files"][url] = {
             "category": guess_category(url),
@@ -434,10 +462,11 @@ def main():
             "last_checked": now_iso(),
         }
 
+    print(f"Skipped re-parsing {skipped_unchanged} unchanged spreadsheet(s)")
+
     print("Checking api.cps.edu services ...")
     new_state["api_services"] = check_api_services(session, api_services)
 
-    old_state = load_state()
     diff = compute_diff(old_state, new_state)
 
     save_json(STATE_FILE, new_state)
