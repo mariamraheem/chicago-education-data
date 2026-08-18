@@ -1,4 +1,107 @@
 Year,Source_File,Sheet,Column
+2025,DISTRICT_MANAGED_2025.xlsx,Overview,School Information
+2025,DISTRICT_MANAGED_2025.xlsx,Overview,"Includes School Name, School Type, Community Area, Network, and Opportunity Index score."
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,School Name
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,School Type
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Community Area
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Network
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Opportunity Index
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Fall 2023 20th Day Enrollment (PE/PK)
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Fall 2023 20th Day Enrollment (K-12)
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Fall 2023 20th Day TOTAL Enrollment (PE-12)
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Per-Pupil Total For Title I Funding
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,GenEd K-12 Teacher Allocation
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Teachers Received on Appeal
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Principal
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Asst. Principal
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Clerk
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Counselor
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Part-Time Operational Position
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Other Central FTEs
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Teachers
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Counselor.1
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Teacher Assistant
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Other Non-Teacher Discretionary Staff
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Discretionary Non-FTE Funding
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Special Ed Teachers
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Special Ed Paraprofessionals
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Case Managers
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Other Special Ed FTEs
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Early Childhood Teachers
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Early Childhood Paraprofessionals
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Other Early Childhood FTEs
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Bilingual Coordinators
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Tiered Instruction Support Dollars (Tier I)
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Tiered Instruction Support Dollars (Tier II)
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Full-Time Instructional Coaches (Tier III)
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Lunchroom
+2025,DISTRICT_MANAGED_2025.xlsx,Alt_Spec,Security
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,School Name
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,School Type
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Community Area
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Network
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Opportunity Index
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Fall 2023 20th Day Enrollment
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Fall 2023 20th Day Non-Cluster Enrollment
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Adjustment for Schools With Increased Enrollment Due to Newcomer Students
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Enrollment Input for Teacher Allocations (Non-Cluster + Newcomer Adjustment)
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Student : Teacher Ratio for Core Classroom Teachers (Unadjusted for Floor)
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Per-Pupil Total For Need-Based Flexible Funding (Unadjusted for Floor)
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Per-Pupil Total For Title I Funding
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Core Classroom
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Holistic (ES Only)
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Title I Interventionists
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Supplemental Programmatic Teachers
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Critical Language Teachers
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Other (Misc Grant-Funded)
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Teachers Received on Appeal
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Liquidated Teacher Positions
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Principal
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Asst. Principal
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Clerk
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Counselor
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Restorative Justice Coord.
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Athletic Director
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,School Assistant
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Part-Time Operational Position
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Other Central FTEs
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Teachers
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Asst. Principal.1
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Clerk.1
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Counselor.1
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Restorative Justice Coord..1
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Tech Coord.
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Teacher Assistant
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Other Non-Teacher Discretionary Staff
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Discretionary Non-FTE Funding
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Special Ed Teachers
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Special Ed Paraprofessionals
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Case Managers
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Other Special Ed FTEs
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Early Childhood Teachers
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Early Childhood Paraprofessionals
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Other Early Chlidhood FTEs
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,College & Career Coaches
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Career Pathways Specialists
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,IB Coord.
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,STEM Positions
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,RGC & RGC-EL Coord.
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Personalized Learning Coord.
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Dual Language Coord.
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Montessori Program Coord.
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Montessori Positions
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,JROTC Positions
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Bilingual Coordinators
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,STLS Advocates
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Tiered Instruction Support Dollars (Tier I)
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Tiered Instruction Support Dollars (Tier II)
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Full-Time Instructional Coaches (Tier III)
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Lunchroom
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Security
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,Whole School Safety Funding
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,School and District Improvement Grant (SDI) Allocation
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,School Internal Account Funded Teacher Positions
+2025,DISTRICT_MANAGED_2025.xlsx,Traditional,School Internal Account Funded Non-Teacher Positions
 2026,DISTRICT_MANAGED_2026.xlsx,Overview,School Information
 2026,DISTRICT_MANAGED_2026.xlsx,Overview,"Includes School Name, School Type, Community Area, Network, and Opportunity Index score (where applicable)."
 2026,DISTRICT_MANAGED_2026.xlsx,Traditional,School Name
@@ -215,3 +318,66 @@ Year,Source_File,Sheet,Column
 2027,DISTRICT_MANAGED_2027.xlsx,Alt-Spec,Lead Coaches
 2027,DISTRICT_MANAGED_2027.xlsx,Alt-Spec,Lunchroom
 2027,DISTRICT_MANAGED_2027.xlsx,Alt-Spec,Security
+2025,CHARTER_CONTRACT_ALOP_2025.xlsx,Overview,Core Instructional Funding
+2025,CHARTER_CONTRACT_ALOP_2025.xlsx,Overview,"A consolidated revenue stream to support instruction at non-district schools. This is a combination of what has historically been Student-Based Budgeting (SBB) and Supplemental Aid. There are now two rates - one for Elementary School Level Students, and one for High School Level Students"
+2025,CHARTER_CONTRACT_ALOP_2025.xlsx,FY25 Non-District Schools,Name
+2025,CHARTER_CONTRACT_ALOP_2025.xlsx,FY25 Non-District Schools,Network
+2025,CHARTER_CONTRACT_ALOP_2025.xlsx,FY25 Non-District Schools,Fall 2023 20th Day Enrollment
+2025,CHARTER_CONTRACT_ALOP_2025.xlsx,FY25 Non-District Schools,Core Instructional Funding
+2025,CHARTER_CONTRACT_ALOP_2025.xlsx,FY25 Non-District Schools,Non-Instructional
+2025,CHARTER_CONTRACT_ALOP_2025.xlsx,FY25 Non-District Schools,Special Education
+2025,CHARTER_CONTRACT_ALOP_2025.xlsx,FY25 Non-District Schools,Facilities Supplement
+2025,CHARTER_CONTRACT_ALOP_2025.xlsx,FY25 Non-District Schools,Title I (Discretionary)
+2025,CHARTER_CONTRACT_ALOP_2025.xlsx,FY25 Non-District Schools,Title I (Districtwide)
+2025,CHARTER_CONTRACT_ALOP_2025.xlsx,FY25 Non-District Schools,Title II (Districtwide)
+2025,CHARTER_CONTRACT_ALOP_2025.xlsx,FY25 Non-District Schools,Title IV (Districtwide)
+2025,CHARTER_CONTRACT_ALOP_2025.xlsx,FY25 Non-District Schools,State Bilingual & Title III
+2025,CHARTER_CONTRACT_ALOP_2025.xlsx,FY25 Non-District Schools,School and District Improvement Grant (SDI)
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,Overview,Estimated Per Capita Tuition Charge
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,Overview,"FY2026 budgets for charter schools reflect a change in methodology to align with continued increases in CPS’s ISBE-certified per capita tuition charge. This single, consolidated funding stream provides adequate financial resources for Charter Schools in line with the Illinois School Code. Estimates are based on projected funding for FY2026."
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,FY26 Charter Schools,Name
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,FY26 Charter Schools,Network
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,FY26 Charter Schools,FY25 20th Day Enrollment
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,FY26 Charter Schools,Estimated Per Capita Tuition Charge
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,FY26 Charter Schools,Title I
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,FY26 Charter Schools,Title II
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,FY26 Charter Schools,Title IV
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,FY26 Charter Schools,State Bilingual & Title III
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,FY26 Charter Schools,School and District Improvement Grant (SDI)
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,"FY26 Contract, ALOP, SAFE",Name
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,"FY26 Contract, ALOP, SAFE",Network
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,"FY26 Contract, ALOP, SAFE",FY25 20th Day Enrollment
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,"FY26 Contract, ALOP, SAFE",Core Instructional Funding
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,"FY26 Contract, ALOP, SAFE",Non-Instructional
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,"FY26 Contract, ALOP, SAFE",Special Education
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,"FY26 Contract, ALOP, SAFE",Facilities Supplement
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,"FY26 Contract, ALOP, SAFE",Title I
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,"FY26 Contract, ALOP, SAFE",Title II
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,"FY26 Contract, ALOP, SAFE",Title IV
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,"FY26 Contract, ALOP, SAFE",State Bilingual & Title III
+2026,CHARTER_CONTRACT_ALOP_2026.xlsx,"FY26 Contract, ALOP, SAFE",School and District Improvement Grant (SDI)
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,Overview,FY2027 Non-District School Budget Overview
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,Overview,Full Budget Details & Allocation Methodologies (incl. PCTC Information) can be found in Appendix B of the FY2027 Budget Book
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,FY27 Charter Schools,Name
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,FY27 Charter Schools,Network
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,FY27 Charter Schools,FY26 20th Day Enrollment - Semester 1
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,FY27 Charter Schools,FY26 10th Day Enrollment - Semester 2
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,FY27 Charter Schools,Estimated Per Capita Tuition Charge
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,FY27 Charter Schools,Consolidated Title I (Discretionary + Districtwide + Parent Involvement)
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,FY27 Charter Schools,Title II (Districtwide)
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,FY27 Charter Schools,Title IV (Districtwide)
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,FY27 Charter Schools,State Bilingual & Title III
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,FY27 Charter Schools,School and District Improvement Grant (SDI)
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,"FY27 Contract, ALOP, SAFE",Name
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,"FY27 Contract, ALOP, SAFE",Network
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,"FY27 Contract, ALOP, SAFE",FY26 20th Day Enrollment - Semester 1
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,"FY27 Contract, ALOP, SAFE",FY26 10th Day Enrollment - Semester 2
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,"FY27 Contract, ALOP, SAFE",Core Instructional Funding
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,"FY27 Contract, ALOP, SAFE",Non-Instructional
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,"FY27 Contract, ALOP, SAFE",Special Education^
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,"FY27 Contract, ALOP, SAFE",Facilities Supplement
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,"FY27 Contract, ALOP, SAFE",Consolidated Title I (Discretionary + Districtwide + Parent Involvement + STLS Set-Asides)
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,"FY27 Contract, ALOP, SAFE",Title II (Districtwide)
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,"FY27 Contract, ALOP, SAFE",Title IV (Districtwide)
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,"FY27 Contract, ALOP, SAFE",State Bilingual & Title III
+2027,CHARTER_CONTRACT_ALOP_2027.xlsx,"FY27 Contract, ALOP, SAFE",School and District Improvement Grant (SDI)
