@@ -63,6 +63,7 @@ def build_dashboard_data(source_file: Path = SOURCE_FILE) -> pd.DataFrame:
     for col in ("School Name", "Network"):
         if col in df.columns:
             df = df[~df[col].astype(str).str.contains("total", case=False, na=False)]
+            df = df[~df[col].astype(str).str.contains("educational units", case=False, na=False)]
 
     id_cols = [c for c in ID_COLUMN_MAP if c in df.columns]
     grade_cols = [c for c in GRADE_COLUMNS if c in df.columns]
