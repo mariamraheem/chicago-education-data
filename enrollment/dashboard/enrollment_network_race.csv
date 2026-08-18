@@ -1,0 +1,2341 @@
+school_year,network,race,count,pct
+2025-2026,Charter,Not Available,0.0,0.012209377841278
+2025-2026,Charter,Asian,26.0,0.0
+2025-2026,Charter,Black/African American,101.0,0.0
+2025-2026,Charter,Hawaiian/Pacific Islander,124.0,0.0
+2025-2026,Charter,Hispanic/Latino,221.0,0.0
+2025-2026,Charter,Multiracial,468.0,0.0
+2025-2026,Charter,Native American/Alaskan,19430.0,0.0
+2025-2026,Charter,Not Available,9.0,0.0
+2025-2026,Charter,White,25251.0,0.0
+2025-2026,Contract,Not Available,0.0,0.0989399293286219
+2025-2026,Contract,Asian,1.0,0.0
+2025-2026,Contract,Black/African American,3.0,0.0
+2025-2026,Contract,Hawaiian/Pacific Islander,3.0,0.0
+2025-2026,Contract,Hispanic/Latino,15.0,0.0
+2025-2026,Contract,Multiracial,5.0,0.0
+2025-2026,Contract,Native American/Alaskan,288.0,0.0
+2025-2026,Contract,Not Available,0.0,0.0
+2025-2026,Contract,White,450.0,0.0
+2025-2026,ISP,Not Available,0.0,0.1740816792151494
+2025-2026,ISP,Asian,13.0,0.0
+2025-2026,ISP,Black/African American,144.0,0.0
+2025-2026,ISP,Hawaiian/Pacific Islander,9.0,0.0
+2025-2026,ISP,Hispanic/Latino,475.0,0.0
+2025-2026,ISP,Multiracial,1913.0,0.0
+2025-2026,ISP,Native American/Alaskan,11208.0,0.0
+2025-2026,ISP,Not Available,6.0,0.0
+2025-2026,ISP,White,4332.0,0.0
+2025-2026,Network 1,Not Available,0.0,0.3543050615008786
+2025-2026,Network 1,Asian,29.0,0.0
+2025-2026,Network 1,Black/African American,109.0,0.0
+2025-2026,Network 1,Hawaiian/Pacific Islander,74.0,0.0
+2025-2026,Network 1,Hispanic/Latino,809.0,0.0
+2025-2026,Network 1,Multiracial,2096.0,0.0
+2025-2026,Network 1,Native American/Alaskan,11161.0,0.0
+2025-2026,Network 1,Not Available,16.0,0.0
+2025-2026,Network 1,White,772.0,0.0
+2025-2026,Network 10,Not Available,0.0,0.0756827903915761
+2025-2026,Network 10,Asian,10.0,0.0
+2025-2026,Network 10,Black/African American,53.0,0.0
+2025-2026,Network 10,Hawaiian/Pacific Islander,4.0,0.0
+2025-2026,Network 10,Hispanic/Latino,162.0,0.0
+2025-2026,Network 10,Multiracial,137.0,0.0
+2025-2026,Network 10,Native American/Alaskan,12224.0,0.0
+2025-2026,Network 10,Not Available,6.0,0.0
+2025-2026,Network 10,White,4258.0,0.0
+2025-2026,Network 11,Not Available,0.0,0.0140845070422535
+2025-2026,Network 11,Asian,4.0,0.0
+2025-2026,Network 11,Black/African American,12.0,0.0
+2025-2026,Network 11,Hawaiian/Pacific Islander,13.0,0.0
+2025-2026,Network 11,Hispanic/Latino,40.0,0.0
+2025-2026,Network 11,Multiracial,27.0,0.0
+2025-2026,Network 11,Native American/Alaskan,1343.0,0.0
+2025-2026,Network 11,Not Available,0.0,0.0
+2025-2026,Network 11,White,7451.0,0.0
+2025-2026,Network 12,Not Available,0.0,0.006815127663659
+2025-2026,Network 12,Asian,7.0,0.0
+2025-2026,Network 12,Black/African American,31.0,0.0
+2025-2026,Network 12,Hawaiian/Pacific Islander,34.0,0.0
+2025-2026,Network 12,Hispanic/Latino,71.0,0.0
+2025-2026,Network 12,Multiracial,3.0,0.0
+2025-2026,Network 12,Native American/Alaskan,1361.0,0.0
+2025-2026,Network 12,Not Available,2.0,0.0
+2025-2026,Network 12,White,8838.0,0.0
+2025-2026,Network 13,Not Available,0.0,0.0200820372585882
+2025-2026,Network 13,Asian,3.0,0.0
+2025-2026,Network 13,Black/African American,34.0,0.0
+2025-2026,Network 13,Hawaiian/Pacific Islander,7.0,0.0
+2025-2026,Network 13,Hispanic/Latino,88.0,0.0
+2025-2026,Network 13,Multiracial,15.0,0.0
+2025-2026,Network 13,Native American/Alaskan,4159.0,0.0
+2025-2026,Network 13,Not Available,0.0,0.0
+2025-2026,Network 13,White,7161.0,0.0
+2025-2026,Network 14,Not Available,0.0,0.2499908615710787
+2025-2026,Network 14,Asian,89.0,0.0
+2025-2026,Network 14,Black/African American,107.0,0.0
+2025-2026,Network 14,Hawaiian/Pacific Islander,202.0,0.0
+2025-2026,Network 14,Hispanic/Latino,762.0,0.0
+2025-2026,Network 14,Multiracial,2595.0,0.0
+2025-2026,Network 14,Native American/Alaskan,13589.0,0.0
+2025-2026,Network 14,Not Available,28.0,0.0
+2025-2026,Network 14,White,3146.0,0.0
+2025-2026,Network 15,Not Available,0.0,0.0950986135520406
+2025-2026,Network 15,Asian,28.0,0.0
+2025-2026,Network 15,Black/African American,64.0,0.0
+2025-2026,Network 15,Hawaiian/Pacific Islander,9.0,0.0
+2025-2026,Network 15,Hispanic/Latino,386.0,0.0
+2025-2026,Network 15,Multiracial,1620.0,0.0
+2025-2026,Network 15,Native American/Alaskan,12259.0,0.0
+2025-2026,Network 15,Not Available,6.0,0.0
+2025-2026,Network 15,White,4164.0,0.0
+2025-2026,Network 16,Not Available,0.0,0.0265564826700898
+2025-2026,Network 16,Asian,9.0,0.0
+2025-2026,Network 16,Black/African American,20.0,0.0
+2025-2026,Network 16,Hawaiian/Pacific Islander,12.0,0.0
+2025-2026,Network 16,Hispanic/Latino,47.0,0.0
+2025-2026,Network 16,Multiracial,197.0,0.0
+2025-2026,Network 16,Native American/Alaskan,7806.0,0.0
+2025-2026,Network 16,Not Available,2.0,0.0
+2025-2026,Network 16,White,4040.0,0.0
+2025-2026,Network 17,Not Available,0.0,0.0215966062475896
+2025-2026,Network 17,Asian,7.0,0.0
+2025-2026,Network 17,Black/African American,15.0,0.0
+2025-2026,Network 17,Hawaiian/Pacific Islander,50.0,0.0
+2025-2026,Network 17,Hispanic/Latino,92.0,0.0
+2025-2026,Network 17,Multiracial,47.0,0.0
+2025-2026,Network 17,Native American/Alaskan,2012.0,0.0
+2025-2026,Network 17,Not Available,1.0,0.0
+2025-2026,Network 17,White,7924.0,0.0
+2025-2026,Network 2,Not Available,0.0,0.2628970331588132
+2025-2026,Network 2,Asian,11.0,0.0
+2025-2026,Network 2,Black/African American,120.0,0.0
+2025-2026,Network 2,Hawaiian/Pacific Islander,46.0,0.0
+2025-2026,Network 2,Hispanic/Latino,816.0,0.0
+2025-2026,Network 2,Multiracial,2244.0,0.0
+2025-2026,Network 2,Native American/Alaskan,4247.0,0.0
+2025-2026,Network 2,Not Available,9.0,0.0
+2025-2026,Network 2,White,3066.0,0.0
+2025-2026,Network 3,Not Available,0.0,0.0324964245987605
+2025-2026,Network 3,Asian,19.0,0.0
+2025-2026,Network 3,Black/African American,88.0,0.0
+2025-2026,Network 3,Hawaiian/Pacific Islander,20.0,0.0
+2025-2026,Network 3,Hispanic/Latino,82.0,0.0
+2025-2026,Network 3,Multiracial,51.0,0.0
+2025-2026,Network 3,Native American/Alaskan,8405.0,0.0
+2025-2026,Network 3,Not Available,7.0,0.0
+2025-2026,Network 3,White,3505.0,0.0
+2025-2026,Network 4,Not Available,0.0,0.3288170638807269
+2025-2026,Network 4,Asian,19.0,0.0
+2025-2026,Network 4,Black/African American,60.0,0.0
+2025-2026,Network 4,Hawaiian/Pacific Islander,50.0,0.0
+2025-2026,Network 4,Hispanic/Latino,1080.0,0.0
+2025-2026,Network 4,Multiracial,1121.0,0.0
+2025-2026,Network 4,Native American/Alaskan,8158.0,0.0
+2025-2026,Network 4,Not Available,0.0,0.0
+2025-2026,Network 4,White,1847.0,0.0
+2025-2026,Network 5,Not Available,0.0,0.0347048300536672
+2025-2026,Network 5,Asian,9.0,0.0
+2025-2026,Network 5,Black/African American,36.0,0.0
+2025-2026,Network 5,Hawaiian/Pacific Islander,3.0,0.0
+2025-2026,Network 5,Hispanic/Latino,74.0,0.0
+2025-2026,Network 5,Multiracial,24.0,0.0
+2025-2026,Network 5,Native American/Alaskan,3607.0,0.0
+2025-2026,Network 5,Not Available,0.0,0.0
+2025-2026,Network 5,White,4341.0,0.0
+2025-2026,Network 6,Not Available,0.0,0.1616655428186109
+2025-2026,Network 6,Asian,14.0,0.0
+2025-2026,Network 6,Black/African American,29.0,0.0
+2025-2026,Network 6,Hawaiian/Pacific Islander,7.0,0.0
+2025-2026,Network 6,Hispanic/Latino,593.0,0.0
+2025-2026,Network 6,Multiracial,2591.0,0.0
+2025-2026,Network 6,Native American/Alaskan,3305.0,0.0
+2025-2026,Network 6,Not Available,9.0,0.0
+2025-2026,Network 6,White,3398.0,0.0
+2025-2026,Network 7,Not Available,0.0,0.0227936879018118
+2025-2026,Network 7,Asian,4.0,0.0
+2025-2026,Network 7,Black/African American,33.0,0.0
+2025-2026,Network 7,Hawaiian/Pacific Islander,4.0,0.0
+2025-2026,Network 7,Hispanic/Latino,32.0,0.0
+2025-2026,Network 7,Multiracial,27.0,0.0
+2025-2026,Network 7,Native American/Alaskan,6911.0,0.0
+2025-2026,Network 7,Not Available,1.0,0.0
+2025-2026,Network 7,White,1348.0,0.0
+2025-2026,Network 8,Not Available,0.0,0.0242534595775673
+2025-2026,Network 8,Asian,6.0,0.0
+2025-2026,Network 8,Black/African American,64.0,0.0
+2025-2026,Network 8,Hawaiian/Pacific Islander,1.0,0.0
+2025-2026,Network 8,Hispanic/Latino,35.0,0.0
+2025-2026,Network 8,Multiracial,61.0,0.0
+2025-2026,Network 8,Native American/Alaskan,12187.0,0.0
+2025-2026,Network 8,Not Available,0.0,0.0
+2025-2026,Network 8,White,1043.0,0.0
+2025-2026,Network 9,Not Available,0.0,0.0193403908794788
+2025-2026,Network 9,Asian,6.0,0.0
+2025-2026,Network 9,Black/African American,26.0,0.0
+2025-2026,Network 9,Hawaiian/Pacific Islander,19.0,0.0
+2025-2026,Network 9,Hispanic/Latino,161.0,0.0
+2025-2026,Network 9,Multiracial,99.0,0.0
+2025-2026,Network 9,Native American/Alaskan,677.0,0.0
+2025-2026,Network 9,Not Available,1.0,0.0
+2025-2026,Network 9,White,8645.0,0.0
+2025-2026,Options,Not Available,0.0,0.0259698621352997
+2025-2026,Options,Asian,7.0,0.0
+2025-2026,Options,Black/African American,13.0,0.0
+2025-2026,Options,Hawaiian/Pacific Islander,13.0,0.0
+2025-2026,Options,Hispanic/Latino,41.0,0.0
+2025-2026,Options,Multiracial,69.0,0.0
+2025-2026,Options,Native American/Alaskan,2525.0,0.0
+2025-2026,Options,Not Available,8.0,0.0
+2025-2026,Options,White,3400.0,0.0
+2024-2025,Charter,Not Available,0.0,0.0125560726114115
+2024-2025,Charter,Asian,27.0,0.0
+2024-2025,Charter,Asian/Pacific Islander (Retired),107.0,0.0
+2024-2025,Charter,Black/African American,0.0,0.0
+2024-2025,Charter,Hawaiian/Pacific Islander,144.0,0.0
+2024-2025,Charter,Hispanic/Latino,218.0,0.0
+2024-2025,Charter,Multiracial,466.0,0.0
+2024-2025,Charter,Native American/Alaskan,20716.0,0.0
+2024-2025,Charter,Not Available,8.0,0.0
+2024-2025,Charter,White,25421.0,0.0
+2024-2025,Contract,Not Available,0.0,0.0891364902506963
+2024-2025,Contract,Asian,1.0,0.0
+2024-2025,Contract,Asian/Pacific Islander (Retired),3.0,0.0
+2024-2025,Contract,Black/African American,0.0,0.0
+2024-2025,Contract,Hawaiian/Pacific Islander,4.0,0.0
+2024-2025,Contract,Hispanic/Latino,16.0,0.0
+2024-2025,Contract,Multiracial,7.0,0.0
+2024-2025,Contract,Native American/Alaskan,279.0,0.0
+2024-2025,Contract,Not Available,0.0,0.0
+2024-2025,Contract,White,671.0,0.0
+2024-2025,ISP,Not Available,0.0,0.168121947609886
+2024-2025,ISP,Asian,17.0,0.0
+2024-2025,ISP,Asian/Pacific Islander (Retired),100.0,0.0
+2024-2025,ISP,Black/African American,0.0,0.0
+2024-2025,ISP,Hawaiian/Pacific Islander,11.0,0.0
+2024-2025,ISP,Hispanic/Latino,571.0,0.0
+2024-2025,ISP,Multiracial,1899.0,0.0
+2024-2025,ISP,Native American/Alaskan,15104.0,0.0
+2024-2025,ISP,Not Available,2.0,0.0
+2024-2025,ISP,White,4780.0,0.0
+2024-2025,Network 1,Not Available,0.0,0.3487571380584481
+2024-2025,Network 1,Asian,36.0,0.0
+2024-2025,Network 1,Asian/Pacific Islander (Retired),104.0,0.0
+2024-2025,Network 1,Black/African American,0.0,0.0
+2024-2025,Network 1,Hawaiian/Pacific Islander,103.0,0.0
+2024-2025,Network 1,Hispanic/Latino,759.0,0.0
+2024-2025,Network 1,Multiracial,2117.0,0.0
+2024-2025,Network 1,Native American/Alaskan,11652.0,0.0
+2024-2025,Network 1,Not Available,4.0,0.0
+2024-2025,Network 1,White,735.0,0.0
+2024-2025,Network 10,Not Available,0.0,0.0666225457754246
+2024-2025,Network 10,Asian,14.0,0.0
+2024-2025,Network 10,Asian/Pacific Islander (Retired),55.0,0.0
+2024-2025,Network 10,Black/African American,0.0,0.0
+2024-2025,Network 10,Hawaiian/Pacific Islander,30.0,0.0
+2024-2025,Network 10,Hispanic/Latino,149.0,0.0
+2024-2025,Network 10,Multiracial,136.0,0.0
+2024-2025,Network 10,Native American/Alaskan,12094.0,0.0
+2024-2025,Network 10,Not Available,1.0,0.0
+2024-2025,Network 10,White,4445.0,0.0
+2024-2025,Network 11,Not Available,0.0,0.0133422281521014
+2024-2025,Network 11,Asian,3.0,0.0
+2024-2025,Network 11,Asian/Pacific Islander (Retired),17.0,0.0
+2024-2025,Network 11,Black/African American,0.0,0.0
+2024-2025,Network 11,Hawaiian/Pacific Islander,8.0,0.0
+2024-2025,Network 11,Hispanic/Latino,37.0,0.0
+2024-2025,Network 11,Multiracial,40.0,0.0
+2024-2025,Network 11,Native American/Alaskan,1135.0,0.0
+2024-2025,Network 11,Not Available,0.0,0.0
+2024-2025,Network 11,White,7634.0,0.0
+2024-2025,Network 12,Not Available,0.0,0.0043216835776024
+2024-2025,Network 12,Asian,4.0,0.0
+2024-2025,Network 12,Asian/Pacific Islander (Retired),26.0,0.0
+2024-2025,Network 12,Black/African American,0.0,0.0
+2024-2025,Network 12,Hawaiian/Pacific Islander,17.0,0.0
+2024-2025,Network 12,Hispanic/Latino,61.0,0.0
+2024-2025,Network 12,Multiracial,4.0,0.0
+2024-2025,Network 12,Native American/Alaskan,1287.0,0.0
+2024-2025,Network 12,Not Available,0.0,0.0
+2024-2025,Network 12,White,9199.0,0.0
+2024-2025,Network 13,Not Available,0.0,0.0173985780008364
+2024-2025,Network 13,Asian,2.0,0.0
+2024-2025,Network 13,Asian/Pacific Islander (Retired),20.0,0.0
+2024-2025,Network 13,Black/African American,0.0,0.0
+2024-2025,Network 13,Hawaiian/Pacific Islander,34.0,0.0
+2024-2025,Network 13,Hispanic/Latino,85.0,0.0
+2024-2025,Network 13,Multiracial,13.0,0.0
+2024-2025,Network 13,Native American/Alaskan,4233.0,0.0
+2024-2025,Network 13,Not Available,0.0,0.0
+2024-2025,Network 13,White,7360.0,0.0
+2024-2025,Network 14,Not Available,0.0,0.2406771257569855
+2024-2025,Network 14,Asian,101.0,0.0
+2024-2025,Network 14,Asian/Pacific Islander (Retired),112.0,0.0
+2024-2025,Network 14,Black/African American,1.0,0.0
+2024-2025,Network 14,Hawaiian/Pacific Islander,454.0,0.0
+2024-2025,Network 14,Hispanic/Latino,688.0,0.0
+2024-2025,Network 14,Multiracial,2601.0,0.0
+2024-2025,Network 14,Native American/Alaskan,14255.0,0.0
+2024-2025,Network 14,Not Available,17.0,0.0
+2024-2025,Network 14,White,3212.0,0.0
+2024-2025,Network 15,Not Available,0.0,0.0959362017095649
+2024-2025,Network 15,Asian,36.0,0.0
+2024-2025,Network 15,Asian/Pacific Islander (Retired),64.0,0.0
+2024-2025,Network 15,Black/African American,0.0,0.0
+2024-2025,Network 15,Hawaiian/Pacific Islander,27.0,0.0
+2024-2025,Network 15,Hispanic/Latino,359.0,0.0
+2024-2025,Network 15,Multiracial,1537.0,0.0
+2024-2025,Network 15,Native American/Alaskan,12589.0,0.0
+2024-2025,Network 15,Not Available,3.0,0.0
+2024-2025,Network 15,White,4317.0,0.0
+2024-2025,Network 16,Not Available,0.0,0.026583850931677
+2024-2025,Network 16,Asian,14.0,0.0
+2024-2025,Network 16,Asian/Pacific Islander (Retired),22.0,0.0
+2024-2025,Network 16,Black/African American,0.0,0.0
+2024-2025,Network 16,Hawaiian/Pacific Islander,37.0,0.0
+2024-2025,Network 16,Hispanic/Latino,38.0,0.0
+2024-2025,Network 16,Multiracial,188.0,0.0
+2024-2025,Network 16,Native American/Alaskan,7222.0,0.0
+2024-2025,Network 16,Not Available,0.0,0.0
+2024-2025,Network 16,White,4233.0,0.0
+2024-2025,Network 17,Not Available,0.0,0.0203175203175203
+2024-2025,Network 17,Asian,10.0,0.0
+2024-2025,Network 17,Asian/Pacific Islander (Retired),13.0,0.0
+2024-2025,Network 17,Black/African American,0.0,0.0
+2024-2025,Network 17,Hawaiian/Pacific Islander,56.0,0.0
+2024-2025,Network 17,Hispanic/Latino,90.0,0.0
+2024-2025,Network 17,Multiracial,42.0,0.0
+2024-2025,Network 17,Native American/Alaskan,2077.0,0.0
+2024-2025,Network 17,Not Available,1.0,0.0
+2024-2025,Network 17,White,8078.0,0.0
+2024-2025,Network 2,Not Available,0.0,0.2349297476960266
+2024-2025,Network 2,Asian,13.0,0.0
+2024-2025,Network 2,Asian/Pacific Islander (Retired),95.0,0.0
+2024-2025,Network 2,Black/African American,0.0,0.0
+2024-2025,Network 2,Hawaiian/Pacific Islander,66.0,0.0
+2024-2025,Network 2,Hispanic/Latino,686.0,0.0
+2024-2025,Network 2,Multiracial,2030.0,0.0
+2024-2025,Network 2,Native American/Alaskan,4237.0,0.0
+2024-2025,Network 2,Not Available,2.0,0.0
+2024-2025,Network 2,White,2999.0,0.0
+2024-2025,Network 3,Not Available,0.0,0.0310989867498051
+2024-2025,Network 3,Asian,15.0,0.0
+2024-2025,Network 3,Asian/Pacific Islander (Retired),70.0,0.0
+2024-2025,Network 3,Black/African American,0.0,0.0
+2024-2025,Network 3,Hawaiian/Pacific Islander,8.0,0.0
+2024-2025,Network 3,Hispanic/Latino,60.0,0.0
+2024-2025,Network 3,Multiracial,58.0,0.0
+2024-2025,Network 3,Native American/Alaskan,8608.0,0.0
+2024-2025,Network 3,Not Available,7.0,0.0
+2024-2025,Network 3,White,3605.0,0.0
+2024-2025,Network 4,Not Available,0.0,0.3152447852431765
+2024-2025,Network 4,Asian,23.0,0.0
+2024-2025,Network 4,Asian/Pacific Islander (Retired),48.0,0.0
+2024-2025,Network 4,Black/African American,0.0,0.0
+2024-2025,Network 4,Hawaiian/Pacific Islander,55.0,0.0
+2024-2025,Network 4,Hispanic/Latino,1047.0,0.0
+2024-2025,Network 4,Multiracial,1111.0,0.0
+2024-2025,Network 4,Native American/Alaskan,8655.0,0.0
+2024-2025,Network 4,Not Available,2.0,0.0
+2024-2025,Network 4,White,1829.0,0.0
+2024-2025,Network 5,Not Available,0.0,0.029126213592233
+2024-2025,Network 5,Asian,8.0,0.0
+2024-2025,Network 5,Asian/Pacific Islander (Retired),26.0,0.0
+2024-2025,Network 5,Black/African American,0.0,0.0
+2024-2025,Network 5,Hawaiian/Pacific Islander,6.0,0.0
+2024-2025,Network 5,Hispanic/Latino,65.0,0.0
+2024-2025,Network 5,Multiracial,17.0,0.0
+2024-2025,Network 5,Native American/Alaskan,3838.0,0.0
+2024-2025,Network 5,Not Available,0.0,0.0
+2024-2025,Network 5,White,4540.0,0.0
+2024-2025,Network 6,Not Available,0.0,0.1525995948683322
+2024-2025,Network 6,Asian,12.0,0.0
+2024-2025,Network 6,Asian/Pacific Islander (Retired),38.0,0.0
+2024-2025,Network 6,Black/African American,0.0,0.0
+2024-2025,Network 6,Hawaiian/Pacific Islander,49.0,0.0
+2024-2025,Network 6,Hispanic/Latino,540.0,0.0
+2024-2025,Network 6,Multiracial,2631.0,0.0
+2024-2025,Network 6,Native American/Alaskan,3475.0,0.0
+2024-2025,Network 6,Not Available,6.0,0.0
+2024-2025,Network 6,White,3289.0,0.0
+2024-2025,Network 7,Not Available,0.0,0.01769431176726
+2024-2025,Network 7,Asian,6.0,0.0
+2024-2025,Network 7,Asian/Pacific Islander (Retired),22.0,0.0
+2024-2025,Network 7,Black/African American,0.0,0.0
+2024-2025,Network 7,Hawaiian/Pacific Islander,4.0,0.0
+2024-2025,Network 7,Hispanic/Latino,29.0,0.0
+2024-2025,Network 7,Multiracial,25.0,0.0
+2024-2025,Network 7,Native American/Alaskan,7499.0,0.0
+2024-2025,Network 7,Not Available,3.0,0.0
+2024-2025,Network 7,White,1461.0,0.0
+2024-2025,Network 8,Not Available,0.0,0.0193910013634297
+2024-2025,Network 8,Asian,4.0,0.0
+2024-2025,Network 8,Asian/Pacific Islander (Retired),52.0,0.0
+2024-2025,Network 8,Black/African American,0.0,0.0
+2024-2025,Network 8,Hawaiian/Pacific Islander,5.0,0.0
+2024-2025,Network 8,Hispanic/Latino,34.0,0.0
+2024-2025,Network 8,Multiracial,64.0,0.0
+2024-2025,Network 8,Native American/Alaskan,11661.0,0.0
+2024-2025,Network 8,Not Available,0.0,0.0
+2024-2025,Network 8,White,1126.0,0.0
+2024-2025,Network 9,Not Available,0.0,0.0172532104695618
+2024-2025,Network 9,Asian,9.0,0.0
+2024-2025,Network 9,Asian/Pacific Islander (Retired),19.0,0.0
+2024-2025,Network 9,Black/African American,0.0,0.0
+2024-2025,Network 9,Hawaiian/Pacific Islander,107.0,0.0
+2024-2025,Network 9,Hispanic/Latino,151.0,0.0
+2024-2025,Network 9,Multiracial,101.0,0.0
+2024-2025,Network 9,Native American/Alaskan,758.0,0.0
+2024-2025,Network 9,Not Available,0.0,0.0
+2024-2025,Network 9,White,8880.0,0.0
+2024-2025,Options,Not Available,0.0,0.0289503477276403
+2024-2025,Options,Asian,4.0,0.0
+2024-2025,Options,Asian/Pacific Islander (Retired),16.0,0.0
+2024-2025,Options,Black/African American,0.0,0.0
+2024-2025,Options,Hawaiian/Pacific Islander,10.0,0.0
+2024-2025,Options,Hispanic/Latino,30.0,0.0
+2024-2025,Options,Multiracial,58.0,0.0
+2024-2025,Options,Native American/Alaskan,2446.0,0.0
+2024-2025,Options,Not Available,2.0,0.0
+2024-2025,Options,White,3438.0,0.0
+2023-2024,Charter,Not Available,0.0,0.0130165289256198
+2023-2024,Charter,Asian,34.0,0.0
+2023-2024,Charter,Asian/Pacific Islander (Retired),89.0,0.0
+2023-2024,Charter,Black/African American,0.0,0.0
+2023-2024,Charter,Hawaiian/Pacific Islander,370.0,0.0
+2023-2024,Charter,Hispanic/Latino,215.0,0.0
+2023-2024,Charter,Multiracial,461.0,0.0
+2023-2024,Charter,Native American/Alaskan,20906.0,0.0
+2023-2024,Charter,White,25695.0,0.0
+2023-2024,Contract,Not Available,0.0,0.1010186757215619
+2023-2024,Contract,Asian,2.0,0.0
+2023-2024,Contract,Asian/Pacific Islander (Retired),3.0,0.0
+2023-2024,Contract,Black/African American,0.0,0.0
+2023-2024,Contract,Hawaiian/Pacific Islander,0.0,0.0
+2023-2024,Contract,Hispanic/Latino,17.0,0.0
+2023-2024,Contract,Multiracial,10.0,0.0
+2023-2024,Contract,Native American/Alaskan,300.0,0.0
+2023-2024,Contract,White,727.0,0.0
+2023-2024,ISP,Not Available,0.0,0.1441856066576301
+2023-2024,ISP,Asian,24.0,0.0
+2023-2024,ISP,Asian/Pacific Islander (Retired),94.0,0.0
+2023-2024,ISP,Black/African American,0.0,0.0
+2023-2024,ISP,Hawaiian/Pacific Islander,17.0,0.0
+2023-2024,ISP,Hispanic/Latino,552.0,0.0
+2023-2024,ISP,Multiracial,2301.0,0.0
+2023-2024,ISP,Native American/Alaskan,18414.0,0.0
+2023-2024,ISP,White,5747.0,0.0
+2023-2024,Network 1,Not Available,0.0,0.3496914237071717
+2023-2024,Network 1,Asian,46.0,0.0
+2023-2024,Network 1,Asian/Pacific Islander (Retired),90.0,0.0
+2023-2024,Network 1,Black/African American,0.0,0.0
+2023-2024,Network 1,Hawaiian/Pacific Islander,94.0,0.0
+2023-2024,Network 1,Hispanic/Latino,692.0,0.0
+2023-2024,Network 1,Multiracial,1988.0,0.0
+2023-2024,Network 1,Native American/Alaskan,11648.0,0.0
+2023-2024,Network 1,White,721.0,0.0
+2023-2024,Network 10,Not Available,0.0,0.0650321683185533
+2023-2024,Network 10,Asian,13.0,0.0
+2023-2024,Network 10,Asian/Pacific Islander (Retired),31.0,0.0
+2023-2024,Network 10,Black/African American,0.0,0.0
+2023-2024,Network 10,Hawaiian/Pacific Islander,6.0,0.0
+2023-2024,Network 10,Hispanic/Latino,137.0,0.0
+2023-2024,Network 10,Multiracial,134.0,0.0
+2023-2024,Network 10,Native American/Alaskan,11161.0,0.0
+2023-2024,Network 10,White,4649.0,0.0
+2023-2024,Network 11,Not Available,0.0,0.002685546875
+2023-2024,Network 11,Asian,3.0,0.0
+2023-2024,Network 11,Asian/Pacific Islander (Retired),8.0,0.0
+2023-2024,Network 11,Black/African American,0.0,0.0
+2023-2024,Network 11,Hawaiian/Pacific Islander,14.0,0.0
+2023-2024,Network 11,Hispanic/Latino,27.0,0.0
+2023-2024,Network 11,Multiracial,5.0,0.0
+2023-2024,Network 11,Native American/Alaskan,603.0,0.0
+2023-2024,Network 11,White,7510.0,0.0
+2023-2024,Network 12,Not Available,0.0,0.003134489176217
+2023-2024,Network 12,Asian,6.0,0.0
+2023-2024,Network 12,Asian/Pacific Islander (Retired),14.0,0.0
+2023-2024,Network 12,Black/African American,0.0,0.0
+2023-2024,Network 12,Hawaiian/Pacific Islander,47.0,0.0
+2023-2024,Network 12,Hispanic/Latino,66.0,0.0
+2023-2024,Network 12,Multiracial,7.0,0.0
+2023-2024,Network 12,Native American/Alaskan,690.0,0.0
+2023-2024,Network 12,White,9347.0,0.0
+2023-2024,Network 13,Not Available,0.0,0.0165317426501917
+2023-2024,Network 13,Asian,1.0,0.0
+2023-2024,Network 13,Asian/Pacific Islander (Retired),13.0,0.0
+2023-2024,Network 13,Black/African American,0.0,0.0
+2023-2024,Network 13,Hawaiian/Pacific Islander,22.0,0.0
+2023-2024,Network 13,Hispanic/Latino,61.0,0.0
+2023-2024,Network 13,Multiracial,13.0,0.0
+2023-2024,Network 13,Native American/Alaskan,4049.0,0.0
+2023-2024,Network 13,White,7382.0,0.0
+2023-2024,Network 14,Not Available,0.0,0.2401117950895068
+2023-2024,Network 14,Asian,108.0,0.0
+2023-2024,Network 14,Asian/Pacific Islander (Retired),116.0,0.0
+2023-2024,Network 14,Black/African American,1.0,0.0
+2023-2024,Network 14,Hawaiian/Pacific Islander,472.0,0.0
+2023-2024,Network 14,Hispanic/Latino,647.0,0.0
+2023-2024,Network 14,Multiracial,2454.0,0.0
+2023-2024,Network 14,Native American/Alaskan,14454.0,0.0
+2023-2024,Network 14,White,3227.0,0.0
+2023-2024,Network 15,Not Available,0.0,0.1044132967137039
+2023-2024,Network 15,Asian,35.0,0.0
+2023-2024,Network 15,Asian/Pacific Islander (Retired),68.0,0.0
+2023-2024,Network 15,Black/African American,0.0,0.0
+2023-2024,Network 15,Hawaiian/Pacific Islander,40.0,0.0
+2023-2024,Network 15,Hispanic/Latino,341.0,0.0
+2023-2024,Network 15,Multiracial,1502.0,0.0
+2023-2024,Network 15,Native American/Alaskan,12546.0,0.0
+2023-2024,Network 15,White,4381.0,0.0
+2023-2024,Network 16,Not Available,0.0,0.0286500903381226
+2023-2024,Network 16,Asian,15.0,0.0
+2023-2024,Network 16,Asian/Pacific Islander (Retired),21.0,0.0
+2023-2024,Network 16,Black/African American,0.0,0.0
+2023-2024,Network 16,Hawaiian/Pacific Islander,40.0,0.0
+2023-2024,Network 16,Hispanic/Latino,41.0,0.0
+2023-2024,Network 16,Multiracial,215.0,0.0
+2023-2024,Network 16,Native American/Alaskan,6788.0,0.0
+2023-2024,Network 16,White,4170.0,0.0
+2023-2024,Network 17,Not Available,0.0,0.0190629742033383
+2023-2024,Network 17,Asian,8.0,0.0
+2023-2024,Network 17,Asian/Pacific Islander (Retired),17.0,0.0
+2023-2024,Network 17,Black/African American,0.0,0.0
+2023-2024,Network 17,Hawaiian/Pacific Islander,28.0,0.0
+2023-2024,Network 17,Hispanic/Latino,91.0,0.0
+2023-2024,Network 17,Multiracial,33.0,0.0
+2023-2024,Network 17,Native American/Alaskan,1944.0,0.0
+2023-2024,Network 17,White,8222.0,0.0
+2023-2024,Network 2,Not Available,0.0,0.23369652299311
+2023-2024,Network 2,Asian,18.0,0.0
+2023-2024,Network 2,Asian/Pacific Islander (Retired),67.0,0.0
+2023-2024,Network 2,Black/African American,0.0,0.0
+2023-2024,Network 2,Hawaiian/Pacific Islander,45.0,0.0
+2023-2024,Network 2,Hispanic/Latino,612.0,0.0
+2023-2024,Network 2,Multiracial,1850.0,0.0
+2023-2024,Network 2,Native American/Alaskan,4152.0,0.0
+2023-2024,Network 2,White,2821.0,0.0
+2023-2024,Network 3,Not Available,0.0,0.0249746351361898
+2023-2024,Network 3,Asian,19.0,0.0
+2023-2024,Network 3,Asian/Pacific Islander (Retired),35.0,0.0
+2023-2024,Network 3,Black/African American,0.0,0.0
+2023-2024,Network 3,Hawaiian/Pacific Islander,19.0,0.0
+2023-2024,Network 3,Hispanic/Latino,59.0,0.0
+2023-2024,Network 3,Multiracial,52.0,0.0
+2023-2024,Network 3,Native American/Alaskan,8458.0,0.0
+2023-2024,Network 3,White,3851.0,0.0
+2023-2024,Network 4,Not Available,0.0,0.3047516198704104
+2023-2024,Network 4,Asian,25.0,0.0
+2023-2024,Network 4,Asian/Pacific Islander (Retired),40.0,0.0
+2023-2024,Network 4,Black/African American,0.0,0.0
+2023-2024,Network 4,Hawaiian/Pacific Islander,52.0,0.0
+2023-2024,Network 4,Hispanic/Latino,954.0,0.0
+2023-2024,Network 4,Multiracial,1101.0,0.0
+2023-2024,Network 4,Native American/Alaskan,8855.0,0.0
+2023-2024,Network 4,White,1849.0,0.0
+2023-2024,Network 5,Not Available,0.0,0.0231877269001054
+2023-2024,Network 5,Asian,6.0,0.0
+2023-2024,Network 5,Asian/Pacific Islander (Retired),16.0,0.0
+2023-2024,Network 5,Black/African American,0.0,0.0
+2023-2024,Network 5,Hawaiian/Pacific Islander,3.0,0.0
+2023-2024,Network 5,Hispanic/Latino,61.0,0.0
+2023-2024,Network 5,Multiracial,17.0,0.0
+2023-2024,Network 5,Native American/Alaskan,3529.0,0.0
+2023-2024,Network 5,White,4709.0,0.0
+2023-2024,Network 6,Not Available,0.0,0.1567083107007061
+2023-2024,Network 6,Asian,17.0,0.0
+2023-2024,Network 6,Asian/Pacific Islander (Retired),31.0,0.0
+2023-2024,Network 6,Black/African American,0.0,0.0
+2023-2024,Network 6,Hawaiian/Pacific Islander,50.0,0.0
+2023-2024,Network 6,Hispanic/Latino,459.0,0.0
+2023-2024,Network 6,Multiracial,2323.0,0.0
+2023-2024,Network 6,Native American/Alaskan,3196.0,0.0
+2023-2024,Network 6,White,3239.0,0.0
+2023-2024,Network 7,Not Available,0.0,0.0110315023313999
+2023-2024,Network 7,Asian,13.0,0.0
+2023-2024,Network 7,Asian/Pacific Islander (Retired),5.0,0.0
+2023-2024,Network 7,Black/African American,0.0,0.0
+2023-2024,Network 7,Hawaiian/Pacific Islander,9.0,0.0
+2023-2024,Network 7,Hispanic/Latino,19.0,0.0
+2023-2024,Network 7,Multiracial,30.0,0.0
+2023-2024,Network 7,Native American/Alaskan,7148.0,0.0
+2023-2024,Network 7,White,1472.0,0.0
+2023-2024,Network 8,Not Available,0.0,0.0173783949000087
+2023-2024,Network 8,Asian,3.0,0.0
+2023-2024,Network 8,Asian/Pacific Islander (Retired),39.0,0.0
+2023-2024,Network 8,Black/African American,0.0,0.0
+2023-2024,Network 8,Hawaiian/Pacific Islander,11.0,0.0
+2023-2024,Network 8,Hispanic/Latino,22.0,0.0
+2023-2024,Network 8,Multiracial,57.0,0.0
+2023-2024,Network 8,Native American/Alaskan,9982.0,0.0
+2023-2024,Network 8,White,1138.0,0.0
+2023-2024,Network 9,Not Available,0.0,0.0161669906886319
+2023-2024,Network 9,Asian,5.0,0.0
+2023-2024,Network 9,Asian/Pacific Islander (Retired),13.0,0.0
+2023-2024,Network 9,Black/African American,0.0,0.0
+2023-2024,Network 9,Hawaiian/Pacific Islander,56.0,0.0
+2023-2024,Network 9,Hispanic/Latino,137.0,0.0
+2023-2024,Network 9,Multiracial,106.0,0.0
+2023-2024,Network 9,Native American/Alaskan,503.0,0.0
+2023-2024,Network 9,White,8795.0,0.0
+2023-2024,Options,Not Available,0.0,0.0247622171203673
+2023-2024,Options,Asian,6.0,0.0
+2023-2024,Options,Asian/Pacific Islander (Retired),17.0,0.0
+2023-2024,Options,Black/African American,0.0,0.0
+2023-2024,Options,Hawaiian/Pacific Islander,26.0,0.0
+2023-2024,Options,Hispanic/Latino,31.0,0.0
+2023-2024,Options,Multiracial,44.0,0.0
+2023-2024,Options,Native American/Alaskan,2278.0,0.0
+2023-2024,Options,White,3545.0,0.0
+2022-2023,AUSL,Not Available,0.0,0.0699617956
+2022-2023,AUSL,Black/African American,0.0,0.0
+2022-2023,AUSL,Asian,5.0,0.0
+2022-2023,AUSL,Asian/Pacific Islander (Retired),9.0,0.0
+2022-2023,AUSL,Hawaiian/Pacific Islander,3.0,0.0
+2022-2023,AUSL,Hispanic/Latino,55.0,0.0
+2022-2023,AUSL,Multiracial,75.0,0.0
+2022-2023,AUSL,Native American/Alaskan,2762.0,0.0
+2022-2023,AUSL,White,986.0,0.0
+2022-2023,Charter,Not Available,0.0,0.013040299
+2022-2023,Charter,Black/African American,0.0,0.0
+2022-2023,Charter,Asian,26.0,0.0
+2022-2023,Charter,Asian/Pacific Islander (Retired),84.0,0.0
+2022-2023,Charter,Hawaiian/Pacific Islander,278.0,0.0
+2022-2023,Charter,Hispanic/Latino,224.0,0.0
+2022-2023,Charter,Multiracial,440.0,0.0
+2022-2023,Charter,Native American/Alaskan,21750.0,0.0
+2022-2023,Charter,White,25788.0,0.0
+2022-2023,Contract,Not Available,0.0,0.0715774844
+2022-2023,Contract,Black/African American,0.0,0.0
+2022-2023,Contract,Asian,4.0,0.0
+2022-2023,Contract,Asian/Pacific Islander (Retired),3.0,0.0
+2022-2023,Contract,Hawaiian/Pacific Islander,42.0,0.0
+2022-2023,Contract,Hispanic/Latino,15.0,0.0
+2022-2023,Contract,Multiracial,7.0,0.0
+2022-2023,Contract,Native American/Alaskan,311.0,0.0
+2022-2023,Contract,White,954.0,0.0
+2022-2023,ISP,Not Available,0.0,0.1614372203
+2022-2023,ISP,Black/African American,0.0,0.0
+2022-2023,ISP,Asian,49.0,0.0
+2022-2023,ISP,Asian/Pacific Islander (Retired),106.0,0.0
+2022-2023,ISP,Hawaiian/Pacific Islander,25.0,0.0
+2022-2023,ISP,Hispanic/Latino,693.0,0.0
+2022-2023,ISP,Multiracial,3126.0,0.0
+2022-2023,ISP,Native American/Alaskan,21452.0,0.0
+2022-2023,ISP,White,6406.0,0.0
+2022-2023,Network 1,Not Available,0.0,0.3570616846
+2022-2023,Network 1,Black/African American,0.0,0.0
+2022-2023,Network 1,Asian,48.0,0.0
+2022-2023,Network 1,Asian/Pacific Islander (Retired),88.0,0.0
+2022-2023,Network 1,Hawaiian/Pacific Islander,132.0,0.0
+2022-2023,Network 1,Hispanic/Latino,606.0,0.0
+2022-2023,Network 1,Multiracial,1799.0,0.0
+2022-2023,Network 1,Native American/Alaskan,10816.0,0.0
+2022-2023,Network 1,White,655.0,0.0
+2022-2023,Network 10,Not Available,0.0,0.0696356769
+2022-2023,Network 10,Black/African American,0.0,0.0
+2022-2023,Network 10,Asian,15.0,0.0
+2022-2023,Network 10,Asian/Pacific Islander (Retired),34.0,0.0
+2022-2023,Network 10,Hawaiian/Pacific Islander,12.0,0.0
+2022-2023,Network 10,Hispanic/Latino,111.0,0.0
+2022-2023,Network 10,Multiracial,118.0,0.0
+2022-2023,Network 10,Native American/Alaskan,10427.0,0.0
+2022-2023,Network 10,White,4554.0,0.0
+2022-2023,Network 11,Not Available,0.0,0.0023892008
+2022-2023,Network 11,Black/African American,0.0,0.0
+2022-2023,Network 11,Asian,2.0,0.0
+2022-2023,Network 11,Asian/Pacific Islander (Retired),5.0,0.0
+2022-2023,Network 11,Hawaiian/Pacific Islander,18.0,0.0
+2022-2023,Network 11,Hispanic/Latino,18.0,0.0
+2022-2023,Network 11,Multiracial,5.0,0.0
+2022-2023,Network 11,Native American/Alaskan,450.0,0.0
+2022-2023,Network 11,White,7853.0,0.0
+2022-2023,Network 12,Not Available,0.0,0.0042793231
+2022-2023,Network 12,Black/African American,0.0,0.0
+2022-2023,Network 12,Asian,3.0,0.0
+2022-2023,Network 12,Asian/Pacific Islander (Retired),10.0,0.0
+2022-2023,Network 12,Hawaiian/Pacific Islander,26.0,0.0
+2022-2023,Network 12,Hispanic/Latino,54.0,0.0
+2022-2023,Network 12,Multiracial,7.0,0.0
+2022-2023,Network 12,Native American/Alaskan,580.0,0.0
+2022-2023,Network 12,White,9558.0,0.0
+2022-2023,Network 13,Not Available,0.0,0.015796897
+2022-2023,Network 13,Black/African American,0.0,0.0
+2022-2023,Network 13,Asian,4.0,0.0
+2022-2023,Network 13,Asian/Pacific Islander (Retired),14.0,0.0
+2022-2023,Network 13,Hawaiian/Pacific Islander,39.0,0.0
+2022-2023,Network 13,Hispanic/Latino,58.0,0.0
+2022-2023,Network 13,Multiracial,6.0,0.0
+2022-2023,Network 13,Native American/Alaskan,2973.0,0.0
+2022-2023,Network 13,White,7373.0,0.0
+2022-2023,Network 14,Not Available,0.0,0.2368350606
+2022-2023,Network 14,Black/African American,1.0,0.0
+2022-2023,Network 14,Asian,117.0,0.0
+2022-2023,Network 14,Asian/Pacific Islander (Retired),111.0,0.0
+2022-2023,Network 14,Hawaiian/Pacific Islander,397.0,0.0
+2022-2023,Network 14,Hispanic/Latino,526.0,0.0
+2022-2023,Network 14,Multiracial,2346.0,0.0
+2022-2023,Network 14,Native American/Alaskan,13318.0,0.0
+2022-2023,Network 14,White,3140.0,0.0
+2022-2023,Network 15,Not Available,0.0,0.0928294801
+2022-2023,Network 15,Black/African American,0.0,0.0
+2022-2023,Network 15,Asian,40.0,0.0
+2022-2023,Network 15,Asian/Pacific Islander (Retired),58.0,0.0
+2022-2023,Network 15,Hawaiian/Pacific Islander,29.0,0.0
+2022-2023,Network 15,Hispanic/Latino,243.0,0.0
+2022-2023,Network 15,Multiracial,1083.0,0.0
+2022-2023,Network 15,Native American/Alaskan,9963.0,0.0
+2022-2023,Network 15,White,4044.0,0.0
+2022-2023,Network 16,Not Available,0.0,0.0304564383
+2022-2023,Network 16,Black/African American,0.0,0.0
+2022-2023,Network 16,Asian,12.0,0.0
+2022-2023,Network 16,Asian/Pacific Islander (Retired),18.0,0.0
+2022-2023,Network 16,Hawaiian/Pacific Islander,41.0,0.0
+2022-2023,Network 16,Hispanic/Latino,41.0,0.0
+2022-2023,Network 16,Multiracial,223.0,0.0
+2022-2023,Network 16,Native American/Alaskan,6834.0,0.0
+2022-2023,Network 16,White,4705.0,0.0
+2022-2023,Network 17,Not Available,0.0,0.017135407
+2022-2023,Network 17,Black/African American,0.0,0.0
+2022-2023,Network 17,Asian,8.0,0.0
+2022-2023,Network 17,Asian/Pacific Islander (Retired),17.0,0.0
+2022-2023,Network 17,Hawaiian/Pacific Islander,93.0,0.0
+2022-2023,Network 17,Hispanic/Latino,94.0,0.0
+2022-2023,Network 17,Multiracial,41.0,0.0
+2022-2023,Network 17,Native American/Alaskan,1901.0,0.0
+2022-2023,Network 17,White,8400.0,0.0
+2022-2023,Network 2,Not Available,0.0,0.2376640638
+2022-2023,Network 2,Black/African American,0.0,0.0
+2022-2023,Network 2,Asian,17.0,0.0
+2022-2023,Network 2,Asian/Pacific Islander (Retired),52.0,0.0
+2022-2023,Network 2,Hawaiian/Pacific Islander,63.0,0.0
+2022-2023,Network 2,Hispanic/Latino,603.0,0.0
+2022-2023,Network 2,Multiracial,1761.0,0.0
+2022-2023,Network 2,Native American/Alaskan,3825.0,0.0
+2022-2023,Network 2,White,2856.0,0.0
+2022-2023,Network 3,Not Available,0.0,0.024502178
+2022-2023,Network 3,Black/African American,0.0,0.0
+2022-2023,Network 3,Asian,21.0,0.0
+2022-2023,Network 3,Asian/Pacific Islander (Retired),33.0,0.0
+2022-2023,Network 3,Hawaiian/Pacific Islander,16.0,0.0
+2022-2023,Network 3,Hispanic/Latino,59.0,0.0
+2022-2023,Network 3,Multiracial,65.0,0.0
+2022-2023,Network 3,Native American/Alaskan,8196.0,0.0
+2022-2023,Network 3,White,4151.0,0.0
+2022-2023,Network 4,Not Available,0.0,0.2954687945
+2022-2023,Network 4,Black/African American,0.0,0.0
+2022-2023,Network 4,Asian,35.0,0.0
+2022-2023,Network 4,Asian/Pacific Islander (Retired),42.0,0.0
+2022-2023,Network 4,Hawaiian/Pacific Islander,32.0,0.0
+2022-2023,Network 4,Hispanic/Latino,837.0,0.0
+2022-2023,Network 4,Multiracial,996.0,0.0
+2022-2023,Network 4,Native American/Alaskan,8628.0,0.0
+2022-2023,Network 4,White,1791.0,0.0
+2022-2023,Network 5,Not Available,0.0,0.0181408584
+2022-2023,Network 5,Black/African American,0.0,0.0
+2022-2023,Network 5,Asian,2.0,0.0
+2022-2023,Network 5,Asian/Pacific Islander (Retired),12.0,0.0
+2022-2023,Network 5,Hawaiian/Pacific Islander,3.0,0.0
+2022-2023,Network 5,Hispanic/Latino,51.0,0.0
+2022-2023,Network 5,Multiracial,12.0,0.0
+2022-2023,Network 5,Native American/Alaskan,3199.0,0.0
+2022-2023,Network 5,White,5002.0,0.0
+2022-2023,Network 6,Not Available,0.0,0.1661761614
+2022-2023,Network 6,Black/African American,0.0,0.0
+2022-2023,Network 6,Asian,21.0,0.0
+2022-2023,Network 6,Asian/Pacific Islander (Retired),34.0,0.0
+2022-2023,Network 6,Hawaiian/Pacific Islander,2.0,0.0
+2022-2023,Network 6,Hispanic/Latino,362.0,0.0
+2022-2023,Network 6,Multiracial,1958.0,0.0
+2022-2023,Network 6,Native American/Alaskan,3003.0,0.0
+2022-2023,Network 6,White,2553.0,0.0
+2022-2023,Network 7,Not Available,0.0,0.0100147946
+2022-2023,Network 7,Black/African American,0.0,0.0
+2022-2023,Network 7,Asian,5.0,0.0
+2022-2023,Network 7,Asian/Pacific Islander (Retired),7.0,0.0
+2022-2023,Network 7,Hawaiian/Pacific Islander,2.0,0.0
+2022-2023,Network 7,Hispanic/Latino,19.0,0.0
+2022-2023,Network 7,Multiracial,30.0,0.0
+2022-2023,Network 7,Native American/Alaskan,7155.0,0.0
+2022-2023,Network 7,White,1481.0,0.0
+2022-2023,Network 8,Not Available,0.0,0.0163352273
+2022-2023,Network 8,Black/African American,0.0,0.0
+2022-2023,Network 8,Asian,4.0,0.0
+2022-2023,Network 8,Asian/Pacific Islander (Retired),41.0,0.0
+2022-2023,Network 8,Hawaiian/Pacific Islander,12.0,0.0
+2022-2023,Network 8,Hispanic/Latino,23.0,0.0
+2022-2023,Network 8,Multiracial,53.0,0.0
+2022-2023,Network 8,Native American/Alaskan,9814.0,0.0
+2022-2023,Network 8,White,1133.0,0.0
+2022-2023,Network 9,Not Available,0.0,0.0158829676
+2022-2023,Network 9,Black/African American,0.0,0.0
+2022-2023,Network 9,Asian,6.0,0.0
+2022-2023,Network 9,Asian/Pacific Islander (Retired),12.0,0.0
+2022-2023,Network 9,Hawaiian/Pacific Islander,76.0,0.0
+2022-2023,Network 9,Hispanic/Latino,118.0,0.0
+2022-2023,Network 9,Multiracial,97.0,0.0
+2022-2023,Network 9,Native American/Alaskan,315.0,0.0
+2022-2023,Network 9,White,8794.0,0.0
+2022-2023,Options,Not Available,0.0,0.0240134028
+2022-2023,Options,Black/African American,0.0,0.0
+2022-2023,Options,Asian,5.0,0.0
+2022-2023,Options,Asian/Pacific Islander (Retired),16.0,0.0
+2022-2023,Options,Hawaiian/Pacific Islander,18.0,0.0
+2022-2023,Options,Hispanic/Latino,31.0,0.0
+2022-2023,Options,Multiracial,43.0,0.0
+2022-2023,Options,Native American/Alaskan,1975.0,0.0
+2022-2023,Options,White,3155.0,0.0
+2021-2022,AUSL,Not Available,0.0,4.1
+2021-2022,AUSL,Black/African American,0.0,0.0
+2021-2022,AUSL,Asian,5.0,0.0
+2021-2022,AUSL,Asian/Pacific Islander (Retired),14.0,0.0
+2021-2022,AUSL,Hawaiian/Pacific Islander,24.0,0.0
+2021-2022,AUSL,Hispanic/Latino,61.0,0.0
+2021-2022,AUSL,Multiracial,77.0,0.0
+2021-2022,AUSL,Native American/Alaskan,2997.0,0.0
+2021-2022,AUSL,White,4215.0,0.0
+2021-2022,Charter,Not Available,0.0,1.3
+2021-2022,Charter,Black/African American,0.0,0.0
+2021-2022,Charter,Asian,26.0,0.0
+2021-2022,Charter,Asian/Pacific Islander (Retired),75.0,0.0
+2021-2022,Charter,Hawaiian/Pacific Islander,322.0,0.0
+2021-2022,Charter,Hispanic/Latino,217.0,0.0
+2021-2022,Charter,Multiracial,502.0,0.0
+2021-2022,Charter,Native American/Alaskan,22682.0,0.0
+2021-2022,Charter,White,25936.0,0.0
+2021-2022,Contract,Not Available,0.0,7.2
+2021-2022,Contract,Black/African American,0.0,0.0
+2021-2022,Contract,Asian,4.0,0.0
+2021-2022,Contract,Asian/Pacific Islander (Retired),3.0,0.0
+2021-2022,Contract,Hawaiian/Pacific Islander,50.0,0.0
+2021-2022,Contract,Hispanic/Latino,11.0,0.0
+2021-2022,Contract,Multiracial,9.0,0.0
+2021-2022,Contract,Native American/Alaskan,332.0,0.0
+2021-2022,Contract,White,993.0,0.0
+2021-2022,ISP,Not Available,0.0,16.7
+2021-2022,ISP,Black/African American,4.0,0.0
+2021-2022,ISP,Asian,97.0,0.0
+2021-2022,ISP,Asian/Pacific Islander (Retired),164.0,0.0
+2021-2022,ISP,Hawaiian/Pacific Islander,162.0,0.0
+2021-2022,ISP,Hispanic/Latino,840.0,0.0
+2021-2022,ISP,Multiracial,4214.0,0.0
+2021-2022,ISP,Native American/Alaskan,27098.0,0.0
+2021-2022,ISP,White,7965.0,0.0
+2021-2022,Network 1,Not Available,0.0,34.8
+2021-2022,Network 1,Black/African American,0.0,0.0
+2021-2022,Network 1,Asian,59.0,0.0
+2021-2022,Network 1,Asian/Pacific Islander (Retired),77.0,0.0
+2021-2022,Network 1,Hawaiian/Pacific Islander,95.0,0.0
+2021-2022,Network 1,Hispanic/Latino,576.0,0.0
+2021-2022,Network 1,Multiracial,1684.0,0.0
+2021-2022,Network 1,Native American/Alaskan,10300.0,0.0
+2021-2022,Network 1,White,622.0,0.0
+2021-2022,Network 10,Not Available,0.0,7.3
+2021-2022,Network 10,Black/African American,0.0,0.0
+2021-2022,Network 10,Asian,14.0,0.0
+2021-2022,Network 10,Asian/Pacific Islander (Retired),40.0,0.0
+2021-2022,Network 10,Hawaiian/Pacific Islander,12.0,0.0
+2021-2022,Network 10,Hispanic/Latino,115.0,0.0
+2021-2022,Network 10,Multiracial,117.0,0.0
+2021-2022,Network 10,Native American/Alaskan,10506.0,0.0
+2021-2022,Network 10,White,4664.0,0.0
+2021-2022,Network 11,Not Available,0.0,0.2
+2021-2022,Network 11,Black/African American,0.0,0.0
+2021-2022,Network 11,Asian,1.0,0.0
+2021-2022,Network 11,Asian/Pacific Islander (Retired),5.0,0.0
+2021-2022,Network 11,Hawaiian/Pacific Islander,44.0,0.0
+2021-2022,Network 11,Hispanic/Latino,27.0,0.0
+2021-2022,Network 11,Multiracial,6.0,0.0
+2021-2022,Network 11,Native American/Alaskan,423.0,0.0
+2021-2022,Network 11,White,8093.0,0.0
+2021-2022,Network 12,Not Available,0.0,0.3
+2021-2022,Network 12,Black/African American,0.0,0.0
+2021-2022,Network 12,Asian,4.0,0.0
+2021-2022,Network 12,Asian/Pacific Islander (Retired),12.0,0.0
+2021-2022,Network 12,Hawaiian/Pacific Islander,49.0,0.0
+2021-2022,Network 12,Hispanic/Latino,42.0,0.0
+2021-2022,Network 12,Multiracial,7.0,0.0
+2021-2022,Network 12,Native American/Alaskan,554.0,0.0
+2021-2022,Network 12,White,9031.0,0.0
+2021-2022,Network 13,Not Available,0.0,1.6
+2021-2022,Network 13,Black/African American,0.0,0.0
+2021-2022,Network 13,Asian,6.0,0.0
+2021-2022,Network 13,Asian/Pacific Islander (Retired),16.0,0.0
+2021-2022,Network 13,Hawaiian/Pacific Islander,31.0,0.0
+2021-2022,Network 13,Hispanic/Latino,52.0,0.0
+2021-2022,Network 13,Multiracial,7.0,0.0
+2021-2022,Network 13,Native American/Alaskan,2973.0,0.0
+2021-2022,Network 13,White,7078.0,0.0
+2021-2022,Network 14,Not Available,0.0,23.3
+2021-2022,Network 14,Black/African American,6.0,0.0
+2021-2022,Network 14,Asian,117.0,0.0
+2021-2022,Network 14,Asian/Pacific Islander (Retired),124.0,0.0
+2021-2022,Network 14,Hawaiian/Pacific Islander,375.0,0.0
+2021-2022,Network 14,Hispanic/Latino,530.0,0.0
+2021-2022,Network 14,Multiracial,2366.0,0.0
+2021-2022,Network 14,Native American/Alaskan,13234.0,0.0
+2021-2022,Network 14,White,3224.0,0.0
+2021-2022,Network 15,Not Available,0.0,6.9
+2021-2022,Network 15,Black/African American,0.0,0.0
+2021-2022,Network 15,Asian,20.0,0.0
+2021-2022,Network 15,Asian/Pacific Islander (Retired),55.0,0.0
+2021-2022,Network 15,Hawaiian/Pacific Islander,47.0,0.0
+2021-2022,Network 15,Hispanic/Latino,154.0,0.0
+2021-2022,Network 15,Multiracial,556.0,0.0
+2021-2022,Network 15,Native American/Alaskan,9537.0,0.0
+2021-2022,Network 15,White,3731.0,0.0
+2021-2022,Network 16,Not Available,0.0,3.2
+2021-2022,Network 16,Black/African American,0.0,0.0
+2021-2022,Network 16,Asian,9.0,0.0
+2021-2022,Network 16,Asian/Pacific Islander (Retired),18.0,0.0
+2021-2022,Network 16,Hawaiian/Pacific Islander,19.0,0.0
+2021-2022,Network 16,Hispanic/Latino,36.0,0.0
+2021-2022,Network 16,Multiracial,247.0,0.0
+2021-2022,Network 16,Native American/Alaskan,6758.0,0.0
+2021-2022,Network 16,White,4855.0,0.0
+2021-2022,Network 17,Not Available,0.0,1.6
+2021-2022,Network 17,Black/African American,0.0,0.0
+2021-2022,Network 17,Asian,8.0,0.0
+2021-2022,Network 17,Asian/Pacific Islander (Retired),18.0,0.0
+2021-2022,Network 17,Hawaiian/Pacific Islander,37.0,0.0
+2021-2022,Network 17,Hispanic/Latino,84.0,0.0
+2021-2022,Network 17,Multiracial,54.0,0.0
+2021-2022,Network 17,Native American/Alaskan,1962.0,0.0
+2021-2022,Network 17,White,8324.0,0.0
+2021-2022,Network 2,Not Available,0.0,23.9
+2021-2022,Network 2,Black/African American,0.0,0.0
+2021-2022,Network 2,Asian,18.0,0.0
+2021-2022,Network 2,Asian/Pacific Islander (Retired),52.0,0.0
+2021-2022,Network 2,Hawaiian/Pacific Islander,45.0,0.0
+2021-2022,Network 2,Hispanic/Latino,509.0,0.0
+2021-2022,Network 2,Multiracial,1583.0,0.0
+2021-2022,Network 2,Native American/Alaskan,3511.0,0.0
+2021-2022,Network 2,White,2641.0,0.0
+2021-2022,Network 3,Not Available,0.0,2.7
+2021-2022,Network 3,Black/African American,0.0,0.0
+2021-2022,Network 3,Asian,22.0,0.0
+2021-2022,Network 3,Asian/Pacific Islander (Retired),31.0,0.0
+2021-2022,Network 3,Hawaiian/Pacific Islander,13.0,0.0
+2021-2022,Network 3,Hispanic/Latino,44.0,0.0
+2021-2022,Network 3,Multiracial,64.0,0.0
+2021-2022,Network 3,Native American/Alaskan,7442.0,0.0
+2021-2022,Network 3,White,3986.0,0.0
+2021-2022,Network 4,Not Available,0.0,30.9
+2021-2022,Network 4,Black/African American,0.0,0.0
+2021-2022,Network 4,Asian,30.0,0.0
+2021-2022,Network 4,Asian/Pacific Islander (Retired),38.0,0.0
+2021-2022,Network 4,Hawaiian/Pacific Islander,23.0,0.0
+2021-2022,Network 4,Hispanic/Latino,774.0,0.0
+2021-2022,Network 4,Multiracial,943.0,0.0
+2021-2022,Network 4,Native American/Alaskan,7952.0,0.0
+2021-2022,Network 4,White,1756.0,0.0
+2021-2022,Network 5,Not Available,0.0,1.7
+2021-2022,Network 5,Black/African American,0.0,0.0
+2021-2022,Network 5,Asian,2.0,0.0
+2021-2022,Network 5,Asian/Pacific Islander (Retired),8.0,0.0
+2021-2022,Network 5,Hawaiian/Pacific Islander,0.0,0.0
+2021-2022,Network 5,Hispanic/Latino,45.0,0.0
+2021-2022,Network 5,Multiracial,16.0,0.0
+2021-2022,Network 5,Native American/Alaskan,2859.0,0.0
+2021-2022,Network 5,White,4607.0,0.0
+2021-2022,Network 6,Not Available,0.0,15.4
+2021-2022,Network 6,Black/African American,0.0,0.0
+2021-2022,Network 6,Asian,13.0,0.0
+2021-2022,Network 6,Asian/Pacific Islander (Retired),25.0,0.0
+2021-2022,Network 6,Hawaiian/Pacific Islander,14.0,0.0
+2021-2022,Network 6,Hispanic/Latino,283.0,0.0
+2021-2022,Network 6,Multiracial,1720.0,0.0
+2021-2022,Network 6,Native American/Alaskan,3032.0,0.0
+2021-2022,Network 6,White,2325.0,0.0
+2021-2022,Network 7,Not Available,0.0,1.1
+2021-2022,Network 7,Black/African American,0.0,0.0
+2021-2022,Network 7,Asian,4.0,0.0
+2021-2022,Network 7,Asian/Pacific Islander (Retired),9.0,0.0
+2021-2022,Network 7,Hawaiian/Pacific Islander,3.0,0.0
+2021-2022,Network 7,Hispanic/Latino,14.0,0.0
+2021-2022,Network 7,Multiracial,21.0,0.0
+2021-2022,Network 7,Native American/Alaskan,6757.0,0.0
+2021-2022,Network 7,White,1590.0,0.0
+2021-2022,Network 8,Not Available,0.0,1.5
+2021-2022,Network 8,Black/African American,0.0,0.0
+2021-2022,Network 8,Asian,5.0,0.0
+2021-2022,Network 8,Asian/Pacific Islander (Retired),38.0,0.0
+2021-2022,Network 8,Hawaiian/Pacific Islander,25.0,0.0
+2021-2022,Network 8,Hispanic/Latino,24.0,0.0
+2021-2022,Network 8,Multiracial,53.0,0.0
+2021-2022,Network 8,Native American/Alaskan,10363.0,0.0
+2021-2022,Network 8,White,1291.0,0.0
+2021-2022,Network 9,Not Available,0.0,1.7
+2021-2022,Network 9,Black/African American,0.0,0.0
+2021-2022,Network 9,Asian,10.0,0.0
+2021-2022,Network 9,Asian/Pacific Islander (Retired),15.0,0.0
+2021-2022,Network 9,Hawaiian/Pacific Islander,61.0,0.0
+2021-2022,Network 9,Hispanic/Latino,112.0,0.0
+2021-2022,Network 9,Multiracial,79.0,0.0
+2021-2022,Network 9,Native American/Alaskan,292.0,0.0
+2021-2022,Network 9,White,8423.0,0.0
+2021-2022,Options,Not Available,0.0,2.8
+2021-2022,Options,Black/African American,0.0,0.0
+2021-2022,Options,Asian,5.0,0.0
+2021-2022,Options,Asian/Pacific Islander (Retired),22.0,0.0
+2021-2022,Options,Hawaiian/Pacific Islander,32.0,0.0
+2021-2022,Options,Hispanic/Latino,42.0,0.0
+2021-2022,Options,Multiracial,58.0,0.0
+2021-2022,Options,Native American/Alaskan,2367.0,0.0
+2021-2022,Options,White,3675.0,0.0
+2020-2021,AUSL,Not Available,0.0,2.6
+2020-2021,AUSL,Black/African American,0.0,0.0
+2020-2021,AUSL,Asian,7.0,0.0
+2020-2021,AUSL,Asian/Pacific Islander (Retired),21.0,0.0
+2020-2021,AUSL,Hawaiian/Pacific Islander,27.0,0.0
+2020-2021,AUSL,Hispanic/Latino,89.0,0.0
+2020-2021,AUSL,Multiracial,85.0,0.0
+2020-2021,AUSL,Native American/Alaskan,4488.0,0.0
+2020-2021,AUSL,White,9651.0,0.0
+2020-2021,Charter,Not Available,0.0,1.4
+2020-2021,Charter,Black/African American,0.0,0.0
+2020-2021,Charter,Asian,32.0,0.0
+2020-2021,Charter,Asian/Pacific Islander (Retired),92.0,0.0
+2020-2021,Charter,Hawaiian/Pacific Islander,195.0,0.0
+2020-2021,Charter,Hispanic/Latino,199.0,0.0
+2020-2021,Charter,Multiracial,502.0,0.0
+2020-2021,Charter,Native American/Alaskan,23198.0,0.0
+2020-2021,Charter,White,26411.0,0.0
+2020-2021,Contract,Not Available,0.0,8.0
+2020-2021,Contract,Black/African American,0.0,0.0
+2020-2021,Contract,Asian,2.0,0.0
+2020-2021,Contract,Asian/Pacific Islander (Retired),2.0,0.0
+2020-2021,Contract,Hawaiian/Pacific Islander,45.0,0.0
+2020-2021,Contract,Hispanic/Latino,11.0,0.0
+2020-2021,Contract,Multiracial,11.0,0.0
+2020-2021,Contract,Native American/Alaskan,334.0,0.0
+2020-2021,Contract,White,933.0,0.0
+2020-2021,ISP,Not Available,0.0,18.2
+2020-2021,ISP,Black/African American,8.0,0.0
+2020-2021,ISP,Asian,133.0,0.0
+2020-2021,ISP,Asian/Pacific Islander (Retired),200.0,0.0
+2020-2021,ISP,Hawaiian/Pacific Islander,326.0,0.0
+2020-2021,ISP,Hispanic/Latino,1046.0,0.0
+2020-2021,ISP,Multiracial,4704.0,0.0
+2020-2021,ISP,Native American/Alaskan,30295.0,0.0
+2020-2021,ISP,White,9236.0,0.0
+2020-2021,Network 1,Not Available,0.0,34.0
+2020-2021,Network 1,Black/African American,0.0,0.0
+2020-2021,Network 1,Asian,71.0,0.0
+2020-2021,Network 1,Asian/Pacific Islander (Retired),103.0,0.0
+2020-2021,Network 1,Hawaiian/Pacific Islander,119.0,0.0
+2020-2021,Network 1,Hispanic/Latino,541.0,0.0
+2020-2021,Network 1,Multiracial,1810.0,0.0
+2020-2021,Network 1,Native American/Alaskan,10988.0,0.0
+2020-2021,Network 1,White,574.0,0.0
+2020-2021,Network 10,Not Available,0.0,8.1
+2020-2021,Network 10,Black/African American,0.0,0.0
+2020-2021,Network 10,Asian,18.0,0.0
+2020-2021,Network 10,Asian/Pacific Islander (Retired),36.0,0.0
+2020-2021,Network 10,Hawaiian/Pacific Islander,24.0,0.0
+2020-2021,Network 10,Hispanic/Latino,111.0,0.0
+2020-2021,Network 10,Multiracial,117.0,0.0
+2020-2021,Network 10,Native American/Alaskan,10037.0,0.0
+2020-2021,Network 10,White,4561.0,0.0
+2020-2021,Network 11,Not Available,0.0,0.3
+2020-2021,Network 11,Black/African American,0.0,0.0
+2020-2021,Network 11,Asian,1.0,0.0
+2020-2021,Network 11,Asian/Pacific Islander (Retired),8.0,0.0
+2020-2021,Network 11,Hawaiian/Pacific Islander,35.0,0.0
+2020-2021,Network 11,Hispanic/Latino,40.0,0.0
+2020-2021,Network 11,Multiracial,4.0,0.0
+2020-2021,Network 11,Native American/Alaskan,681.0,0.0
+2020-2021,Network 11,White,8123.0,0.0
+2020-2021,Network 12,Not Available,0.0,0.3
+2020-2021,Network 12,Black/African American,0.0,0.0
+2020-2021,Network 12,Asian,4.0,0.0
+2020-2021,Network 12,Asian/Pacific Islander (Retired),13.0,0.0
+2020-2021,Network 12,Hawaiian/Pacific Islander,41.0,0.0
+2020-2021,Network 12,Hispanic/Latino,40.0,0.0
+2020-2021,Network 12,Multiracial,8.0,0.0
+2020-2021,Network 12,Native American/Alaskan,515.0,0.0
+2020-2021,Network 12,White,8457.0,0.0
+2020-2021,Network 13,Not Available,0.0,1.7
+2020-2021,Network 13,Black/African American,0.0,0.0
+2020-2021,Network 13,Asian,7.0,0.0
+2020-2021,Network 13,Asian/Pacific Islander (Retired),18.0,0.0
+2020-2021,Network 13,Hawaiian/Pacific Islander,27.0,0.0
+2020-2021,Network 13,Hispanic/Latino,44.0,0.0
+2020-2021,Network 13,Multiracial,10.0,0.0
+2020-2021,Network 13,Native American/Alaskan,3027.0,0.0
+2020-2021,Network 13,White,6996.0,0.0
+2020-2021,Network 14,Not Available,0.0,23.9
+2020-2021,Network 14,Black/African American,0.0,0.0
+2020-2021,Network 14,Asian,105.0,0.0
+2020-2021,Network 14,Asian/Pacific Islander (Retired),112.0,0.0
+2020-2021,Network 14,Hawaiian/Pacific Islander,163.0,0.0
+2020-2021,Network 14,Hispanic/Latino,496.0,0.0
+2020-2021,Network 14,Multiracial,2204.0,0.0
+2020-2021,Network 14,Native American/Alaskan,12151.0,0.0
+2020-2021,Network 14,White,3124.0,0.0
+2020-2021,Network 15,Not Available,0.0,7.2
+2020-2021,Network 15,Black/African American,0.0,0.0
+2020-2021,Network 15,Asian,20.0,0.0
+2020-2021,Network 15,Asian/Pacific Islander (Retired),48.0,0.0
+2020-2021,Network 15,Hawaiian/Pacific Islander,15.0,0.0
+2020-2021,Network 15,Hispanic/Latino,170.0,0.0
+2020-2021,Network 15,Multiracial,541.0,0.0
+2020-2021,Network 15,Native American/Alaskan,9711.0,0.0
+2020-2021,Network 15,White,3940.0,0.0
+2020-2021,Network 16,Not Available,0.0,3.8
+2020-2021,Network 16,Black/African American,0.0,0.0
+2020-2021,Network 16,Asian,10.0,0.0
+2020-2021,Network 16,Asian/Pacific Islander (Retired),22.0,0.0
+2020-2021,Network 16,Hawaiian/Pacific Islander,14.0,0.0
+2020-2021,Network 16,Hispanic/Latino,37.0,0.0
+2020-2021,Network 16,Multiracial,290.0,0.0
+2020-2021,Network 16,Native American/Alaskan,6157.0,0.0
+2020-2021,Network 16,White,3787.0,0.0
+2020-2021,Network 17,Not Available,0.0,1.6
+2020-2021,Network 17,Black/African American,0.0,0.0
+2020-2021,Network 17,Asian,5.0,0.0
+2020-2021,Network 17,Asian/Pacific Islander (Retired),19.0,0.0
+2020-2021,Network 17,Hawaiian/Pacific Islander,51.0,0.0
+2020-2021,Network 17,Hispanic/Latino,86.0,0.0
+2020-2021,Network 17,Multiracial,52.0,0.0
+2020-2021,Network 17,Native American/Alaskan,1936.0,0.0
+2020-2021,Network 17,White,8350.0,0.0
+2020-2021,Network 2,Not Available,0.0,20.2
+2020-2021,Network 2,Black/African American,0.0,0.0
+2020-2021,Network 2,Asian,22.0,0.0
+2020-2021,Network 2,Asian/Pacific Islander (Retired),83.0,0.0
+2020-2021,Network 2,Hawaiian/Pacific Islander,31.0,0.0
+2020-2021,Network 2,Hispanic/Latino,393.0,0.0
+2020-2021,Network 2,Multiracial,1540.0,0.0
+2020-2021,Network 2,Native American/Alaskan,3573.0,0.0
+2020-2021,Network 2,White,2642.0,0.0
+2020-2021,Network 3,Not Available,0.0,3.1
+2020-2021,Network 3,Black/African American,0.0,0.0
+2020-2021,Network 3,Asian,24.0,0.0
+2020-2021,Network 3,Asian/Pacific Islander (Retired),32.0,0.0
+2020-2021,Network 3,Hawaiian/Pacific Islander,20.0,0.0
+2020-2021,Network 3,Hispanic/Latino,32.0,0.0
+2020-2021,Network 3,Multiracial,66.0,0.0
+2020-2021,Network 3,Native American/Alaskan,7311.0,0.0
+2020-2021,Network 3,White,3562.0,0.0
+2020-2021,Network 4,Not Available,0.0,28.9
+2020-2021,Network 4,Black/African American,0.0,0.0
+2020-2021,Network 4,Asian,38.0,0.0
+2020-2021,Network 4,Asian/Pacific Islander (Retired),57.0,0.0
+2020-2021,Network 4,Hawaiian/Pacific Islander,48.0,0.0
+2020-2021,Network 4,Hispanic/Latino,651.0,0.0
+2020-2021,Network 4,Multiracial,821.0,0.0
+2020-2021,Network 4,Native American/Alaskan,8312.0,0.0
+2020-2021,Network 4,White,1682.0,0.0
+2020-2021,Network 5,Not Available,0.0,2.9
+2020-2021,Network 5,Black/African American,0.0,0.0
+2020-2021,Network 5,Asian,5.0,0.0
+2020-2021,Network 5,Asian/Pacific Islander (Retired),9.0,0.0
+2020-2021,Network 5,Hawaiian/Pacific Islander,10.0,0.0
+2020-2021,Network 5,Hispanic/Latino,56.0,0.0
+2020-2021,Network 5,Multiracial,24.0,0.0
+2020-2021,Network 5,Native American/Alaskan,2300.0,0.0
+2020-2021,Network 5,White,5342.0,0.0
+2020-2021,Network 6,Not Available,0.0,14.5
+2020-2021,Network 6,Black/African American,0.0,0.0
+2020-2021,Network 6,Asian,14.0,0.0
+2020-2021,Network 6,Asian/Pacific Islander (Retired),31.0,0.0
+2020-2021,Network 6,Hawaiian/Pacific Islander,28.0,0.0
+2020-2021,Network 6,Hispanic/Latino,280.0,0.0
+2020-2021,Network 6,Multiracial,1812.0,0.0
+2020-2021,Network 6,Native American/Alaskan,3485.0,0.0
+2020-2021,Network 6,White,2516.0,0.0
+2020-2021,Network 7,Not Available,0.0,1.1
+2020-2021,Network 7,Black/African American,0.0,0.0
+2020-2021,Network 7,Asian,2.0,0.0
+2020-2021,Network 7,Asian/Pacific Islander (Retired),12.0,0.0
+2020-2021,Network 7,Hawaiian/Pacific Islander,2.0,0.0
+2020-2021,Network 7,Hispanic/Latino,13.0,0.0
+2020-2021,Network 7,Multiracial,19.0,0.0
+2020-2021,Network 7,Native American/Alaskan,7082.0,0.0
+2020-2021,Network 7,White,236.0,0.0
+2020-2021,Network 8,Not Available,0.0,1.5
+2020-2021,Network 8,Black/African American,0.0,0.0
+2020-2021,Network 8,Asian,4.0,0.0
+2020-2021,Network 8,Asian/Pacific Islander (Retired),38.0,0.0
+2020-2021,Network 8,Hawaiian/Pacific Islander,8.0,0.0
+2020-2021,Network 8,Hispanic/Latino,22.0,0.0
+2020-2021,Network 8,Multiracial,59.0,0.0
+2020-2021,Network 8,Native American/Alaskan,10781.0,0.0
+2020-2021,Network 8,White,256.0,0.0
+2020-2021,Network 9,Not Available,0.0,1.8
+2020-2021,Network 9,Black/African American,0.0,0.0
+2020-2021,Network 9,Asian,8.0,0.0
+2020-2021,Network 9,Asian/Pacific Islander (Retired),13.0,0.0
+2020-2021,Network 9,Hawaiian/Pacific Islander,76.0,0.0
+2020-2021,Network 9,Hispanic/Latino,97.0,0.0
+2020-2021,Network 9,Multiracial,74.0,0.0
+2020-2021,Network 9,Native American/Alaskan,270.0,0.0
+2020-2021,Network 9,White,7997.0,0.0
+2020-2021,Options,Not Available,0.0,2.9
+2020-2021,Options,Black/African American,0.0,0.0
+2020-2021,Options,Asian,5.0,0.0
+2020-2021,Options,Asian/Pacific Islander (Retired),27.0,0.0
+2020-2021,Options,Hawaiian/Pacific Islander,37.0,0.0
+2020-2021,Options,Hispanic/Latino,34.0,0.0
+2020-2021,Options,Multiracial,57.0,0.0
+2020-2021,Options,Native American/Alaskan,2531.0,0.0
+2020-2021,Options,White,3740.0,0.0
+2019-2020,AUSL,Not Available,0.0,2.4
+2019-2020,AUSL,Black/African American,0.0,0.0
+2019-2020,AUSL,Asian,8.0,0.0
+2019-2020,AUSL,Asian/Pacific Islander (Retired),26.0,0.0
+2019-2020,AUSL,Hawaiian/Pacific Islander,53.0,0.0
+2019-2020,AUSL,Hispanic/Latino,89.0,0.0
+2019-2020,AUSL,Multiracial,96.0,0.0
+2019-2020,AUSL,Native American/Alaskan,4526.0,0.0
+2019-2020,AUSL,White,10413.0,0.0
+2019-2020,Charter,Not Available,0.0,1.5
+2019-2020,Charter,Black/African American,1.0,0.0
+2019-2020,Charter,Asian,25.0,0.0
+2019-2020,Charter,Asian/Pacific Islander (Retired),105.0,0.0
+2019-2020,Charter,Hawaiian/Pacific Islander,412.0,0.0
+2019-2020,Charter,Hispanic/Latino,220.0,0.0
+2019-2020,Charter,Multiracial,525.0,0.0
+2019-2020,Charter,Native American/Alaskan,23253.0,0.0
+2019-2020,Charter,White,26659.0,0.0
+2019-2020,Contract,Not Available,0.0,8.7
+2019-2020,Contract,Black/African American,0.0,0.0
+2019-2020,Contract,Asian,2.0,0.0
+2019-2020,Contract,Asian/Pacific Islander (Retired),2.0,0.0
+2019-2020,Contract,Hawaiian/Pacific Islander,43.0,0.0
+2019-2020,Contract,Hispanic/Latino,12.0,0.0
+2019-2020,Contract,Multiracial,10.0,0.0
+2019-2020,Contract,Native American/Alaskan,331.0,0.0
+2019-2020,Contract,White,918.0,0.0
+2019-2020,ISP,Not Available,0.0,17.2
+2019-2020,ISP,Black/African American,9.0,0.0
+2019-2020,ISP,Asian,154.0,0.0
+2019-2020,ISP,Asian/Pacific Islander (Retired),208.0,0.0
+2019-2020,ISP,Hawaiian/Pacific Islander,463.0,0.0
+2019-2020,ISP,Hispanic/Latino,1108.0,0.0
+2019-2020,ISP,Multiracial,4508.0,0.0
+2019-2020,ISP,Native American/Alaskan,36279.0,0.0
+2019-2020,ISP,White,9828.0,0.0
+2019-2020,Network 1,Not Available,0.0,33.7
+2019-2020,Network 1,Black/African American,0.0,0.0
+2019-2020,Network 1,Asian,90.0,0.0
+2019-2020,Network 1,Asian/Pacific Islander (Retired),99.0,0.0
+2019-2020,Network 1,Hawaiian/Pacific Islander,451.0,0.0
+2019-2020,Network 1,Hispanic/Latino,510.0,0.0
+2019-2020,Network 1,Multiracial,1827.0,0.0
+2019-2020,Network 1,Native American/Alaskan,11567.0,0.0
+2019-2020,Network 1,White,579.0,0.0
+2019-2020,Network 10,Not Available,0.0,9.2
+2019-2020,Network 10,Black/African American,0.0,0.0
+2019-2020,Network 10,Asian,22.0,0.0
+2019-2020,Network 10,Asian/Pacific Islander (Retired),39.0,0.0
+2019-2020,Network 10,Hawaiian/Pacific Islander,42.0,0.0
+2019-2020,Network 10,Hispanic/Latino,106.0,0.0
+2019-2020,Network 10,Multiracial,110.0,0.0
+2019-2020,Network 10,Native American/Alaskan,9364.0,0.0
+2019-2020,Network 10,White,4795.0,0.0
+2019-2020,Network 11,Not Available,0.0,0.2
+2019-2020,Network 11,Black/African American,0.0,0.0
+2019-2020,Network 11,Asian,1.0,0.0
+2019-2020,Network 11,Asian/Pacific Islander (Retired),7.0,0.0
+2019-2020,Network 11,Hawaiian/Pacific Islander,17.0,0.0
+2019-2020,Network 11,Hispanic/Latino,37.0,0.0
+2019-2020,Network 11,Multiracial,6.0,0.0
+2019-2020,Network 11,Native American/Alaskan,716.0,0.0
+2019-2020,Network 11,White,8926.0,0.0
+2019-2020,Network 12,Not Available,0.0,0.3
+2019-2020,Network 12,Black/African American,0.0,0.0
+2019-2020,Network 12,Asian,3.0,0.0
+2019-2020,Network 12,Asian/Pacific Islander (Retired),12.0,0.0
+2019-2020,Network 12,Hawaiian/Pacific Islander,95.0,0.0
+2019-2020,Network 12,Hispanic/Latino,45.0,0.0
+2019-2020,Network 12,Multiracial,7.0,0.0
+2019-2020,Network 12,Native American/Alaskan,537.0,0.0
+2019-2020,Network 12,White,8691.0,0.0
+2019-2020,Network 13,Not Available,0.0,1.7
+2019-2020,Network 13,Black/African American,0.0,0.0
+2019-2020,Network 13,Asian,8.0,0.0
+2019-2020,Network 13,Asian/Pacific Islander (Retired),20.0,0.0
+2019-2020,Network 13,Hawaiian/Pacific Islander,37.0,0.0
+2019-2020,Network 13,Hispanic/Latino,47.0,0.0
+2019-2020,Network 13,Multiracial,9.0,0.0
+2019-2020,Network 13,Native American/Alaskan,3224.0,0.0
+2019-2020,Network 13,White,7614.0,0.0
+2019-2020,Network 14,Not Available,0.0,24.1
+2019-2020,Network 14,Black/African American,3.0,0.0
+2019-2020,Network 14,Asian,101.0,0.0
+2019-2020,Network 14,Asian/Pacific Islander (Retired),117.0,0.0
+2019-2020,Network 14,Hawaiian/Pacific Islander,86.0,0.0
+2019-2020,Network 14,Hispanic/Latino,502.0,0.0
+2019-2020,Network 14,Multiracial,2288.0,0.0
+2019-2020,Network 14,Native American/Alaskan,12086.0,0.0
+2019-2020,Network 14,White,3103.0,0.0
+2019-2020,Network 15,Not Available,0.0,4.7
+2019-2020,Network 15,Black/African American,0.0,0.0
+2019-2020,Network 15,Asian,11.0,0.0
+2019-2020,Network 15,Asian/Pacific Islander (Retired),45.0,0.0
+2019-2020,Network 15,Hawaiian/Pacific Islander,53.0,0.0
+2019-2020,Network 15,Hispanic/Latino,115.0,0.0
+2019-2020,Network 15,Multiracial,301.0,0.0
+2019-2020,Network 15,Native American/Alaskan,7846.0,0.0
+2019-2020,Network 15,White,3830.0,0.0
+2019-2020,Network 16,Not Available,0.0,3.9
+2019-2020,Network 16,Black/African American,0.0,0.0
+2019-2020,Network 16,Asian,8.0,0.0
+2019-2020,Network 16,Asian/Pacific Islander (Retired),36.0,0.0
+2019-2020,Network 16,Hawaiian/Pacific Islander,51.0,0.0
+2019-2020,Network 16,Hispanic/Latino,46.0,0.0
+2019-2020,Network 16,Multiracial,268.0,0.0
+2019-2020,Network 16,Native American/Alaskan,6420.0,0.0
+2019-2020,Network 16,White,4591.0,0.0
+2019-2020,Network 17,Not Available,0.0,1.6
+2019-2020,Network 17,Black/African American,0.0,0.0
+2019-2020,Network 17,Asian,11.0,0.0
+2019-2020,Network 17,Asian/Pacific Islander (Retired),21.0,0.0
+2019-2020,Network 17,Hawaiian/Pacific Islander,44.0,0.0
+2019-2020,Network 17,Hispanic/Latino,100.0,0.0
+2019-2020,Network 17,Multiracial,55.0,0.0
+2019-2020,Network 17,Native American/Alaskan,2134.0,0.0
+2019-2020,Network 17,White,9045.0,0.0
+2019-2020,Network 2,Not Available,0.0,19.1
+2019-2020,Network 2,Black/African American,0.0,0.0
+2019-2020,Network 2,Asian,29.0,0.0
+2019-2020,Network 2,Asian/Pacific Islander (Retired),106.0,0.0
+2019-2020,Network 2,Hawaiian/Pacific Islander,97.0,0.0
+2019-2020,Network 2,Hispanic/Latino,408.0,0.0
+2019-2020,Network 2,Multiracial,2076.0,0.0
+2019-2020,Network 2,Native American/Alaskan,4209.0,0.0
+2019-2020,Network 2,White,2867.0,0.0
+2019-2020,Network 3,Not Available,0.0,3.1
+2019-2020,Network 3,Black/African American,0.0,0.0
+2019-2020,Network 3,Asian,31.0,0.0
+2019-2020,Network 3,Asian/Pacific Islander (Retired),31.0,0.0
+2019-2020,Network 3,Hawaiian/Pacific Islander,58.0,0.0
+2019-2020,Network 3,Hispanic/Latino,39.0,0.0
+2019-2020,Network 3,Multiracial,70.0,0.0
+2019-2020,Network 3,Native American/Alaskan,7824.0,0.0
+2019-2020,Network 3,White,3861.0,0.0
+2019-2020,Network 4,Not Available,0.0,30.0
+2019-2020,Network 4,Black/African American,0.0,0.0
+2019-2020,Network 4,Asian,47.0,0.0
+2019-2020,Network 4,Asian/Pacific Islander (Retired),55.0,0.0
+2019-2020,Network 4,Hawaiian/Pacific Islander,70.0,0.0
+2019-2020,Network 4,Hispanic/Latino,599.0,0.0
+2019-2020,Network 4,Multiracial,764.0,0.0
+2019-2020,Network 4,Native American/Alaskan,8433.0,0.0
+2019-2020,Network 4,White,1566.0,0.0
+2019-2020,Network 5,Not Available,0.0,2.9
+2019-2020,Network 5,Black/African American,0.0,0.0
+2019-2020,Network 5,Asian,5.0,0.0
+2019-2020,Network 5,Asian/Pacific Islander (Retired),13.0,0.0
+2019-2020,Network 5,Hawaiian/Pacific Islander,55.0,0.0
+2019-2020,Network 5,Hispanic/Latino,46.0,0.0
+2019-2020,Network 5,Multiracial,21.0,0.0
+2019-2020,Network 5,Native American/Alaskan,2484.0,0.0
+2019-2020,Network 5,White,5760.0,0.0
+2019-2020,Network 6,Not Available,0.0,14.3
+2019-2020,Network 6,Black/African American,0.0,0.0
+2019-2020,Network 6,Asian,22.0,0.0
+2019-2020,Network 6,Asian/Pacific Islander (Retired),26.0,0.0
+2019-2020,Network 6,Hawaiian/Pacific Islander,33.0,0.0
+2019-2020,Network 6,Hispanic/Latino,252.0,0.0
+2019-2020,Network 6,Multiracial,1825.0,0.0
+2019-2020,Network 6,Native American/Alaskan,3317.0,0.0
+2019-2020,Network 6,White,2627.0,0.0
+2019-2020,Network 7,Not Available,0.0,1.2
+2019-2020,Network 7,Black/African American,0.0,0.0
+2019-2020,Network 7,Asian,3.0,0.0
+2019-2020,Network 7,Asian/Pacific Islander (Retired),15.0,0.0
+2019-2020,Network 7,Hawaiian/Pacific Islander,12.0,0.0
+2019-2020,Network 7,Hispanic/Latino,23.0,0.0
+2019-2020,Network 7,Multiracial,18.0,0.0
+2019-2020,Network 7,Native American/Alaskan,7810.0,0.0
+2019-2020,Network 7,White,244.0,0.0
+2019-2020,Network 8,Not Available,0.0,1.5
+2019-2020,Network 8,Black/African American,0.0,0.0
+2019-2020,Network 8,Asian,3.0,0.0
+2019-2020,Network 8,Asian/Pacific Islander (Retired),39.0,0.0
+2019-2020,Network 8,Hawaiian/Pacific Islander,42.0,0.0
+2019-2020,Network 8,Hispanic/Latino,23.0,0.0
+2019-2020,Network 8,Multiracial,46.0,0.0
+2019-2020,Network 8,Native American/Alaskan,10455.0,0.0
+2019-2020,Network 8,White,284.0,0.0
+2019-2020,Network 9,Not Available,0.0,2.0
+2019-2020,Network 9,Black/African American,0.0,0.0
+2019-2020,Network 9,Asian,8.0,0.0
+2019-2020,Network 9,Asian/Pacific Islander (Retired),11.0,0.0
+2019-2020,Network 9,Hawaiian/Pacific Islander,154.0,0.0
+2019-2020,Network 9,Hispanic/Latino,93.0,0.0
+2019-2020,Network 9,Multiracial,89.0,0.0
+2019-2020,Network 9,Native American/Alaskan,249.0,0.0
+2019-2020,Network 9,White,7358.0,0.0
+2019-2020,Options,Not Available,0.0,3.0
+2019-2020,Options,Black/African American,1.0,0.0
+2019-2020,Options,Asian,7.0,0.0
+2019-2020,Options,Asian/Pacific Islander (Retired),21.0,0.0
+2019-2020,Options,Hawaiian/Pacific Islander,40.0,0.0
+2019-2020,Options,Hispanic/Latino,41.0,0.0
+2019-2020,Options,Multiracial,42.0,0.0
+2019-2020,Options,Native American/Alaskan,2514.0,0.0
+2019-2020,Options,White,4042.0,0.0
+2018-2019,AUSL,Not Available,0.0,2.2
+2018-2019,AUSL,Black/African American,0.0,0.0
+2018-2019,AUSL,Asian,13.0,0.0
+2018-2019,AUSL,Asian/Pacific Islander (Retired),28.0,0.0
+2018-2019,AUSL,Hawaiian/Pacific Islander,17.0,0.0
+2018-2019,AUSL,Hispanic/Latino,88.0,0.0
+2018-2019,AUSL,Multiracial,92.0,0.0
+2018-2019,AUSL,Native American/Alaskan,4376.0,0.0
+2018-2019,AUSL,White,10851.0,0.0
+2018-2019,Charter,Not Available,0.0,1.4
+2018-2019,Charter,Black/African American,2.0,0.0
+2018-2019,Charter,Asian,34.0,0.0
+2018-2019,Charter,Asian/Pacific Islander (Retired),120.0,0.0
+2018-2019,Charter,Hawaiian/Pacific Islander,260.0,0.0
+2018-2019,Charter,Hispanic/Latino,255.0,0.0
+2018-2019,Charter,Multiracial,540.0,0.0
+2018-2019,Charter,Native American/Alaskan,23523.0,0.0
+2018-2019,Charter,White,27851.0,0.0
+2018-2019,Contract,Not Available,0.0,8.9
+2018-2019,Contract,Black/African American,0.0,0.0
+2018-2019,Contract,Asian,1.0,0.0
+2018-2019,Contract,Asian/Pacific Islander (Retired),2.0,0.0
+2018-2019,Contract,Hawaiian/Pacific Islander,40.0,0.0
+2018-2019,Contract,Hispanic/Latino,17.0,0.0
+2018-2019,Contract,Multiracial,14.0,0.0
+2018-2019,Contract,Native American/Alaskan,286.0,0.0
+2018-2019,Contract,White,1004.0,0.0
+2018-2019,ISP,Not Available,0.0,16.6
+2018-2019,ISP,Black/African American,11.0,0.0
+2018-2019,ISP,Asian,137.0,0.0
+2018-2019,ISP,Asian/Pacific Islander (Retired),205.0,0.0
+2018-2019,ISP,Hawaiian/Pacific Islander,371.0,0.0
+2018-2019,ISP,Hispanic/Latino,1112.0,0.0
+2018-2019,ISP,Multiracial,4497.0,0.0
+2018-2019,ISP,Native American/Alaskan,35569.0,0.0
+2018-2019,ISP,White,11438.0,0.0
+2018-2019,Network 1,Not Available,0.0,33.9
+2018-2019,Network 1,Black/African American,0.0,0.0
+2018-2019,Network 1,Asian,138.0,0.0
+2018-2019,Network 1,Asian/Pacific Islander (Retired),124.0,0.0
+2018-2019,Network 1,Hawaiian/Pacific Islander,19.0,0.0
+2018-2019,Network 1,Hispanic/Latino,504.0,0.0
+2018-2019,Network 1,Multiracial,1905.0,0.0
+2018-2019,Network 1,Native American/Alaskan,12176.0,0.0
+2018-2019,Network 1,White,607.0,0.0
+2018-2019,Network 10,Not Available,0.0,9.2
+2018-2019,Network 10,Black/African American,0.0,0.0
+2018-2019,Network 10,Asian,18.0,0.0
+2018-2019,Network 10,Asian/Pacific Islander (Retired),37.0,0.0
+2018-2019,Network 10,Hawaiian/Pacific Islander,46.0,0.0
+2018-2019,Network 10,Hispanic/Latino,93.0,0.0
+2018-2019,Network 10,Multiracial,97.0,0.0
+2018-2019,Network 10,Native American/Alaskan,9304.0,0.0
+2018-2019,Network 10,White,4992.0,0.0
+2018-2019,Network 11,Not Available,0.0,0.2
+2018-2019,Network 11,Black/African American,0.0,0.0
+2018-2019,Network 11,Asian,3.0,0.0
+2018-2019,Network 11,Asian/Pacific Islander (Retired),6.0,0.0
+2018-2019,Network 11,Hawaiian/Pacific Islander,15.0,0.0
+2018-2019,Network 11,Hispanic/Latino,41.0,0.0
+2018-2019,Network 11,Multiracial,5.0,0.0
+2018-2019,Network 11,Native American/Alaskan,661.0,0.0
+2018-2019,Network 11,White,9763.0,0.0
+2018-2019,Network 12,Not Available,0.0,0.4
+2018-2019,Network 12,Black/African American,0.0,0.0
+2018-2019,Network 12,Asian,3.0,0.0
+2018-2019,Network 12,Asian/Pacific Islander (Retired),10.0,0.0
+2018-2019,Network 12,Hawaiian/Pacific Islander,18.0,0.0
+2018-2019,Network 12,Hispanic/Latino,40.0,0.0
+2018-2019,Network 12,Multiracial,9.0,0.0
+2018-2019,Network 12,Native American/Alaskan,570.0,0.0
+2018-2019,Network 12,White,8640.0,0.0
+2018-2019,Network 13,Not Available,0.0,1.4
+2018-2019,Network 13,Black/African American,0.0,0.0
+2018-2019,Network 13,Asian,5.0,0.0
+2018-2019,Network 13,Asian/Pacific Islander (Retired),24.0,0.0
+2018-2019,Network 13,Hawaiian/Pacific Islander,16.0,0.0
+2018-2019,Network 13,Hispanic/Latino,49.0,0.0
+2018-2019,Network 13,Multiracial,11.0,0.0
+2018-2019,Network 13,Native American/Alaskan,3768.0,0.0
+2018-2019,Network 13,White,7821.0,0.0
+2018-2019,Network 14,Not Available,0.0,22.5
+2018-2019,Network 14,Black/African American,5.0,0.0
+2018-2019,Network 14,Asian,67.0,0.0
+2018-2019,Network 14,Asian/Pacific Islander (Retired),97.0,0.0
+2018-2019,Network 14,Hawaiian/Pacific Islander,174.0,0.0
+2018-2019,Network 14,Hispanic/Latino,415.0,0.0
+2018-2019,Network 14,Multiracial,2037.0,0.0
+2018-2019,Network 14,Native American/Alaskan,11232.0,0.0
+2018-2019,Network 14,White,2660.0,0.0
+2018-2019,Network 15,Not Available,0.0,5.1
+2018-2019,Network 15,Black/African American,0.0,0.0
+2018-2019,Network 15,Asian,5.0,0.0
+2018-2019,Network 15,Asian/Pacific Islander (Retired),39.0,0.0
+2018-2019,Network 15,Hawaiian/Pacific Islander,33.0,0.0
+2018-2019,Network 15,Hispanic/Latino,115.0,0.0
+2018-2019,Network 15,Multiracial,281.0,0.0
+2018-2019,Network 15,Native American/Alaskan,7681.0,0.0
+2018-2019,Network 15,White,4449.0,0.0
+2018-2019,Network 16,Not Available,0.0,4.0
+2018-2019,Network 16,Black/African American,2.0,0.0
+2018-2019,Network 16,Asian,7.0,0.0
+2018-2019,Network 16,Asian/Pacific Islander (Retired),42.0,0.0
+2018-2019,Network 16,Hawaiian/Pacific Islander,39.0,0.0
+2018-2019,Network 16,Hispanic/Latino,55.0,0.0
+2018-2019,Network 16,Multiracial,284.0,0.0
+2018-2019,Network 16,Native American/Alaskan,6707.0,0.0
+2018-2019,Network 16,White,4681.0,0.0
+2018-2019,Network 17,Not Available,0.0,1.7
+2018-2019,Network 17,Black/African American,0.0,0.0
+2018-2019,Network 17,Asian,10.0,0.0
+2018-2019,Network 17,Asian/Pacific Islander (Retired),29.0,0.0
+2018-2019,Network 17,Hawaiian/Pacific Islander,15.0,0.0
+2018-2019,Network 17,Hispanic/Latino,90.0,0.0
+2018-2019,Network 17,Multiracial,62.0,0.0
+2018-2019,Network 17,Native American/Alaskan,2115.0,0.0
+2018-2019,Network 17,White,8655.0,0.0
+2018-2019,Network 2,Not Available,0.0,22.3
+2018-2019,Network 2,Black/African American,0.0,0.0
+2018-2019,Network 2,Asian,27.0,0.0
+2018-2019,Network 2,Asian/Pacific Islander (Retired),68.0,0.0
+2018-2019,Network 2,Hawaiian/Pacific Islander,32.0,0.0
+2018-2019,Network 2,Hispanic/Latino,415.0,0.0
+2018-2019,Network 2,Multiracial,2276.0,0.0
+2018-2019,Network 2,Native American/Alaskan,5023.0,0.0
+2018-2019,Network 2,White,2443.0,0.0
+2018-2019,Network 3,Not Available,0.0,3.4
+2018-2019,Network 3,Black/African American,0.0,0.0
+2018-2019,Network 3,Asian,33.0,0.0
+2018-2019,Network 3,Asian/Pacific Islander (Retired),41.0,0.0
+2018-2019,Network 3,Hawaiian/Pacific Islander,15.0,0.0
+2018-2019,Network 3,Hispanic/Latino,45.0,0.0
+2018-2019,Network 3,Multiracial,77.0,0.0
+2018-2019,Network 3,Native American/Alaskan,7998.0,0.0
+2018-2019,Network 3,White,4075.0,0.0
+2018-2019,Network 4,Not Available,0.0,29.3
+2018-2019,Network 4,Black/African American,0.0,0.0
+2018-2019,Network 4,Asian,49.0,0.0
+2018-2019,Network 4,Asian/Pacific Islander (Retired),57.0,0.0
+2018-2019,Network 4,Hawaiian/Pacific Islander,19.0,0.0
+2018-2019,Network 4,Hispanic/Latino,554.0,0.0
+2018-2019,Network 4,Multiracial,741.0,0.0
+2018-2019,Network 4,Native American/Alaskan,8489.0,0.0
+2018-2019,Network 4,White,1647.0,0.0
+2018-2019,Network 5,Not Available,0.0,2.6
+2018-2019,Network 5,Black/African American,0.0,0.0
+2018-2019,Network 5,Asian,9.0,0.0
+2018-2019,Network 5,Asian/Pacific Islander (Retired),18.0,0.0
+2018-2019,Network 5,Hawaiian/Pacific Islander,27.0,0.0
+2018-2019,Network 5,Hispanic/Latino,47.0,0.0
+2018-2019,Network 5,Multiracial,21.0,0.0
+2018-2019,Network 5,Native American/Alaskan,2719.0,0.0
+2018-2019,Network 5,White,6191.0,0.0
+2018-2019,Network 6,Not Available,0.0,14.0
+2018-2019,Network 6,Black/African American,0.0,0.0
+2018-2019,Network 6,Asian,35.0,0.0
+2018-2019,Network 6,Asian/Pacific Islander (Retired),26.0,0.0
+2018-2019,Network 6,Hawaiian/Pacific Islander,15.0,0.0
+2018-2019,Network 6,Hispanic/Latino,227.0,0.0
+2018-2019,Network 6,Multiracial,1774.0,0.0
+2018-2019,Network 6,Native American/Alaskan,3025.0,0.0
+2018-2019,Network 6,White,2439.0,0.0
+2018-2019,Network 7,Not Available,0.0,1.1
+2018-2019,Network 7,Black/African American,0.0,0.0
+2018-2019,Network 7,Asian,3.0,0.0
+2018-2019,Network 7,Asian/Pacific Islander (Retired),19.0,0.0
+2018-2019,Network 7,Hawaiian/Pacific Islander,11.0,0.0
+2018-2019,Network 7,Hispanic/Latino,13.0,0.0
+2018-2019,Network 7,Multiracial,12.0,0.0
+2018-2019,Network 7,Native American/Alaskan,8811.0,0.0
+2018-2019,Network 7,White,215.0,0.0
+2018-2019,Network 8,Not Available,0.0,1.5
+2018-2019,Network 8,Black/African American,0.0,0.0
+2018-2019,Network 8,Asian,2.0,0.0
+2018-2019,Network 8,Asian/Pacific Islander (Retired),30.0,0.0
+2018-2019,Network 8,Hawaiian/Pacific Islander,53.0,0.0
+2018-2019,Network 8,Hispanic/Latino,26.0,0.0
+2018-2019,Network 8,Multiracial,51.0,0.0
+2018-2019,Network 8,Native American/Alaskan,12200.0,0.0
+2018-2019,Network 8,White,308.0,0.0
+2018-2019,Network 9,Not Available,0.0,2.1
+2018-2019,Network 9,Black/African American,0.0,0.0
+2018-2019,Network 9,Asian,8.0,0.0
+2018-2019,Network 9,Asian/Pacific Islander (Retired),14.0,0.0
+2018-2019,Network 9,Hawaiian/Pacific Islander,13.0,0.0
+2018-2019,Network 9,Hispanic/Latino,91.0,0.0
+2018-2019,Network 9,Multiracial,101.0,0.0
+2018-2019,Network 9,Native American/Alaskan,244.0,0.0
+2018-2019,Network 9,White,7134.0,0.0
+2018-2019,Options,Not Available,0.0,2.8
+2018-2019,Options,Black/African American,0.0,0.0
+2018-2019,Options,Asian,9.0,0.0
+2018-2019,Options,Asian/Pacific Islander (Retired),25.0,0.0
+2018-2019,Options,Hawaiian/Pacific Islander,5.0,0.0
+2018-2019,Options,Hispanic/Latino,41.0,0.0
+2018-2019,Options,Multiracial,46.0,0.0
+2018-2019,Options,Native American/Alaskan,2411.0,0.0
+2018-2019,Options,White,4330.0,0.0
+2017-2018,AUSL,Not Available,0.0,2.1
+2017-2018,AUSL,Black/African American,0.0,0.0
+2017-2018,AUSL,Asian,17.0,0.0
+2017-2018,AUSL,Asian/Pacific Islander (Retired),25.0,0.0
+2017-2018,AUSL,Hawaiian/Pacific Islander,12.0,0.0
+2017-2018,AUSL,Hispanic/Latino,83.0,0.0
+2017-2018,AUSL,Multiracial,89.0,0.0
+2017-2018,AUSL,Native American/Alaskan,4450.0,0.0
+2017-2018,AUSL,White,11330.0,0.0
+2017-2018,Charter,Not Available,0.0,1.6
+2017-2018,Charter,Black/African American,0.0,0.0
+2017-2018,Charter,Asian,30.0,0.0
+2017-2018,Charter,Asian/Pacific Islander (Retired),126.0,0.0
+2017-2018,Charter,Hawaiian/Pacific Islander,195.0,0.0
+2017-2018,Charter,Hispanic/Latino,271.0,0.0
+2017-2018,Charter,Multiracial,564.0,0.0
+2017-2018,Charter,Native American/Alaskan,23251.0,0.0
+2017-2018,Charter,White,28471.0,0.0
+2017-2018,Contract,Not Available,0.0,8.4
+2017-2018,Contract,Black/African American,0.0,0.0
+2017-2018,Contract,Asian,2.0,0.0
+2017-2018,Contract,Asian/Pacific Islander (Retired),1.0,0.0
+2017-2018,Contract,Hawaiian/Pacific Islander,27.0,0.0
+2017-2018,Contract,Hispanic/Latino,21.0,0.0
+2017-2018,Contract,Multiracial,17.0,0.0
+2017-2018,Contract,Native American/Alaskan,279.0,0.0
+2017-2018,Contract,White,1131.0,0.0
+2017-2018,ISP,Not Available,0.0,15.0
+2017-2018,ISP,Black/African American,2.0,0.0
+2017-2018,ISP,Asian,108.0,0.0
+2017-2018,ISP,Asian/Pacific Islander (Retired),174.0,0.0
+2017-2018,ISP,Hawaiian/Pacific Islander,203.0,0.0
+2017-2018,ISP,Hispanic/Latino,762.0,0.0
+2017-2018,ISP,Multiracial,2623.0,0.0
+2017-2018,ISP,Native American/Alaskan,29959.0,0.0
+2017-2018,ISP,White,9727.0,0.0
+2017-2018,Network 1,Not Available,0.0,31.7
+2017-2018,Network 1,Black/African American,3.0,0.0
+2017-2018,Network 1,Asian,183.0,0.0
+2017-2018,Network 1,Asian/Pacific Islander (Retired),196.0,0.0
+2017-2018,Network 1,Hawaiian/Pacific Islander,229.0,0.0
+2017-2018,Network 1,Hispanic/Latino,708.0,0.0
+2017-2018,Network 1,Multiracial,2981.0,0.0
+2017-2018,Network 1,Native American/Alaskan,18077.0,0.0
+2017-2018,Network 1,White,1585.0,0.0
+2017-2018,Network 10,Not Available,0.0,9.1
+2017-2018,Network 10,Black/African American,0.0,0.0
+2017-2018,Network 10,Asian,24.0,0.0
+2017-2018,Network 10,Asian/Pacific Islander (Retired),86.0,0.0
+2017-2018,Network 10,Hawaiian/Pacific Islander,1.0,0.0
+2017-2018,Network 10,Hispanic/Latino,147.0,0.0
+2017-2018,Network 10,Multiracial,126.0,0.0
+2017-2018,Network 10,Native American/Alaskan,14557.0,0.0
+2017-2018,Network 10,White,7427.0,0.0
+2017-2018,Network 11,Not Available,0.0,0.5
+2017-2018,Network 11,Black/African American,0.0,0.0
+2017-2018,Network 11,Asian,4.0,0.0
+2017-2018,Network 11,Asian/Pacific Islander (Retired),14.0,0.0
+2017-2018,Network 11,Hawaiian/Pacific Islander,17.0,0.0
+2017-2018,Network 11,Hispanic/Latino,58.0,0.0
+2017-2018,Network 11,Multiracial,22.0,0.0
+2017-2018,Network 11,Native American/Alaskan,1024.0,0.0
+2017-2018,Network 11,White,12349.0,0.0
+2017-2018,Network 12,Not Available,0.0,0.3
+2017-2018,Network 12,Black/African American,0.0,0.0
+2017-2018,Network 12,Asian,4.0,0.0
+2017-2018,Network 12,Asian/Pacific Islander (Retired),18.0,0.0
+2017-2018,Network 12,Hawaiian/Pacific Islander,2.0,0.0
+2017-2018,Network 12,Hispanic/Latino,57.0,0.0
+2017-2018,Network 12,Multiracial,12.0,0.0
+2017-2018,Network 12,Native American/Alaskan,720.0,0.0
+2017-2018,Network 12,White,11931.0,0.0
+2017-2018,Network 13,Not Available,0.0,1.7
+2017-2018,Network 13,Black/African American,0.0,0.0
+2017-2018,Network 13,Asian,10.0,0.0
+2017-2018,Network 13,Asian/Pacific Islander (Retired),39.0,0.0
+2017-2018,Network 13,Hawaiian/Pacific Islander,4.0,0.0
+2017-2018,Network 13,Hispanic/Latino,63.0,0.0
+2017-2018,Network 13,Multiracial,15.0,0.0
+2017-2018,Network 13,Native American/Alaskan,5319.0,0.0
+2017-2018,Network 13,White,9393.0,0.0
+2017-2018,Network 2,Not Available,0.0,19.9
+2017-2018,Network 2,Black/African American,2.0,0.0
+2017-2018,Network 2,Asian,58.0,0.0
+2017-2018,Network 2,Asian/Pacific Islander (Retired),110.0,0.0
+2017-2018,Network 2,Hawaiian/Pacific Islander,64.0,0.0
+2017-2018,Network 2,Hispanic/Latino,611.0,0.0
+2017-2018,Network 2,Multiracial,4244.0,0.0
+2017-2018,Network 2,Native American/Alaskan,9230.0,0.0
+2017-2018,Network 2,White,4074.0,0.0
+2017-2018,Network 3,Not Available,0.0,3.4
+2017-2018,Network 3,Black/African American,0.0,0.0
+2017-2018,Network 3,Asian,33.0,0.0
+2017-2018,Network 3,Asian/Pacific Islander (Retired),71.0,0.0
+2017-2018,Network 3,Hawaiian/Pacific Islander,10.0,0.0
+2017-2018,Network 3,Hispanic/Latino,73.0,0.0
+2017-2018,Network 3,Multiracial,134.0,0.0
+2017-2018,Network 3,Native American/Alaskan,11491.0,0.0
+2017-2018,Network 3,White,6001.0,0.0
+2017-2018,Network 4,Not Available,0.0,30.4
+2017-2018,Network 4,Black/African American,6.0,0.0
+2017-2018,Network 4,Asian,69.0,0.0
+2017-2018,Network 4,Asian/Pacific Islander (Retired),87.0,0.0
+2017-2018,Network 4,Hawaiian/Pacific Islander,109.0,0.0
+2017-2018,Network 4,Hispanic/Latino,678.0,0.0
+2017-2018,Network 4,Multiracial,1257.0,0.0
+2017-2018,Network 4,Native American/Alaskan,11267.0,0.0
+2017-2018,Network 4,White,2203.0,0.0
+2017-2018,Network 5,Not Available,0.0,1.0
+2017-2018,Network 5,Black/African American,0.0,0.0
+2017-2018,Network 5,Asian,12.0,0.0
+2017-2018,Network 5,Asian/Pacific Islander (Retired),22.0,0.0
+2017-2018,Network 5,Hawaiian/Pacific Islander,19.0,0.0
+2017-2018,Network 5,Hispanic/Latino,54.0,0.0
+2017-2018,Network 5,Multiracial,71.0,0.0
+2017-2018,Network 5,Native American/Alaskan,5006.0,0.0
+2017-2018,Network 5,White,8987.0,0.0
+2017-2018,Network 6,Not Available,0.0,13.0
+2017-2018,Network 6,Black/African American,0.0,0.0
+2017-2018,Network 6,Asian,49.0,0.0
+2017-2018,Network 6,Asian/Pacific Islander (Retired),49.0,0.0
+2017-2018,Network 6,Hawaiian/Pacific Islander,39.0,0.0
+2017-2018,Network 6,Hispanic/Latino,350.0,0.0
+2017-2018,Network 6,Multiracial,2375.0,0.0
+2017-2018,Network 6,Native American/Alaskan,5629.0,0.0
+2017-2018,Network 6,White,4898.0,0.0
+2017-2018,Network 7,Not Available,0.0,1.1
+2017-2018,Network 7,Black/African American,0.0,0.0
+2017-2018,Network 7,Asian,4.0,0.0
+2017-2018,Network 7,Asian/Pacific Islander (Retired),28.0,0.0
+2017-2018,Network 7,Hawaiian/Pacific Islander,56.0,0.0
+2017-2018,Network 7,Hispanic/Latino,18.0,0.0
+2017-2018,Network 7,Multiracial,18.0,0.0
+2017-2018,Network 7,Native American/Alaskan,12472.0,0.0
+2017-2018,Network 7,White,496.0,0.0
+2017-2018,Network 8,Not Available,0.0,1.7
+2017-2018,Network 8,Black/African American,0.0,0.0
+2017-2018,Network 8,Asian,6.0,0.0
+2017-2018,Network 8,Asian/Pacific Islander (Retired),63.0,0.0
+2017-2018,Network 8,Hawaiian/Pacific Islander,27.0,0.0
+2017-2018,Network 8,Hispanic/Latino,49.0,0.0
+2017-2018,Network 8,Multiracial,391.0,0.0
+2017-2018,Network 8,Native American/Alaskan,18158.0,0.0
+2017-2018,Network 8,White,1122.0,0.0
+2017-2018,Network 9,Not Available,0.0,2.1
+2017-2018,Network 9,Black/African American,0.0,0.0
+2017-2018,Network 9,Asian,11.0,0.0
+2017-2018,Network 9,Asian/Pacific Islander (Retired),19.0,0.0
+2017-2018,Network 9,Hawaiian/Pacific Islander,59.0,0.0
+2017-2018,Network 9,Hispanic/Latino,140.0,0.0
+2017-2018,Network 9,Multiracial,139.0,0.0
+2017-2018,Network 9,Native American/Alaskan,393.0,0.0
+2017-2018,Network 9,White,11896.0,0.0
+2017-2018,Options,Not Available,0.0,2.6
+2017-2018,Options,Black/African American,0.0,0.0
+2017-2018,Options,Asian,3.0,0.0
+2017-2018,Options,Asian/Pacific Islander (Retired),16.0,0.0
+2017-2018,Options,Hawaiian/Pacific Islander,9.0,0.0
+2017-2018,Options,Hispanic/Latino,42.0,0.0
+2017-2018,Options,Multiracial,35.0,0.0
+2017-2018,Options,Native American/Alaskan,2508.0,0.0
+2017-2018,Options,White,4474.0,0.0
+2016-2017,AUSL,Not Available,0.0,2.1
+2016-2017,AUSL,Black/African American,0.0,0.0
+2016-2017,AUSL,Asian,12.0,0.0
+2016-2017,AUSL,Asian/Pacific Islander (Retired),19.0,0.0
+2016-2017,AUSL,Hawaiian/Pacific Islander,11.0,0.0
+2016-2017,AUSL,Hispanic/Latino,88.0,0.0
+2016-2017,AUSL,Multiracial,73.0,0.0
+2016-2017,AUSL,Native American/Alaskan,4327.0,0.0
+2016-2017,AUSL,White,11999.0,0.0
+2016-2017,Charter,Not Available,0.0,1.6
+2016-2017,Charter,Black/African American,0.0,0.0
+2016-2017,Charter,Asian,29.0,0.0
+2016-2017,Charter,Asian/Pacific Islander (Retired),102.0,0.0
+2016-2017,Charter,Hawaiian/Pacific Islander,250.0,0.0
+2016-2017,Charter,Hispanic/Latino,280.0,0.0
+2016-2017,Charter,Multiracial,598.0,0.0
+2016-2017,Charter,Native American/Alaskan,23011.0,0.0
+2016-2017,Charter,White,28696.0,0.0
+2016-2017,Contract,Not Available,0.0,7.1
+2016-2017,Contract,Black/African American,0.0,0.0
+2016-2017,Contract,Asian,2.0,0.0
+2016-2017,Contract,Asian/Pacific Islander (Retired),2.0,0.0
+2016-2017,Contract,Hawaiian/Pacific Islander,23.0,0.0
+2016-2017,Contract,Hispanic/Latino,24.0,0.0
+2016-2017,Contract,Multiracial,12.0,0.0
+2016-2017,Contract,Native American/Alaskan,252.0,0.0
+2016-2017,Contract,White,1253.0,0.0
+2016-2017,ISP,Not Available,0.0,19.5
+2016-2017,ISP,Black/African American,4.0,0.0
+2016-2017,ISP,Asian,98.0,0.0
+2016-2017,ISP,Asian/Pacific Islander (Retired),96.0,0.0
+2016-2017,ISP,Hawaiian/Pacific Islander,212.0,0.0
+2016-2017,ISP,Hispanic/Latino,732.0,0.0
+2016-2017,ISP,Multiracial,2037.0,0.0
+2016-2017,ISP,Native American/Alaskan,22377.0,0.0
+2016-2017,ISP,White,6528.0,0.0
+2016-2017,Network 1,Not Available,0.0,30.6
+2016-2017,Network 1,Black/African American,5.0,0.0
+2016-2017,Network 1,Asian,180.0,0.0
+2016-2017,Network 1,Asian/Pacific Islander (Retired),111.0,0.0
+2016-2017,Network 1,Hawaiian/Pacific Islander,432.0,0.0
+2016-2017,Network 1,Hispanic/Latino,698.0,0.0
+2016-2017,Network 1,Multiracial,2973.0,0.0
+2016-2017,Network 1,Native American/Alaskan,18780.0,0.0
+2016-2017,Network 1,White,1704.0,0.0
+2016-2017,Network 10,Not Available,0.0,9.3
+2016-2017,Network 10,Black/African American,0.0,0.0
+2016-2017,Network 10,Asian,21.0,0.0
+2016-2017,Network 10,Asian/Pacific Islander (Retired),54.0,0.0
+2016-2017,Network 10,Hawaiian/Pacific Islander,32.0,0.0
+2016-2017,Network 10,Hispanic/Latino,144.0,0.0
+2016-2017,Network 10,Multiracial,66.0,0.0
+2016-2017,Network 10,Native American/Alaskan,14283.0,0.0
+2016-2017,Network 10,White,7843.0,0.0
+2016-2017,Network 11,Not Available,0.0,0.4
+2016-2017,Network 11,Black/African American,0.0,0.0
+2016-2017,Network 11,Asian,6.0,0.0
+2016-2017,Network 11,Asian/Pacific Islander (Retired),8.0,0.0
+2016-2017,Network 11,Hawaiian/Pacific Islander,11.0,0.0
+2016-2017,Network 11,Hispanic/Latino,61.0,0.0
+2016-2017,Network 11,Multiracial,26.0,0.0
+2016-2017,Network 11,Native American/Alaskan,1127.0,0.0
+2016-2017,Network 11,White,15020.0,0.0
+2016-2017,Network 12,Not Available,0.0,0.3
+2016-2017,Network 12,Black/African American,0.0,0.0
+2016-2017,Network 12,Asian,3.0,0.0
+2016-2017,Network 12,Asian/Pacific Islander (Retired),7.0,0.0
+2016-2017,Network 12,Hawaiian/Pacific Islander,13.0,0.0
+2016-2017,Network 12,Hispanic/Latino,66.0,0.0
+2016-2017,Network 12,Multiracial,10.0,0.0
+2016-2017,Network 12,Native American/Alaskan,761.0,0.0
+2016-2017,Network 12,White,12879.0,0.0
+2016-2017,Network 13,Not Available,0.0,1.7
+2016-2017,Network 13,Black/African American,0.0,0.0
+2016-2017,Network 13,Asian,9.0,0.0
+2016-2017,Network 13,Asian/Pacific Islander (Retired),24.0,0.0
+2016-2017,Network 13,Hawaiian/Pacific Islander,29.0,0.0
+2016-2017,Network 13,Hispanic/Latino,62.0,0.0
+2016-2017,Network 13,Multiracial,13.0,0.0
+2016-2017,Network 13,Native American/Alaskan,5291.0,0.0
+2016-2017,Network 13,White,9793.0,0.0
+2016-2017,Network 2,Not Available,0.0,18.4
+2016-2017,Network 2,Black/African American,3.0,0.0
+2016-2017,Network 2,Asian,63.0,0.0
+2016-2017,Network 2,Asian/Pacific Islander (Retired),78.0,0.0
+2016-2017,Network 2,Hawaiian/Pacific Islander,117.0,0.0
+2016-2017,Network 2,Hispanic/Latino,617.0,0.0
+2016-2017,Network 2,Multiracial,4361.0,0.0
+2016-2017,Network 2,Native American/Alaskan,10243.0,0.0
+2016-2017,Network 2,White,4660.0,0.0
+2016-2017,Network 3,Not Available,0.0,3.4
+2016-2017,Network 3,Black/African American,0.0,0.0
+2016-2017,Network 3,Asian,45.0,0.0
+2016-2017,Network 3,Asian/Pacific Islander (Retired),71.0,0.0
+2016-2017,Network 3,Hawaiian/Pacific Islander,122.0,0.0
+2016-2017,Network 3,Hispanic/Latino,93.0,0.0
+2016-2017,Network 3,Multiracial,150.0,0.0
+2016-2017,Network 3,Native American/Alaskan,11908.0,0.0
+2016-2017,Network 3,White,6768.0,0.0
+2016-2017,Network 4,Not Available,0.0,25.0
+2016-2017,Network 4,Black/African American,1.0,0.0
+2016-2017,Network 4,Asian,69.0,0.0
+2016-2017,Network 4,Asian/Pacific Islander (Retired),54.0,0.0
+2016-2017,Network 4,Hawaiian/Pacific Islander,201.0,0.0
+2016-2017,Network 4,Hispanic/Latino,619.0,0.0
+2016-2017,Network 4,Multiracial,1061.0,0.0
+2016-2017,Network 4,Native American/Alaskan,14070.0,0.0
+2016-2017,Network 4,White,2352.0,0.0
+2016-2017,Network 5,Not Available,0.0,2.2
+2016-2017,Network 5,Black/African American,0.0,0.0
+2016-2017,Network 5,Asian,14.0,0.0
+2016-2017,Network 5,Asian/Pacific Islander (Retired),18.0,0.0
+2016-2017,Network 5,Hawaiian/Pacific Islander,96.0,0.0
+2016-2017,Network 5,Hispanic/Latino,55.0,0.0
+2016-2017,Network 5,Multiracial,84.0,0.0
+2016-2017,Network 5,Native American/Alaskan,5306.0,0.0
+2016-2017,Network 5,White,9445.0,0.0
+2016-2017,Network 6,Not Available,0.0,14.1
+2016-2017,Network 6,Black/African American,0.0,0.0
+2016-2017,Network 6,Asian,63.0,0.0
+2016-2017,Network 6,Asian/Pacific Islander (Retired),20.0,0.0
+2016-2017,Network 6,Hawaiian/Pacific Islander,81.0,0.0
+2016-2017,Network 6,Hispanic/Latino,326.0,0.0
+2016-2017,Network 6,Multiracial,2739.0,0.0
+2016-2017,Network 6,Native American/Alaskan,4909.0,0.0
+2016-2017,Network 6,White,4378.0,0.0
+2016-2017,Network 7,Not Available,0.0,0.9
+2016-2017,Network 7,Black/African American,0.0,0.0
+2016-2017,Network 7,Asian,6.0,0.0
+2016-2017,Network 7,Asian/Pacific Islander (Retired),32.0,0.0
+2016-2017,Network 7,Hawaiian/Pacific Islander,34.0,0.0
+2016-2017,Network 7,Hispanic/Latino,24.0,0.0
+2016-2017,Network 7,Multiracial,21.0,0.0
+2016-2017,Network 7,Native American/Alaskan,15314.0,0.0
+2016-2017,Network 7,White,641.0,0.0
+2016-2017,Network 8,Not Available,0.0,2.0
+2016-2017,Network 8,Black/African American,0.0,0.0
+2016-2017,Network 8,Asian,8.0,0.0
+2016-2017,Network 8,Asian/Pacific Islander (Retired),51.0,0.0
+2016-2017,Network 8,Hawaiian/Pacific Islander,27.0,0.0
+2016-2017,Network 8,Hispanic/Latino,58.0,0.0
+2016-2017,Network 8,Multiracial,510.0,0.0
+2016-2017,Network 8,Native American/Alaskan,20531.0,0.0
+2016-2017,Network 8,White,1226.0,0.0
+2016-2017,Network 9,Not Available,0.0,1.8
+2016-2017,Network 9,Black/African American,0.0,0.0
+2016-2017,Network 9,Asian,8.0,0.0
+2016-2017,Network 9,Asian/Pacific Islander (Retired),12.0,0.0
+2016-2017,Network 9,Hawaiian/Pacific Islander,55.0,0.0
+2016-2017,Network 9,Hispanic/Latino,159.0,0.0
+2016-2017,Network 9,Multiracial,133.0,0.0
+2016-2017,Network 9,Native American/Alaskan,381.0,0.0
+2016-2017,Network 9,White,12540.0,0.0
+2016-2017,Options,Not Available,0.0,2.5
+2016-2017,Options,Black/African American,1.0,0.0
+2016-2017,Options,Asian,6.0,0.0
+2016-2017,Options,Asian/Pacific Islander (Retired),18.0,0.0
+2016-2017,Options,Hawaiian/Pacific Islander,28.0,0.0
+2016-2017,Options,Hispanic/Latino,37.0,0.0
+2016-2017,Options,Multiracial,28.0,0.0
+2016-2017,Options,Native American/Alaskan,2514.0,0.0
+2016-2017,Options,White,5320.0,0.0
+2016-2017,Service Leadership Academies,Not Available,0.0,3.0
+2016-2017,Service Leadership Academies,Black/African American,0.0,0.0
+2016-2017,Service Leadership Academies,Asian,2.0,0.0
+2016-2017,Service Leadership Academies,Asian/Pacific Islander (Retired),9.0,0.0
+2016-2017,Service Leadership Academies,Hawaiian/Pacific Islander,1.0,0.0
+2016-2017,Service Leadership Academies,Hispanic/Latino,20.0,0.0
+2016-2017,Service Leadership Academies,Multiracial,40.0,0.0
+2016-2017,Service Leadership Academies,Native American/Alaskan,2107.0,0.0
+2016-2017,Service Leadership Academies,White,804.0,0.0
+2015-2016,AUSL,Not Available,342.0,1.9
+2015-2016,AUSL,Black/African American,0.0,0.0
+2015-2016,AUSL,Asian,14.0,0.0
+2015-2016,AUSL,"Asian/
+Pacific Islander
+(Retired)",21.0,0.0
+2015-2016,AUSL,Hawaiian/Pacific Islander,28.0,0.0
+2015-2016,AUSL,Hispanic/Latino,91.0,0.0
+2015-2016,AUSL,Multiracial,68.0,0.0
+2015-2016,AUSL,Native American/Alaskan,4237.0,0.0
+2015-2016,AUSL,White,12895.0,0.0
+2015-2016,Charter,Not Available,872.0,1.6
+2015-2016,Charter,Black/African American,3.0,0.0
+2015-2016,Charter,Asian,26.0,0.0
+2015-2016,Charter,"Asian/
+Pacific Islander
+(Retired)",107.0,0.0
+2015-2016,Charter,Hawaiian/Pacific Islander,356.0,0.0
+2015-2016,Charter,Hispanic/Latino,301.0,0.0
+2015-2016,Charter,Multiracial,590.0,0.0
+2015-2016,Charter,Native American/Alaskan,22064.0,0.0
+2015-2016,Charter,White,30019.0,0.0
+2015-2016,Contract,Not Available,116.0,6.4
+2015-2016,Contract,Black/African American,0.0,0.0
+2015-2016,Contract,Asian,2.0,0.0
+2015-2016,Contract,"Asian/
+Pacific Islander
+(Retired)",2.0,0.0
+2015-2016,Contract,Hawaiian/Pacific Islander,7.0,0.0
+2015-2016,Contract,Hispanic/Latino,28.0,0.0
+2015-2016,Contract,Multiracial,17.0,0.0
+2015-2016,Contract,Native American/Alaskan,251.0,0.0
+2015-2016,Contract,White,1386.0,0.0
+2015-2016,ISP,Not Available,4448.0,16.0
+2015-2016,ISP,Black/African American,1.0,0.0
+2015-2016,ISP,Asian,96.0,0.0
+2015-2016,ISP,"Asian/
+Pacific Islander
+(Retired)",87.0,0.0
+2015-2016,ISP,Hawaiian/Pacific Islander,161.0,0.0
+2015-2016,ISP,Hispanic/Latino,520.0,0.0
+2015-2016,ISP,Multiracial,3083.0,0.0
+2015-2016,ISP,Native American/Alaskan,13619.0,0.0
+2015-2016,ISP,White,5769.0,0.0
+2015-2016,Network 1,Not Available,11803.0,30.9
+2015-2016,Network 1,Black/African American,5.0,0.0
+2015-2016,Network 1,Asian,174.0,0.0
+2015-2016,Network 1,"Asian/
+Pacific Islander
+(Retired)",129.0,0.0
+2015-2016,Network 1,Hawaiian/Pacific Islander,273.0,0.0
+2015-2016,Network 1,Hispanic/Latino,692.0,0.0
+2015-2016,Network 1,Multiracial,2964.0,0.0
+2015-2016,Network 1,Native American/Alaskan,20457.0,0.0
+2015-2016,Network 1,White,1744.0,0.0
+2015-2016,Network 10,Not Available,3414.0,13.2
+2015-2016,Network 10,Black/African American,0.0,0.0
+2015-2016,Network 10,Asian,28.0,0.0
+2015-2016,Network 10,"Asian/
+Pacific Islander
+(Retired)",65.0,0.0
+2015-2016,Network 10,Hawaiian/Pacific Islander,65.0,0.0
+2015-2016,Network 10,Hispanic/Latino,169.0,0.0
+2015-2016,Network 10,Multiracial,69.0,0.0
+2015-2016,Network 10,Native American/Alaskan,14325.0,0.0
+2015-2016,Network 10,White,7823.0,0.0
+2015-2016,Network 11,Not Available,56.0,0.3
+2015-2016,Network 11,Black/African American,0.0,0.0
+2015-2016,Network 11,Asian,7.0,0.0
+2015-2016,Network 11,"Asian/
+Pacific Islander
+(Retired)",12.0,0.0
+2015-2016,Network 11,Hawaiian/Pacific Islander,27.0,0.0
+2015-2016,Network 11,Hispanic/Latino,59.0,0.0
+2015-2016,Network 11,Multiracial,28.0,0.0
+2015-2016,Network 11,Native American/Alaskan,934.0,0.0
+2015-2016,Network 11,White,15633.0,0.0
+2015-2016,Network 12,Not Available,34.0,0.3
+2015-2016,Network 12,Black/African American,0.0,0.0
+2015-2016,Network 12,Asian,8.0,0.0
+2015-2016,Network 12,"Asian/
+Pacific Islander
+(Retired)",6.0,0.0
+2015-2016,Network 12,Hawaiian/Pacific Islander,20.0,0.0
+2015-2016,Network 12,Hispanic/Latino,66.0,0.0
+2015-2016,Network 12,Multiracial,9.0,0.0
+2015-2016,Network 12,Native American/Alaskan,704.0,0.0
+2015-2016,Network 12,White,12170.0,0.0
+2015-2016,Network 13,Not Available,350.0,2.2
+2015-2016,Network 13,Black/African American,0.0,0.0
+2015-2016,Network 13,Asian,8.0,0.0
+2015-2016,Network 13,"Asian/
+Pacific Islander
+(Retired)",31.0,0.0
+2015-2016,Network 13,Hawaiian/Pacific Islander,9.0,0.0
+2015-2016,Network 13,Hispanic/Latino,58.0,0.0
+2015-2016,Network 13,Multiracial,13.0,0.0
+2015-2016,Network 13,Native American/Alaskan,6249.0,0.0
+2015-2016,Network 13,White,9434.0,0.0
+2015-2016,Network 2,Not Available,4492.0,18.1
+2015-2016,Network 2,Black/African American,1.0,0.0
+2015-2016,Network 2,Asian,69.0,0.0
+2015-2016,Network 2,"Asian/
+Pacific Islander
+(Retired)",116.0,0.0
+2015-2016,Network 2,Hawaiian/Pacific Islander,77.0,0.0
+2015-2016,Network 2,Hispanic/Latino,627.0,0.0
+2015-2016,Network 2,Multiracial,4205.0,0.0
+2015-2016,Network 2,Native American/Alaskan,10534.0,0.0
+2015-2016,Network 2,White,4754.0,0.0
+2015-2016,Network 3,Not Available,705.0,3.5
+2015-2016,Network 3,Black/African American,0.0,0.0
+2015-2016,Network 3,Asian,34.0,0.0
+2015-2016,Network 3,"Asian/
+Pacific Islander
+(Retired)",76.0,0.0
+2015-2016,Network 3,Hawaiian/Pacific Islander,37.0,0.0
+2015-2016,Network 3,Hispanic/Latino,97.0,0.0
+2015-2016,Network 3,Multiracial,138.0,0.0
+2015-2016,Network 3,Native American/Alaskan,11810.0,0.0
+2015-2016,Network 3,White,7406.0,0.0
+2015-2016,Network 4,Not Available,7168.0,26.1
+2015-2016,Network 4,Black/African American,1.0,0.0
+2015-2016,Network 4,Asian,90.0,0.0
+2015-2016,Network 4,"Asian/
+Pacific Islander
+(Retired)",77.0,0.0
+2015-2016,Network 4,Hawaiian/Pacific Islander,185.0,0.0
+2015-2016,Network 4,Hispanic/Latino,713.0,0.0
+2015-2016,Network 4,Multiracial,1257.0,0.0
+2015-2016,Network 4,Native American/Alaskan,15320.0,0.0
+2015-2016,Network 4,White,2639.0,0.0
+2015-2016,Network 5,Not Available,446.0,2.7
+2015-2016,Network 5,Black/African American,0.0,0.0
+2015-2016,Network 5,Asian,11.0,0.0
+2015-2016,Network 5,"Asian/
+Pacific Islander
+(Retired)",28.0,0.0
+2015-2016,Network 5,Hawaiian/Pacific Islander,95.0,0.0
+2015-2016,Network 5,Hispanic/Latino,71.0,0.0
+2015-2016,Network 5,Multiracial,97.0,0.0
+2015-2016,Network 5,Native American/Alaskan,6394.0,0.0
+2015-2016,Network 5,White,9573.0,0.0
+2015-2016,Network 6,Not Available,2193.0,15.6
+2015-2016,Network 6,Black/African American,0.0,0.0
+2015-2016,Network 6,Asian,33.0,0.0
+2015-2016,Network 6,"Asian/
+Pacific Islander
+(Retired)",20.0,0.0
+2015-2016,Network 6,Hawaiian/Pacific Islander,40.0,0.0
+2015-2016,Network 6,Hispanic/Latino,370.0,0.0
+2015-2016,Network 6,Multiracial,1185.0,0.0
+2015-2016,Network 6,Native American/Alaskan,5582.0,0.0
+2015-2016,Network 6,White,4630.0,0.0
+2015-2016,Network 7,Not Available,127.0,0.8
+2015-2016,Network 7,Black/African American,0.0,0.0
+2015-2016,Network 7,Asian,2.0,0.0
+2015-2016,Network 7,"Asian/
+Pacific Islander
+(Retired)",37.0,0.0
+2015-2016,Network 7,Hawaiian/Pacific Islander,12.0,0.0
+2015-2016,Network 7,Hispanic/Latino,26.0,0.0
+2015-2016,Network 7,Multiracial,17.0,0.0
+2015-2016,Network 7,Native American/Alaskan,15824.0,0.0
+2015-2016,Network 7,White,670.0,0.0
+2015-2016,Network 8,Not Available,528.0,2.0
+2015-2016,Network 8,Black/African American,0.0,0.0
+2015-2016,Network 8,Asian,12.0,0.0
+2015-2016,Network 8,"Asian/
+Pacific Islander
+(Retired)",71.0,0.0
+2015-2016,Network 8,Hawaiian/Pacific Islander,123.0,0.0
+2015-2016,Network 8,Hispanic/Latino,77.0,0.0
+2015-2016,Network 8,Multiracial,246.0,0.0
+2015-2016,Network 8,Native American/Alaskan,24021.0,0.0
+2015-2016,Network 8,White,1328.0,0.0
+2015-2016,Network 9,Not Available,250.0,1.8
+2015-2016,Network 9,Black/African American,1.0,0.0
+2015-2016,Network 9,Asian,9.0,0.0
+2015-2016,Network 9,"Asian/
+Pacific Islander
+(Retired)",16.0,0.0
+2015-2016,Network 9,Hawaiian/Pacific Islander,37.0,0.0
+2015-2016,Network 9,Hispanic/Latino,144.0,0.0
+2015-2016,Network 9,Multiracial,163.0,0.0
+2015-2016,Network 9,Native American/Alaskan,401.0,0.0
+2015-2016,Network 9,White,12867.0,0.0
+2015-2016,OS4,Not Available,75.0,1.0
+2015-2016,OS4,Black/African American,0.0,0.0
+2015-2016,OS4,Asian,3.0,0.0
+2015-2016,OS4,"Asian/
+Pacific Islander
+(Retired)",11.0,0.0
+2015-2016,OS4,Hawaiian/Pacific Islander,5.0,0.0
+2015-2016,OS4,Hispanic/Latino,25.0,0.0
+2015-2016,OS4,Multiracial,315.0,0.0
+2015-2016,OS4,Native American/Alaskan,2902.0,0.0
+2015-2016,OS4,White,4018.0,0.0
+2015-2016,Options,Not Available,226.0,2.3
+2015-2016,Options,Black/African American,2.0,0.0
+2015-2016,Options,Asian,4.0,0.0
+2015-2016,Options,"Asian/
+Pacific Islander
+(Retired)",17.0,0.0
+2015-2016,Options,Hawaiian/Pacific Islander,47.0,0.0
+2015-2016,Options,Hispanic/Latino,42.0,0.0
+2015-2016,Options,Multiracial,35.0,0.0
+2015-2016,Options,Native American/Alaskan,2586.0,0.0
+2015-2016,Options,White,6782.0,0.0
+2015-2016,Service Leadership Academies,Not Available,103.0,3.4
+2015-2016,Service Leadership Academies,Black/African American,0.0,0.0
+2015-2016,Service Leadership Academies,Asian,0.0,0.0
+2015-2016,Service Leadership Academies,"Asian/
+Pacific Islander
+(Retired)",8.0,0.0
+2015-2016,Service Leadership Academies,Hawaiian/Pacific Islander,1.0,0.0
+2015-2016,Service Leadership Academies,Hispanic/Latino,16.0,0.0
+2015-2016,Service Leadership Academies,Multiracial,41.0,0.0
+2015-2016,Service Leadership Academies,Native American/Alaskan,1992.0,0.0
+2015-2016,Service Leadership Academies,White,873.0,0.0
+2014-2015,AUSL,Not Available,356.0,2.0
+2014-2015,AUSL,Black/African American,0.0,0.0
+2014-2015,AUSL,Asian,12.0,0.0
+2014-2015,AUSL,"Asian/
+Pacific Islander
+(Retired)",27.0,0.0
+2014-2015,AUSL,Hawaiian/Pacific Islander,79.0,0.0
+2014-2015,AUSL,Hispanic/Latino,85.0,0.0
+2014-2015,AUSL,Multiracial,66.0,0.0
+2014-2015,AUSL,Native American/Alaskan,4172.0,0.0
+2014-2015,AUSL,White,13173.0,0.0
+2014-2015,Charter,Not Available,886.0,1.7
+2014-2015,Charter,Black/African American,11.0,0.0
+2014-2015,Charter,Asian,25.0,0.0
+2014-2015,Charter,"Asian/
+Pacific Islander
+(Retired)",113.0,0.0
+2014-2015,Charter,Hawaiian/Pacific Islander,858.0,0.0
+2014-2015,Charter,Hispanic/Latino,300.0,0.0
+2014-2015,Charter,Multiracial,561.0,0.0
+2014-2015,Charter,Native American/Alaskan,20615.0,0.0
+2014-2015,Charter,White,29081.0,0.0
+2014-2015,Contract,Not Available,112.0,6.1
+2014-2015,Contract,Black/African American,0.0,0.0
+2014-2015,Contract,Asian,3.0,0.0
+2014-2015,Contract,"Asian/
+Pacific Islander
+(Retired)",4.0,0.0
+2014-2015,Contract,Hawaiian/Pacific Islander,6.0,0.0
+2014-2015,Contract,Hispanic/Latino,23.0,0.0
+2014-2015,Contract,Multiracial,22.0,0.0
+2014-2015,Contract,Native American/Alaskan,265.0,0.0
+2014-2015,Contract,White,1400.0,0.0
+2014-2015,Network 1,Not Available,12507.0,30.9
+2014-2015,Network 1,Black/African American,10.0,0.0
+2014-2015,Network 1,Asian,173.0,0.0
+2014-2015,Network 1,"Asian/
+Pacific Islander
+(Retired)",167.0,0.0
+2014-2015,Network 1,Hawaiian/Pacific Islander,401.0,0.0
+2014-2015,Network 1,Hispanic/Latino,736.0,0.0
+2014-2015,Network 1,Multiracial,3065.0,0.0
+2014-2015,Network 1,Native American/Alaskan,21410.0,0.0
+2014-2015,Network 1,White,1956.0,0.0
+2014-2015,Network 10,Not Available,3995.0,15.2
+2014-2015,Network 10,Black/African American,0.0,0.0
+2014-2015,Network 10,Asian,33.0,0.0
+2014-2015,Network 10,"Asian/
+Pacific Islander
+(Retired)",76.0,0.0
+2014-2015,Network 10,Hawaiian/Pacific Islander,41.0,0.0
+2014-2015,Network 10,Hispanic/Latino,166.0,0.0
+2014-2015,Network 10,Multiracial,145.0,0.0
+2014-2015,Network 10,Native American/Alaskan,14958.0,0.0
+2014-2015,Network 10,White,6865.0,0.0
+2014-2015,Network 11,Not Available,98.0,0.6
+2014-2015,Network 11,Black/African American,0.0,0.0
+2014-2015,Network 11,Asian,10.0,0.0
+2014-2015,Network 11,"Asian/
+Pacific Islander
+(Retired)",18.0,0.0
+2014-2015,Network 11,Hawaiian/Pacific Islander,14.0,0.0
+2014-2015,Network 11,Hispanic/Latino,58.0,0.0
+2014-2015,Network 11,Multiracial,68.0,0.0
+2014-2015,Network 11,Native American/Alaskan,926.0,0.0
+2014-2015,Network 11,White,15703.0,0.0
+2014-2015,Network 12,Not Available,33.0,0.2
+2014-2015,Network 12,Black/African American,0.0,0.0
+2014-2015,Network 12,Asian,6.0,0.0
+2014-2015,Network 12,"Asian/
+Pacific Islander
+(Retired)",9.0,0.0
+2014-2015,Network 12,Hawaiian/Pacific Islander,17.0,0.0
+2014-2015,Network 12,Hispanic/Latino,73.0,0.0
+2014-2015,Network 12,Multiracial,9.0,0.0
+2014-2015,Network 12,Native American/Alaskan,755.0,0.0
+2014-2015,Network 12,White,12432.0,0.0
+2014-2015,Network 13,Not Available,377.0,2.3
+2014-2015,Network 13,Black/African American,0.0,0.0
+2014-2015,Network 13,Asian,8.0,0.0
+2014-2015,Network 13,"Asian/
+Pacific Islander
+(Retired)",41.0,0.0
+2014-2015,Network 13,Hawaiian/Pacific Islander,9.0,0.0
+2014-2015,Network 13,Hispanic/Latino,78.0,0.0
+2014-2015,Network 13,Multiracial,13.0,0.0
+2014-2015,Network 13,Native American/Alaskan,6437.0,0.0
+2014-2015,Network 13,White,9605.0,0.0
+2014-2015,Network 2,Not Available,4732.0,18.0
+2014-2015,Network 2,Black/African American,2.0,0.0
+2014-2015,Network 2,Asian,79.0,0.0
+2014-2015,Network 2,"Asian/
+Pacific Islander
+(Retired)",148.0,0.0
+2014-2015,Network 2,Hawaiian/Pacific Islander,63.0,0.0
+2014-2015,Network 2,Hispanic/Latino,696.0,0.0
+2014-2015,Network 2,Multiracial,4262.0,0.0
+2014-2015,Network 2,Native American/Alaskan,10986.0,0.0
+2014-2015,Network 2,White,5275.0,0.0
+2014-2015,Network 3,Not Available,764.0,3.3
+2014-2015,Network 3,Black/African American,0.0,0.0
+2014-2015,Network 3,Asian,31.0,0.0
+2014-2015,Network 3,"Asian/
+Pacific Islander
+(Retired)",86.0,0.0
+2014-2015,Network 3,Hawaiian/Pacific Islander,53.0,0.0
+2014-2015,Network 3,Hispanic/Latino,111.0,0.0
+2014-2015,Network 3,Multiracial,155.0,0.0
+2014-2015,Network 3,Native American/Alaskan,14224.0,0.0
+2014-2015,Network 3,White,7940.0,0.0
+2014-2015,Network 4,Not Available,7487.0,25.6
+2014-2015,Network 4,Black/African American,1.0,0.0
+2014-2015,Network 4,Asian,85.0,0.0
+2014-2015,Network 4,"Asian/
+Pacific Islander
+(Retired)",105.0,0.0
+2014-2015,Network 4,Hawaiian/Pacific Islander,233.0,0.0
+2014-2015,Network 4,Hispanic/Latino,801.0,0.0
+2014-2015,Network 4,Multiracial,1387.0,0.0
+2014-2015,Network 4,Native American/Alaskan,16303.0,0.0
+2014-2015,Network 4,White,2844.0,0.0
+2014-2015,Network 5,Not Available,437.0,2.7
+2014-2015,Network 5,Black/African American,0.0,0.0
+2014-2015,Network 5,Asian,14.0,0.0
+2014-2015,Network 5,"Asian/
+Pacific Islander
+(Retired)",37.0,0.0
+2014-2015,Network 5,Hawaiian/Pacific Islander,52.0,0.0
+2014-2015,Network 5,Hispanic/Latino,83.0,0.0
+2014-2015,Network 5,Multiracial,106.0,0.0
+2014-2015,Network 5,Native American/Alaskan,6984.0,0.0
+2014-2015,Network 5,White,8407.0,0.0
+2014-2015,Network 6,Not Available,4246.0,19.4
+2014-2015,Network 6,Black/African American,6.0,0.0
+2014-2015,Network 6,Asian,106.0,0.0
+2014-2015,Network 6,"Asian/
+Pacific Islander
+(Retired)",50.0,0.0
+2014-2015,Network 6,Hawaiian/Pacific Islander,156.0,0.0
+2014-2015,Network 6,Hispanic/Latino,588.0,0.0
+2014-2015,Network 6,Multiracial,3491.0,0.0
+2014-2015,Network 6,Native American/Alaskan,7467.0,0.0
+2014-2015,Network 6,White,5736.0,0.0
+2014-2015,Network 7,Not Available,126.0,0.7
+2014-2015,Network 7,Black/African American,0.0,0.0
+2014-2015,Network 7,Asian,1.0,0.0
+2014-2015,Network 7,"Asian/
+Pacific Islander
+(Retired)",48.0,0.0
+2014-2015,Network 7,Hawaiian/Pacific Islander,59.0,0.0
+2014-2015,Network 7,Hispanic/Latino,23.0,0.0
+2014-2015,Network 7,Multiracial,24.0,0.0
+2014-2015,Network 7,Native American/Alaskan,16999.0,0.0
+2014-2015,Network 7,White,611.0,0.0
+2014-2015,Network 8,Not Available,526.0,1.7
+2014-2015,Network 8,Black/African American,0.0,0.0
+2014-2015,Network 8,Asian,12.0,0.0
+2014-2015,Network 8,"Asian/
+Pacific Islander
+(Retired)",106.0,0.0
+2014-2015,Network 8,Hawaiian/Pacific Islander,154.0,0.0
+2014-2015,Network 8,Hispanic/Latino,76.0,0.0
+2014-2015,Network 8,Multiracial,241.0,0.0
+2014-2015,Network 8,Native American/Alaskan,27698.0,0.0
+2014-2015,Network 8,White,1356.0,0.0
+2014-2015,Network 9,Not Available,232.0,1.6
+2014-2015,Network 9,Black/African American,0.0,0.0
+2014-2015,Network 9,Asian,7.0,0.0
+2014-2015,Network 9,"Asian/
+Pacific Islander
+(Retired)",15.0,0.0
+2014-2015,Network 9,Hawaiian/Pacific Islander,56.0,0.0
+2014-2015,Network 9,Hispanic/Latino,154.0,0.0
+2014-2015,Network 9,Multiracial,163.0,0.0
+2014-2015,Network 9,Native American/Alaskan,367.0,0.0
+2014-2015,Network 9,White,13088.0,0.0
+2014-2015,OS4,Not Available,229.0,1.2
+2014-2015,OS4,Black/African American,0.0,0.0
+2014-2015,OS4,Asian,12.0,0.0
+2014-2015,OS4,"Asian/
+Pacific Islander
+(Retired)",28.0,0.0
+2014-2015,OS4,Hawaiian/Pacific Islander,45.0,0.0
+2014-2015,OS4,Hispanic/Latino,90.0,0.0
+2014-2015,OS4,Multiracial,383.0,0.0
+2014-2015,OS4,Native American/Alaskan,5986.0,0.0
+2014-2015,OS4,White,12720.0,0.0
+2014-2015,Options,Not Available,197.0,2.1
+2014-2015,Options,Black/African American,1.0,0.0
+2014-2015,Options,Asian,5.0,0.0
+2014-2015,Options,"Asian/
+Pacific Islander
+(Retired)",14.0,0.0
+2014-2015,Options,Hawaiian/Pacific Islander,28.0,0.0
+2014-2015,Options,Hispanic/Latino,40.0,0.0
+2014-2015,Options,Multiracial,23.0,0.0
+2014-2015,Options,Native American/Alaskan,2331.0,0.0
+2014-2015,Options,White,6748.0,0.0
+2014-2015,Service Leadership Academies,Not Available,104.0,3.4
+2014-2015,Service Leadership Academies,Black/African American,0.0,0.0
+2014-2015,Service Leadership Academies,Asian,1.0,0.0
+2014-2015,Service Leadership Academies,"Asian/
+Pacific Islander
+(Retired)",11.0,0.0
+2014-2015,Service Leadership Academies,Hawaiian/Pacific Islander,6.0,0.0
+2014-2015,Service Leadership Academies,Hispanic/Latino,21.0,0.0
+2014-2015,Service Leadership Academies,Multiracial,44.0,0.0
+2014-2015,Service Leadership Academies,Native American/Alaskan,1907.0,0.0
+2014-2015,Service Leadership Academies,White,992.0,0.0
