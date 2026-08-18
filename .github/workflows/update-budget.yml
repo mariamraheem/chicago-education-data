@@ -1,0 +1,43 @@
+name: Update Budget
+
+on:
+  schedule:
+    # Monthly, 1st of the month, 06:15 UTC -- offset from Update
+    # Enrollment's schedule so the two don't race on the same runner
+    # minute. CPS updates budget documents a few times a year, so most
+    # scheduled runs will find nothing new and commit nothing.
+    - cron: "15 6 1 * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-clean-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Scrape CPS budget documents
+        run: python budget/scripts/01_scrape.py
+
+      - name: Clean District Managed Funds workbooks
+        run: python budget/scripts/02_clean.py
+
+      - name: Build frontend-ready dashboard data
+        run: python budget/scripts/03_build_dashboard_data.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add budget/data budget/dashboard
+          git diff --cached --quiet || git commit -m "budget: scrape/clean $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push
