@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CPS Budget Data</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -45,9 +46,17 @@
       padding: 12px;
       border-bottom: 1px solid #eee;
       font-size: 14px;
+      white-space: nowrap;
     }
     tr:hover {
       background: #fafafa;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
     }
   </style>
 </head>
@@ -59,7 +68,9 @@
     <div class="flex items-start justify-between mt-3 flex-wrap gap-4">
       <div>
         <h1 class="text-3xl font-bold tracking-tight">Budget</h1>
-        <p class="text-white/80 mt-2">District Managed Funds</p>
+        <p class="text-white/80 mt-2">
+          District Managed &middot; Charter, Contract &amp; ALOP School Budget Overviews &middot; FY2025&ndash;FY2027
+        </p>
       </div>
       <div class="flex gap-3">
         <a
@@ -103,27 +114,62 @@
     </div>
   </div>
   <!-- KPI cards -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
     <div class="card">
-      <div class="text-sm text-gray-500">Rows</div>
-      <div id="totalRows" class="text-3xl font-bold mt-2">—</div>
+      <div class="text-sm text-gray-500">Schools covered</div>
+      <div id="totalSchools" class="text-3xl font-bold mt-2">—</div>
     </div>
     <div class="card">
-      <div class="text-sm text-gray-500">Budget years covered</div>
-      <div id="totalYears" class="text-3xl font-bold mt-2">—</div>
+      <div class="text-sm text-gray-500" id="districtManagedLabel">District managed</div>
+      <div id="districtManagedCount" class="text-3xl font-bold mt-2">—</div>
     </div>
     <div class="card">
-      <div class="text-sm text-gray-500">Source files</div>
-      <div id="totalSources" class="text-3xl font-bold mt-2">—</div>
+      <div class="text-sm text-gray-500" id="charterLabel">Charter / Contract / ALOP</div>
+      <div id="charterCount" class="text-3xl font-bold mt-2">—</div>
+    </div>
+    <div class="card">
+      <div class="text-sm text-gray-500">Latest budget year</div>
+      <div id="latestYear" class="text-3xl font-bold mt-2">—</div>
     </div>
   </div>
-  <div class="card mb-6" id="scaffoldNotice" style="display:none">
-    <p class="text-sm text-gray-600">
-      This pipeline's cleaner (<code>budget/scripts/02_clean.py</code>) hasn't been validated against a real
-      CPS budget workbook yet, so this table shows exactly what the automated column-detection produced,
-      unfiltered beyond dropping obvious subtotal rows. Once you've confirmed the real column names look right,
-      budget-specific charts (like enrollment's race/EL/IEP breakdowns) can be added here the same way.
-    </p>
+  <!-- Schools by category, by year -->
+  <div class="card mb-6">
+    <div class="flex justify-between items-center mb-5">
+      <div>
+        <h2 class="font-semibold text-lg">Schools budgeted, by year</h2>
+        <p class="text-sm text-gray-500">
+          District Managed vs. Charter/Contract/ALOP school counts, per CPS budget (fiscal) year
+        </p>
+      </div>
+    </div>
+    <div style="height:300px">
+      <canvas id="categoryChart"></canvas>
+    </div>
+  </div>
+  <!-- Enrollment trend + network breakdown -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+    <div class="card">
+      <div class="mb-5">
+        <h2 class="font-semibold text-lg">Enrollment covered, by year</h2>
+        <p class="text-sm text-gray-500" id="enrollmentChartSubtitle">
+          Sum of each school's most recent enrollment figure in its budget workbook
+        </p>
+      </div>
+      <div style="height:280px">
+        <canvas id="enrollmentChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="mb-5">
+        <h2 class="font-semibold text-lg">Schools by network</h2>
+        <p class="text-sm text-gray-500">
+          Latest budget year &middot; top networks by school count
+        </p>
+      </div>
+      <div style="height:280px">
+        <canvas id="networkChart"></canvas>
+      </div>
+    </div>
   </div>
   <!-- Filters -->
   <div class="card mb-6">
@@ -131,15 +177,18 @@
       <input
         id="search"
         type="text"
-        placeholder="Search..."
+        placeholder="Search school..."
         class="border border-gray-300 rounded-lg px-3 py-2 text-sm flex-1"
         oninput="renderTable()"
       />
       <select id="yearFilter" class="border border-gray-300 rounded-lg px-3 py-2 text-sm" onchange="renderTable()">
         <option value="">All years</option>
       </select>
-      <select id="sourceFilter" class="border border-gray-300 rounded-lg px-3 py-2 text-sm" onchange="renderTable()">
-        <option value="">All source files</option>
+      <select id="categoryFilter" class="border border-gray-300 rounded-lg px-3 py-2 text-sm" onchange="renderTable()">
+        <option value="">All categories</option>
+      </select>
+      <select id="networkFilter" class="border border-gray-300 rounded-lg px-3 py-2 text-sm" onchange="renderTable()">
+        <option value="">All networks</option>
       </select>
     </div>
   </div>
@@ -149,6 +198,10 @@
       <div>
         <h2 class="font-semibold text-lg">Data viewer</h2>
         <p id="rowCount" class="text-sm text-gray-500"></p>
+        <p class="text-xs text-gray-400 mt-1">
+          Showing key columns below &middot; each budget workbook has 100+ line-item columns that drift year to
+          year (staffing allocations, per-pupil grants, etc.) &mdash; use "Download CSV" for the full row.
+        </p>
       </div>
     </div>
     <div class="overflow-x-auto">
@@ -162,6 +215,9 @@
 <script>
 let DATA = [];
 let FILTERED = [];
+let categoryChart = null;
+let enrollmentChart = null;
+let networkChart = null;
 let sortColumn = null;
 let sortDirection = "asc";
 
@@ -171,6 +227,81 @@ let sortDirection = "asc";
  */
 const DATA_SOURCE = "./budget_dashboard_data.csv";
 
+// Validated categorical palette (dataviz skill's reference instance) --
+// fixed hue order, CVD-safe on adjacent pairs. Assigned by entity, not
+// cycled, so the same category always gets the same color across charts.
+const PALETTE = [
+  "#2a78d6", "#eb6834", "#1baf7a", "#eda100",
+  "#e87ba4", "#008300", "#4a3aa7", "#e34948",
+];
+const CATEGORY_COLORS = {
+  "District Managed": PALETTE[0],
+  "Charter, Contract & ALOP": PALETTE[1],
+};
+
+// CPS's own two budget workbooks per year (see budget/scripts/01_scrape.py
+// classify_filename()) -- Source_File always starts with one of these two
+// prefixes regardless of year, which is a much more stable signal than
+// Source_Sheet (sheet names/counts drift: "Traditional", "Alt-Spec",
+// "FY26 Charter Schools", "FY27 Contract, ALOP, SAFE", etc).
+function categoryOf(row) {
+  const src = String(row.Source_File || "");
+  if (src.startsWith("DISTRICT_MANAGED")) return "District Managed";
+  if (src.startsWith("CHARTER_CONTRACT_ALOP")) return "Charter, Contract & ALOP";
+  return "Other";
+}
+
+// CPS renames its "current enrollment" column almost every budget year
+// ("Fall 2023 20th Day Enrollment", "Fall 2024 Total Enrollment", "FY25
+// 20th Day Enrollment", ...), and different sheets within the SAME
+// workbook use different names too. Rather than hardcode one column name
+// (which silently breaks or silently reports 0 the moment CPS renames it
+// again), scan every column name for a "Fall <year> ... enrollment" or
+// "FY<yy> ... enrollment" pattern, tag each match with the school year it
+// actually refers to, and for each row use whichever matching column is
+// both non-blank AND refers to the most recent year -- that's the
+// school's best available enrollment figure as of that budget workbook.
+const ENROLLMENT_COLUMN_PATTERNS = [
+  { re: /^Fall (\d{4}).*Total Enrollment.*$/i, yearOf: (m) => Number(m[1]) },
+  { re: /^Fall (\d{4}) 20th Day Enrollment$/i, yearOf: (m) => Number(m[1]) },
+  { re: /^FY(\d{2}) 20th Day Enrollment(?: - Semester 1)?$/i, yearOf: (m) => 2000 + Number(m[1]) - 1 },
+];
+// Columns that look like an enrollment total but are actually a
+// year-over-year delta -- must be excluded or they'd be double-counted as
+// if they were a standalone enrollment figure.
+const ENROLLMENT_EXCLUDE = /^Change in/i;
+
+let enrollmentColumnCache = null;
+function enrollmentColumnsFor(headers) {
+  if (enrollmentColumnCache) return enrollmentColumnCache;
+  const matches = [];
+  headers.forEach((h) => {
+    if (ENROLLMENT_EXCLUDE.test(h)) return;
+    for (const { re, yearOf } of ENROLLMENT_COLUMN_PATTERNS) {
+      const m = h.match(re);
+      if (m) {
+        matches.push({ column: h, refYear: yearOf(m) });
+        break;
+      }
+    }
+  });
+  enrollmentColumnCache = matches;
+  return matches;
+}
+
+function rowEnrollment(row, headers) {
+  const cols = enrollmentColumnsFor(headers);
+  let best = null;
+  for (const { column, refYear } of cols) {
+    const raw = row[column];
+    if (raw === undefined || raw === "" || raw === null) continue;
+    const v = Number(raw);
+    if (Number.isNaN(v)) continue;
+    if (!best || refYear > best.refYear) best = { refYear, value: v };
+  }
+  return best ? best.value : null;
+}
+
 async function refreshData() {
   setStatus("Loading", "gray");
   try {
@@ -178,12 +309,11 @@ async function refreshData() {
     if (!response.ok) throw new Error("Could not load budget data");
     const text = await response.text();
     DATA = parseCSV(text);
+    enrollmentColumnCache = null;
     if (!DATA.length) {
       setStatus("No data yet -- run the budget pipeline", "red");
-      document.getElementById("scaffoldNotice").style.display = "block";
       return;
     }
-    document.getElementById("scaffoldNotice").style.display = "block";
     initializeFilters();
     renderDashboard();
     setStatus("Dataset loaded", "green");
@@ -194,45 +324,211 @@ async function refreshData() {
   }
 }
 
+// A naive line.split(",") breaks the instant any field is quoted and
+// contains a comma -- and this dataset has plenty (dollar amounts like
+// "$1,234", multi-word community areas, etc). Every column after that
+// field would silently shift by one, corrupting values (including the
+// enrollment/category columns the charts above depend on) without ever
+// throwing an error. This is a minimal RFC4180-style parser: it tracks
+// quote state character-by-character so a comma or newline inside a
+// quoted field doesn't split the row, and "" inside quotes unescapes to a
+// literal ".
 function parseCSV(text) {
-  const lines = text.trim().split(/\r?\n/);
-  if (!lines.length || !lines[0]) return [];
-  const headers = lines[0].split(",").map(x => x.trim());
-  return lines.slice(1).map(line => {
-    const values = line.split(",");
-    const row = {};
-    headers.forEach((header, i) => { row[header] = values[i] ?? ""; });
-    return row;
-  });
+  const rows = [];
+  let row = [];
+  let field = "";
+  let inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"') {
+        if (text[i + 1] === '"') { field += '"'; i++; }
+        else { inQuotes = false; }
+      } else {
+        field += c;
+      }
+    } else if (c === '"') {
+      inQuotes = true;
+    } else if (c === ",") {
+      row.push(field);
+      field = "";
+    } else if (c === "\n" || c === "\r") {
+      if (c === "\r" && text[i + 1] === "\n") i++;
+      row.push(field);
+      rows.push(row);
+      row = [];
+      field = "";
+    } else {
+      field += c;
+    }
+  }
+  if (field !== "" || row.length) {
+    row.push(field);
+    rows.push(row);
+  }
+  if (!rows.length || !rows[0].length) return [];
+  const headers = rows[0].map(h => h.trim());
+  return rows
+    .slice(1)
+    .filter(cols => cols.length > 1 || cols[0] !== "")
+    .map(cols => {
+      const row = {};
+      headers.forEach((header, i) => { row[header] = cols[i] ?? ""; });
+      return row;
+    });
 }
 
 function initializeFilters() {
   fillSelect("yearFilter", "All years", uniqueValues(DATA, ["Year"]));
-  fillSelect("sourceFilter", "All source files", uniqueValues(DATA, ["Source_File"]));
+  fillSelect("categoryFilter", "All categories", [...new Set(DATA.map(categoryOf))]);
+  fillSelect("networkFilter", "All networks", uniqueValues(DATA, ["Network"]));
 }
 
 function fillSelect(id, allLabel, values) {
   const el = document.getElementById(id);
+  const current = el.value;
   el.innerHTML = `<option value="">${escapeHtml(allLabel)}</option>`;
   values.sort().forEach(v => {
     el.innerHTML += `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`;
   });
+  if (values.includes(current)) el.value = current;
 }
 
 function renderDashboard() {
+  // Each piece renders independently -- if Chart.js failed to load or one
+  // chart's data is malformed, that shouldn't take the KPI cards, other
+  // charts, or the table down with it.
   updateKPIs();
-  renderTable();
+  safely(renderCategoryChart);
+  safely(renderEnrollmentChart);
+  safely(renderNetworkChart);
+  safely(renderTable);
+}
+
+function safely(fn) {
+  try {
+    fn();
+  } catch (e) {
+    console.error(`${fn.name} failed:`, e);
+  }
 }
 
 function updateKPIs() {
-  document.getElementById("totalRows").textContent = formatNumber(DATA.length);
-  document.getElementById("totalYears").textContent = uniqueValues(DATA, ["Year"]).length;
-  document.getElementById("totalSources").textContent = uniqueValues(DATA, ["Source_File"]).length;
+  const years = uniqueValues(DATA, ["Year"]).sort();
+  const latestYear = years.length ? years.at(-1) : null;
+  const schools = uniqueValues(DATA, ["School Name"]);
+
+  document.getElementById("totalSchools").textContent = formatNumber(schools.length);
+  document.getElementById("latestYear").textContent = latestYear ? `FY${latestYear}` : "—";
+
+  const latestRows = latestYear ? DATA.filter(r => r.Year === latestYear) : DATA;
+  const districtCount = latestRows.filter(r => categoryOf(r) === "District Managed").length;
+  const charterCount = latestRows.filter(r => categoryOf(r) === "Charter, Contract & ALOP").length;
+
+  document.getElementById("districtManagedLabel").textContent =
+    latestYear ? `District managed (FY${latestYear})` : "District managed";
+  document.getElementById("charterLabel").textContent =
+    latestYear ? `Charter/Contract/ALOP (FY${latestYear})` : "Charter / Contract / ALOP";
+  document.getElementById("districtManagedCount").textContent = formatNumber(districtCount);
+  document.getElementById("charterCount").textContent = formatNumber(charterCount);
+}
+
+function renderCategoryChart() {
+  if (categoryChart) categoryChart.destroy();
+  if (!DATA.length) return;
+  const years = uniqueValues(DATA, ["Year"]).sort();
+  const categories = ["District Managed", "Charter, Contract & ALOP"];
+  const datasets = categories.map(cat => ({
+    label: cat,
+    data: years.map(y => DATA.filter(r => r.Year === y && categoryOf(r) === cat).length),
+    backgroundColor: CATEGORY_COLORS[cat],
+  }));
+  categoryChart = new Chart(document.getElementById("categoryChart"), {
+    type: "bar",
+    data: { labels: years.map(y => `FY${y}`), datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: { stacked: true },
+        y: { stacked: true, ticks: { callback: value => value.toLocaleString(), precision: 0 } },
+      },
+      plugins: { legend: { position: "bottom", labels: { boxWidth: 12, font: { size: 11 } } } },
+    },
+  });
+}
+
+function renderEnrollmentChart() {
+  if (enrollmentChart) enrollmentChart.destroy();
+  const canvas = document.getElementById("enrollmentChart");
+  if (!DATA.length) return;
+  const headers = Object.keys(DATA[0]);
+  const cols = enrollmentColumnsFor(headers);
+  if (!cols.length) {
+    document.getElementById("enrollmentChartSubtitle").textContent =
+      "Not available -- no recognizable enrollment column found in this run's source data.";
+    return;
+  }
+  const years = uniqueValues(DATA, ["Year"]).sort();
+  const totals = years.map(y => {
+    const rows = DATA.filter(r => r.Year === y);
+    return rows.reduce((sum, r) => sum + (rowEnrollment(r, headers) || 0), 0);
+  });
+  enrollmentChart = new Chart(canvas, {
+    type: "line",
+    data: {
+      labels: years.map(y => `FY${y}`),
+      datasets: [{
+        label: "Enrollment",
+        data: totals,
+        tension: 0.25,
+        borderWidth: 2,
+        borderColor: PALETTE[0],
+        backgroundColor: PALETTE[0],
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: false, ticks: { callback: value => value.toLocaleString() } } },
+    },
+  });
+}
+
+function renderNetworkChart() {
+  if (networkChart) networkChart.destroy();
+  const canvas = document.getElementById("networkChart");
+  if (!DATA.length) return;
+  const years = uniqueValues(DATA, ["Year"]).sort();
+  const latestYear = years.at(-1);
+  const rows = DATA.filter(r => r.Year === latestYear && r.Network);
+  const counts = {};
+  rows.forEach(r => { counts[r.Network] = (counts[r.Network] || 0) + 1; });
+  const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 12);
+  networkChart = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: sorted.map(([network]) => network),
+      datasets: [{
+        label: "Schools",
+        data: sorted.map(([, count]) => count),
+        backgroundColor: PALETTE[0],
+      }],
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { x: { ticks: { precision: 0 } } },
+    },
+  });
 }
 
 function sortRows(rows) {
   if (!sortColumn) return rows;
-  return [...rows].sort((a, b) => {
+  const sorted = [...rows].sort((a, b) => {
     const av = a[sortColumn] ?? "";
     const bv = b[sortColumn] ?? "";
     const an = Number(av);
@@ -245,6 +541,7 @@ function sortRows(rows) {
     }
     return sortDirection === "asc" ? cmp : -cmp;
   });
+  return sorted;
 }
 
 function setSort(column) {
@@ -257,31 +554,60 @@ function setSort(column) {
   renderTable();
 }
 
+// Curated subset for the table -- the full row (100+ line-item columns
+// that drift year to year) is still available via "Download CSV", but
+// showing all of them inline is what made the old table unreadable.
+const TABLE_COLUMNS = [
+  { key: "Year", label: "Year", value: r => `FY${r.Year}` },
+  { key: "School Name", label: "School" },
+  { key: "_category", label: "Category", value: r => categoryOf(r) },
+  { key: "Network", label: "Network" },
+  { key: "School Type", label: "School type" },
+  { key: "Community Area", label: "Community area" },
+  { key: "_enrollment", label: "Enrollment", value: (r, headers) => {
+      const v = rowEnrollment(r, headers);
+      return v === null ? "" : formatNumber(v);
+  } },
+];
+
 function renderTable() {
   const search = document.getElementById("search").value.toLowerCase();
   const year = document.getElementById("yearFilter").value;
-  const source = document.getElementById("sourceFilter").value;
+  const category = document.getElementById("categoryFilter").value;
+  const network = document.getElementById("networkFilter").value;
 
   FILTERED = DATA.filter(row => {
     const text = Object.values(row).join(" ").toLowerCase();
     const matchesSearch = !search || text.includes(search);
     const yearValue = row.Year || "";
-    const sourceValue = row.Source_File || "";
-    return matchesSearch && (!year || yearValue === year) && (!source || sourceValue === source);
+    const networkValue = row.Network || "";
+    return (
+      matchesSearch &&
+      (!year || yearValue === year) &&
+      (!category || categoryOf(row) === category) &&
+      (!network || networkValue === network)
+    );
   });
 
   FILTERED = sortRows(FILTERED);
 
   const headers = DATA.length ? Object.keys(DATA[0]) : [];
   document.getElementById("tableHead").innerHTML = `<tr>
-      ${headers.map(h => {
-        const arrow = sortColumn === h ? (sortDirection === "asc" ? "&#9650;" : "&#9660;") : "";
-        return `<th onclick="setSort('${h}')">${escapeHtml(h)} <span class="sort-arrow">${arrow}</span></th>`;
+      ${TABLE_COLUMNS.map(col => {
+        const arrow = sortColumn === col.key ? (sortDirection === "asc" ? "&#9650;" : "&#9660;") : "";
+        return `<th onclick="setSort('${col.key}')">${escapeHtml(col.label)} <span class="sort-arrow">${arrow}</span></th>`;
       }).join("")}
     </tr>`;
   document.getElementById("tableBody").innerHTML = FILTERED
     .slice(0, 500)
-    .map(row => `<tr>${headers.map(h => `<td>${escapeHtml(row[h])}</td>`).join("")}</tr>`)
+    .map(row => `<tr>${TABLE_COLUMNS.map(col => {
+      const raw = col.value ? col.value(row, headers) : row[col.key];
+      if (col.key === "_category") {
+        const color = CATEGORY_COLORS[raw] || "#666";
+        return `<td><span class="badge" style="background:${color}22;color:${color}">${escapeHtml(raw)}</span></td>`;
+      }
+      return `<td>${escapeHtml(raw)}</td>`;
+    }).join("")}</tr>`)
     .join("");
   document.getElementById("rowCount").textContent =
     `${FILTERED.length.toLocaleString()} rows${FILTERED.length > 500 ? " (showing first 500)" : ""}`;

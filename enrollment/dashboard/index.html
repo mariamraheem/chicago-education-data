@@ -331,21 +331,55 @@ async function fetchOptionalCsv(url) {
   }
 }
 
+// A naive line.split(",") breaks the instant any field is quoted and
+// contains a comma (e.g. "$1,234" dollar amounts, "City, ST" addresses) --
+// every column after that field silently shifts by one, corrupting values
+// without erroring. This is a minimal RFC4180-style parser: it tracks
+// quote state character-by-character so a comma or newline inside a
+// quoted field doesn't split the row, and "" inside quotes unescapes to a
+// literal ".
 function parseCSV(text) {
-  const lines = text
-    .trim()
-    .split(/\r?\n/);
-  if (!lines.length || !lines[0]) return [];
-  const headers = lines[0]
-    .split(",")
-    .map(x => x.trim());
-  return lines
+  const rows = [];
+  let row = [];
+  let field = "";
+  let inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (inQuotes) {
+      if (c === '"') {
+        if (text[i + 1] === '"') { field += '"'; i++; }
+        else { inQuotes = false; }
+      } else {
+        field += c;
+      }
+    } else if (c === '"') {
+      inQuotes = true;
+    } else if (c === ",") {
+      row.push(field);
+      field = "";
+    } else if (c === "\n" || c === "\r") {
+      if (c === "\r" && text[i + 1] === "\n") i++;
+      row.push(field);
+      rows.push(row);
+      row = [];
+      field = "";
+    } else {
+      field += c;
+    }
+  }
+  if (field !== "" || row.length) {
+    row.push(field);
+    rows.push(row);
+  }
+  if (!rows.length || !rows[0].length) return [];
+  const headers = rows[0].map(h => h.trim());
+  return rows
     .slice(1)
-    .map(line => {
-      const values = line.split(",");
+    .filter(cols => cols.length > 1 || cols[0] !== "")
+    .map(cols => {
       const row = {};
       headers.forEach((header, i) => {
-        row[header] = values[i] ?? "";
+        row[header] = cols[i] ?? "";
       });
       return row;
     });
