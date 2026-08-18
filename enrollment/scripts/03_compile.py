@@ -251,8 +251,39 @@ def combine_10_year_race_data(input_dir: Path, prefix="RACE") -> pd.DataFrame:
         year = file.stem.split("_")[1]
         try:
             df = pd.read_excel(file, sheet_name="Comparison", header=None)
-            temp = df[[1, 4]].dropna(subset=[1, 4])
+
+            # The "Comparison" sheet's column layout shifts by a column
+            # across years (older years put the race label in column 0 with
+            # N/% in columns 2/3; newer years shift everything one column
+            # right). A hardcoded df[[1, 4]] silently grabbed the "%" column
+            # instead of "N" in newer years (e.g. 0.11 instead of 36693),
+            # which get truncated to 0 once cast to int downstream -- that's
+            # why the race charts were rendering with every count at zero.
+            # Find the header row (the one containing literal "N" and "%"
+            # cells) and locate those columns by content, not position.
+            header_row_idx, n_col = None, None
+            for i in range(min(10, len(df))):
+                row = df.iloc[i].astype(str).str.strip()
+                matches_n = row[row == "N"]
+                matches_pct = row[row == "%"]
+                if len(matches_n) and len(matches_pct):
+                    header_row_idx = i
+                    n_col = matches_n.index[0]
+                    break
+            if header_row_idx is None:
+                print(f"!! {file.name}: couldn't find 'N'/'%' header on Comparison sheet, skipping")
+                continue
+            # The race-label column is consistently two columns to the left
+            # of "N" (one blank spacer column in between) in every year seen
+            # so far -- verified against both the old and new layouts.
+            race_col = n_col - 2
+            if race_col < 0:
+                print(f"!! {file.name}: unexpected Comparison sheet layout, skipping")
+                continue
+
+            temp = df[[race_col, n_col]].iloc[header_row_idx + 1:]
             temp.columns = ["Race", "Count"]
+            temp = temp.dropna(subset=["Race", "Count"])
             temp["Year"] = year
             temp["Count"] = pd.to_numeric(temp["Count"], errors="coerce")
             all_data.append(temp)
@@ -264,12 +295,29 @@ def combine_10_year_race_data(input_dir: Path, prefix="RACE") -> pd.DataFrame:
 
     combined_df = pd.concat(all_data, ignore_index=True)
     combined_df["Race"] = combined_df["Race"].str.strip().replace({
+        # CPS relabels race categories over the years (verified against
+        # the raw Comparison sheets): "African American" (2016-17 through
+        # 2022-23) becomes "Black/African American" (2023-24) becomes just
+        # "Black" (2024-25+); "Native American" (2016-17 only) becomes
+        # "Native American/Alaskan" (2017-18+). Without normalizing these
+        # to one canonical label, the same demographic group shows up as
+        # multiple different chart series with gaps -- e.g. "African
+        # American" plotting 2016-22 then flatlining at 0 while "Black"
+        # picks up from 2023 on.
+        "African American": "Black",
         "Black/African American": "Black",
         "Latinx": "Hispanic",
         "Multi-Racial": "Multiracial",
+        "Native American": "NativeAmerican",
         "Native American/Alaskan": "NativeAmerican",
-        "Asian/Pacific Islander (retired)": "Asian",
     })
+    # "Asian/Pacific Islander (retired)" is a distinct legacy line CPS
+    # keeps in every Comparison sheet alongside the real "Asian" row (not
+    # a renamed version of it -- both appear in the same year with their
+    # own counts, usually a token ~1-14). Relabeling it to "Asian" would
+    # silently sum it into the real Asian count instead of representing a
+    # separate (basically defunct) category, so it's dropped outright.
+    combined_df = combined_df[combined_df["Race"] != "Asian/Pacific Islander (retired)"]
     # Broad, case-insensitive "*total*" match -- drops rows like "District
     # Total" / "Total" so they aren't charted as if they were a race group.
     combined_df = combined_df[~combined_df["Race"].astype(str).str.contains("total", case=False, na=False)]
@@ -291,19 +339,31 @@ def combine_race_networks(input_dir: Path, prefix="RACE") -> pd.DataFrame:
                 continue
             header_row = header_row[0]
 
-            races = df.iloc[header_row - 1].fillna("").tolist()
+            # The race-name row is Excel merged cells -- "White" only
+            # appears in the leftmost cell of its No/Pct pair, with the
+            # cell above "Pct" blank. Forward-filling before doing a
+            # positional (same-index) lookup keeps each No/Pct pair matched
+            # to the right race. The previous version used a single shared
+            # iterator advanced once per No/Pct cell regardless of column
+            # position, which silently shifted every race's numbers onto
+            # the wrong column (e.g. Asian's count ending up on the row
+            # labeled "Not Available") once there was a title cell (like
+            # "20th Day 2025-2026") occupying column 0.
+            races = df.iloc[header_row - 1].ffill().tolist()
             headers = df.iloc[header_row].tolist()
 
-            clean_cols, race_iter = [], iter(races)
-            for col in headers:
-                if str(col).strip() in ["Network", "Total"]:
-                    clean_cols.append(col)
-                elif col == "No":
-                    clean_cols.append(f"{next(race_iter, '').strip()}_No")
-                elif col == "Pct":
-                    clean_cols.append(f"{next(race_iter, '').strip()}_Pct")
+            clean_cols = []
+            for i, col in enumerate(headers):
+                col_str = str(col).strip()
+                race_label = str(races[i]).strip() if i < len(races) and pd.notna(races[i]) else ""
+                if col_str in ["Network", "Total"]:
+                    clean_cols.append(col_str)
+                elif col_str == "No":
+                    clean_cols.append(f"{race_label}_No")
+                elif col_str == "Pct":
+                    clean_cols.append(f"{race_label}_Pct")
                 else:
-                    clean_cols.append(str(col).strip())
+                    clean_cols.append(col_str)
 
             df.columns = clean_cols
             df = df.iloc[header_row + 1:].reset_index(drop=True)

@@ -59,11 +59,11 @@ def build_dashboard_data(source_file: Path = SOURCE_FILE) -> pd.DataFrame:
     # individual school or network. 02_clean.py already drops exact
     # "District Total" rows, but this catches any "*total(s)*" variant in
     # either column (case-insensitive). Legitimate category values like
-    # "Regular Educational Units" don't contain "total" and pass through.
+    # "Regular Educational Units" don't contain "total" and pass through,
+    # and are kept intentionally -- they're a real Network value, not junk.
     for col in ("School Name", "Network"):
         if col in df.columns:
             df = df[~df[col].astype(str).str.contains("total", case=False, na=False)]
-            df = df[~df[col].astype(str).str.contains("educational units", case=False, na=False)]
 
     id_cols = [c for c in ID_COLUMN_MAP if c in df.columns]
     grade_cols = [c for c in GRADE_COLUMNS if c in df.columns]
@@ -85,6 +85,17 @@ def build_dashboard_data(source_file: Path = SOURCE_FILE) -> pd.DataFrame:
         # any blank cells), which would otherwise print every ID as e.g.
         # "400008.0" instead of "400008".
         long_df["school_id"] = pd.to_numeric(long_df["school_id"], errors="coerce").astype("Int64")
+
+    # If school_id, school_name, AND network are all blank there's nothing
+    # identifying what row this even is -- drop it rather than show an
+    # unlabeled row in the table.
+    id_check_cols = [c for c in ("school_id", "school_name", "network") if c in long_df.columns]
+    if id_check_cols:
+        def _is_blank(series: pd.Series) -> pd.Series:
+            return series.isna() | (series.astype(str).str.strip() == "")
+
+        all_blank = pd.concat([_is_blank(long_df[c]) for c in id_check_cols], axis=1).all(axis=1)
+        long_df = long_df[~all_blank]
 
     long_df["enrollment"] = pd.to_numeric(long_df["enrollment"], errors="coerce")
     long_df = long_df.dropna(subset=["enrollment"])
