@@ -1,0 +1,53 @@
+name: Update Enrollment Dashboard
+
+# Deploys ONLY enrollment/dashboard/ to GitHub Pages -- no scraping, no
+# monitor crawl/render. Fast (seconds), so it's safe to run on every push
+# that touches the dashboard or its data, not just on a schedule.
+#
+# Note: this replaces whatever is currently live on Pages with just the
+# enrollment dashboard. If update-monitor.yml's own site content is live at
+# the time this runs, this deploy overwrites it (and vice versa -- the next
+# update-monitor.yml run will overwrite this). The two workflows are not
+# coordinated; whichever ran most recently is what's live.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "enrollment/dashboard/**"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare Pages site from enrollment/dashboard/
+        run: |
+          mkdir -p site
+          cp -r enrollment/dashboard/. site/
+
+      - name: Upload dashboard artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
