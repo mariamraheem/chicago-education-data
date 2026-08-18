@@ -7,14 +7,28 @@
 # the crawler finds on its own, so it acts as a guaranteed fallback.
 #
 # Format: CATEGORY_YEAR: url
-#   - CATEGORY should be one of DISTRICT_MANAGED, STUDENT_BASED, REVENUE,
-#     GENERAL, or OTHER (see scraper.py's classify_filename()), so cleaning
-#     scripts can find files by prefix the same way enrollment's do.
+#   - CATEGORY should be one of DISTRICT_MANAGED, CHARTER_CONTRACT_ALOP,
+#     STUDENT_BASED, REVENUE, GENERAL, or OTHER (see scraper.py's
+#     classify_filename()), so cleaning scripts can find files by prefix the
+#     same way enrollment's do.
 #   - YEAR is the CPS fiscal/budget year (e.g. 2027 for the FY2027 budget).
 #
 # Add a line here any time you spot a document on cps.edu that the crawler
 # missed - no code changes required, the scraper picks up new entries on its
 # next run.
+#
+# DISTRICT_MANAGED = the "School Budget Overview - District Managed Schools"
+# workbook for that year. CHARTER_CONTRACT_ALOP = the companion "School
+# Budget Overview - Charter, Contract, ALOP Schools" workbook. CPS publishes
+# these as two separate files per year, both under budget-<year>/docs/.
 
+DISTRICT_MANAGED_2025: "https://www.cps.edu/globalassets/cps-pages/about-cps/finance/budget/budget-2025/docs/fy2025_budgetoverview_district_management-schools.xlsx"
+CHARTER_CONTRACT_ALOP_2025: "https://www.cps.edu/globalassets/cps-pages/about-cps/finance/budget/budget-2025/docs/fy2025_budget_overview_charter_contract_alop_schools.xlsx"
 DISTRICT_MANAGED_2026: "https://www.cps.edu/globalassets/cps-pages/about-cps/finance/budget/budget-2026/docs/fy2026-budget-overview-district-managed.xlsx"
+CHARTER_CONTRACT_ALOP_2026: "https://www.cps.edu/globalassets/cps-pages/about-cps/finance/budget/budget-2026/docs/fy2026_budget_overview_charter_contract_alop_schools_.xlsx"
 DISTRICT_MANAGED_2027: "https://www.cps.edu/globalassets/cps-pages/about-cps/finance/budget/budget-2027/docs/fy2027_budget_overview_district_managed_schools.xlsx"
+CHARTER_CONTRACT_ALOP_2027: "https://www.cps.edu/globalassets/cps-pages/about-cps/finance/budget/budget-2027/docs/fy2027_budget_overview_charter_contract_alop_schools.xlsx"
+# Every URL above was verified live (returns the actual file, not a 404) --
+# note CPS isn't consistent about hyphens vs underscores vs a trailing
+# underscore before ".xlsx" from one year to the next, which is exactly why
+# these are hardcoded here rather than pattern-generated from the year.

@@ -61,6 +61,11 @@ def classify_filename(filename: str) -> str:
     fn = filename.lower()
     if "district" in fn and "manag" in fn:
         return "DISTRICT_MANAGED"
+    # Checked before the generic "overview" catch-all below -- these files
+    # are literally named "..._budget_overview_charter_contract_alop_..."
+    # so "overview" would otherwise misclassify them as GENERAL.
+    if "charter" in fn or "contract" in fn or "alop" in fn:
+        return "CHARTER_CONTRACT_ALOP"
     if "student" in fn and ("based" in fn or "sbb" in fn):
         return "STUDENT_BASED"
     if "revenue" in fn:

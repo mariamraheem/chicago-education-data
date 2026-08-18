@@ -258,11 +258,31 @@ def clean_general_files() -> pd.DataFrame:
 
     df_general = pd.concat(general_dfs, ignore_index=True)
 
+    # CPS didn't standardize the school-name column header until 2016-2017 --
+    # older years call it "School" (2005-2006, 2011-2012 through 2015-2016)
+    # or "Schools" (2007-2008 through 2010-2011) instead of "School Name".
+    # Without this, every row from those years ends up with a blank
+    # school_name in the dashboard output even though the real value is
+    # sitting right there under a different column name.
+    for alt_col in ("School", "Schools"):
+        if alt_col in df_general.columns:
+            if "School Name" in df_general.columns:
+                df_general["School Name"] = df_general["School Name"].fillna(df_general[alt_col])
+            else:
+                df_general["School Name"] = df_general[alt_col]
+
     grade_map = {str(i): f"Grade {i}" for i in range(1, 13)}
     df_general.rename(columns=grade_map, inplace=True)
 
     cols_to_keep = list(GENERAL_COLS_TO_KEEP) + list(grade_map.values())
     df_general_clean = df_general[[c for c in cols_to_keep if c in df_general.columns]]
+    if "School ID" in df_general_clean.columns:
+        # Some years have blank/subtotal rows in the School ID column, which
+        # forces the whole concatenated column to float64 -- without this,
+        # every ID gets written out as e.g. "400008.0" instead of "400008".
+        df_general_clean["School ID"] = pd.to_numeric(
+            df_general_clean["School ID"], errors="coerce"
+        ).astype("Int64")
     # Broad, case-insensitive "*total*" match on both School Name and
     # Network -- catches "District Total", "Regular School Totals",
     # "Charter Schools Totals", etc., not just the exact phrase "District

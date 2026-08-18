@@ -78,6 +78,13 @@ def build_dashboard_data(source_file: Path = SOURCE_FILE) -> pd.DataFrame:
     )
     long_df.rename(columns=ID_COLUMN_MAP, inplace=True)
 
+    if "school_id" in long_df.columns:
+        # Re-reading the clean CSV loses the nullable-integer dtype 02_clean.py
+        # sets (plain pd.read_csv falls back to float64 whenever a column has
+        # any blank cells), which would otherwise print every ID as e.g.
+        # "400008.0" instead of "400008".
+        long_df["school_id"] = pd.to_numeric(long_df["school_id"], errors="coerce").astype("Int64")
+
     long_df["enrollment"] = pd.to_numeric(long_df["enrollment"], errors="coerce")
     long_df = long_df.dropna(subset=["enrollment"])
     long_df = long_df[long_df["enrollment"] != 0]

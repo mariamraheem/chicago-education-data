@@ -1,34 +1,34 @@
 """
-Clean and combine CPS "District Managed Funds" budget workbooks.
+Clean and combine CPS school budget workbooks -- both "District Managed"
+schools and "Charter, Contract, ALOP" schools, CPS's two per-year budget
+overview files.
 
-IMPORTANT - read this before relying on the output:
-This cleaner was written without ever being able to open a real CPS budget
-workbook (the sandbox that built this pipeline can't reach cps.edu, so the
-actual FY2026/FY2027 "district managed" files were never inspected). Rather
-than guess at CPS's exact column names the way the enrollment cleaners can
-(those were adapted from Mariam's own notebooks, which *had* seen the real
-files), this script uses a generic, defensive approach:
+This cleaner uses a generic, defensive approach rather than assuming any
+particular CPS column layout up front:
 
-  1. For every sheet in every DISTRICT_MANAGED_*.xlsx file, auto-detect the
-     header row as the row (within the first 15) with the most non-blank
-     cells - a reasonable heuristic for government spreadsheets that start
-     with a title/note row or two.
+  1. For every sheet in every DISTRICT_MANAGED_*.xlsx / CHARTER_CONTRACT_ALOP_*.xlsx
+     file, auto-detect the header row as the row (within the first 15) with
+     the most non-blank cells - a reasonable heuristic for government
+     spreadsheets that start with a title/note row or two.
   2. Flatten any multi-level header pandas detects, normalize column names.
   3. Tag every row with its source Year, source file, and sheet name so nothing
      is silently conflated across years/sheets that may not actually line up.
-  4. Concatenate everything into one long table for a first look.
+  4. Concatenate everything into one long table.
+  5. Coalesce the school-identifier column: district-managed sheets call it
+     "School Name", charter/contract/ALOP sheets call it "Name" -- both get
+     folded into a single "School Name" column so downstream filtering
+     (03_build_dashboard_data.py) and the dashboard table treat every school
+     the same way regardless of which workbook it came from.
 
-Treat enrollment/data/clean output as ground truth quality (it mirrors
-Mariam's validated notebooks); treat this budget cleaner's output as a
-first-pass scaffold. After the first real GitHub Actions run downloads and
-processes the actual files, inspect
-budget/data/clean/district_managed_funds_clean.csv and
-budget/data/clean/_column_report.csv (also written below) and tighten the
-column-name standardization the same way enrollment/scripts/clean_general_race.py
-does, once the real headers are known.
+Each workbook also contains a legend/definitions sheet ("Overview" /
+"Overview Definitions") that's just field-name -> description text, not
+budget data -- 03_build_dashboard_data.py drops those rows (anything with no
+School Name) rather than this script, so _column_report.csv still shows you
+everything that was actually found, legend sheet included.
 
 Reads:  budget/data/raw/DISTRICT_MANAGED_*.xls*
-Writes: budget/data/clean/district_managed_funds_clean.csv
+        budget/data/raw/CHARTER_CONTRACT_ALOP_*.xls*
+Writes: budget/data/clean/budget_school_funding_clean.csv
         budget/data/clean/_column_report.csv (what columns were found, by year/sheet)
 """
 
@@ -81,7 +81,7 @@ def extract_year(filename: str) -> str:
     return m.group(1) if m else "Unknown"
 
 
-def read_district_managed_file(file: Path) -> list[pd.DataFrame]:
+def read_budget_workbook(file: Path) -> list[pd.DataFrame]:
     year = extract_year(file.stem)
     frames = []
 
@@ -130,15 +130,31 @@ def build_column_report(frames: list[pd.DataFrame]) -> pd.DataFrame:
 
 if __name__ == "__main__":
     all_frames = []
-    for file in sorted(INPUT_DIR.glob("DISTRICT_MANAGED_*.xls*")):
+    files = sorted(INPUT_DIR.glob("DISTRICT_MANAGED_*.xls*")) + sorted(
+        INPUT_DIR.glob("CHARTER_CONTRACT_ALOP_*.xls*")
+    )
+    for file in files:
         print(f"Reading {file.name} ...")
-        all_frames.extend(read_district_managed_file(file))
+        all_frames.extend(read_budget_workbook(file))
 
     if not all_frames:
-        print("No DISTRICT_MANAGED_*.xls* files found in budget/data/raw - skipping.")
+        print("No DISTRICT_MANAGED_*.xls* or CHARTER_CONTRACT_ALOP_*.xls* files "
+              "found in budget/data/raw - skipping.")
     else:
         combined = pd.concat(all_frames, ignore_index=True, sort=False)
-        out = OUTPUT_DIR / "district_managed_funds_clean.csv"
+
+        # Charter/Contract/ALOP sheets call the school-identifier column
+        # "Name" instead of "School Name" -- fold them into one column so a
+        # school isn't split across two differently-named columns depending
+        # on which workbook it came from.
+        if "Name" in combined.columns:
+            if "School Name" in combined.columns:
+                combined["School Name"] = combined["School Name"].fillna(combined["Name"])
+            else:
+                combined["School Name"] = combined["Name"]
+            combined = combined.drop(columns=["Name"])
+
+        out = OUTPUT_DIR / "budget_school_funding_clean.csv"
         combined.to_csv(out, index=False)
         print(f"Wrote {out} ({len(combined)} rows, {len(combined.columns)} columns)")
 

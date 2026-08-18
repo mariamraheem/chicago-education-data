@@ -65,6 +65,10 @@
         Also require the join key columns to match (school-level merge). Unchecked = match by year only
         (works even if Budget has no per-school identifier yet).
       </label>
+      <p class="text-xs text-gray-400 mt-1">
+        Years are matched by school year, not literal text -- Budget's fiscal year (e.g. FY26) is
+        automatically shifted to the school year it funds (FY26 &rarr; 2025-2026), per CPS's own convention.
+      </p>
     </div>
 
     <button id="mergeBtn" onclick="runMerge()" class="mt-4 px-4 py-2 rounded-lg bg-black text-white text-sm font-medium hover:bg-gray-800" style="display:none">
@@ -195,6 +199,22 @@ function normalizeKey(v) {
   return String(v ?? "").trim().toLowerCase();
 }
 
+// Enrollment's "school_year" is a range like "2025-2026"; Budget's "Year" is
+// a single CPS fiscal year like 2026. Per CPS's own convention, FY<N> is the
+// budget FOR school year (N-1)-N (e.g. FY26 = the 2025-2026 school year), so
+// a plain string match between "2026" and "2025-2026" would never hit.
+// Normalize both sides to the school year's *start* year instead: a range
+// keeps its first year as-is; a bare 4-digit year is treated as a fiscal
+// year and shifted back by one.
+function normalizeYearKey(v) {
+  const s = String(v ?? "").trim();
+  const rangeMatch = s.match(/^(\d{4})\s*-\s*\d{2,4}/);
+  if (rangeMatch) return rangeMatch[1];
+  const fyMatch = s.match(/^(\d{4})$/);
+  if (fyMatch) return String(parseInt(fyMatch[1], 10) - 1);
+  return normalizeKey(s);
+}
+
 function runMerge() {
   const enrollKey = document.getElementById("enrollKeyCol").value;
   const enrollYear = document.getElementById("enrollYearCol").value;
@@ -204,7 +224,7 @@ function runMerge() {
 
   const budgetIndex = new Map();
   BUDGET.forEach(row => {
-    const yearPart = normalizeKey(row[budgetYear]);
+    const yearPart = normalizeYearKey(row[budgetYear]);
     const keyPart = matchKeyToo ? normalizeKey(row[budgetKey]) : "";
     const idx = `${yearPart}|${keyPart}`;
     if (!budgetIndex.has(idx)) budgetIndex.set(idx, []);
@@ -213,7 +233,7 @@ function runMerge() {
 
   MERGED = [];
   ENROLLMENT.forEach(eRow => {
-    const yearPart = normalizeKey(eRow[enrollYear]);
+    const yearPart = normalizeYearKey(eRow[enrollYear]);
     const keyPart = matchKeyToo ? normalizeKey(eRow[enrollKey]) : "";
     const idx = `${yearPart}|${keyPart}`;
     const matches = budgetIndex.get(idx);
