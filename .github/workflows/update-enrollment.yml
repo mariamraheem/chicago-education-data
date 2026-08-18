@@ -44,5 +44,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add enrollment/data enrollment/dashboard
-          git diff --cached --quiet || git commit -m "enrollment: scrape/clean/compile $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          git push
+          git diff --cached --quiet && exit 0
+          git commit -m "enrollment: scrape/clean/compile $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push && exit 0
+            echo "Push attempt $i failed (remote moved) -- retrying..."
+            sleep $((RANDOM % 10 + 5))
+          done
+          echo "::error::Could not push after 5 attempts -- remote kept moving."
+          exit 1
