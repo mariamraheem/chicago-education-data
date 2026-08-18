@@ -1,0 +1,45 @@
+name: Update Enrollment
+
+on:
+  schedule:
+    # Monthly, 1st of the month, 06:00 UTC. CPS only publishes new 20th-day
+    # enrollment reports a few times a year, so most scheduled runs will
+    # find nothing new and commit nothing -- that's expected, not a bug.
+    - cron: "0 6 1 * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-clean-compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Scrape CPS demographics reports
+        run: python enrollment/scripts/01_scrape.py
+
+      - name: Clean GENERAL/RACE files
+        run: python enrollment/scripts/02_clean.py
+
+      - name: Compile network/district aggregates
+        run: python enrollment/scripts/03_compile.py
+
+      - name: Build frontend-ready dashboard data
+        run: python enrollment/scripts/04_build_dashboard_data.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add enrollment/data enrollment/dashboard/enrollment_dashboard_data.csv
+          git diff --cached --quiet || git commit -m "enrollment: scrape/clean/compile $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push
