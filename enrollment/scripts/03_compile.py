@@ -228,6 +228,12 @@ def compile_el_iep() -> None:
         print("No EL_IEP*.xls* files found in enrollment/data/raw - skipping.")
         return
     clean_df = harmonize_network_groups(raw_df)
+    if "Network" in clean_df.columns:
+        # Broad, case-insensitive "*total*" match -- drops aggregate rows
+        # like "District Total", "Charter Total", "Regular School Totals",
+        # etc. Legitimate values like "Regular Educational Units" don't
+        # contain "total" and pass through.
+        clean_df = clean_df[~clean_df["Network"].astype(str).str.contains("total", case=False, na=False)]
     out = OUTPUT_DIR / "enrollment_network_el_iep_aggregate.csv"
     clean_df.to_csv(out, index=False)
     print(f"Wrote {out} ({len(clean_df)} rows)")
@@ -264,6 +270,9 @@ def combine_10_year_race_data(input_dir: Path, prefix="RACE") -> pd.DataFrame:
         "Native American/Alaskan": "NativeAmerican",
         "Asian/Pacific Islander (retired)": "Asian",
     })
+    # Broad, case-insensitive "*total*" match -- drops rows like "District
+    # Total" / "Total" so they aren't charted as if they were a race group.
+    combined_df = combined_df[~combined_df["Race"].astype(str).str.contains("total", case=False, na=False)]
     return combined_df
 
 
@@ -339,7 +348,10 @@ def compile_race_aggregates() -> None:
         df_raw["No"] = pd.to_numeric(df_raw["No"], errors="coerce").fillna(0)
         df_raw["Pct"] = pd.to_numeric(df_raw["Pct"], errors="coerce").fillna(0)
 
-        df_raw = df_raw[~df_raw["Network"].astype(str).str.contains("district total", case=False, na=False)]
+        # Broad, case-insensitive "*total*" match -- not just the exact
+        # phrase "district total" -- so rows like "Charter Total", "Regular
+        # School Totals", "Charter Schools Totals", etc. are dropped too.
+        df_raw = df_raw[~df_raw["Network"].astype(str).str.contains("total", case=False, na=False)]
         df_raw = df_raw[~df_raw["Race"].astype(str).str.contains("20th", case=False, na=False)]
 
         df_networks_clean = df_raw.copy()

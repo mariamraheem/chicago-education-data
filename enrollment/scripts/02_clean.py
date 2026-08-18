@@ -193,10 +193,15 @@ def clean_race_files() -> pd.DataFrame:
     # groupby(axis=1) call.
     df_race_clean = df_race_clean.T.groupby(level=0).sum(min_count=1).T
 
+    # Broad, case-insensitive "*total*" match -- not just the exact phrase
+    # "District Total" -- so aggregate rows like "Charter Total", "Regular
+    # School Totals", "Charter Schools Totals", etc. are dropped too.
+    # Legitimate values like "Regular Educational Units" don't contain
+    # "total" and pass through.
     df_race_clean = df_race_clean[~df_race_clean["School_Name"].astype(str).str.contains(
-        "District Total", case=False, na=False)]
+        "total", case=False, na=False)]
     df_race_clean = df_race_clean[~df_race_clean["Network"].astype(str).str.contains(
-        "Total", case=False, na=False)]
+        "total", case=False, na=False)]
 
     current_cols = [c for c in REORDER_COLUMNS if c in df_race_clean.columns]
     df_race_clean = df_race_clean[current_cols]
@@ -258,8 +263,16 @@ def clean_general_files() -> pd.DataFrame:
 
     cols_to_keep = list(GENERAL_COLS_TO_KEEP) + list(grade_map.values())
     df_general_clean = df_general[[c for c in cols_to_keep if c in df_general.columns]]
+    # Broad, case-insensitive "*total*" match on both School Name and
+    # Network -- catches "District Total", "Regular School Totals",
+    # "Charter Schools Totals", etc., not just the exact phrase "District
+    # Total". Legitimate values like "Regular Educational Units" don't
+    # contain "total" and pass through.
     df_general_clean = df_general_clean[~df_general_clean["School Name"].astype(str).str.contains(
-        "District Total", case=False, na=False)]
+        "total", case=False, na=False)]
+    if "Network" in df_general_clean.columns:
+        df_general_clean = df_general_clean[~df_general_clean["Network"].astype(str).str.contains(
+            "total", case=False, na=False)]
     return df_general_clean
 
 
