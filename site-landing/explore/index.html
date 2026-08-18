@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore &middot; Chicago Education Data</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f7f7f5;
+    }
+    .card { background: white; border: 1px solid #e5e5e5; border-radius: 14px; padding: 22px; }
+    .pill { display:inline-flex; align-items:center; gap:6px; font-size:13px; padding:5px 12px; border-radius:999px; font-weight:500; text-decoration:none; }
+    select, input[type=text] { border: 1px solid #d1d5db; border-radius: 8px; padding: 8px 10px; font-size: 14px; }
+    table { border-collapse: collapse; width: 100%; }
+    th { text-align:left; font-size:12px; color:#666; font-weight:600; text-transform:uppercase; letter-spacing:.04em; padding:12px; border-bottom:1px solid #ddd; cursor:pointer; user-select:none; white-space:nowrap; }
+    th:hover { color:#111; }
+    td { padding:12px; border-bottom:1px solid #eee; font-size:14px; }
+    tr:hover { background:#fafafa; }
+    .step-label { font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:#888; font-weight:600; }
+  </style>
+</head>
+<body>
+<!-- Banner -->
+<div style="background:#1b4332">
+  <div class="max-w-6xl mx-auto px-6 pt-5 pb-7 text-white">
+    <a href="../index.html" class="text-sm text-white/70 hover:text-white">&larr; Chicago Education Data</a>
+    <h1 class="text-3xl font-bold tracking-tight mt-3">Explore</h1>
+    <p class="text-white/80 mt-2 max-w-2xl">
+      Merge Enrollment and Budget data, then build a quick pivot: group by any column,
+      summarize any numeric fields, and optionally compute a ratio like spending per student.
+    </p>
+  </div>
+</div>
+<div class="max-w-6xl mx-auto px-6 py-8">
+
+  <!-- Step 1: Merge -->
+  <div class="card mb-6">
+    <div class="step-label mb-1">Step 1</div>
+    <h2 class="font-semibold text-lg mb-4">Merge sources</h2>
+    <p class="text-sm text-gray-500 mb-4" id="loadStatus">Loading Enrollment and Budget data&hellip;</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="mergeControls" style="display:none">
+      <div>
+        <div class="text-sm font-medium mb-2">Enrollment</div>
+        <label class="block text-xs text-gray-500 mb-1">Join key column</label>
+        <select id="enrollKeyCol" class="w-full mb-3"></select>
+        <label class="block text-xs text-gray-500 mb-1">Year column</label>
+        <select id="enrollYearCol" class="w-full"></select>
+      </div>
+      <div>
+        <div class="text-sm font-medium mb-2">Budget</div>
+        <label class="block text-xs text-gray-500 mb-1">Join key column</label>
+        <select id="budgetKeyCol" class="w-full mb-3"></select>
+        <label class="block text-xs text-gray-500 mb-1">Year column</label>
+        <select id="budgetYearCol" class="w-full"></select>
+      </div>
+    </div>
+
+    <div class="mt-4" id="mergeModeWrap" style="display:none">
+      <label class="inline-flex items-center gap-2 text-sm">
+        <input type="checkbox" id="matchKeyToo">
+        Also require the join key columns to match (school-level merge). Unchecked = match by year only
+        (works even if Budget has no per-school identifier yet).
+      </label>
+    </div>
+
+    <button id="mergeBtn" onclick="runMerge()" class="mt-4 px-4 py-2 rounded-lg bg-black text-white text-sm font-medium hover:bg-gray-800" style="display:none">
+      Merge
+    </button>
+    <p class="text-sm mt-3" id="mergeResult"></p>
+  </div>
+
+  <!-- Step 2: Pivot builder -->
+  <div class="card mb-6" id="pivotCard" style="display:none">
+    <div class="step-label mb-1">Step 2</div>
+    <h2 class="font-semibold text-lg mb-4">Build a pivot</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <div>
+        <label class="block text-xs text-gray-500 mb-1">Group rows by</label>
+        <select id="groupByCol" class="w-full"></select>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <div class="text-xs text-gray-500 mb-1">Value columns (summarized per group)</div>
+      <div id="valueRows"></div>
+      <button onclick="addValueRow()" class="mt-2 text-sm text-blue-700 hover:underline">+ Add value column</button>
+    </div>
+
+    <div class="mt-5 pt-4 border-t">
+      <label class="inline-flex items-center gap-2 text-sm mb-2">
+        <input type="checkbox" id="enableComputed" onchange="toggleComputed()">
+        Add a computed field (e.g. spending per student)
+      </label>
+      <div id="computedControls" class="grid grid-cols-1 md:grid-cols-4 gap-3" style="display:none">
+        <select id="computedNumerator" class="w-full"></select>
+        <select id="computedOperator" class="w-full">
+          <option value="/">&divide; divide</option>
+          <option value="*">&times; multiply</option>
+          <option value="+">+ add</option>
+          <option value="-">&minus; subtract</option>
+        </select>
+        <select id="computedDenominator" class="w-full"></select>
+        <input type="text" id="computedLabel" placeholder="Label (e.g. Spending per student)" class="w-full">
+      </div>
+    </div>
+
+    <button onclick="runPivot()" class="mt-5 px-4 py-2 rounded-lg bg-black text-white text-sm font-medium hover:bg-gray-800">
+      Build pivot
+    </button>
+  </div>
+
+  <!-- Step 3: Results -->
+  <div class="card mb-6" id="chartCard" style="display:none">
+    <div class="step-label mb-1">Step 3</div>
+    <h2 class="font-semibold text-lg mb-4">Result</h2>
+    <div style="height:340px">
+      <canvas id="pivotChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card" id="tableCard" style="display:none">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="font-semibold text-lg">Pivot table</h2>
+      <p id="pivotRowCount" class="text-sm text-gray-500"></p>
+    </div>
+    <div class="overflow-x-auto">
+      <table>
+        <thead id="pivotHead"></thead>
+        <tbody id="pivotBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+<script>
+let ENROLLMENT = [];
+let BUDGET = [];
+let MERGED = [];
+let PIVOT_RESULT = [];
+let pivotChart = null;
+let valueRowCount = 0;
+
+async function init() {
+  try {
+    const [enrollRes, budgetRes] = await Promise.all([
+      fetch("../api/enrollment/dashboard_data.json"),
+      fetch("../api/budget/dashboard_data.json"),
+    ]);
+    ENROLLMENT = enrollRes.ok ? await enrollRes.json() : [];
+    BUDGET = budgetRes.ok ? await budgetRes.json() : [];
+
+    if (!ENROLLMENT.length || !BUDGET.length) {
+      document.getElementById("loadStatus").textContent =
+        `Enrollment: ${ENROLLMENT.length} rows. Budget: ${BUDGET.length} rows. ` +
+        `Both need data before you can merge -- run each source's refresh workflow first.`;
+      return;
+    }
+
+    document.getElementById("loadStatus").textContent =
+      `Loaded ${ENROLLMENT.length.toLocaleString()} enrollment rows and ${BUDGET.length.toLocaleString()} budget rows.`;
+    document.getElementById("mergeControls").style.display = "grid";
+    document.getElementById("mergeModeWrap").style.display = "block";
+    document.getElementById("mergeBtn").style.display = "inline-block";
+
+    fillOptions("enrollKeyCol", Object.keys(ENROLLMENT[0]), guessColumn(ENROLLMENT[0], ["school_id", "school id"]));
+    fillOptions("enrollYearCol", Object.keys(ENROLLMENT[0]), guessColumn(ENROLLMENT[0], ["school_year", "year"]));
+    fillOptions("budgetKeyCol", Object.keys(BUDGET[0]), guessColumn(BUDGET[0], ["school_id", "school id", "unit"]));
+    fillOptions("budgetYearCol", Object.keys(BUDGET[0]), guessColumn(BUDGET[0], ["year"]));
+  } catch (e) {
+    console.error(e);
+    document.getElementById("loadStatus").textContent = "Couldn't load one or both datasets -- see console for details.";
+  }
+}
+
+function guessColumn(row, candidates) {
+  const keys = Object.keys(row);
+  for (const c of candidates) {
+    const match = keys.find(k => k.toLowerCase() === c);
+    if (match) return match;
+  }
+  return keys[0];
+}
+
+function fillOptions(id, columns, selected) {
+  const el = document.getElementById(id);
+  el.innerHTML = columns.map(c => `<option value="${escapeHtml(c)}" ${c === selected ? "selected" : ""}>${escapeHtml(c)}</option>`).join("");
+}
+
+function normalizeKey(v) {
+  return String(v ?? "").trim().toLowerCase();
+}
+
+function runMerge() {
+  const enrollKey = document.getElementById("enrollKeyCol").value;
+  const enrollYear = document.getElementById("enrollYearCol").value;
+  const budgetKey = document.getElementById("budgetKeyCol").value;
+  const budgetYear = document.getElementById("budgetYearCol").value;
+  const matchKeyToo = document.getElementById("matchKeyToo").checked;
+
+  const budgetIndex = new Map();
+  BUDGET.forEach(row => {
+    const yearPart = normalizeKey(row[budgetYear]);
+    const keyPart = matchKeyToo ? normalizeKey(row[budgetKey]) : "";
+    const idx = `${yearPart}|${keyPart}`;
+    if (!budgetIndex.has(idx)) budgetIndex.set(idx, []);
+    budgetIndex.get(idx).push(row);
+  });
+
+  MERGED = [];
+  ENROLLMENT.forEach(eRow => {
+    const yearPart = normalizeKey(eRow[enrollYear]);
+    const keyPart = matchKeyToo ? normalizeKey(eRow[enrollKey]) : "";
+    const idx = `${yearPart}|${keyPart}`;
+    const matches = budgetIndex.get(idx);
+    if (!matches) return;
+    matches.forEach(bRow => {
+      const merged = { ...eRow };
+      Object.keys(bRow).forEach(k => {
+        const outKey = (k in merged) ? `budget_${k}` : k;
+        merged[outKey] = bRow[k];
+      });
+      MERGED.push(merged);
+    });
+  });
+
+  const resultEl = document.getElementById("mergeResult");
+  if (!MERGED.length) {
+    resultEl.innerHTML = `<span style="color:#d03b3b">No matching rows found. ` +
+      (matchKeyToo
+        ? `Try unchecking "school-level merge" to match by year only.`
+        : `Budget data may not cover the same years as Enrollment yet, or may not have per-school data at all (this pipeline currently only cleans district-wide "District Managed Funds" files -- per-school "Student Based Budget" files aren't wired up yet).`) +
+      `</span>`;
+    document.getElementById("pivotCard").style.display = "none";
+    return;
+  }
+  resultEl.innerHTML = `<span style="color:#0ca30c">Merged ${MERGED.length.toLocaleString()} rows.</span>`;
+
+  const columns = Object.keys(MERGED[0]);
+  fillOptions("groupByCol", columns, guessColumn(MERGED[0], ["school_year", "year"]));
+  document.getElementById("valueRows").innerHTML = "";
+  valueRowCount = 0;
+  addValueRow();
+  document.getElementById("pivotCard").style.display = "block";
+}
+
+function numericColumns() {
+  if (!MERGED.length) return [];
+  return Object.keys(MERGED[0]).filter(c => MERGED.some(r => r[c] !== "" && !Number.isNaN(Number(r[c]))));
+}
+
+function addValueRow() {
+  valueRowCount++;
+  const id = valueRowCount;
+  const cols = numericColumns();
+  const div = document.createElement("div");
+  div.className = "flex gap-2 items-center mb-2";
+  div.id = `valueRow${id}`;
+  div.innerHTML = `
+    <select class="value-col flex-1">${cols.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("")}</select>
+    <select class="value-agg">
+      <option value="sum">Sum</option>
+      <option value="avg">Average</option>
+      <option value="count">Count</option>
+      <option value="min">Min</option>
+      <option value="max">Max</option>
+    </select>
+    <button onclick="document.getElementById('valueRow${id}').remove()" class="text-sm text-gray-400 hover:text-red-600">&times;</button>
+  `;
+  document.getElementById("valueRows").appendChild(div);
+  refreshComputedOptions();
+}
+
+function toggleComputed() {
+  const on = document.getElementById("enableComputed").checked;
+  document.getElementById("computedControls").style.display = on ? "grid" : "none";
+  if (on) refreshComputedOptions();
+}
+
+function currentValueLabels() {
+  return Array.from(document.querySelectorAll("#valueRows > div")).map(row => {
+    const col = row.querySelector(".value-col").value;
+    const agg = row.querySelector(".value-agg").value;
+    return `${agg}(${col})`;
+  });
+}
+
+function refreshComputedOptions() {
+  const labels = currentValueLabels();
+  fillOptions("computedNumerator", labels, labels[0]);
+  fillOptions("computedDenominator", labels, labels[1] || labels[0]);
+}
+
+function aggregate(values, agg) {
+  const nums = values.map(Number).filter(v => !Number.isNaN(v));
+  if (agg === "count") return values.length;
+  if (!nums.length) return null;
+  switch (agg) {
+    case "sum": return nums.reduce((a, b) => a + b, 0);
+    case "avg": return nums.reduce((a, b) => a + b, 0) / nums.length;
+    case "min": return Math.min(...nums);
+    case "max": return Math.max(...nums);
+    default: return null;
+  }
+}
+
+function runPivot() {
+  refreshComputedOptions();
+  const groupCol = document.getElementById("groupByCol").value;
+  const valueSpecs = Array.from(document.querySelectorAll("#valueRows > div")).map(row => ({
+    col: row.querySelector(".value-col").value,
+    agg: row.querySelector(".value-agg").value,
+    label: `${row.querySelector(".value-agg").value}(${row.querySelector(".value-col").value})`,
+  }));
+
+  const groups = new Map();
+  MERGED.forEach(row => {
+    const key = row[groupCol] ?? "(blank)";
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(row);
+  });
+
+  PIVOT_RESULT = Array.from(groups.entries()).map(([key, rows]) => {
+    const out = { [groupCol]: key };
+    valueSpecs.forEach(spec => {
+      out[spec.label] = aggregate(rows.map(r => r[spec.col]), spec.agg);
+    });
+    return out;
+  });
+
+  const computedOn = document.getElementById("enableComputed").checked;
+  let computedLabel = null;
+  if (computedOn) {
+    const num = document.getElementById("computedNumerator").value;
+    const den = document.getElementById("computedDenominator").value;
+    const op = document.getElementById("computedOperator").value;
+    const userLabel = document.getElementById("computedLabel").value.trim();
+    computedLabel = userLabel || `${num} ${op} ${den}`;
+    PIVOT_RESULT.forEach(row => {
+      const a = Number(row[num]);
+      const b = Number(row[den]);
+      let val = null;
+      if (!Number.isNaN(a) && !Number.isNaN(b)) {
+        if (op === "/") val = b !== 0 ? a / b : null;
+        else if (op === "*") val = a * b;
+        else if (op === "+") val = a + b;
+        else if (op === "-") val = a - b;
+      }
+      row[computedLabel] = val;
+    });
+  }
+
+  PIVOT_RESULT.sort((a, b) => String(a[groupCol]).localeCompare(String(b[groupCol])));
+
+  renderPivotTable(groupCol);
+  renderPivotChart(groupCol, computedLabel || (valueSpecs[0] && valueSpecs[0].label));
+}
+
+function renderPivotTable(groupCol) {
+  document.getElementById("tableCard").style.display = "block";
+  if (!PIVOT_RESULT.length) return;
+  const headers = Object.keys(PIVOT_RESULT[0]);
+  document.getElementById("pivotHead").innerHTML =
+    `<tr>${headers.map(h => `<th>${escapeHtml(h)}</th>`).join("")}</tr>`;
+  document.getElementById("pivotBody").innerHTML = PIVOT_RESULT
+    .map(row => `<tr>${headers.map(h => `<td>${formatCell(row[h])}</td>`).join("")}</tr>`)
+    .join("");
+  document.getElementById("pivotRowCount").textContent = `${PIVOT_RESULT.length.toLocaleString()} rows`;
+}
+
+function formatCell(v) {
+  if (v === null || v === undefined || v === "") return "—";
+  if (typeof v === "number") return v.toLocaleString(undefined, { maximumFractionDigits: 2 });
+  return escapeHtml(v);
+}
+
+function renderPivotChart(groupCol, valueLabel) {
+  if (pivotChart) pivotChart.destroy();
+  document.getElementById("chartCard").style.display = "block";
+  if (!PIVOT_RESULT.length || !valueLabel) return;
+  const labels = PIVOT_RESULT.map(r => String(r[groupCol]));
+  const data = PIVOT_RESULT.map(r => (typeof r[valueLabel] === "number" ? r[valueLabel] : null));
+  try {
+    pivotChart = new Chart(document.getElementById("pivotChart"), {
+      type: "bar",
+      data: { labels, datasets: [{ label: valueLabel, data, backgroundColor: "#2a78d6" }] },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: { y: { ticks: { callback: v => v.toLocaleString() } } },
+      },
+    });
+  } catch (e) {
+    console.error("chart failed:", e);
+  }
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+init();
+</script>
+</body>
+</html>

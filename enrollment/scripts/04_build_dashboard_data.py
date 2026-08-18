@@ -54,14 +54,15 @@ def build_dashboard_data(source_file: Path = SOURCE_FILE) -> pd.DataFrame:
 
     df = pd.read_csv(source_file)
 
-    # Drop any aggregate row -- "District Total", "Network Total", "Total",
-    # etc. -- so it isn't mistaken for an individual school. 02_clean.py
-    # already drops exact "District Total" rows, but this catches any
-    # "*total*" variant that slips through (case-insensitive).
-    if "School Name" in df.columns:
-        df = df[~df["School Name"].astype(str).str.contains("total", case=False, na=False)]
-        df = df[~df["Network"].astype(str).str.contains("totals", case=False, na=False)]
-        df = df[~df["Network"].astype(str).str.contains("educational units", case=False, na=False)]
+    # Drop any aggregate row -- "District Total", "Regular School Totals",
+    # "Charter Schools Totals", etc. -- so it isn't mistaken for an
+    # individual school or network. 02_clean.py already drops exact
+    # "District Total" rows, but this catches any "*total(s)*" variant in
+    # either column (case-insensitive). Legitimate category values like
+    # "Regular Educational Units" don't contain "total" and pass through.
+    for col in ("School Name", "Network"):
+        if col in df.columns:
+            df = df[~df[col].astype(str).str.contains("total", case=False, na=False)]
 
     id_cols = [c for c in ID_COLUMN_MAP if c in df.columns]
     grade_cols = [c for c in GRADE_COLUMNS if c in df.columns]

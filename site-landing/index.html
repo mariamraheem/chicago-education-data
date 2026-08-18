@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chicago Education Data</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f7f7f5;
+    }
+    .card {
+      background: white;
+      border: 1px solid #e5e5e5;
+      border-radius: 14px;
+      padding: 22px;
+    }
+    .card:hover {
+      border-color: #d4d4d4;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+<!-- Banner -->
+<div style="background:#1b4332">
+  <div class="max-w-5xl mx-auto px-6 pt-8 pb-8 text-white">
+    <h1 class="text-3xl font-bold tracking-tight">Chicago Education Data</h1>
+    <p class="text-white/80 mt-2 max-w-2xl">
+      Automated scraping, cleaning, and compiling of public Chicago Public Schools data.
+      Pick a data source below to explore it, export its data directly, or merge sources
+      together in the pivot explorer.
+    </p>
+    <div class="flex gap-2 mt-4 flex-wrap">
+      <a href="explore/index.html" class="pill" style="background:rgba(255,255,255,.15);color:#fff">
+        &#128200; Open pivot explorer &rarr;
+      </a>
+    </div>
+  </div>
+</div>
+<div class="max-w-5xl mx-auto px-6 py-10">
+  <style>.pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:5px 12px;border-radius:999px;font-weight:500;text-decoration:none}</style>
+  <!-- Overall status -->
+  <div class="card mb-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <div class="text-sm text-gray-500">Site last built</div>
+        <div id="builtAt" class="font-semibold mt-1">—</div>
+      </div>
+      <div class="text-sm text-gray-500 text-right">
+        Data sources: <span id="sourceCount" class="font-semibold text-gray-900">—</span>
+      </div>
+    </div>
+  </div>
+  <!-- Source cards -->
+  <div id="sourceCards" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- populated by JS -->
+  </div>
+  <p class="text-xs text-gray-400 mt-8">
+    "Run refresh" opens the relevant GitHub Actions workflow so you can trigger it manually
+    (this static page can't trigger workflow runs itself -- that would require exposing
+    a GitHub token to every visitor).
+  </p>
+</div>
+<script>
+async function init() {
+  const container = document.getElementById("sourceCards");
+  try {
+    const res = await fetch("./api/manifest.json");
+    if (!res.ok) throw new Error("manifest.json not found");
+    const manifest = await res.json();
+
+    document.getElementById("builtAt").textContent = formatDate(manifest.generated_at);
+    document.getElementById("sourceCount").textContent = manifest.sources.length;
+
+    container.innerHTML = manifest.sources.map(renderCard).join("");
+  } catch (e) {
+    console.error(e);
+    container.innerHTML = `
+      <div class="card md:col-span-2">
+        <p class="text-sm text-gray-600">
+          Couldn't load <code>api/manifest.json</code>. If you're viewing this file directly
+          (not via GitHub Pages), that's expected -- it needs to be served over http(s).
+          Otherwise, run the site-build workflow at least once to generate it.
+        </p>
+      </div>`;
+  }
+}
+
+function renderCard(source) {
+  const hasData = source.has_data;
+  const statusPill = hasData
+    ? `<span class="pill" style="background:#e6f6e6;color:#0ca30c">&#9679; Live</span>`
+    : `<span class="pill" style="background:#fdeeee;color:#d03b3b">&#9679; No data yet</span>`;
+  const rowCount = source.row_count != null ? formatNumber(source.row_count) : "—";
+  const apiLinks = (source.api || []).map(f =>
+    `<a href="${f.url}" class="text-xs text-blue-700 hover:underline" target="_blank" rel="noopener">${escapeHtml(f.label)} (JSON)</a>`
+  ).join("<br>");
+
+  return `
+    <div class="card flex flex-col">
+      <div class="flex items-start justify-between mb-2">
+        <h2 class="font-semibold text-xl">${escapeHtml(source.label)}</h2>
+        ${statusPill}
+      </div>
+      <p class="text-sm text-gray-600 mb-4 flex-1">${escapeHtml(source.description || "")}</p>
+      <div class="grid grid-cols-2 gap-3 text-sm mb-4">
+        <div>
+          <div class="text-xs text-gray-500">Last refreshed</div>
+          <div class="font-medium">${formatDate(source.last_refreshed)}</div>
+        </div>
+        <div>
+          <div class="text-xs text-gray-500">Rows</div>
+          <div class="font-medium">${rowCount}</div>
+        </div>
+      </div>
+      <div class="flex gap-2 mb-4">
+        <a href="${source.tab_url}" class="px-3 py-2 rounded-lg bg-black text-white text-sm font-medium hover:bg-gray-800 flex-1 text-center">
+          View dashboard
+        </a>
+        <a href="${source.refresh_workflow_url}" target="_blank" rel="noopener"
+           class="px-3 py-2 rounded-lg border border-gray-300 bg-white text-sm font-medium hover:bg-gray-50 flex-1 text-center">
+          Run refresh &#8599;
+        </a>
+      </div>
+      ${apiLinks ? `<div class="border-t pt-3"><div class="text-xs text-gray-500 mb-1">Export API</div>${apiLinks}</div>` : ""}
+    </div>`;
+}
+
+function formatDate(iso) {
+  if (!iso) return "—";
+  try {
+    return new Date(iso).toLocaleString();
+  } catch (e) {
+    return iso;
+  }
+}
+
+function formatNumber(n) {
+  return Number(n || 0).toLocaleString();
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+init();
+</script>
+</body>
+</html>

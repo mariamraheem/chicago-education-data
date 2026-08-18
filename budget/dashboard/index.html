@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPS Budget Data</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f7f7f5;
+    }
+    .card {
+      background: white;
+      border: 1px solid #e5e5e5;
+      border-radius: 14px;
+      padding: 22px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th {
+      text-align: left;
+      font-size: 12px;
+      color: #666;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    th:hover {
+      color: #111;
+    }
+    th .sort-arrow {
+      display: inline-block;
+      width: 12px;
+      opacity: .5;
+    }
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+    tr:hover {
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+<!-- Banner -->
+<div style="background:#1b4332">
+  <div class="max-w-7xl mx-auto px-6 pt-5 pb-7 text-white">
+    <a href="../../index.html" class="text-sm text-white/70 hover:text-white">&larr; Chicago Education Data</a>
+    <div class="flex items-start justify-between mt-3 flex-wrap gap-4">
+      <div>
+        <h1 class="text-3xl font-bold tracking-tight">Budget</h1>
+        <p class="text-white/80 mt-2">District Managed Funds</p>
+      </div>
+      <div class="flex gap-3">
+        <a
+          href="https://github.com/mariamraheem/chicago-education-data/actions/workflows/update-budget.yml"
+          target="_blank" rel="noopener"
+          class="px-4 py-2 rounded-lg bg-white text-gray-900 text-sm font-medium hover:bg-gray-100">
+          Run refresh &#8599;
+        </a>
+        <button
+          onclick="downloadCSV()"
+          class="px-4 py-2 rounded-lg border border-white/40 text-white text-sm font-medium hover:bg-white/10">
+          Download CSV
+        </button>
+      </div>
+    </div>
+    <div class="flex gap-2 mt-4 flex-wrap">
+      <a href="../explore/index.html" class="pill" style="background:rgba(255,255,255,.15);color:#fff">
+        &#128200; Merge with Enrollment (Explore) &rarr;
+      </a>
+    </div>
+  </div>
+</div>
+<div class="max-w-7xl mx-auto px-6 py-8">
+  <style>.pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:5px 12px;border-radius:999px;font-weight:500;text-decoration:none}</style>
+  <!-- Status -->
+  <div class="card mb-6">
+    <div class="flex items-center justify-between">
+      <div>
+        <div class="text-sm text-gray-500">
+          Dataset status
+        </div>
+        <div class="flex items-center gap-2 mt-1">
+          <div id="statusDot" class="w-2.5 h-2.5 rounded-full bg-gray-400"></div>
+          <span id="statusText" class="font-semibold">Loading...</span>
+        </div>
+      </div>
+      <div class="text-right">
+        <div class="text-xs text-gray-500">Last refreshed</div>
+        <div id="lastUpdated" class="font-medium">—</div>
+      </div>
+    </div>
+  </div>
+  <!-- KPI cards -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div class="card">
+      <div class="text-sm text-gray-500">Rows</div>
+      <div id="totalRows" class="text-3xl font-bold mt-2">—</div>
+    </div>
+    <div class="card">
+      <div class="text-sm text-gray-500">Budget years covered</div>
+      <div id="totalYears" class="text-3xl font-bold mt-2">—</div>
+    </div>
+    <div class="card">
+      <div class="text-sm text-gray-500">Source files</div>
+      <div id="totalSources" class="text-3xl font-bold mt-2">—</div>
+    </div>
+  </div>
+  <div class="card mb-6" id="scaffoldNotice" style="display:none">
+    <p class="text-sm text-gray-600">
+      This pipeline's cleaner (<code>budget/scripts/02_clean.py</code>) hasn't been validated against a real
+      CPS budget workbook yet, so this table shows exactly what the automated column-detection produced,
+      unfiltered beyond dropping obvious subtotal rows. Once you've confirmed the real column names look right,
+      budget-specific charts (like enrollment's race/EL/IEP breakdowns) can be added here the same way.
+    </p>
+  </div>
+  <!-- Filters -->
+  <div class="card mb-6">
+    <div class="flex flex-col md:flex-row gap-4">
+      <input
+        id="search"
+        type="text"
+        placeholder="Search..."
+        class="border border-gray-300 rounded-lg px-3 py-2 text-sm flex-1"
+        oninput="renderTable()"
+      />
+      <select id="yearFilter" class="border border-gray-300 rounded-lg px-3 py-2 text-sm" onchange="renderTable()">
+        <option value="">All years</option>
+      </select>
+      <select id="sourceFilter" class="border border-gray-300 rounded-lg px-3 py-2 text-sm" onchange="renderTable()">
+        <option value="">All source files</option>
+      </select>
+    </div>
+  </div>
+  <!-- Table -->
+  <div class="card">
+    <div class="flex justify-between items-center mb-4">
+      <div>
+        <h2 class="font-semibold text-lg">Data viewer</h2>
+        <p id="rowCount" class="text-sm text-gray-500"></p>
+      </div>
+    </div>
+    <div class="overflow-x-auto">
+      <table>
+        <thead id="tableHead"></thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+let DATA = [];
+let FILTERED = [];
+let sortColumn = null;
+let sortDirection = "asc";
+
+/*
+ * budget/scripts/03_build_dashboard_data.py writes this file next to
+ * index.html, matching the enrollment dashboard's same-directory pattern.
+ */
+const DATA_SOURCE = "./budget_dashboard_data.csv";
+
+async function refreshData() {
+  setStatus("Loading", "gray");
+  try {
+    const response = await fetch(DATA_SOURCE);
+    if (!response.ok) throw new Error("Could not load budget data");
+    const text = await response.text();
+    DATA = parseCSV(text);
+    if (!DATA.length) {
+      setStatus("No data yet -- run the budget pipeline", "red");
+      document.getElementById("scaffoldNotice").style.display = "block";
+      return;
+    }
+    document.getElementById("scaffoldNotice").style.display = "block";
+    initializeFilters();
+    renderDashboard();
+    setStatus("Dataset loaded", "green");
+    document.getElementById("lastUpdated").textContent = new Date().toLocaleString();
+  } catch (error) {
+    console.error(error);
+    setStatus("Unable to load data", "red");
+  }
+}
+
+function parseCSV(text) {
+  const lines = text.trim().split(/\r?\n/);
+  if (!lines.length || !lines[0]) return [];
+  const headers = lines[0].split(",").map(x => x.trim());
+  return lines.slice(1).map(line => {
+    const values = line.split(",");
+    const row = {};
+    headers.forEach((header, i) => { row[header] = values[i] ?? ""; });
+    return row;
+  });
+}
+
+function initializeFilters() {
+  fillSelect("yearFilter", "All years", uniqueValues(DATA, ["Year"]));
+  fillSelect("sourceFilter", "All source files", uniqueValues(DATA, ["Source_File"]));
+}
+
+function fillSelect(id, allLabel, values) {
+  const el = document.getElementById(id);
+  el.innerHTML = `<option value="">${escapeHtml(allLabel)}</option>`;
+  values.sort().forEach(v => {
+    el.innerHTML += `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`;
+  });
+}
+
+function renderDashboard() {
+  updateKPIs();
+  renderTable();
+}
+
+function updateKPIs() {
+  document.getElementById("totalRows").textContent = formatNumber(DATA.length);
+  document.getElementById("totalYears").textContent = uniqueValues(DATA, ["Year"]).length;
+  document.getElementById("totalSources").textContent = uniqueValues(DATA, ["Source_File"]).length;
+}
+
+function sortRows(rows) {
+  if (!sortColumn) return rows;
+  return [...rows].sort((a, b) => {
+    const av = a[sortColumn] ?? "";
+    const bv = b[sortColumn] ?? "";
+    const an = Number(av);
+    const bn = Number(bv);
+    let cmp;
+    if (av !== "" && bv !== "" && !Number.isNaN(an) && !Number.isNaN(bn)) {
+      cmp = an - bn;
+    } else {
+      cmp = String(av).localeCompare(String(bv));
+    }
+    return sortDirection === "asc" ? cmp : -cmp;
+  });
+}
+
+function setSort(column) {
+  if (sortColumn === column) {
+    sortDirection = sortDirection === "asc" ? "desc" : "asc";
+  } else {
+    sortColumn = column;
+    sortDirection = "asc";
+  }
+  renderTable();
+}
+
+function renderTable() {
+  const search = document.getElementById("search").value.toLowerCase();
+  const year = document.getElementById("yearFilter").value;
+  const source = document.getElementById("sourceFilter").value;
+
+  FILTERED = DATA.filter(row => {
+    const text = Object.values(row).join(" ").toLowerCase();
+    const matchesSearch = !search || text.includes(search);
+    const yearValue = row.Year || "";
+    const sourceValue = row.Source_File || "";
+    return matchesSearch && (!year || yearValue === year) && (!source || sourceValue === source);
+  });
+
+  FILTERED = sortRows(FILTERED);
+
+  const headers = DATA.length ? Object.keys(DATA[0]) : [];
+  document.getElementById("tableHead").innerHTML = `<tr>
+      ${headers.map(h => {
+        const arrow = sortColumn === h ? (sortDirection === "asc" ? "&#9650;" : "&#9660;") : "";
+        return `<th onclick="setSort('${h}')">${escapeHtml(h)} <span class="sort-arrow">${arrow}</span></th>`;
+      }).join("")}
+    </tr>`;
+  document.getElementById("tableBody").innerHTML = FILTERED
+    .slice(0, 500)
+    .map(row => `<tr>${headers.map(h => `<td>${escapeHtml(row[h])}</td>`).join("")}</tr>`)
+    .join("");
+  document.getElementById("rowCount").textContent =
+    `${FILTERED.length.toLocaleString()} rows${FILTERED.length > 500 ? " (showing first 500)" : ""}`;
+}
+
+function downloadCSV() {
+  if (!FILTERED.length) return;
+  const headers = Object.keys(FILTERED[0]);
+  const csv = [
+    headers.join(","),
+    ...FILTERED.map(row => headers.map(header => `"${String(row[header] ?? "").replace(/"/g, '""')}"`).join(",")),
+  ].join("\n");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "cps-budget.csv";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function uniqueValues(rows, columns) {
+  if (!rows.length) return [];
+  const column = columns.find(c => c in rows[0]);
+  if (!column) return [];
+  return [...new Set(rows.map(row => row[column]).filter(Boolean))];
+}
+
+function setStatus(text, color) {
+  const dot = document.getElementById("statusDot");
+  const status = document.getElementById("statusText");
+  status.textContent = text;
+  dot.className = "w-2.5 h-2.5 rounded-full " +
+    (color === "green" ? "bg-green-500" : color === "red" ? "bg-red-500" : "bg-gray-400");
+}
+
+function formatNumber(number) {
+  return Number(number || 0).toLocaleString();
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+refreshData();
+</script>
+</body>
+</html>

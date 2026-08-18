@@ -30,6 +30,17 @@
       letter-spacing: .04em;
       padding: 12px;
       border-bottom: 1px solid #ddd;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    th:hover {
+      color: #111;
+    }
+    th .sort-arrow {
+      display: inline-block;
+      width: 12px;
+      opacity: .5;
     }
     td {
       padding: 12px;
@@ -42,33 +53,40 @@
   </style>
 </head>
 <body>
-<div class="max-w-7xl mx-auto px-6 py-8">
-  <!-- Header -->
-  <div class="flex items-start justify-between mb-8">
-    <div>
-      <div class="text-sm text-gray-500 mb-2">
-        Chicago Education Data
+<!-- Banner -->
+<div style="background:#1b4332">
+  <div class="max-w-7xl mx-auto px-6 pt-5 pb-7 text-white">
+    <a href="../../index.html" class="text-sm text-white/70 hover:text-white">&larr; Chicago Education Data</a>
+    <div class="flex items-start justify-between mt-3 flex-wrap gap-4">
+      <div>
+        <h1 class="text-3xl font-bold tracking-tight">Enrollment</h1>
+        <p class="text-white/80 mt-2">
+          20th Day Membership &middot; Race &middot; English Learners &middot; Students with Disabilities
+        </p>
       </div>
-      <h1 class="text-3xl font-bold tracking-tight">
-        Enrollment
-      </h1>
-      <p class="text-gray-600 mt-2">
-        20th Day Membership
-      </p>
+      <div class="flex gap-3">
+        <a
+          href="https://github.com/mariamraheem/chicago-education-data/actions/workflows/update-enrollment.yml"
+          target="_blank" rel="noopener"
+          class="px-4 py-2 rounded-lg bg-white text-gray-900 text-sm font-medium hover:bg-gray-100">
+          Run refresh &#8599;
+        </a>
+        <button
+          onclick="downloadCSV()"
+          class="px-4 py-2 rounded-lg border border-white/40 text-white text-sm font-medium hover:bg-white/10">
+          Download CSV
+        </button>
+      </div>
     </div>
-    <div class="flex gap-3">
-      <button
-        onclick="refreshData()"
-        class="px-4 py-2 rounded-lg bg-black text-white text-sm font-medium hover:bg-gray-800">
-        Refresh
-      </button>
-      <button
-        onclick="downloadCSV()"
-        class="px-4 py-2 rounded-lg border border-gray-300 bg-white text-sm font-medium hover:bg-gray-50">
-        Download CSV
-      </button>
+    <div class="flex gap-2 mt-4 flex-wrap">
+      <a href="../explore/index.html" class="pill" style="background:rgba(255,255,255,.15);color:#fff">
+        &#128200; Merge with Budget (Explore) &rarr;
+      </a>
     </div>
   </div>
+</div>
+<div class="max-w-7xl mx-auto px-6 py-8">
+  <style>.pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;padding:5px 12px;border-radius:999px;font-weight:500;text-decoration:none}</style>
   <!-- Status -->
   <div class="card mb-6">
     <div class="flex items-center justify-between">
@@ -143,7 +161,7 @@
       </div>
     </div>
   </div>
-  <!-- Chart -->
+  <!-- Enrollment trend -->
   <div class="card mb-6">
     <div class="flex justify-between items-center mb-5">
       <div>
@@ -157,6 +175,43 @@
     </div>
     <div style="height:320px">
       <canvas id="trendChart"></canvas>
+    </div>
+  </div>
+  <!-- Race breakdown + demographics trends -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+    <div class="card">
+      <div class="mb-5">
+        <h2 class="font-semibold text-lg">
+          Race breakdown
+        </h2>
+        <p class="text-sm text-gray-500" id="raceChartSubtitle">
+          District-wide enrollment by race, by year
+        </p>
+      </div>
+      <div style="height:300px">
+        <canvas id="raceChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="mb-5">
+        <h2 class="font-semibold text-lg">
+          Student population trends
+        </h2>
+        <p class="text-sm text-gray-500">
+          English Learners &middot; Students with Disabilities &middot; Economically Disadvantaged
+        </p>
+      </div>
+      <div class="mb-3">
+        <select
+          id="demographicsNetworkFilter"
+          class="border border-gray-300 rounded-lg px-3 py-2 text-sm"
+          onchange="renderDemographicsChart()">
+          <option value="">All networks (weighted average)</option>
+        </select>
+      </div>
+      <div style="height:260px">
+        <canvas id="demographicsChart"></canvas>
+      </div>
     </div>
   </div>
   <!-- Filters -->
@@ -174,6 +229,12 @@
         class="border border-gray-300 rounded-lg px-3 py-2 text-sm"
         onchange="renderTable()">
         <option value="">All years</option>
+      </select>
+      <select
+        id="networkFilter"
+        class="border border-gray-300 rounded-lg px-3 py-2 text-sm"
+        onchange="renderTable()">
+        <option value="">All networks</option>
       </select>
       <select
         id="gradeFilter"
@@ -207,24 +268,48 @@
 <script>
 let DATA = [];
 let FILTERED = [];
+let DEMOGRAPHICS = [];
+let RACE_TREND = [];
 let chart = null;
+let raceChart = null;
+let demographicsChart = null;
+let sortColumn = null;
+let sortDirection = "asc";
+
 /*
- * enrollment/scripts/04_build_dashboard_data.py writes this file next to
- * index.html (and a copy under enrollment/data/clean/ for the pipeline's
- * own history), so a same-directory relative path resolves both when this
- * file is opened straight out of the repo and when it's copied wholesale
- * into monitor/site/enrollment/ and deployed to GitHub Pages.
+ * enrollment/scripts/04_build_dashboard_data.py and
+ * enrollment/scripts/05_build_demographics_data.py write these files next
+ * to index.html, so same-directory relative paths resolve both when this
+ * file is opened straight out of the repo and when it's deployed as-is to
+ * GitHub Pages.
  */
 const DATA_SOURCE = "./enrollment_dashboard_data.csv";
+const DEMOGRAPHICS_SOURCE = "./enrollment_network_demographics.csv";
+const RACE_TREND_SOURCE = "./enrollment_race_trend.csv";
+
+// Validated categorical palette (dataviz skill's reference instance) --
+// fixed hue order (blue, orange, aqua, yellow, magenta, green, violet,
+// red), CVD-safe on adjacent pairs. A 9th series would need to fold into
+// "Other" rather than extend this list with an arbitrary color.
+const RACE_COLORS = [
+  "#2a78d6", "#eb6834", "#1baf7a", "#eda100",
+  "#e87ba4", "#008300", "#4a3aa7", "#e34948",
+];
+
 async function refreshData() {
   setStatus("Loading", "gray");
   try {
-    const response = await fetch(DATA_SOURCE);
-    if (!response.ok) {
-      throw new Error("Could not load enrollment data");
-    }
-    const text = await response.text();
-    DATA = parseCSV(text);
+    const [mainText, demoResult, raceResult] = await Promise.all([
+      fetch(DATA_SOURCE).then(r => {
+        if (!r.ok) throw new Error("Could not load enrollment data");
+        return r.text();
+      }),
+      fetchOptionalCsv(DEMOGRAPHICS_SOURCE),
+      fetchOptionalCsv(RACE_TREND_SOURCE),
+    ]);
+    DATA = parseCSV(mainText);
+    DEMOGRAPHICS = demoResult;
+    RACE_TREND = raceResult;
     initializeFilters();
     renderDashboard();
     setStatus("Dataset loaded", "green");
@@ -235,10 +320,22 @@ async function refreshData() {
     setStatus("Unable to load data", "red");
   }
 }
+
+async function fetchOptionalCsv(url) {
+  try {
+    const r = await fetch(url);
+    if (!r.ok) return [];
+    return parseCSV(await r.text());
+  } catch (e) {
+    return [];
+  }
+}
+
 function parseCSV(text) {
   const lines = text
     .trim()
     .split(/\r?\n/);
+  if (!lines.length || !lines[0]) return [];
   const headers = lines[0]
     .split(",")
     .map(x => x.trim());
@@ -253,50 +350,52 @@ function parseCSV(text) {
       return row;
     });
 }
+
 function initializeFilters() {
-  const years = uniqueValues(DATA, [
-    "school_year",
-    "year",
-    "School Year"
-  ]);
-  const grades = uniqueValues(DATA, [
-    "grade",
-    "Grade"
-  ]);
-  const yearFilter =
-    document.getElementById("yearFilter");
-  const gradeFilter =
-    document.getElementById("gradeFilter");
-  yearFilter.innerHTML =
-    '<option value="">All years</option>';
-  gradeFilter.innerHTML =
-    '<option value="">All grades</option>';
-  years.forEach(year => {
-    yearFilter.innerHTML +=
-      `<option value="${escapeHtml(year)}">${escapeHtml(year)}</option>`;
-  });
-  grades.forEach(grade => {
-    gradeFilter.innerHTML +=
-      `<option value="${escapeHtml(grade)}">${escapeHtml(grade)}</option>`;
-  });
+  const years = uniqueValues(DATA, ["school_year", "year", "School Year"]);
+  const grades = uniqueValues(DATA, ["grade", "Grade"]);
+  const networks = uniqueValues(DATA, ["network", "Network"]);
+
+  fillSelect("yearFilter", "All years", years);
+  fillSelect("gradeFilter", "All grades", grades);
+  fillSelect("networkFilter", "All networks", networks);
+
+  const demoNetworks = uniqueValues(DEMOGRAPHICS, ["network"]);
+  fillSelect("demographicsNetworkFilter", "All networks (weighted average)", demoNetworks);
 }
+
+function fillSelect(id, allLabel, values) {
+  const el = document.getElementById(id);
+  const current = el.value;
+  el.innerHTML = `<option value="">${escapeHtml(allLabel)}</option>`;
+  values.sort().forEach(v => {
+    el.innerHTML += `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`;
+  });
+  if (values.includes(current)) el.value = current;
+}
+
 function renderDashboard() {
+  // Each piece renders independently -- if Chart.js failed to load (CDN
+  // hiccup, ad blocker, offline) or one chart's data is malformed, that
+  // shouldn't take the KPI cards, other charts, or the table down with it.
   updateKPIs();
-  renderChart();
-  renderTable();
+  safely(renderChart);
+  safely(renderRaceChart);
+  safely(renderDemographicsChart);
+  safely(renderTable);
 }
+
+function safely(fn) {
+  try {
+    fn();
+  } catch (e) {
+    console.error(`${fn.name} failed:`, e);
+  }
+}
+
 function updateKPIs() {
-  const schools = uniqueValues(DATA, [
-    "school_id",
-    "School ID",
-    "school_name",
-    "School Name"
-  ]);
-  const years = uniqueValues(DATA, [
-    "school_year",
-    "year",
-    "School Year"
-  ]);
+  const schools = uniqueValues(DATA, ["school_id", "School ID", "school_name", "School Name"]);
+  const years = uniqueValues(DATA, ["school_year", "year", "School Year"]);
   document.getElementById("totalStudents").textContent =
     formatNumber(calculateEnrollment(DATA));
   document.getElementById("totalSchools").textContent =
@@ -306,213 +405,226 @@ function updateKPIs() {
   document.getElementById("latestYear").textContent =
     years.length ? years.sort().at(-1) : "—";
 }
+
 function calculateEnrollment(rows) {
-  const possibleColumns = [
-    "enrollment",
-    "membership",
-    "count",
-    "Enrollment",
-    "Membership"
-  ];
-  const column =
-    possibleColumns.find(c =>
-      rows.length &&
-      Object.prototype.hasOwnProperty.call(rows[0], c)
-    );
+  const possibleColumns = ["enrollment", "membership", "count", "Enrollment", "Membership"];
+  const column = possibleColumns.find(c => rows.length && Object.prototype.hasOwnProperty.call(rows[0], c));
   if (!column) return 0;
-  return rows.reduce(
-    (sum, row) =>
-      sum + (Number(row[column]) || 0),
-    0
-  );
+  return rows.reduce((sum, row) => sum + (Number(row[column]) || 0), 0);
 }
+
 function renderChart() {
-  const yearColumns = [
-    "school_year",
-    "year",
-    "School Year"
-  ];
-  const enrollmentColumns = [
-    "enrollment",
-    "membership",
-    "count",
-    "Enrollment",
-    "Membership"
-  ];
+  const yearColumns = ["school_year", "year", "School Year"];
+  const enrollmentColumns = ["enrollment", "membership", "count", "Enrollment", "Membership"];
   if (!DATA.length) return;
-  const yearColumn =
-    yearColumns.find(c => c in DATA[0]);
-  const enrollmentColumn =
-    enrollmentColumns.find(c => c in DATA[0]);
+  const yearColumn = yearColumns.find(c => c in DATA[0]);
+  const enrollmentColumn = enrollmentColumns.find(c => c in DATA[0]);
   if (!yearColumn || !enrollmentColumn) return;
   const totals = {};
   DATA.forEach(row => {
     const year = row[yearColumn];
-    totals[year] =
-      (totals[year] || 0) +
-      (Number(row[enrollmentColumn]) || 0);
+    totals[year] = (totals[year] || 0) + (Number(row[enrollmentColumn]) || 0);
   });
-  const years =
-    Object.keys(totals).sort();
-  const values =
-    years.map(year => totals[year]);
-  if (chart) {
-    chart.destroy();
+  const years = Object.keys(totals).sort();
+  const values = years.map(year => totals[year]);
+  if (chart) chart.destroy();
+  chart = new Chart(document.getElementById("trendChart"), {
+    type: "line",
+    data: {
+      labels: years,
+      datasets: [{ label: "Enrollment", data: values, tension: 0.25, borderWidth: 2 }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: false, ticks: { callback: value => value.toLocaleString() } } },
+    },
+  });
+}
+
+function renderRaceChart() {
+  if (raceChart) raceChart.destroy();
+  const canvas = document.getElementById("raceChart");
+  if (!RACE_TREND.length) {
+    document.getElementById("raceChartSubtitle").textContent =
+      "Not available yet -- run 03_compile.py/05_build_demographics_data.py to populate this.";
+    return;
   }
-  chart = new Chart(
-    document.getElementById("trendChart"),
-    {
-      type: "line",
-      data: {
-        labels: years,
-        datasets: [
-          {
-            label: "Enrollment",
-            data: values,
-            tension: 0.25,
-            borderWidth: 2
-          }
-        ]
+  const years = [...new Set(RACE_TREND.map(r => r.school_year))].sort();
+  const races = [...new Set(RACE_TREND.map(r => r.race))].sort();
+  const byYearRace = {};
+  RACE_TREND.forEach(r => {
+    byYearRace[`${r.school_year}|${r.race}`] = Number(r.count) || 0;
+  });
+  const datasets = races.map((race, i) => ({
+    label: race,
+    data: years.map(y => byYearRace[`${y}|${race}`] || 0),
+    backgroundColor: RACE_COLORS[i % RACE_COLORS.length],
+  }));
+  raceChart = new Chart(canvas, {
+    type: "bar",
+    data: { labels: years, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: { stacked: true },
+        y: { stacked: true, ticks: { callback: value => value.toLocaleString() } },
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: false,
-            ticks: {
-              callback: value =>
-                value.toLocaleString()
-            }
-          }
-        }
+      plugins: { legend: { position: "bottom", labels: { boxWidth: 12, font: { size: 11 } } } },
+    },
+  });
+}
+
+function renderDemographicsChart() {
+  if (demographicsChart) demographicsChart.destroy();
+  const canvas = document.getElementById("demographicsChart");
+  if (!DEMOGRAPHICS.length) return;
+
+  const networkFilter = document.getElementById("demographicsNetworkFilter").value;
+  const rows = networkFilter
+    ? DEMOGRAPHICS.filter(r => r.network === networkFilter)
+    : DEMOGRAPHICS;
+
+  const metrics = [...new Set(rows.map(r => r.metric))];
+  const years = [...new Set(rows.map(r => r.school_year))].sort();
+
+  const datasets = metrics.map((metric, i) => {
+    const points = years.map(year => {
+      const matching = rows.filter(r => r.school_year === year && r.metric === metric);
+      if (!matching.length) return null;
+      const totalN = matching.reduce((s, r) => s + (Number(r.n) || 0), 0);
+      if (totalN > 0) {
+        const weighted = matching.reduce((s, r) => s + (Number(r.pct) || 0) * (Number(r.n) || 0), 0);
+        return (weighted / totalN) * 100;
       }
-    }
-  );
-}
-function renderTable() {
-  const search =
-    document.getElementById("search")
-      .value
-      .toLowerCase();
-  const year =
-    document.getElementById("yearFilter")
-      .value;
-  const grade =
-    document.getElementById("gradeFilter")
-      .value;
-  FILTERED =
-    DATA.filter(row => {
-      const text =
-        Object.values(row)
-          .join(" ")
-          .toLowerCase();
-      const matchesSearch =
-        !search ||
-        text.includes(search);
-      const yearValue =
-        row.school_year ||
-        row.year ||
-        row["School Year"] ||
-        "";
-      const gradeValue =
-        row.grade ||
-        row.Grade ||
-        "";
-      return (
-        matchesSearch &&
-        (!year || yearValue === year) &&
-        (!grade || gradeValue === grade)
-      );
+      const avg = matching.reduce((s, r) => s + (Number(r.pct) || 0), 0) / matching.length;
+      return avg * 100;
     });
-  const headers =
-    DATA.length
-      ? Object.keys(DATA[0])
-      : [];
-  document.getElementById("tableHead").innerHTML =
-    `<tr>
-      ${headers.map(h => `<th>${escapeHtml(h)}</th>`).join("")}
-    </tr>`;
-  document.getElementById("tableBody").innerHTML =
-    FILTERED
-      .slice(0, 500)
-      .map(row =>
-        `<tr>
-          ${headers.map(h =>
-            `<td>${escapeHtml(row[h])}</td>`
-          ).join("")}
-        </tr>`
-      )
-      .join("");
-  document.getElementById("rowCount").textContent =
-    `${FILTERED.length.toLocaleString()} rows`;
+    return {
+      label: metric,
+      data: points,
+      borderColor: RACE_COLORS[i % RACE_COLORS.length],
+      backgroundColor: RACE_COLORS[i % RACE_COLORS.length],
+      tension: 0.25,
+      borderWidth: 2,
+      spanGaps: true,
+    };
+  });
+
+  demographicsChart = new Chart(canvas, {
+    type: "line",
+    data: { labels: years, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { position: "bottom", labels: { boxWidth: 12, font: { size: 11 } } } },
+      scales: { y: { ticks: { callback: value => value.toFixed(0) + "%" } } },
+    },
+  });
 }
+
+function sortRows(rows) {
+  if (!sortColumn) return rows;
+  const sorted = [...rows].sort((a, b) => {
+    const av = a[sortColumn] ?? "";
+    const bv = b[sortColumn] ?? "";
+    const an = Number(av);
+    const bn = Number(bv);
+    let cmp;
+    if (av !== "" && bv !== "" && !Number.isNaN(an) && !Number.isNaN(bn)) {
+      cmp = an - bn;
+    } else {
+      cmp = String(av).localeCompare(String(bv));
+    }
+    return sortDirection === "asc" ? cmp : -cmp;
+  });
+  return sorted;
+}
+
+function setSort(column) {
+  if (sortColumn === column) {
+    sortDirection = sortDirection === "asc" ? "desc" : "asc";
+  } else {
+    sortColumn = column;
+    sortDirection = "asc";
+  }
+  renderTable();
+}
+
+function renderTable() {
+  const search = document.getElementById("search").value.toLowerCase();
+  const year = document.getElementById("yearFilter").value;
+  const network = document.getElementById("networkFilter").value;
+  const grade = document.getElementById("gradeFilter").value;
+
+  FILTERED = DATA.filter(row => {
+    const text = Object.values(row).join(" ").toLowerCase();
+    const matchesSearch = !search || text.includes(search);
+    const yearValue = row.school_year || row.year || row["School Year"] || "";
+    const networkValue = row.network || row.Network || "";
+    const gradeValue = row.grade || row.Grade || "";
+    return (
+      matchesSearch &&
+      (!year || yearValue === year) &&
+      (!network || networkValue === network) &&
+      (!grade || gradeValue === grade)
+    );
+  });
+
+  FILTERED = sortRows(FILTERED);
+
+  const headers = DATA.length ? Object.keys(DATA[0]) : [];
+  document.getElementById("tableHead").innerHTML = `<tr>
+      ${headers.map(h => {
+        const arrow = sortColumn === h ? (sortDirection === "asc" ? "&#9650;" : "&#9660;") : "";
+        return `<th onclick="setSort('${h}')">${escapeHtml(h)} <span class="sort-arrow">${arrow}</span></th>`;
+      }).join("")}
+    </tr>`;
+  document.getElementById("tableBody").innerHTML = FILTERED
+    .slice(0, 500)
+    .map(row => `<tr>${headers.map(h => `<td>${escapeHtml(row[h])}</td>`).join("")}</tr>`)
+    .join("");
+  document.getElementById("rowCount").textContent =
+    `${FILTERED.length.toLocaleString()} rows${FILTERED.length > 500 ? " (showing first 500)" : ""}`;
+}
+
 function downloadCSV() {
   if (!FILTERED.length) return;
-  const headers =
-    Object.keys(FILTERED[0]);
+  const headers = Object.keys(FILTERED[0]);
   const csv = [
     headers.join(","),
-    ...FILTERED.map(row =>
-      headers
-        .map(header =>
-          `"${String(row[header] ?? "")
-            .replace(/"/g, '""')}"`
-        )
-        .join(",")
-    )
+    ...FILTERED.map(row => headers.map(header => `"${String(row[header] ?? "").replace(/"/g, '""')}"`).join(",")),
   ].join("\n");
-  const blob =
-    new Blob([csv], {
-      type: "text/csv;charset=utf-8;"
-    });
-  const url =
-    URL.createObjectURL(blob);
-  const a =
-    document.createElement("a");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
   a.href = url;
   a.download = "cps-enrollment.csv";
   a.click();
   URL.revokeObjectURL(url);
 }
+
 function uniqueValues(rows, columns) {
   if (!rows.length) return [];
-  const column =
-    columns.find(c => c in rows[0]);
+  const column = columns.find(c => c in rows[0]);
   if (!column) return [];
-  return [
-    ...new Set(
-      rows
-        .map(row => row[column])
-        .filter(Boolean)
-    )
-  ];
+  return [...new Set(rows.map(row => row[column]).filter(Boolean))];
 }
+
 function setStatus(text, color) {
-  const dot =
-    document.getElementById("statusDot");
-  const status =
-    document.getElementById("statusText");
+  const dot = document.getElementById("statusDot");
+  const status = document.getElementById("statusText");
   status.textContent = text;
-  dot.className =
-    "w-2.5 h-2.5 rounded-full " +
-    (
-      color === "green"
-        ? "bg-green-500"
-        : color === "red"
-          ? "bg-red-500"
-          : "bg-gray-400"
-    );
+  dot.className = "w-2.5 h-2.5 rounded-full " +
+    (color === "green" ? "bg-green-500" : color === "red" ? "bg-red-500" : "bg-gray-400");
 }
+
 function formatNumber(number) {
-  return Number(number || 0)
-    .toLocaleString();
+  return Number(number || 0).toLocaleString();
 }
+
 function escapeHtml(value) {
   return String(value ?? "")
     .replace(/&/g, "&amp;")
@@ -521,6 +633,7 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
+
 refreshData();
 </script>
 </body>
