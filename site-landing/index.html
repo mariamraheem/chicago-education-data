@@ -112,7 +112,10 @@ function renderCard(source) {
         <h2 class="font-semibold text-xl">${escapeHtml(source.label)}</h2>
         ${statusPill}
       </div>
-      <p class="text-sm text-gray-600 mb-4 flex-1">${escapeHtml(source.description || "")}</p>
+      <div class="flex-1 mb-4">
+        <p class="text-sm text-gray-600">${escapeHtml(source.description || "")}</p>
+        ${source.headline ? `<p class="text-sm font-medium text-gray-900 mt-2">${escapeHtml(source.headline)}</p>` : ""}
+      </div>
       <div class="grid grid-cols-2 gap-3 text-sm mb-4">
         <div>
           <div class="text-xs text-gray-500">Last refreshed</div>
