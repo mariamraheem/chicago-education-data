@@ -56,7 +56,7 @@
 <!-- Banner -->
 <div style="background:#1b4332">
   <div class="max-w-7xl mx-auto px-6 pt-5 pb-7 text-white">
-    <a href="../../index.html" class="text-sm text-white/70 hover:text-white">&larr; Chicago Education Data</a>
+    <a href="../index.html" class="text-sm text-white/70 hover:text-white">&larr; Chicago Education Data</a>
     <div class="flex items-start justify-between mt-3 flex-wrap gap-4">
       <div>
         <h1 class="text-3xl font-bold tracking-tight">Enrollment</h1>
@@ -122,27 +122,29 @@
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
     <div class="card">
       <div class="text-sm text-gray-500">
-        Students
+        Students <span id="studentsAsOf" class="text-gray-400"></span>
       </div>
       <div
         id="totalStudents"
         class="text-3xl font-bold mt-2">
         —
       </div>
+      <div id="totalStudentsDelta" class="text-xs mt-1 text-gray-500">&nbsp;</div>
     </div>
     <div class="card">
       <div class="text-sm text-gray-500">
-        Schools
+        Schools <span id="schoolsAsOf" class="text-gray-400"></span>
       </div>
       <div
         id="totalSchools"
         class="text-3xl font-bold mt-2">
         —
       </div>
+      <div id="totalSchoolsDelta" class="text-xs mt-1 text-gray-500">&nbsp;</div>
     </div>
     <div class="card">
       <div class="text-sm text-gray-500">
-        School years
+        School years on record
       </div>
       <div
         id="schoolYears"
@@ -158,6 +160,25 @@
         id="latestYear"
         class="text-3xl font-bold mt-2">
         —
+      </div>
+    </div>
+  </div>
+  <!-- Highlights: quick, auto-generated takeaways so a new data drop is -->
+  <!-- worth something at a glance, before anyone touches a filter. -->
+  <div class="card mb-6" id="highlightsCard" style="display:none">
+    <div class="mb-5">
+      <h2 class="font-semibold text-lg">Highlights</h2>
+      <p class="text-sm text-gray-500" id="highlightsSubtitle">Auto-generated from the latest data drop</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6" id="highlightStats"></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <div class="text-sm font-medium text-gray-700 mb-2">Biggest gains &middot; <span id="moversYearLabel1"></span></div>
+        <div id="topGainers" class="text-sm divide-y divide-gray-100"></div>
+      </div>
+      <div>
+        <div class="text-sm font-medium text-gray-700 mb-2">Biggest declines &middot; <span id="moversYearLabel2"></span></div>
+        <div id="topDecliners" class="text-sm divide-y divide-gray-100"></div>
       </div>
     </div>
   </div>
@@ -413,6 +434,7 @@ function renderDashboard() {
   // hiccup, ad blocker, offline) or one chart's data is malformed, that
   // shouldn't take the KPI cards, other charts, or the table down with it.
   updateKPIs();
+  safely(renderHighlights);
   safely(renderChart);
   safely(renderRaceChart);
   safely(renderDemographicsChart);
@@ -427,24 +449,161 @@ function safely(fn) {
   }
 }
 
+const YEAR_COLUMNS = ["school_year", "year", "School Year"];
+const ENROLLMENT_COLUMNS = ["enrollment", "membership", "count", "Enrollment", "Membership"];
+const SCHOOL_KEY_COLUMNS = ["school_id", "School ID"];
+const SCHOOL_NAME_COLUMNS = ["school_name", "School Name"];
+
+function colFor(row, candidates) {
+  return candidates.find(c => row && c in row);
+}
+
+// KPIs are scoped to the latest school year on record, not summed across
+// all 20+ years -- a district-wide running total across two decades isn't
+// a meaningful "current students" figure, and made this card easy to
+// misread. "School years on record" (below) still shows the full span.
 function updateKPIs() {
-  const schools = uniqueValues(DATA, ["school_id", "School ID", "school_name", "School Name"]);
-  const years = uniqueValues(DATA, ["school_year", "year", "School Year"]);
-  document.getElementById("totalStudents").textContent =
-    formatNumber(calculateEnrollment(DATA));
-  document.getElementById("totalSchools").textContent =
-    formatNumber(schools.length);
-  document.getElementById("schoolYears").textContent =
-    years.length;
-  document.getElementById("latestYear").textContent =
-    years.length ? years.sort().at(-1) : "—";
+  if (!DATA.length) return;
+  const yearCol = colFor(DATA[0], YEAR_COLUMNS);
+  const years = yearCol ? [...new Set(DATA.map(r => r[yearCol]))].sort() : [];
+  const latestYear = years.length ? years.at(-1) : null;
+  const prevYear = years.length > 1 ? years.at(-2) : null;
+
+  const latestRows = latestYear ? DATA.filter(r => r[yearCol] === latestYear) : DATA;
+  const prevRows = prevYear ? DATA.filter(r => r[yearCol] === prevYear) : [];
+
+  const schoolKeyCol = colFor(DATA[0], [...SCHOOL_KEY_COLUMNS, ...SCHOOL_NAME_COLUMNS]);
+  const latestSchools = schoolKeyCol ? new Set(latestRows.map(r => r[schoolKeyCol]).filter(Boolean)).size : 0;
+  const prevSchools = schoolKeyCol && prevYear ? new Set(prevRows.map(r => r[schoolKeyCol]).filter(Boolean)).size : null;
+
+  const latestStudents = calculateEnrollment(latestRows);
+  const prevStudents = prevYear ? calculateEnrollment(prevRows) : null;
+
+  document.getElementById("totalStudents").textContent = formatNumber(latestStudents);
+  document.getElementById("studentsAsOf").textContent = latestYear ? `(${latestYear})` : "";
+  document.getElementById("totalStudentsDelta").innerHTML = deltaHtml(latestStudents, prevStudents, prevYear);
+
+  document.getElementById("totalSchools").textContent = formatNumber(latestSchools);
+  document.getElementById("schoolsAsOf").textContent = latestYear ? `(${latestYear})` : "";
+  document.getElementById("totalSchoolsDelta").innerHTML = deltaHtml(latestSchools, prevSchools, prevYear);
+
+  document.getElementById("schoolYears").textContent = years.length;
+  document.getElementById("latestYear").textContent = latestYear || "—";
+}
+
+function deltaHtml(current, previous, prevYear) {
+  if (previous === null || previous === undefined || !prevYear) return "&nbsp;";
+  const diff = current - previous;
+  const pct = previous ? (diff / previous) * 100 : 0;
+  const arrow = diff > 0 ? "&#9650;" : diff < 0 ? "&#9660;" : "&#9679;";
+  const sign = diff > 0 ? "+" : "";
+  return `${arrow} ${sign}${formatNumber(diff)} (${sign}${pct.toFixed(1)}%) vs ${prevYear}`;
 }
 
 function calculateEnrollment(rows) {
-  const possibleColumns = ["enrollment", "membership", "count", "Enrollment", "Membership"];
-  const column = possibleColumns.find(c => rows.length && Object.prototype.hasOwnProperty.call(rows[0], c));
+  const column = colFor(rows[0], ENROLLMENT_COLUMNS);
   if (!column) return 0;
   return rows.reduce((sum, row) => sum + (Number(row[column]) || 0), 0);
+}
+
+// Auto-generated "so what" summary of the two most recent school years --
+// the point is that a new monthly data drop is worth a glance without
+// anyone manually poking at filters first.
+function schoolTotalsForYear(rows, yearCol, year, keyCol, nameCol, enrollCol) {
+  const totals = new Map();
+  rows.forEach(r => {
+    if (r[yearCol] !== year) return;
+    const key = r[keyCol];
+    if (!key) return;
+    const entry = totals.get(key) || { name: r[nameCol] || key, total: 0 };
+    entry.total += Number(r[enrollCol]) || 0;
+    totals.set(key, entry);
+  });
+  return totals;
+}
+
+function renderHighlights() {
+  const card = document.getElementById("highlightsCard");
+  if (!DATA.length) { card.style.display = "none"; return; }
+  const yearCol = colFor(DATA[0], YEAR_COLUMNS);
+  const enrollCol = colFor(DATA[0], ENROLLMENT_COLUMNS);
+  const keyCol = colFor(DATA[0], SCHOOL_KEY_COLUMNS);
+  const nameCol = colFor(DATA[0], SCHOOL_NAME_COLUMNS);
+  if (!yearCol || !enrollCol || !keyCol) { card.style.display = "none"; return; }
+
+  const years = [...new Set(DATA.map(r => r[yearCol]))].sort();
+  if (years.length < 2) { card.style.display = "none"; return; }
+  const latestYear = years.at(-1);
+  const prevYear = years.at(-2);
+
+  const latestTotals = schoolTotalsForYear(DATA, yearCol, latestYear, keyCol, nameCol, enrollCol);
+  const prevTotals = schoolTotalsForYear(DATA, yearCol, prevYear, keyCol, nameCol, enrollCol);
+
+  const districtLatest = [...latestTotals.values()].reduce((s, e) => s + e.total, 0);
+  const districtPrev = [...prevTotals.values()].reduce((s, e) => s + e.total, 0);
+  const districtDiff = districtLatest - districtPrev;
+  const districtPct = districtPrev ? (districtDiff / districtPrev) * 100 : 0;
+
+  // Only schools present in both years get a "mover" -- otherwise a
+  // brand-new school's first-year enrollment would show up as a giant
+  // fake "gain" against a nonexistent prior-year baseline of zero.
+  const moves = [];
+  latestTotals.forEach((entry, key) => {
+    const prevEntry = prevTotals.get(key);
+    if (!prevEntry) return;
+    moves.push({
+      name: entry.name,
+      diff: entry.total - prevEntry.total,
+      pct: prevEntry.total ? ((entry.total - prevEntry.total) / prevEntry.total) * 100 : null,
+    });
+  });
+  const gainers = [...moves].filter(m => m.diff > 0).sort((a, b) => b.diff - a.diff).slice(0, 5);
+  const decliners = [...moves].filter(m => m.diff < 0).sort((a, b) => a.diff - b.diff).slice(0, 5);
+
+  const opened = [...latestTotals.keys()].filter(k => !prevTotals.has(k)).length;
+  const closed = [...prevTotals.keys()].filter(k => !latestTotals.has(k)).length;
+
+  const stats = [
+    {
+      label: `District enrollment change`,
+      value: `${districtDiff >= 0 ? "+" : ""}${formatNumber(districtDiff)}`,
+      sub: `${districtDiff >= 0 ? "+" : ""}${districtPct.toFixed(1)}% &middot; ${formatNumber(districtLatest)} total in ${latestYear}`,
+    },
+    { label: "Schools newly reporting", value: formatNumber(opened), sub: `in ${latestYear}, not in ${prevYear}` },
+    { label: "Schools no longer reporting", value: formatNumber(closed), sub: `in ${prevYear}, not in ${latestYear}` },
+  ];
+
+  document.getElementById("highlightStats").innerHTML = stats.map(s => `
+    <div class="rounded-lg border border-gray-100 bg-gray-50 px-4 py-3">
+      <div class="text-xs text-gray-500">${s.label}</div>
+      <div class="text-xl font-semibold mt-1">${s.value}</div>
+      <div class="text-xs text-gray-500 mt-0.5">${s.sub}</div>
+    </div>`).join("");
+
+  const rangeLabel = `${prevYear} &rarr; ${latestYear}`;
+  document.getElementById("moversYearLabel1").innerHTML = rangeLabel;
+  document.getElementById("moversYearLabel2").innerHTML = rangeLabel;
+  document.getElementById("topGainers").innerHTML = moverRows(gainers);
+  document.getElementById("topDecliners").innerHTML = moverRows(decliners);
+  document.getElementById("highlightsSubtitle").textContent =
+    `Comparing the two most recent school years on record: ${prevYear} vs ${latestYear}.`;
+
+  card.style.display = "block";
+}
+
+function moverRows(list) {
+  if (!list.length) {
+    return `<p class="text-gray-400 text-sm py-2">Not enough overlapping schools to compare.</p>`;
+  }
+  return list.map(m => {
+    const sign = m.diff >= 0 ? "+" : "";
+    const arrow = m.diff >= 0 ? "&#9650;" : "&#9660;";
+    const pctText = m.pct === null ? "" : ` (${sign}${m.pct.toFixed(1)}%)`;
+    return `<div class="flex items-center justify-between py-2">
+      <span class="text-gray-800 truncate pr-3">${escapeHtml(m.name)}</span>
+      <span class="text-gray-600 whitespace-nowrap text-xs">${arrow} ${sign}${formatNumber(m.diff)}${pctText}</span>
+    </div>`;
+  }).join("");
 }
 
 function renderChart() {
