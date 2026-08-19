@@ -45,32 +45,29 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="mergeControls" style="display:none">
       <div>
         <div class="text-sm font-medium mb-2">Enrollment</div>
-        <label class="block text-xs text-gray-500 mb-1">School column</label>
+        <label class="block text-xs text-gray-500 mb-1">Join key column</label>
         <select id="enrollKeyCol" class="w-full mb-3"></select>
         <label class="block text-xs text-gray-500 mb-1">Year column</label>
         <select id="enrollYearCol" class="w-full"></select>
       </div>
       <div>
         <div class="text-sm font-medium mb-2">Budget</div>
-        <label class="block text-xs text-gray-500 mb-1">School column</label>
+        <label class="block text-xs text-gray-500 mb-1">Join key column</label>
         <select id="budgetKeyCol" class="w-full mb-3"></select>
         <label class="block text-xs text-gray-500 mb-1">Year column</label>
         <select id="budgetYearCol" class="w-full"></select>
       </div>
     </div>
 
-    <div class="mt-4 text-xs text-gray-400" id="mergeModeWrap" style="display:none">
-      <p>
-        Enrollment is one row per school <em>per grade</em> per year -- before merging, we roll it up to one
-        row per school per year (summing enrollment across grades), then join that against Budget's one
-        row per school per year. That keeps the merge to roughly one output row per school-year instead of
-        multiplying every grade row by every budget line.
-      </p>
-      <p class="mt-1">
+    <div class="mt-4" id="mergeModeWrap" style="display:none">
+      <label class="inline-flex items-center gap-2 text-sm">
+        <input type="checkbox" id="matchKeyToo">
+        Also require the join key columns to match (school-level merge). Unchecked = match by year only
+        (works even if Budget has no per-school identifier yet).
+      </label>
+      <p class="text-xs text-gray-400 mt-1">
         Years are matched by school year, not literal text -- Budget's fiscal year (e.g. FY26) is
         automatically shifted to the school year it funds (FY26 &rarr; 2025-2026), per CPS's own convention.
-        School names are matched case/whitespace-insensitively, but CPS doesn't guarantee identical spelling
-        across the two sources, so not every school will find a match -- see the match rate below.
       </p>
     </div>
 
@@ -174,14 +171,9 @@ async function init() {
     document.getElementById("mergeModeWrap").style.display = "block";
     document.getElementById("mergeBtn").style.display = "inline-block";
 
-    // Default to the *name* columns, not school_id -- Budget has no numeric
-    // school ID to match against, only "School Name". Defaulting the
-    // enrollment side to school_id meant the two key columns never lined
-    // up out of the box (comparing an ID against a name), silently
-    // producing zero matches unless someone noticed and fixed it by hand.
-    fillOptions("enrollKeyCol", Object.keys(ENROLLMENT[0]), guessColumn(ENROLLMENT[0], ["school_name", "school name", "school_id", "school id"]));
+    fillOptions("enrollKeyCol", Object.keys(ENROLLMENT[0]), guessColumn(ENROLLMENT[0], ["school_id", "school id"]));
     fillOptions("enrollYearCol", Object.keys(ENROLLMENT[0]), guessColumn(ENROLLMENT[0], ["school_year", "year"]));
-    fillOptions("budgetKeyCol", Object.keys(BUDGET[0]), guessColumn(BUDGET[0], ["school name", "school_name", "school_id", "school id", "unit"]));
+    fillOptions("budgetKeyCol", Object.keys(BUDGET[0]), guessColumn(BUDGET[0], ["school_id", "school id", "unit"]));
     fillOptions("budgetYearCol", Object.keys(BUDGET[0]), guessColumn(BUDGET[0], ["year"]));
   } catch (e) {
     console.error(e);
@@ -223,54 +215,29 @@ function normalizeYearKey(v) {
   return normalizeKey(s);
 }
 
-// Enrollment is one row per school PER GRADE per year -- joining that
-// straight against Budget's one-row-per-school-per-year on year alone
-// (the old default) produced a full cartesian product: every grade row
-// paired with every budget row for that year. For ~113k enrollment rows
-// x ~1.9k budget rows that's several million meaningless output rows,
-// which is what made this feature unusable. Rolling enrollment up to one
-// row per school per year first (summing across grades) keeps the join
-// to roughly 1:1 -- a merge someone can actually read.
-function aggregateEnrollmentBySchoolYear(enrollKey, enrollYear) {
-  const groups = new Map();
-  ENROLLMENT.forEach(row => {
-    const yearRaw = row[enrollYear];
-    const keyRaw = row[enrollKey];
-    if (!yearRaw || !keyRaw) return;
-    const idx = `${normalizeYearKey(yearRaw)}|${normalizeKey(keyRaw)}`;
-    if (!groups.has(idx)) {
-      groups.set(idx, { [enrollYear]: yearRaw, [enrollKey]: keyRaw, enrollment: 0 });
-    }
-    const enrollCol = Object.keys(row).find(c => c.toLowerCase() === "enrollment");
-    groups.get(idx).enrollment += Number(row[enrollCol]) || 0;
-  });
-  return groups;
-}
-
 function runMerge() {
   const enrollKey = document.getElementById("enrollKeyCol").value;
   const enrollYear = document.getElementById("enrollYearCol").value;
   const budgetKey = document.getElementById("budgetKeyCol").value;
   const budgetYear = document.getElementById("budgetYearCol").value;
-
-  const enrollAgg = aggregateEnrollmentBySchoolYear(enrollKey, enrollYear);
+  const matchKeyToo = document.getElementById("matchKeyToo").checked;
 
   const budgetIndex = new Map();
   BUDGET.forEach(row => {
-    const yearRaw = row[budgetYear];
-    const keyRaw = row[budgetKey];
-    if (!yearRaw || !keyRaw) return;
-    const idx = `${normalizeYearKey(yearRaw)}|${normalizeKey(keyRaw)}`;
+    const yearPart = normalizeYearKey(row[budgetYear]);
+    const keyPart = matchKeyToo ? normalizeKey(row[budgetKey]) : "";
+    const idx = `${yearPart}|${keyPart}`;
     if (!budgetIndex.has(idx)) budgetIndex.set(idx, []);
     budgetIndex.get(idx).push(row);
   });
 
   MERGED = [];
-  let matchedGroups = 0;
-  enrollAgg.forEach((eRow, idx) => {
+  ENROLLMENT.forEach(eRow => {
+    const yearPart = normalizeYearKey(eRow[enrollYear]);
+    const keyPart = matchKeyToo ? normalizeKey(eRow[enrollKey]) : "";
+    const idx = `${yearPart}|${keyPart}`;
     const matches = budgetIndex.get(idx);
     if (!matches) return;
-    matchedGroups++;
     matches.forEach(bRow => {
       const merged = { ...eRow };
       Object.keys(bRow).forEach(k => {
@@ -282,22 +249,16 @@ function runMerge() {
   });
 
   const resultEl = document.getElementById("mergeResult");
-  const schoolYearCount = enrollAgg.size;
   if (!MERGED.length) {
-    resultEl.innerHTML = `<span style="color:#d03b3b">No matching school-years found ` +
-      `(0 of ${schoolYearCount.toLocaleString()} enrollment school-years matched a budget row). ` +
-      `Check that the School and Year columns picked above are really the ones that identify a school in ` +
-      `each source -- Budget currently only covers FY2025&ndash;FY2027.</span>`;
+    resultEl.innerHTML = `<span style="color:#d03b3b">No matching rows found. ` +
+      (matchKeyToo
+        ? `Try unchecking "school-level merge" to match by year only.`
+        : `Budget data may not cover the same years as Enrollment yet, or may not have per-school data at all (this pipeline currently only cleans district-wide "District Managed Funds" files -- per-school "Student Based Budget" files aren't wired up yet).`) +
+      `</span>`;
     document.getElementById("pivotCard").style.display = "none";
     return;
   }
-  const matchPct = ((matchedGroups / schoolYearCount) * 100).toFixed(0);
-  resultEl.innerHTML = `<span style="color:#0ca30c">Merged into ${MERGED.length.toLocaleString()} rows ` +
-    `(matched ${matchedGroups.toLocaleString()} of ${schoolYearCount.toLocaleString()} enrollment ` +
-    `school-years &mdash; ${matchPct}% &mdash; to a budget row).</span> ` +
-    `<span class="text-gray-400">That overall rate looks low mostly because Enrollment goes back to 1999 ` +
-    `while Budget only covers FY2025&ndash;FY2027 so far &mdash; within the years both sources actually cover, ` +
-    `the match rate is much higher.</span>`;
+  resultEl.innerHTML = `<span style="color:#0ca30c">Merged ${MERGED.length.toLocaleString()} rows.</span>`;
 
   const columns = Object.keys(MERGED[0]);
   fillOptions("groupByCol", columns, guessColumn(MERGED[0], ["school_year", "year"]));

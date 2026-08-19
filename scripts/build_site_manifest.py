@@ -90,66 +90,10 @@ def csv_to_json_rows(path: Path) -> list[dict]:
         return list(csv.DictReader(f))
 
 
-def _safe_float(value: str | None) -> float:
-    try:
-        return float(value) if value not in (None, "") else 0.0
-    except ValueError:
-        return 0.0
-
-
-def enrollment_headline(rows: list[dict]) -> str | None:
-    """One-line year-over-year takeaway for the landing page card -- so a
-    new data drop is worth something at a glance, before anyone opens the
-    dashboard. Mirrors the enrollment dashboard's own Highlights math
-    (sum "enrollment" per school_year, compare the latest two years)."""
-    totals: dict[str, float] = {}
-    for row in rows:
-        year = row.get("school_year")
-        if not year:
-            continue
-        totals[year] = totals.get(year, 0.0) + _safe_float(row.get("enrollment"))
-    years = sorted(totals)
-    if len(years) < 2:
-        return None
-    latest, prev = years[-1], years[-2]
-    diff = totals[latest] - totals[prev]
-    pct = (diff / totals[prev] * 100) if totals[prev] else 0.0
-    arrow = "▲" if diff > 0 else "▼" if diff < 0 else "●"
-    sign = "+" if diff > 0 else ""
-    return f"{arrow} {sign}{diff:,.0f} students ({sign}{pct:.1f}%) vs {prev}"
-
-
-def budget_headline(rows: list[dict]) -> str | None:
-    """Same idea for Budget: unique schools budgeted, latest fiscal year
-    vs. the one before it."""
-    counts: dict[str, set[str]] = {}
-    for row in rows:
-        year = row.get("Year")
-        name = row.get("School Name")
-        if not year or not name:
-            continue
-        counts.setdefault(year, set()).add(name)
-    years = sorted(counts)
-    if len(years) < 2:
-        return None
-    latest, prev = years[-1], years[-2]
-    diff = len(counts[latest]) - len(counts[prev])
-    arrow = "▲" if diff > 0 else "▼" if diff < 0 else "●"
-    sign = "+" if diff > 0 else ""
-    return f"{arrow} {sign}{diff} schools budgeted vs FY{prev} (FY{latest}: {len(counts[latest])})"
-
-
-HEADLINE_FUNCS = {
-    "enrollment": enrollment_headline,
-    "budget": budget_headline,
-}
-
-
 def build_domain(domain: Domain, generated_at: str) -> dict:
     out_dir = API_DIR / domain.id
     files_meta = []
     primary_row_count = None
-    headline = None
 
     for i, data_file in enumerate(domain.data_files):
         source_path = domain.source_dir / data_file.filename
@@ -167,17 +111,10 @@ def build_domain(domain: Domain, generated_at: str) -> dict:
         })
         if i == 0:
             primary_row_count = len(rows)
-            headline_fn = HEADLINE_FUNCS.get(domain.id)
-            if headline_fn:
-                try:
-                    headline = headline_fn(rows)
-                except Exception:
-                    headline = None
 
     return {
         "id": domain.id,
         "label": domain.label,
-        "headline": headline,
         "description": domain.description,
         "tab_url": domain.tab_url,
         "refresh_workflow_url": domain.refresh_workflow_url,
