@@ -64,7 +64,7 @@
 <!-- Banner -->
 <div style="background:#1b4332">
   <div class="max-w-7xl mx-auto px-6 pt-5 pb-7 text-white">
-    <a href="../../index.html" class="text-sm text-white/70 hover:text-white">&larr; Chicago Education Data</a>
+    <a href="../index.html" class="text-sm text-white/70 hover:text-white">&larr; Chicago Education Data</a>
     <div class="flex items-start justify-between mt-3 flex-wrap gap-4">
       <div>
         <h1 class="text-3xl font-bold tracking-tight">Budget</h1>
@@ -116,8 +116,9 @@
   <!-- KPI cards -->
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
     <div class="card">
-      <div class="text-sm text-gray-500">Schools covered</div>
+      <div class="text-sm text-gray-500">Schools covered <span id="schoolsAsOf" class="text-gray-400"></span></div>
       <div id="totalSchools" class="text-3xl font-bold mt-2">—</div>
+      <div id="totalSchoolsDelta" class="text-xs mt-1 text-gray-500">&nbsp;</div>
     </div>
     <div class="card">
       <div class="text-sm text-gray-500" id="districtManagedLabel">District managed</div>
@@ -130,6 +131,25 @@
     <div class="card">
       <div class="text-sm text-gray-500">Latest budget year</div>
       <div id="latestYear" class="text-3xl font-bold mt-2">—</div>
+    </div>
+  </div>
+  <!-- Highlights: quick, auto-generated takeaways so a new budget drop is -->
+  <!-- worth something at a glance, before anyone touches a filter. -->
+  <div class="card mb-6" id="highlightsCard" style="display:none">
+    <div class="mb-5">
+      <h2 class="font-semibold text-lg">Highlights</h2>
+      <p class="text-sm text-gray-500" id="highlightsSubtitle">Auto-generated from the latest data drop</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6" id="highlightStats"></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <div class="text-sm font-medium text-gray-700 mb-2">Biggest enrollment gains &middot; <span id="moversYearLabel1"></span></div>
+        <div id="topGainers" class="text-sm divide-y divide-gray-100"></div>
+      </div>
+      <div>
+        <div class="text-sm font-medium text-gray-700 mb-2">Biggest enrollment declines &middot; <span id="moversYearLabel2"></span></div>
+        <div id="topDecliners" class="text-sm divide-y divide-gray-100"></div>
+      </div>
     </div>
   </div>
   <!-- Schools by category, by year -->
@@ -399,6 +419,7 @@ function renderDashboard() {
   // chart's data is malformed, that shouldn't take the KPI cards, other
   // charts, or the table down with it.
   updateKPIs();
+  safely(renderHighlights);
   safely(renderCategoryChart);
   safely(renderEnrollmentChart);
   safely(renderNetworkChart);
@@ -413,15 +434,27 @@ function safely(fn) {
   }
 }
 
+// "Schools covered" is scoped to the latest budget year, not a
+// three-year-deduplicated count -- a school budgeted in all three years
+// was being counted once, which understated the real per-year figure and
+// didn't line up with the District Managed / Charter counts next to it
+// (which were already latest-year-only).
 function updateKPIs() {
   const years = uniqueValues(DATA, ["Year"]).sort();
   const latestYear = years.length ? years.at(-1) : null;
-  const schools = uniqueValues(DATA, ["School Name"]);
-
-  document.getElementById("totalSchools").textContent = formatNumber(schools.length);
-  document.getElementById("latestYear").textContent = latestYear ? `FY${latestYear}` : "—";
+  const prevYear = years.length > 1 ? years.at(-2) : null;
 
   const latestRows = latestYear ? DATA.filter(r => r.Year === latestYear) : DATA;
+  const prevRows = prevYear ? DATA.filter(r => r.Year === prevYear) : [];
+
+  const latestSchools = new Set(latestRows.map(r => r["School Name"]).filter(Boolean)).size;
+  const prevSchools = prevYear ? new Set(prevRows.map(r => r["School Name"]).filter(Boolean)).size : null;
+
+  document.getElementById("totalSchools").textContent = formatNumber(latestSchools);
+  document.getElementById("schoolsAsOf").textContent = latestYear ? `(FY${latestYear})` : "";
+  document.getElementById("totalSchoolsDelta").innerHTML = deltaHtml(latestSchools, prevSchools, prevYear ? `FY${prevYear}` : null);
+  document.getElementById("latestYear").textContent = latestYear ? `FY${latestYear}` : "—";
+
   const districtCount = latestRows.filter(r => categoryOf(r) === "District Managed").length;
   const charterCount = latestRows.filter(r => categoryOf(r) === "Charter, Contract & ALOP").length;
 
@@ -431,6 +464,111 @@ function updateKPIs() {
     latestYear ? `Charter/Contract/ALOP (FY${latestYear})` : "Charter / Contract / ALOP";
   document.getElementById("districtManagedCount").textContent = formatNumber(districtCount);
   document.getElementById("charterCount").textContent = formatNumber(charterCount);
+}
+
+function deltaHtml(current, previous, prevLabel) {
+  if (previous === null || previous === undefined || !prevLabel) return "&nbsp;";
+  const diff = current - previous;
+  const pct = previous ? (diff / previous) * 100 : 0;
+  const arrow = diff > 0 ? "&#9650;" : diff < 0 ? "&#9660;" : "&#9679;";
+  const sign = diff > 0 ? "+" : "";
+  return `${arrow} ${sign}${formatNumber(diff)} (${sign}${pct.toFixed(1)}%) vs ${prevLabel}`;
+}
+
+// Auto-generated "so what" summary of the two most recent budget years --
+// same idea as the enrollment dashboard's Highlights card, so a new
+// budget drop is worth a glance before anyone touches a filter.
+function renderHighlights() {
+  const card = document.getElementById("highlightsCard");
+  if (!DATA.length) { card.style.display = "none"; return; }
+  const years = uniqueValues(DATA, ["Year"]).sort();
+  if (years.length < 2) { card.style.display = "none"; return; }
+  const latestYear = years.at(-1);
+  const prevYear = years.at(-2);
+  const headers = Object.keys(DATA[0]);
+
+  const latestRows = DATA.filter(r => r.Year === latestYear);
+  const prevRows = DATA.filter(r => r.Year === prevYear);
+
+  const latestByName = new Map(latestRows.map(r => [r["School Name"], r]));
+  const prevByName = new Map(prevRows.map(r => [r["School Name"], r]));
+
+  const districtLatest = latestRows.reduce((s, r) => s + (rowEnrollment(r, headers) || 0), 0);
+  const districtPrev = prevRows.reduce((s, r) => s + (rowEnrollment(r, headers) || 0), 0);
+  const districtDiff = districtLatest - districtPrev;
+  const districtPct = districtPrev ? (districtDiff / districtPrev) * 100 : 0;
+
+  const schoolCountDiff =
+    new Set(latestRows.map(r => r["School Name"]).filter(Boolean)).size -
+    new Set(prevRows.map(r => r["School Name"]).filter(Boolean)).size;
+
+  const opened = [...latestByName.keys()].filter(k => k && !prevByName.has(k)).length;
+  const closed = [...prevByName.keys()].filter(k => k && !latestByName.has(k)).length;
+
+  const stats = [
+    {
+      label: "Enrollment covered, change",
+      value: `${districtDiff >= 0 ? "+" : ""}${formatNumber(districtDiff)}`,
+      sub: `${districtDiff >= 0 ? "+" : ""}${districtPct.toFixed(1)}% &middot; ${formatNumber(districtLatest)} total in FY${latestYear}`,
+    },
+    {
+      label: "Schools budgeted, change",
+      value: `${schoolCountDiff >= 0 ? "+" : ""}${formatNumber(schoolCountDiff)}`,
+      sub: `FY${prevYear} &rarr; FY${latestYear}`,
+    },
+    { label: "Newly budgeted / dropped", value: `${formatNumber(opened)} / ${formatNumber(closed)}`, sub: `new in FY${latestYear} / gone since FY${prevYear}` },
+  ];
+
+  document.getElementById("highlightStats").innerHTML = stats.map(s => `
+    <div class="rounded-lg border border-gray-100 bg-gray-50 px-4 py-3">
+      <div class="text-xs text-gray-500">${s.label}</div>
+      <div class="text-xl font-semibold mt-1">${s.value}</div>
+      <div class="text-xs text-gray-500 mt-0.5">${s.sub}</div>
+    </div>`).join("");
+
+  // Movers: only schools present in both years, so a school's first
+  // budget year doesn't show up as a fake "gain" against a zero baseline.
+  const moves = [];
+  latestByName.forEach((row, name) => {
+    if (!name) return;
+    const prevRow = prevByName.get(name);
+    if (!prevRow) return;
+    const latestVal = rowEnrollment(row, headers);
+    const prevVal = rowEnrollment(prevRow, headers);
+    if (latestVal === null || prevVal === null) return;
+    moves.push({
+      name,
+      diff: latestVal - prevVal,
+      pct: prevVal ? ((latestVal - prevVal) / prevVal) * 100 : null,
+    });
+  });
+  const gainers = [...moves].filter(m => m.diff > 0).sort((a, b) => b.diff - a.diff).slice(0, 5);
+  const decliners = [...moves].filter(m => m.diff < 0).sort((a, b) => a.diff - b.diff).slice(0, 5);
+
+  const rangeLabel = `FY${prevYear} &rarr; FY${latestYear}`;
+  document.getElementById("moversYearLabel1").innerHTML = rangeLabel;
+  document.getElementById("moversYearLabel2").innerHTML = rangeLabel;
+  document.getElementById("topGainers").innerHTML = moverRows(gainers);
+  document.getElementById("topDecliners").innerHTML = moverRows(decliners);
+  document.getElementById("highlightsSubtitle").textContent =
+    `Comparing the two most recent budget years on record: FY${prevYear} vs FY${latestYear}.`;
+
+  card.style.display = "block";
+}
+
+function moverRows(list) {
+  if (!list.length) {
+    return `<p class="text-gray-400 text-sm py-2">Not enough overlapping schools to compare.</p>`;
+  }
+  return list.map(m => {
+    const sign = m.diff >= 0 ? "+" : "";
+    const arrow = m.diff >= 0 ? "&#9650;" : "&#9660;";
+    const pctText = m.pct === null ? "" : ` (${sign}${m.pct.toFixed(1)}%)`;
+    return `<div class="flex items-center justify-between py-2">
+      <span class="text-gray-800 truncate pr-3">${escapeHtml(m.name)}</span>
+      <span class="text-gray-600 whitespace-nowrap text-xs">${arrow} ${sign}${formatNumber(m.diff)}${pctText}</span>
+    </div>`;
+  }).join("");
 }
 
 function renderCategoryChart() {
