@@ -1,0 +1,32 @@
+dataset_id: yrbs
+title: CDC Youth Risk Behavior Survey (Chicago, Illinois, national)
+domain: yrbs
+description: >-
+  Historic high school YRBS microdata and weighted prevalence estimates for Chicago,
+  Illinois and the U.S., from CDC's combined (SADC) datasets.
+source:
+  url: https://www.cdc.gov/yrbs/data/index.html
+  publisher: Centers for Disease Control and Prevention
+  source_type: fixed_width_ascii_with_sas_layout
+  metadata_status: verified_from_scraper
+refresh:
+  cadence: biennial
+  manual_refresh_eligible: true
+  metadata_status: verified
+ingestion:
+  method: yrbs/scripts/01_scrape.py then 02_compile.py
+  expected_file_types: [dat, sas]
+  metadata_status: verified
+schema:
+  grain: geography_year_indicator_group (prevalence); student (microdata)
+  primary_keys: [geography, year, indicator, group_type, group]
+  time_field: year
+  geography_or_school_identifiers: [geography, sitecode]
+  metadata_status: verified
+public_output:
+  path: yrbs/data/clean/
+  format: csv, parquet
+  metadata_status: verified
+governance:
+  pii_assessment: public_use_deidentified_cdc_files
+  public_use_notes: Estimates with n < 100 are flagged suppress=True and should not be reported.

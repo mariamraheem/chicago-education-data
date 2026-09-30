@@ -1,0 +1,54 @@
+name: Update 5Essentials
+
+on:
+  schedule:
+    # 07:00 UTC on the 1st of Jul-Oct, when new CPS 5Essentials results post.
+    - cron: "0 7 1 7-10 *"
+  workflow_dispatch:
+    inputs:
+      years:
+        description: "Survey years to pull, space-separated (blank = latest 5)"
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Scrape 5Essentials (all schools, all measures)
+        run: |
+          if [ -n "${{ inputs.years }}" ]; then
+            python five_essentials/scripts/01_scrape.py --years ${{ inputs.years }}
+          else
+            python five_essentials/scripts/01_scrape.py
+          fi
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add five_essentials/data
+          git diff --cached --quiet && exit 0
+          git commit -m "5essentials: scrape $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push && exit 0
+            echo "Push attempt $i failed (remote moved) -- retrying..."
+            sleep $((RANDOM % 10 + 5))
+          done
+          echo "::error::Could not push after 5 attempts -- remote kept moving."
+          exit 1
