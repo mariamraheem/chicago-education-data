@@ -5,6 +5,8 @@ lxml>=5.0
 openpyxl>=3.1
 xlrd>=2.0
 PyYAML>=6.0
+scipy>=1.11
+pyarrow>=14.0
 
 # Only needed to run the dashboards in enrollment/apps/ locally - not used
 # by the scraper/clean/compile scripts or the GitHub Actions workflows.

@@ -1,0 +1,373 @@
+geography,indicator,indicator_label,1991,1993,1995,1997,1999,2001,2003,2005,2007,2009,2011,2013,2015,2017,2019,2021,2023,2025
+Chicago,qn10,Texted or e-mailed while driving a car or other vehicle,,,,,,,,,,,,39.9,,27.4,28.4,27.2,,
+Chicago,qn11,Carried a weapon on school property,,9.9,10.9,12.4,10.8,7.8,6.2,5.5,5.7,7.5,4.7,4.8,,3.4,3.6,2.8,2.3,2.2
+Chicago,qn12,Carried a gun,,,,,,,,,,,,,,7.2,6.8,,,
+Chicago,qn13,Did not go to school because they felt unsafe at school or on their way to or from school,,17.5,17.0,13.9,12.7,16.0,13.6,10.5,12.3,15.1,10.8,12.9,,10.0,12.8,14.3,13.8,11.8
+Chicago,qn14,Were threatened or injured with a weapon on school property,,12.2,13.3,12.8,13.8,14.8,11.9,9.3,12.8,13.2,11.1,9.1,,7.7,9.5,6.5,10.0,8.0
+Chicago,qn15,Were in a physical fight,51.3,43.7,41.9,40.7,41.4,40.8,42.6,42.7,39.8,41.6,39.3,,,24.7,20.5,15.9,16.8,13.8
+Chicago,qn16,Were in a physical fight on school property,,18.3,19.1,17.9,17.9,18.5,19.3,19.5,17.4,20.6,17.7,16.9,,10.0,9.1,5.4,8.0,7.1
+Chicago,qn17,"Ever saw someone get physically attacked, beaten, stabbed, or shot in their neighborhood",,,,,,,,,,,,,,,,39.5,40.8,34.4
+Chicago,qn18,Were ever physically forced to have sexual intercourse,,,,,,10.3,8.4,9.4,11.3,9.0,9.3,8.8,,7.8,10.2,4.8,6.0,4.2
+Chicago,qn19,Experienced sexual violence,,,,,,,,,,,,,,14.1,13.1,8.4,9.7,6.0
+Chicago,qn20,Experienced sexual dating violence,,,,,,,,,,,,9.1,,4.4,6.2,6.9,5.9,4.6
+Chicago,qn21,Experienced physical dating violence,,,,,,,,,,,,12.3,,8.7,10.6,7.4,7.3,8.9
+Chicago,qn22,Felt that they were ever treated badly or unfairly in school because of their race or ethnicity,,,,,,,,,,,,,,,,,31.0,27.6
+Chicago,qn23,Were bullied on school property,,,,,,,,,,11.1,12.8,13.0,,15.2,12.0,8.2,12.6,10.8
+Chicago,qn24,Were electronically bullied,,,,,,,,,,,11.5,10.5,,12.1,11.0,10.7,12.3,8.1
+Chicago,qn25,Did something to purposely hurt themselves without wanting to die,,,,,,,,,,,18.1,19.9,,,,,19.2,12.4
+Chicago,qn26,Felt sad or hopeless,,,,,30.2,34.1,31.1,28.0,30.0,30.5,30.3,32.5,,34.7,38.2,43.0,40.6,28.8
+Chicago,qn27,Seriously considered attempting suicide,25.0,18.9,18.2,17.7,14.4,17.3,13.5,12.9,13.4,13.3,15.5,15.5,,18.0,16.6,15.6,15.7,8.2
+Chicago,qn28,Made a plan about how they would attempt suicide,17.6,15.0,14.8,14.5,12.3,15.3,11.2,10.6,10.4,10.4,13.9,13.9,,14.8,13.4,13.3,12.1,6.2
+Chicago,qn29,Actually attempted suicide,9.6,10.8,13.2,12.1,9.0,11.8,12.1,8.6,10.1,13.3,15.8,9.9,,12.3,10.2,8.0,7.3,4.8
+Chicago,qn30,"Had a suicide attempt that resulted in an injury, poisoning, or overdose that had to be treated by a doctor or nurse",3.5,4.6,5.0,4.2,3.0,2.7,4.7,3.4,1.8,5.9,5.6,3.5,,5.1,3.4,1.8,2.0,1.5
+Chicago,qn31,Ever smoked a cigarette,72.4,64.7,65.3,70.5,69.1,64.5,61.6,61.8,57.6,50.3,51.1,45.2,,27.3,15.9,,,
+Chicago,qn32,Smoked a cigarette before age 13 years,,,,,,,,,,,,,,9.9,6.9,5.7,4.1,3.9
+Chicago,qn33,Currently smoked cigarettes,16.3,19.4,23.1,26.8,29.0,24.7,16.9,14.4,13.2,12.5,13.6,10.7,,6.0,3.9,1.1,2.0,2.7
+Chicago,qn34,Smoked more than 10 cigarettes per day,8.0,6.9,7.6,4.8,7.3,7.0,6.8,6.1,7.7,5.1,3.1,5.2,,5.9,,,,
+Chicago,qn35,Ever used an electronic vapor product,,,,,,,,,,,,,,36.6,41.3,,,
+Chicago,qn36,Currently used an electronic vapor product,,,,,,,,,,,,,,6.6,12.4,10.3,12.6,12.9
+Chicago,qn37,"Usually got their electronic vapor products by buying them themselves in a convenience store, supermarket, discount store, or gas station",,,,,,,,,,,,,,,,,4.2,2.4
+Chicago,qn38,Currently used smokeless tobacco,,,,,,,,,,,,,,,,,,3.7
+Chicago,qn39,Currently smoked cigars,,,,,15.3,14.1,15.6,13.0,11.9,13.1,13.0,9.5,,7.2,5.5,1.1,,
+Chicago,qn40,Had their first drink of alcohol before age 13 years,30.9,28.3,32.5,35.0,29.9,32.4,31.6,25.3,25.1,22.4,26.4,20.8,,16.8,16.5,14.4,14.3,10.3
+Chicago,qn41,Currently drank alcohol,42.1,39.2,37.4,36.9,39.4,42.3,42.8,43.4,38.9,37.5,37.7,37.3,,23.9,26.0,19.8,19.2,17.0
+Chicago,qn42,Reported that the largest number of drinks they had in a row was 10 or more,,,,,,,,,,,,3.3,,1.4,1.6,,,
+Chicago,qn43,Usually got the alcohol they drank by someone giving it to them,,,,,,,,,38.9,34.3,33.3,31.2,,43.1,38.6,,,
+Chicago,qn44,Ever used marijuana,26.7,26.6,33.7,44.7,46.1,49.3,45.4,44.9,44.0,41.0,42.6,50.0,,43.8,38.8,29.5,29.3,25.4
+Chicago,qn45,Tried marijuana for the first time before age 13 years,9.4,6.8,9.8,12.5,13.2,15.6,12.7,13.0,13.0,9.6,11.9,13.2,,8.1,7.3,6.6,4.3,3.9
+Chicago,qn46,Currently used marijuana,11.8,14.3,18.9,23.6,27.3,28.7,22.8,22.5,21.7,22.2,25.0,28.5,,24.7,23.4,18.9,16.6,14.1
+Chicago,qn47,Ever took prescription pain medicine without a doctor's prescription or differently than how a doctor told them to use it,,,,,,,,,,,,,,15.0,16.6,11.3,11.8,6.7
+Chicago,qn48,Ever used cocaine,4.3,4.0,5.8,5.1,5.1,4.4,5.6,4.2,5.9,6.7,5.9,7.1,,6.6,6.3,1.7,1.2,1.5
+Chicago,qn49,Ever used inhalants,,,14.5,13.0,8.5,6.5,7.2,7.0,9.6,9.9,10.7,9.9,,9.7,10.7,5.1,4.2,2.1
+Chicago,qn50,Ever used heroin,,,,,3.1,2.5,3.7,2.0,3.7,4.7,3.9,4.1,,4.9,5.1,1.1,0.6,0.7
+Chicago,qn51,Ever used methamphetamines,,,,,4.2,2.8,3.7,1.5,4.7,4.3,3.4,3.7,,4.7,4.9,0.9,0.7,0.8
+Chicago,qn52,Ever used ecstasy,,,,,,,5.3,3.3,6.4,6.5,6.9,7.8,,5.8,6.7,2.6,1.6,1.3
+Chicago,qn53,Ever injected any illegal drug,,,3.5,2.4,2.5,2.2,1.5,2.0,2.4,3.8,3.4,2.6,,4.1,4.3,0.9,0.6,0.6
+Chicago,qn54,Ever had sexual intercourse,64.3,62.1,55.8,53.9,57.6,58.1,55.1,56.9,56.9,53.6,52.2,51.8,,39.0,31.1,23.7,27.0,25.5
+Chicago,qn55,Had sexual intercourse for the first time before age 13 years,24.2,17.2,16.2,12.8,18.3,17.2,13.2,10.4,11.5,12.0,11.9,9.6,,5.4,3.1,3.2,2.3,1.5
+Chicago,qn56,Had sexual intercourse with four or more persons during their life,29.8,26.7,20.5,19.9,25.1,22.5,19.6,18.0,18.1,19.5,17.5,16.4,,9.8,5.4,4.9,4.6,3.5
+Chicago,qn57,Were currently sexually active,44.9,45.7,39.2,37.7,42.0,40.9,42.3,43.3,39.8,39.3,37.8,36.8,,28.6,20.4,15.5,18.5,15.5
+Chicago,qn58,Drank alcohol or used drugs before last sexual intercourse,16.5,13.1,14.9,19.1,20.5,23.7,20.7,14.6,12.5,18.1,21.3,18.8,,14.1,15.3,,10.1,15.6
+Chicago,qn59,Used a condom during last sexual intercourse,50.3,63.9,69.1,67.0,69.7,70.0,66.6,68.9,67.8,65.1,64.3,61.3,,53.5,60.3,58.9,53.3,54.3
+Chicago,qn60,Used birth control pills before last sexual intercourse with opposite-sex partner,,,,,,,,,,,,,,,,7.0,14.9,17.6
+Chicago,qn64,Described themselves as slightly or very overweight,26.0,28.5,24.4,24.1,25.3,28.6,27.4,26.9,29.2,26.8,25.7,28.5,,33.5,35.7,,,
+Chicago,qn65,Were trying to lose weight,35.3,37.2,37.9,40.1,37.8,43.6,43.7,46.4,45.4,45.1,45.9,46.6,,48.9,52.1,,,
+Chicago,qn66,Did not eat fruit,,,,,17.4,16.2,24.6,17.2,17.8,19.9,15.1,11.1,,11.8,12.6,14.8,8.9,9.0
+Chicago,qn67,Did not eat salad,,,,,45.3,42.7,50.5,48.6,49.4,51.0,49.3,48.0,,47.2,49.6,,,
+Chicago,qn68,Did not eat potatoes,,,,,34.7,37.5,37.3,39.9,41.2,43.4,39.1,39.7,,41.9,43.5,,,
+Chicago,qn69,Did not eat carrots,,,,,58.6,63.9,64.6,65.5,65.0,64.2,62.3,60.2,,58.4,55.4,,,
+Chicago,qn7,Did not always wear a seat belt,89.0,84.0,86.6,86.4,77.7,79.2,66.2,61.4,54.7,59.5,60.6,56.8,,58.7,54.9,,,
+Chicago,qn70,Did not eat other vegetables,,,,,23.0,24.6,32.0,29.6,26.3,32.5,27.4,26.3,,27.5,27.3,,,
+Chicago,qn71,"Did not drink a can, bottle, or glass of soda or pop",,,,,,,,,19.1,21.1,17.9,21.6,,26.4,28.7,34.1,32.9,31.9
+Chicago,qn72,Did not eat breakfast,,,,,,,,,,,,21.4,,19.6,17.7,25.5,22.0,24.2
+Chicago,qn73,Were physically active at least 60 minutes per day on 5 or more days,,,,,,,,,28.8,32.3,34.2,35.4,,36.5,32.5,32.5,37.5,39.9
+Chicago,qn74,Attended physical education (PE) classes on 1 or more days,87.9,92.6,89.8,90.2,81.6,70.5,58.5,63.2,61.1,60.1,60.5,58.7,,69.5,70.2,,,
+Chicago,qn75,Played on at least one sports team,,,,,50.0,54.1,51.9,50.2,51.6,52.2,53.9,50.0,,50.8,52.2,,,
+Chicago,qn76,Had a concussion from playing a sport or being physically active,,,,,,,,,,,,,,,,10.7,11.8,
+Chicago,qn77,Used social media several times,,,,,,,,,,,,,,,,,82.5,81.0
+Chicago,qn78,Were ever tested for human immunodeficiency virus (HIV),,,,,,,,,,,,25.1,,19.0,13.9,6.3,9.1,7.0
+Chicago,qn79,"Were tested for a sexually transmitted transmitted infection (STI) other than HIV, such as chlamydia or gonorrhea)",,,,,,,,,,,,,,,15.2,4.3,7.1,4.4
+Chicago,qn8,Rode with a driver who had been drinking alcohol,37.4,35.7,35.2,34.1,33.1,34.0,32.5,31.9,29.5,31.5,33.2,30.5,,23.5,21.4,,,
+Chicago,qn80,Saw a dentist,,,,,,,,,,,,64.6,,67.7,70.2,65.0,67.8,66.5
+Chicago,qn81,Reported that their mental health was most of the time or always not good,,,,,,,,,,,,,,,,29.0,27.7,20.3
+Chicago,qn82,"Most of the time or always got the kind of help they needed when feeling sad, empty, hopeless, angry, or anxious",,,,,,,,,,,,,,,,,,17.2
+Chicago,qn83,Got 8 or more hours of sleep,,,,,,,,,,,,,,17.0,20.1,20.8,20.3,25.9
+Chicago,qn84,Experience unstable housing,,,,,,,,,,,,,,,,,,2.2
+Chicago,qn85,"Reported their family sometimes, most of the time, or always worried that their food would run out before  they got money to buy more",,,,,,,,,,,,,,,,,,10.1
+Chicago,qn86,"Reported sometimes, most of the time, or always the food their family bought ran out and they did not have money to buy more",,,,,,,,,,,,,,,,,,6.9
+Chicago,qn9,Drove a car or other vehicle when they had been drinking alcohol,,,,,,,,,,,,,,5.4,4.9,,,
+Chicago,qnbcnone,Did not use any method to prevent pregnancy during last sexual intercourse with an opposite-sex partner,,,,,,,,,,,,,,,,13.1,19.2,18.1
+Chicago,qnbk7day,Ate breakfast on all 7 days,,,,,,,,,,,,23.9,,23.9,25.0,21.2,24.0,23.2
+Chicago,qnclose2people,Strongly agree or agree that they feel close to people at their school,,,,,,,,,,,,,,,65.8,60.4,59.7,62.7
+Chicago,qnconcentrating,"Have serious difficulty concentrating, remembering, or making decisions",,,,,,,,,,,,,,,,,45.4,35.5
+Chicago,qnconpp,Used a condom as the primary method to prevent pregnancy before last sexual intercourse with an opposite-sex partner,,,,,,,,,,,,,,,,60.6,47.5,44.8
+Chicago,qndaycgr,Currently smoked cigars daily,,,,,1.8,1.5,1.7,2.0,1.1,1.3,1.2,1.7,,0.4,0.6,0.3,,
+Chicago,qndaycig,Currently smoked cigarettes daily,4.4,4.0,5.1,5.3,7.5,5.9,3.7,3.3,2.2,1.6,2.4,2.0,,0.6,0.5,0.0,0.4,0.4
+Chicago,qndayevp,Currently used electronic vapor products daily,,,,,,,,,,,,,,0.5,1.3,2.0,1.7,2.5
+Chicago,qndayskl,Currently used smokeless tobacco daily,,,,,,,,,,,,,,,,,,1.0
+Chicago,qndlype,Attended physical education (PE) classes on all 5 days,73.9,80.5,78.2,80.7,62.6,57.1,49.9,45.9,43.6,39.6,42.5,38.9,,41.8,45.3,,,
+Chicago,qnexpwttheraphy,"needed counseling or therapy but did not get it because of cost, not knowing how or where to get help, or another reason",,,,,,,,,,,,,,,,,,13.0
+Chicago,qnfdinsc,Food insecurity,,,,,,,,,,,,,,,,,,12.7
+Chicago,qnfrcgr,Currently smoked cigars frequently,,,,,2.5,2.1,2.9,2.4,1.6,2.0,1.9,1.8,,0.8,1.0,0.3,,
+Chicago,qnfrcig,Currently smoked cigarettes frequently,5.7,5.7,6.8,7.6,9.3,7.6,5.6,3.9,3.2,2.7,3.2,3.0,,1.0,0.8,0.0,0.5,0.6
+Chicago,qnfrevp,Currently smoked electronic vapor products frequently,,,,,,,,,,,,,,0.6,2.4,2.4,2.4,3.3
+Chicago,qnfrskl,Currently used smokeless tobacco frequently,,,,,,,,,,,,,,,,,,1.0
+Chicago,qnfruit1,Ate fruit one or more times per day,,,,,28.8,30.3,22.3,25.4,25.4,29.4,28.9,29.3,,30.2,29.4,31.5,37.1,40.1
+Chicago,qnfruit2,Ate fruit two or more times per day,,,,,21.6,21.5,14.8,16.9,17.5,21.7,21.0,19.5,,20.6,20.2,21.9,25.7,27.7
+Chicago,qnfruit3,Ate fruit three or more times per day,,,,,13.2,13.6,8.2,8.7,10.4,11.1,12.3,11.9,,11.1,10.4,10.5,11.2,12.0
+Chicago,qnintviolenceace,"Reported that their parents or other adults in their home most of the time or always slapped, hit, kicked, punched, or beat each other up",,,,,,,,,,,,,,,,0.9,1.4,1.1
+Chicago,qniudimp,Used an IUD (such as Mirena or ParaGard) or implant (such as Implanon or Nexplanon) before last sexual intercourse with an opposite-sex partner,,,,,,,,,,,,,,,,1.1,3.0,5.4
+Chicago,qnmusclestrength,Did exercises to strengthen or tone their muscles on three or more days,42.1,46.6,42.3,48.2,50.1,51.0,39.6,,,,,,,,,,,
+Chicago,qnnodnt,Never saw a dentist,,,,,,,,,,,,2.8,,2.4,2.3,2.3,2.3,4.0
+Chicago,qnobese,Had obesity,,,,,12.6,12.6,14.0,15.6,15.8,15.2,15.7,14.8,,18.2,17.6,21.2,17.1,17.2
+Chicago,qnothhpl,"Used birth control pills; an IUD (such as Mirena or ParaGard) or implant (such as Implanon or Nexplanon); or a shot (such as Depo-Provera), patch (such as OrthoEvra), or birth control ring (such as NuvaRing) before last sexual intercourse with an opposite-",,,,,,,,,,,,,,,,11.2,19.9,25.2
+Chicago,qnowt,Were overweight,,,,,17.3,18.6,17.6,18.4,18.6,20.8,18.2,15.5,,18.2,15.7,16.8,17.2,15.3
+Chicago,qnpa0day,Did not participate in at least 60 minutes of physical activity on at least 1 day,,,,,,,,,20.9,23.2,20.6,21.5,,18.8,19.3,22.6,19.0,19.9
+Chicago,qnpa7day,Were physically active at least 60 minutes per day on all 7 days,,,,,,,,,16.4,17.5,18.2,19.6,,17.2,15.0,15.7,16.8,18.6
+Chicago,qnphyabuseace,Were physically abused at home,,,,,,,,,,,,,,,,1.7,2.1,2.2
+Chicago,qnsoda1,"Drank a can, bottle, or glass of soda or pop one or more times per day",,,,,,,,,27.8,27.9,29.4,23.1,,17.9,12.3,13.3,14.3,14.2
+Chicago,qnsoda2,"Drank a can, bottle, or glass of soda or pop two or more times per day",,,,,,,,,19.0,20.4,22.9,15.7,,11.9,7.8,8.3,8.5,6.4
+Chicago,qntalkadultace,Most of the time or always feel that they are able to talk to an adult in their family or another caring adult about their feelings,,,,,,,,,,,,,,,,,31.8,35.0
+Chicago,qntb2,Currently smoked cigarettes or cigars,,,,,30.9,27.5,21.0,19.1,17.0,17.7,16.7,13.0,,8.7,4.7,1.6,,
+Chicago,qnunfairlyace,Felt that they were treated badly or unfairly because of their race or ethnicity,,,,,,,,,,,,,,,,50.9,,
+Chicago,qnveg0,Did not eat vegetables,,,,,9.7,10.6,14.2,10.5,12.2,14.8,12.4,11.0,,12.0,14.0,,,
+Chicago,qnveg1,Ate vegetables one or more times per day,,,,,55.7,56.1,46.8,47.0,44.5,45.4,48.9,49.2,,50.1,48.5,,,
+Chicago,qnveg2,Ate vegetables two or more times per day,,,,,28.5,28.4,19.1,21.3,19.7,22.4,22.2,21.1,,24.1,21.3,,,
+Chicago,qnveg3,Ate vegetables three or more times per day,,,,,17.7,17.5,10.7,11.6,10.6,13.4,14.1,11.0,,13.3,11.8,,,
+Illinois,qn10,Texted or e-mailed while driving a car or other vehicle,,,,,,,,,,,,45.1,41.5,37.1,43.3,39.2,,
+Illinois,qn11,Carried a weapon on school property,,10.2,8.9,,,,,,3.7,4.8,3.9,4.7,4.3,3.7,2.7,3.8,3.6,1.1
+Illinois,qn12,Carried a gun,,,,,,,,,,,,,,6.2,4.4,3.0,,
+Illinois,qn13,Did not go to school because they felt unsafe at school or on their way to or from school,,6.5,5.8,,,,,,4.6,7.4,4.7,8.5,6.0,9.0,9.1,12.2,11.5,9.6
+Illinois,qn14,Were threatened or injured with a weapon on school property,,8.0,8.6,,,,,,7.8,8.8,7.6,8.5,6.6,7.5,8.0,7.5,9.8,6.2
+Illinois,qn15,Were in a physical fight,,42.7,38.1,,,,,,33.9,33.0,29.5,24.6,22.7,20.3,20.7,16.6,15.8,12.1
+Illinois,qn16,Were in a physical fight on school property,,17.9,16.1,,,,,,11.3,11.5,9.8,8.1,7.7,7.3,7.5,4.4,5.9,4.5
+Illinois,qn17,"Ever saw someone get physically attacked, beaten, stabbed, or shot in their neighborhood",,,,,,,,,,,,,,,,22.7,25.2,27.0
+Illinois,qn18,Were ever physically forced to have sexual intercourse,,,,,,,,,8.0,9.0,8.4,9.8,8.9,10.6,10.7,8.8,10.0,8.7
+Illinois,qn19,Experienced sexual violence,,,,,,,,,,,,,,13.2,12.0,11.6,12.7,8.9
+Illinois,qn20,Experienced sexual dating violence,,,,,,,,,,,,11.6,11.1,7.8,6.9,7.8,9.5,5.4
+Illinois,qn21,Experienced physical dating violence,,,,,,,,,,,,11.1,11.3,10.7,7.4,7.4,7.6,8.2
+Illinois,qn22,Felt that they were ever treated badly or unfairly in school because of their race or ethnicity,,,,,,,,,,,,,,,,,33.1,25.8
+Illinois,qn23,Were bullied on school property,,,,,,,,,,19.6,19.3,22.2,19.6,21.4,19.9,14.7,19.4,25.2
+Illinois,qn24,Were electronically bullied,,,,,,,,,,,16.0,16.9,15.3,17.3,16.0,17.6,16.8,18.9
+Illinois,qn25,Did something to purposely hurt themselves without wanting to die,,,,,,,,,,,,,,,,,,18.2
+Illinois,qn26,Felt sad or hopeless,,,,,,,,,26.5,27.8,27.6,28.7,29.3,32.3,36.3,42.1,38.2,39.2
+Illinois,qn27,Seriously considered attempting suicide,,25.0,23.9,,,,,,12.9,14.5,14.3,18.9,15.9,17.2,19.0,20.3,19.2,16.4
+Illinois,qn28,Made a plan about how they would attempt suicide,,18.5,17.4,,,,,,9.2,11.3,13.1,16.9,14.5,14.8,15.6,17.0,15.5,17.3
+Illinois,qn29,Actually attempted suicide,,9.8,9.5,,,,,,6.8,8.9,8.0,12.4,9.8,10.0,9.0,8.4,9.8,9.4
+Illinois,qn30,"Had a suicide attempt that resulted in an injury, poisoning, or overdose that had to be treated by a doctor or nurse",,3.0,2.8,,,,,,2.0,2.9,2.6,5.6,4.3,4.0,3.1,2.1,3.0,2.9
+Illinois,qn31,Ever smoked a cigarette,,67.9,70.4,,,,,,51.8,50.6,47.4,44.0,33.8,27.3,19.8,,,
+Illinois,qn32,Smoked a cigarette before age 13 years,,,,,,,,,,,,,,10.5,7.0,6.3,6.4,9.3
+Illinois,qn33,Currently smoked cigarettes,,29.1,35.7,,,,,,19.9,18.1,17.5,14.1,10.1,7.6,4.7,2.5,3.6,3.7
+Illinois,qn34,Smoked more than 10 cigarettes per day,,18.4,19.3,,,,,,11.8,12.2,6.8,11.8,8.6,10.4,7.6,,,
+Illinois,qn35,Ever used an electronic vapor product,,,,,,,,,,,,,47.0,41.4,49.2,38.0,,
+Illinois,qn36,Currently used an electronic vapor product,,,,,,,,,,,,,26.6,13.2,19.9,16.7,16.6,12.4
+Illinois,qn37,"Usually got their electronic vapor products by buying them themselves in a convenience store, supermarket, discount store, or gas station",,,,,,,,,,,,,,,,4.6,6.7,4.3
+Illinois,qn38,Currently used smokeless tobacco,,,,,,,,,,,,,,,,,,4.2
+Illinois,qn39,Currently smoked cigars,,,,,,,,,13.3,14.1,13.1,14.0,9.4,8.1,6.1,2.6,,
+Illinois,qn40,Had their first drink of alcohol before age 13 years,,31.0,35.2,,,,,,23.3,20.7,18.2,18.3,15.8,16.8,12.8,13.0,14.7,12.1
+Illinois,qn41,Currently drank alcohol,,47.2,47.5,,,,,,43.7,39.8,37.8,36.6,30.7,27.4,27.1,22.8,25.5,16.3
+Illinois,qn42,Reported that the largest number of drinks they had in a row was 10 or more,,,,,,,,,,,,5.4,3.5,4.0,2.9,,,
+Illinois,qn43,Usually got the alcohol they drank by someone giving it to them,,,,,,,,,40.9,32.8,36.3,32.9,40.8,41.6,35.7,,,
+Illinois,qn44,Ever used marijuana,,27.9,40.2,,,,,,38.6,38.9,38.4,40.4,36.3,34.2,36.7,27.5,29.3,20.0
+Illinois,qn45,Tried marijuana for the first time before age 13 years,,6.2,7.2,,,,,,8.7,8.6,7.2,8.9,7.3,6.4,4.9,5.0,5.1,5.9
+Illinois,qn46,Currently used marijuana,,14.4,24.8,,,,,,20.3,21.0,23.1,24.0,18.7,20.8,21.8,15.1,17.3,8.2
+Illinois,qn47,Ever took prescription pain medicine without a doctor's prescription or differently than how a doctor told them to use it,,,,,,,,,,,,,,14.1,14.5,9.5,13.1,9.6
+Illinois,qn48,Ever used cocaine,,4.7,6.7,,,,,,6.7,6.8,5.7,7.8,5.4,6.4,4.7,2.4,2.8,3.0
+Illinois,qn49,Ever used inhalants,,,20.3,,,,,,11.8,11.6,9.8,12.0,6.9,8.4,7.1,6.7,6.6,5.2
+Illinois,qn50,Ever used heroin,,,,,,,,,2.5,3.0,2.0,3.9,3.4,3.4,2.8,1.4,2.2,2.6
+Illinois,qn51,Ever used methamphetamines,,,,,,,,,3.6,3.8,2.6,4.5,3.5,3.7,2.3,1.5,2.1,2.7
+Illinois,qn52,Ever used ecstasy,,,,,,,,,5.9,7.2,6.7,8.8,6.1,5.3,4.6,2.9,4.1,2.7
+Illinois,qn53,Ever injected any illegal drug,,,1.9,,,,,,1.9,2.6,2.1,3.2,3.3,3.2,1.9,1.4,1.9,1.5
+Illinois,qn54,Ever had sexual intercourse,,54.7,48.4,,,,,,50.1,48.1,44.8,44.5,38.6,38.0,37.4,27.5,30.1,
+Illinois,qn55,Had sexual intercourse for the first time before age 13 years,,10.7,9.4,,,,,,6.7,6.3,6.3,5.2,3.2,3.9,3.3,2.4,2.4,2.8
+Illinois,qn56,Had sexual intercourse with four or more persons during their life,,19.3,16.3,,,,,,15.8,14.5,12.4,13.1,9.0,9.0,9.0,5.4,4.7,1.5
+Illinois,qn57,Were currently sexually active,,40.0,34.0,,,,,,37.4,36.2,32.8,33.1,29.7,28.3,27.0,18.3,21.6,14.2
+Illinois,qn58,Drank alcohol or used drugs before last sexual intercourse,,20.9,23.6,,,,,,22.0,21.1,19.6,22.7,19.9,18.0,19.8,,20.1,11.0
+Illinois,qn59,Used a condom during last sexual intercourse,,57.8,60.1,,,,,,64.8,63.2,61.5,57.7,56.2,52.6,53.4,52.2,55.2,47.7
+Illinois,qn60,Used birth control pills before last sexual intercourse with opposite-sex partner,,,,,,,,,,,,,,,,24.7,16.7,24.6
+Illinois,qn64,Described themselves as slightly or very overweight,,33.4,27.7,,,,,,29.6,25.5,28.6,29.8,30.3,29.8,30.9,29.1,,
+Illinois,qn65,Were trying to lose weight,,42.5,40.9,,,,,,47.3,43.8,48.3,47.0,46.1,45.2,47.6,44.2,,
+Illinois,qn66,Did not eat fruit,,,,,,,,,13.3,15.0,11.7,10.8,13.3,14.7,12.4,13.0,13.2,14.6
+Illinois,qn67,Did not eat salad,,,,,,,,,38.1,41.6,40.0,39.2,38.9,43.3,43.4,48.8,,
+Illinois,qn68,Did not eat potatoes,,,,,,,,,31.7,32.2,32.8,32.2,37.5,36.8,38.3,40.8,,
+Illinois,qn69,Did not eat carrots,,,,,,,,,52.5,55.6,52.9,49.4,52.1,53.7,54.2,55.0,,
+Illinois,qn7,Did not always wear a seat belt,,76.9,79.1,,,,,,44.8,46.2,44.6,42.8,38.9,,43.9,41.1,,
+Illinois,qn70,Did not eat other vegetables,,,,,,,,,18.8,21.7,18.9,18.4,21.8,20.1,18.8,19.7,,
+Illinois,qn71,"Did not drink a can, bottle, or glass of soda or pop",,,,,,,,,18.5,21.5,21.8,24.9,30.1,29.1,32.1,30.1,32.9,28.3
+Illinois,qn72,Did not eat breakfast,,,,,,,,,,,,17.6,16.4,,16.5,23.5,22.3,29.9
+Illinois,qn73,Were physically active at least 60 minutes per day on 5 or more days,,,,,,,,,43.5,44.7,48.5,49.9,49.6,49.3,51.4,47.6,47.7,44.4
+Illinois,qn74,Attended physical education (PE) classes on 1 or more days,,76.0,79.6,,,,,,75.3,81.7,82.8,84.2,78.5,82.7,74.0,,,
+Illinois,qn75,Played on at least one sports team,,,,,,,,,58.0,58.7,58.7,58.9,57.3,55.2,59.3,,,
+Illinois,qn76,Had a concussion from playing a sport or being physically active,,,,,,,,,,,,,,,,11.1,13.9,
+Illinois,qn77,Used social media several times,,,,,,,,,,,,,,,,,75.8,73.4
+Illinois,qn78,Were ever tested for human immunodeficiency virus (HIV),,,,,,,,,,,,,15.1,15.8,12.0,5.6,8.8,10.8
+Illinois,qn79,"Were tested for a sexually transmitted transmitted infection (STI) other than HIV, such as chlamydia or gonorrhea)",,,,,,,,,,,,,,,10.8,5.4,7.3,12.3
+Illinois,qn8,Rode with a driver who had been drinking alcohol,,38.5,38.0,,,,,,28.6,29.0,26.0,27.0,22.4,19.2,17.9,14.6,,
+Illinois,qn80,Saw a dentist,,,,,,,,,,,,,77.1,71.2,76.2,77.4,74.4,68.4
+Illinois,qn81,Reported that their mental health was most of the time or always not good,,,,,,,,,,,,,,,,30.0,26.0,20.4
+Illinois,qn82,"Most of the time or always got the kind of help they needed when feeling sad, empty, hopeless, angry, or anxious",,,,,,,,,,,,,,,,,,19.3
+Illinois,qn83,Got 8 or more hours of sleep,,,,,,,,,,,,,23.5,22.4,20.1,19.4,19.5,22.6
+Illinois,qn84,Experience unstable housing,,,,,,,,,,,,,,,,,,5.6
+Illinois,qn85,"Reported their family sometimes, most of the time, or always worried that their food would run out before  they got money to buy more",,,,,,,,,,,,,,,,,,12.2
+Illinois,qn86,"Reported sometimes, most of the time, or always the food their family bought ran out and they did not have money to buy more",,,,,,,,,,,,,,,,,,5.7
+Illinois,qn9,Drove a car or other vehicle when they had been drinking alcohol,,,,,,,,,,,,9.9,8.2,5.2,5.0,,,
+Illinois,qnbcnone,Did not use any method to prevent pregnancy during last sexual intercourse with an opposite-sex partner,,,,,,,,,,,,,,,,13.9,13.5,17.5
+Illinois,qnbk7day,Ate breakfast on all 7 days,,,,,,,,,,,,33.5,32.9,,29.6,24.9,24.5,19.0
+Illinois,qnclose2people,Strongly agree or agree that they feel close to people at their school,,,,,,,,,,,,,,,65.3,,,64.4
+Illinois,qnconpp,Used a condom as the primary method to prevent pregnancy before last sexual intercourse with an opposite-sex partner,,,,,,,,,,,,,,,,44.1,49.2,30.3
+Illinois,qndaycgr,Currently smoked cigars daily,,,,,,,,,1.4,1.4,0.5,1.2,1.1,0.8,0.6,0.2,,
+Illinois,qndaycig,Currently smoked cigarettes daily,,10.9,14.2,,,,,,7.6,5.8,4.4,3.6,2.0,1.4,0.9,0.4,0.5,0.2
+Illinois,qndayevp,Currently used electronic vapor products daily,,,,,,,,,,,,,3.8,2.7,5.5,4.5,4.0,2.1
+Illinois,qndayskl,Currently used smokeless tobacco daily,,,,,,,,,,,,,,,,,,0.7
+Illinois,qndlype,Attended physical education (PE) classes on all 5 days,,69.4,64.4,,,,,,47.3,67.5,71.2,63.6,60.7,68.4,60.8,,,
+Illinois,qnfdinsc,Food insecurity,,,,,,,,,,,,,,,,,,13.3
+Illinois,qnfrcgr,Currently smoked cigars frequently,,,,,,,,,1.7,1.9,0.8,1.5,1.4,1.7,0.9,0.3,,
+Illinois,qnfrcig,Currently smoked cigarettes frequently,,13.7,17.2,,,,,,9.3,7.6,6.3,5.0,2.6,1.5,1.2,0.5,0.7,0.3
+Illinois,qnfrevp,Currently smoked electronic vapor products frequently,,,,,,,,,,,,,4.5,3.3,8.0,6.3,5.9,3.2
+Illinois,qnfrskl,Currently used smokeless tobacco frequently,,,,,,,,,,,,,,,,,,0.7
+Illinois,qnfruit1,Ate fruit one or more times per day,,,,,,,,,30.1,28.9,31.4,33.9,32.4,31.4,34.1,29.3,32.3,30.3
+Illinois,qnfruit2,Ate fruit two or more times per day,,,,,,,,,18.4,18.5,20.0,22.1,22.4,20.7,23.2,18.0,21.3,21.8
+Illinois,qnfruit3,Ate fruit three or more times per day,,,,,,,,,10.0,9.3,8.6,10.3,11.7,9.5,9.2,8.3,10.1,8.3
+Illinois,qnintviolenceace,"Reported that their parents or other adults in their home most of the time or always slapped, hit, kicked, punched, or beat each other up",,,,,,,,,,,,,,,,2.4,,2.1
+Illinois,qniudimp,Used an IUD (such as Mirena or ParaGard) or implant (such as Implanon or Nexplanon) before last sexual intercourse with an opposite-sex partner,,,,,,,,,,,,,,,,3.0,5.1,9.7
+Illinois,qnmusclestrength,Did exercises to strengthen or tone their muscles on three or more days,,57.3,53.6,,,,,,,,,,,,,,,
+Illinois,qnnodnt,Never saw a dentist,,,,,,,,,,,,,1.0,1.7,1.1,0.9,1.6,3.8
+Illinois,qnobese,Had obesity,,,,,,,,,12.9,11.9,11.6,11.6,12.9,14.8,15.2,15.6,13.5,13.8
+Illinois,qnothhpl,"Used birth control pills; an IUD (such as Mirena or ParaGard) or implant (such as Implanon or Nexplanon); or a shot (such as Depo-Provera), patch (such as OrthoEvra), or birth control ring (such as NuvaRing) before last sexual intercourse with an opposite-",,,,,,,,,,,,,,,,31.8,24.5,43.8
+Illinois,qnowt,Were overweight,,,,,,,,,15.7,15.3,14.4,14.4,15.3,16.2,15.5,14.8,14.4,17.6
+Illinois,qnpa0day,Did not participate in at least 60 minutes of physical activity on at least 1 day,,,,,,,,,14.7,16.5,12.9,12.9,13.9,15.9,12.3,13.7,16.0,17.3
+Illinois,qnpa7day,Were physically active at least 60 minutes per day on all 7 days,,,,,,,,,21.7,24.1,23.2,25.4,26.8,23.2,26.0,24.1,23.9,21.1
+Illinois,qnphyabuseace,Were physically abused at home,,,,,,,,,,,,,,,,1.6,,1.2
+Illinois,qnphyviolenceace,"Reported that a parent or other adult in their home hit, beat, kicked, or physically hurt them in any way one or more times",,,,,,,,,,,,,,,,12.7,,
+Illinois,qnsexabuseace,Reported that an adult or person at least 5 years older than them ever made them do sexual things they did not want to do,,,,,,,,,,,,,,,,8.4,,
+Illinois,qnsoda1,"Drank a can, bottle, or glass of soda or pop one or more times per day",,,,,,,,,33.7,31.1,26.1,22.0,18.3,16.4,13.7,13.4,13.0,15.0
+Illinois,qnsoda2,"Drank a can, bottle, or glass of soda or pop two or more times per day",,,,,,,,,23.0,21.6,17.5,13.8,11.2,9.7,7.8,7.7,6.2,7.0
+Illinois,qntalkadultace,Most of the time or always feel that they are able to talk to an adult in their family or another caring adult about their feelings,,,,,,,,,,,,,,,,,,45.1
+Illinois,qntb2,Currently smoked cigarettes or cigars,,,,,,,,,24.1,22.6,22.5,19.2,13.0,10.1,7.6,3.7,,
+Illinois,qnunfairlyace,Felt that they were treated badly or unfairly because of their race or ethnicity,,,,,,,,,,,,,,,,39.1,,
+Illinois,qnveg0,Did not eat vegetables,,,,,,,,,6.8,8.1,6.8,6.8,9.8,8.7,7.9,8.5,,
+Illinois,qnveg1,Ate vegetables one or more times per day,,,,,,,,,57.4,55.2,57.7,60.1,57.1,56.2,55.5,53.0,,
+Illinois,qnveg2,Ate vegetables two or more times per day,,,,,,,,,26.4,23.8,23.5,26.9,24.8,24.7,24.3,21.5,,
+Illinois,qnveg3,Ate vegetables three or more times per day,,,,,,,,,13.2,12.0,11.4,12.4,12.7,11.8,11.7,10.0,,
+United States,qn10,Texted or e-mailed while driving a car or other vehicle,,,,,,,,,,,,41.4,41.5,39.2,39.0,36.1,42.3,45.8
+United States,qn11,Carried a weapon on school property,,11.8,9.8,8.5,6.9,6.4,6.1,6.5,5.9,5.6,5.4,5.2,4.1,3.8,2.8,3.1,4.2,2.9
+United States,qn12,Carried a gun,,,,,,,,,,,,,,4.8,4.4,3.5,3.5,3.4
+United States,qn13,Did not go to school because they felt unsafe at school or on their way to or from school,,4.4,4.5,4.0,5.2,6.6,5.4,6.0,5.5,5.0,5.9,7.1,5.6,6.7,8.7,8.6,12.8,10.6
+United States,qn14,Were threatened or injured with a weapon on school property,,7.3,8.4,7.4,7.7,8.9,9.2,7.9,7.8,7.7,7.4,6.9,6.0,6.0,7.4,6.6,9.0,8.2
+United States,qn15,Were in a physical fight,42.5,41.8,38.7,36.6,35.7,33.2,33.0,35.9,35.5,31.5,32.8,24.7,22.6,23.6,21.9,18.3,19.2,19.2
+United States,qn16,Were in a physical fight on school property,,16.2,15.5,14.8,14.2,12.5,12.8,13.6,12.4,11.1,12.0,8.1,7.8,8.5,8.0,5.8,7.9,7.1
+United States,qn17,"Ever saw someone get physically attacked, beaten, stabbed, or shot in their neighborhood",,,,,,,,,,,,,,,,19.9,23.2,21.9
+United States,qn18,Were ever physically forced to have sexual intercourse,,,,,,7.7,9.0,7.5,7.8,7.4,8.0,7.3,6.7,7.4,7.3,8.5,8.6,7.0
+United States,qn19,Experienced sexual violence,,,,,,,,,,,,,,9.7,10.8,11.0,11.4,9.7
+United States,qn20,Experienced sexual dating violence,,,,,,,,,,,,10.4,10.6,6.9,8.2,9.7,9.0,9.2
+United States,qn21,Experienced physical dating violence,,,,,,,,,,,,10.3,9.6,8.0,8.2,8.5,10.4,10.7
+United States,qn22,Felt that they were ever treated badly or unfairly in school because of their race or ethnicity,,,,,,,,,,,,,,,,,31.5,30.0
+United States,qn23,Were bullied on school property,,,,,,,,,,19.9,20.1,19.6,20.2,19.0,19.5,15.0,19.2,19.7
+United States,qn24,Were electronically bullied,,,,,,,,,,,16.2,14.8,15.5,14.9,15.7,15.9,16.3,14.6
+United States,qn25,Did something to purposely hurt themselves without wanting to die,,,,,,,,,,,,,,,,,,17.1
+United States,qn26,Felt sad or hopeless,,,,,28.3,28.3,28.6,28.5,28.5,26.1,28.5,29.9,29.9,31.5,36.7,42.3,39.7,33.3
+United States,qn27,Seriously considered attempting suicide,29.0,24.1,24.1,20.5,19.3,19.0,16.9,16.9,14.5,13.8,15.8,17.0,17.7,17.2,18.8,22.2,20.4,14.5
+United States,qn28,Made a plan about how they would attempt suicide,18.6,19.0,17.7,15.7,14.5,14.8,16.5,13.0,11.3,10.9,12.8,13.6,14.6,13.6,15.7,17.6,16.4,12.5
+United States,qn29,Actually attempted suicide,7.3,8.6,8.7,7.7,8.3,8.8,8.5,8.4,6.9,6.3,7.8,8.0,8.6,7.4,8.9,10.2,9.5,6.4
+United States,qn30,"Had a suicide attempt that resulted in an injury, poisoning, or overdose that had to be treated by a doctor or nurse",1.7,2.7,2.8,2.6,2.6,2.6,2.9,2.3,2.0,1.9,2.4,2.7,2.8,2.4,2.5,2.9,2.3,1.5
+United States,qn31,Ever smoked a cigarette,70.1,69.5,71.3,70.2,70.4,63.9,58.4,54.3,50.3,46.3,44.7,41.1,32.3,28.9,24.1,17.8,14.4,14.1
+United States,qn32,Smoked a cigarette before age 13 years,,,,,,,,,,,,,,9.5,7.9,6.3,4.5,4.8
+United States,qn33,Currently smoked cigarettes,27.5,30.5,34.8,36.4,34.8,28.5,21.9,23.0,20.0,19.5,18.1,15.7,10.8,8.8,6.0,3.8,3.5,3.5
+United States,qn34,Smoked more than 10 cigarettes per day,18.0,15.1,16.2,13.8,14.9,14.4,13.7,10.7,10.7,7.8,7.8,8.6,7.9,9.7,8.1,9.8,8.1,9.0
+United States,qn35,Ever used an electronic vapor product,,,,,,,,,,,,,44.9,42.2,50.1,36.2,33.8,30.2
+United States,qn36,Currently used an electronic vapor product,,,,,,,,,,,,,24.1,13.2,32.7,18.0,16.8,16.0
+United States,qn37,"Usually got their electronic vapor products by buying them themselves in a convenience store, supermarket, discount store, or gas station",,,,,,,,,,,,,,,,6.8,7.3,6.7
+United States,qn38,Currently used smokeless tobacco,,,,,,,,,,,,,,,,,,4.1
+United States,qn39,Currently smoked cigars,,,,,17.7,15.2,14.8,14.0,13.6,14.0,13.1,12.6,10.3,8.0,5.7,3.1,4.5,3.2
+United States,qn40,Had their first drink of alcohol before age 13 years,32.7,32.9,32.4,31.1,32.2,29.1,27.8,25.6,23.8,21.1,20.5,18.6,17.2,15.5,15.0,15.0,13.3,12.9
+United States,qn41,Currently drank alcohol,50.8,48.0,51.6,50.8,50.0,47.1,44.9,43.3,44.7,41.8,38.7,34.9,32.8,29.8,29.2,22.7,22.1,20.3
+United States,qn42,Reported that the largest number of drinks they had in a row was 10 or more,,,,,,,,,,,,6.1,4.3,4.4,3.1,2.7,2.2,2.2
+United States,qn43,Usually got the alcohol they drank by someone giving it to them,,,,,,,,,41.7,42.2,40.0,41.8,44.1,43.5,40.5,40.1,42.1,40.4
+United States,qn44,Ever used marijuana,31.3,32.8,42.4,47.1,47.2,42.4,40.2,38.4,38.1,36.8,39.9,40.7,38.6,35.6,36.8,27.8,29.5,25.5
+United States,qn45,Tried marijuana for the first time before age 13 years,7.4,6.9,7.6,9.7,11.3,10.2,9.9,8.7,8.3,7.5,8.1,8.6,7.5,6.8,5.6,4.9,4.8,4.4
+United States,qn46,Currently used marijuana,14.7,17.7,25.3,26.2,26.7,23.9,22.4,20.2,19.7,20.8,23.1,23.4,21.7,19.8,21.7,15.8,17.0,12.9
+United States,qn47,Ever took prescription pain medicine without a doctor's prescription or differently than how a doctor told them to use it,,,,,,,,,,,,,,14.0,14.3,12.2,11.6,10.6
+United States,qn48,Ever used cocaine,5.9,4.9,7.0,8.2,9.5,9.4,8.7,7.6,7.2,6.4,6.8,5.5,5.2,4.8,3.9,2.5,2.5,2.0
+United States,qn49,Ever used inhalants,,,20.3,16.0,14.6,14.7,12.1,12.4,13.3,11.7,11.4,8.9,7.0,6.2,6.4,8.1,5.7,5.0
+United States,qn50,Ever used heroin,,,,,2.4,3.1,3.3,2.4,2.3,2.5,2.9,2.2,2.1,1.7,1.8,1.3,1.6,1.1
+United States,qn51,Ever used methamphetamines,,,,,9.1,9.8,7.6,6.2,4.4,4.1,3.8,3.2,3.0,2.5,2.1,1.8,1.8,1.3
+United States,qn52,Ever used ecstasy,,,,,,11.1,11.1,6.3,5.8,6.7,8.2,6.6,5.0,4.0,3.6,2.9,2.7,1.8
+United States,qn53,Ever injected any illegal drug,,,2.1,2.1,1.8,2.3,3.2,2.1,2.0,2.1,2.3,1.7,1.8,1.5,1.6,1.4,1.2,1.0
+United States,qn54,Ever had sexual intercourse,54.1,53.0,53.1,48.4,49.9,45.6,46.7,46.8,47.8,46.0,47.4,46.8,41.2,39.5,38.4,30.0,31.6,28.5
+United States,qn55,Had sexual intercourse for the first time before age 13 years,10.2,9.2,8.9,7.2,8.3,6.6,7.4,6.2,7.1,5.9,6.2,5.6,3.9,3.4,3.0,3.2,3.0,2.6
+United States,qn56,Had sexual intercourse with four or more persons during their life,18.7,18.7,17.8,16.0,16.2,14.2,14.4,14.3,14.9,13.8,15.3,15.0,11.5,9.7,8.6,6.0,5.8,5.1
+United States,qn57,Were currently sexually active,37.5,37.5,37.9,34.8,36.3,33.4,34.3,33.9,35.0,34.2,33.7,34.0,30.1,28.7,27.4,20.7,20.9,18.8
+United States,qn58,Drank alcohol or used drugs before last sexual intercourse,21.6,21.3,24.8,24.7,24.8,25.6,25.4,23.3,22.5,21.6,22.1,22.4,20.6,18.8,21.2,20.6,18.3,16.6
+United States,qn59,Used a condom during last sexual intercourse,46.2,52.8,54.4,56.8,58.0,57.9,63.0,62.8,61.5,61.1,60.2,59.1,56.9,53.8,54.3,51.8,51.9,53.0
+United States,qn60,Used birth control pills before last sexual intercourse with opposite-sex partner,,,,,,,,,,,,,,,,20.9,20.0,19.5
+United States,qn64,Described themselves as slightly or very overweight,31.8,34.3,27.6,27.3,30.0,29.2,29.6,31.5,29.3,27.7,29.2,31.1,31.5,31.5,32.4,32.3,30.8,29.0
+United States,qn65,Were trying to lose weight,41.8,40.3,41.4,39.7,42.7,46.0,43.8,45.6,45.2,44.4,46.0,47.7,45.6,47.1,48.3,45.7,44.5,45.6
+United States,qn66,Did not eat fruit,,,,,15.2,15.6,14.8,14.7,14.7,11.4,11.7,10.6,10.1,11.1,11.9,13.8,11.3,8.2
+United States,qn67,Did not eat salad,,,,,35.1,32.9,33.7,34.4,35.9,36.6,38.0,39.1,39.1,40.7,41.9,47.2,43.3,39.6
+United States,qn68,Did not eat potatoes,,,,,27.2,27.4,29.0,31.5,30.9,31.2,31.2,32.7,32.9,34.6,36.3,41.5,37.5,32.6
+United States,qn69,Did not eat carrots,,,,,50.4,52.8,52.0,53.1,53.7,51.8,52.0,52.7,51.3,54.7,53.3,55.7,54.4,52.9
+United States,qn7,Did not always wear a seat belt,72.3,68.3,69.1,66.8,62.1,58.9,61.0,52.1,53.4,50.7,45.7,45.3,38.8,41.2,43.1,39.9,39.6,39.6
+United States,qn70,Did not eat other vegetables,,,,,13.8,14.8,16.5,17.9,17.6,16.7,17.0,18.6,18.7,18.5,19.8,20.5,19.2,16.2
+United States,qn71,"Did not drink a can, bottle, or glass of soda or pop",,,,,,,,,18.6,19.4,20.9,22.3,26.2,27.8,31.7,31.0,30.9,30.4
+United States,qn72,Did not eat breakfast,,,,,,,,,,,13.1,13.7,13.8,14.1,16.7,22.0,17.9,17.2
+United States,qn73,Were physically active at least 60 minutes per day on 5 or more days,,,,,,,,,,,49.5,47.3,48.6,46.5,44.1,45.3,46.3,47.2
+United States,qn74,Attended physical education (PE) classes on 1 or more days,48.9,52.1,59.6,48.8,56.1,51.7,55.7,54.2,53.6,56.4,51.8,48.0,51.6,51.7,52.2,46.8,49.9,50.6
+United States,qn75,Played on at least one sports team,,,,,55.1,55.2,57.6,56.0,56.3,58.3,58.4,54.0,57.6,54.3,57.4,49.1,51.9,57.6
+United States,qn76,Had a concussion from playing a sport or being physically active,,,,,,,,,,,,,,15.1,15.1,11.9,14.2,14.4
+United States,qn77,Used social media several times,,,,,,,,,,,,,,,,,77.0,80.2
+United States,qn78,Were ever tested for human immunodeficiency virus (HIV),,,,,,,,11.9,12.9,12.7,12.9,12.9,10.2,9.3,9.4,5.8,7.1,6.7
+United States,qn79,"Were tested for a sexually transmitted transmitted infection (STI) other than HIV, such as chlamydia or gonorrhea)",,,,,,,,,,,,,,,8.6,5.2,5.6,5.5
+United States,qn8,Rode with a driver who had been drinking alcohol,39.9,35.3,38.8,36.6,33.1,30.7,30.2,28.5,29.1,28.3,24.1,21.9,20.0,16.5,16.7,14.1,15.7,13.2
+United States,qn80,Saw a dentist,,,,,,68.7,68.7,,,,,,74.4,75.7,75.9,73.7,75.9,76.3
+United States,qn81,Reported that their mental health was most of the time or always not good,,,,,,,,,,,,,,,,29.3,28.5,23.3
+United States,qn82,"Most of the time or always got the kind of help they needed when feeling sad, empty, hopeless, angry, or anxious",,,,,,,,,,,,,,,,,,22.2
+United States,qn83,Got 8 or more hours of sleep,,,,,,,,,31.1,30.9,31.4,31.7,27.3,25.4,22.1,22.7,23.2,24.3
+United States,qn84,Experience unstable housing,,,,,,,,,,,,,,,,,,2.8
+United States,qn85,"Reported their family sometimes, most of the time, or always worried that their food would run out before  they got money to buy more",,,,,,,,,,,,,,,,,,15.3
+United States,qn86,"Reported sometimes, most of the time, or always the food their family bought ran out and they did not have money to buy more",,,,,,,,,,,,,,,,,,8.4
+United States,qn9,Drove a car or other vehicle when they had been drinking alcohol,,,,,,,,,,,,10.0,7.8,5.5,5.4,4.6,5.1,5.2
+United States,qnacessfirearm,Could obtain a loaded gun ready for them to fire without a parent or other adult's permission or supervision,,,,,,,,,,,,,,,,,,31.4
+United States,qnbasicneedsace,Reported that an adult in their household most of the time or always tried to make sure their basic needs were met,,,,,,,,,,,,,,,,,86.3,88.8
+United States,qnbcnone,Did not use any method to prevent pregnancy during last sexual intercourse with an opposite-sex partner,,,,,,,,,,,,,,,,13.7,12.4,13.1
+United States,qnbingeeating,Ate an unusually large amount of food in a short period of time and experienced a loss of control over how much they were eating or a feeling that they could not stop eating even when full,,,,,,,,,,,,,,,,,,40.5
+United States,qnbk7day,Ate breakfast on all 7 days,,,,,,,,,,,37.7,38.1,36.3,35.3,33.1,25.0,27.4,27.0
+United States,qnclimatechange,Reported being worried or very worried about climate change,,,,,,,,,,,,,,,,,,29.2
+United States,qnclose2people,Strongly agree or agree that they feel close to people at their school,,,,,,,,,,,,,,,,61.5,55.3,63.2
+United States,qnconcentrating,"Have serious difficulty concentrating, remembering, or making decisions",,,,,,,,,,,,,29.9,32.0,38.0,45.6,45.0,38.5
+United States,qnconpp,Used a condom as the primary method to prevent pregnancy before last sexual intercourse with an opposite-sex partner,,,,,,,,,,,,,,,,40.8,42.5,44.1
+United States,qnconsentsexcont,Verbally asked for consent the last time they had sexual contact,,,,,,,,,,,,,,,,,79.8,
+United States,qncurrentopioid,Currently took prescription pain medicine without a doctor's prescription or differently than how a doctor told them to use it,,,,,,,,,,,,,,,7.2,6.0,4.4,5.0
+United States,qndaycgr,Currently smoked cigars daily,,,,,1.1,0.9,1.4,1.0,1.3,1.3,1.4,1.3,1.0,1.0,0.8,0.5,0.7,0.6
+United States,qndaycig,Currently smoked cigarettes daily,9.8,10.0,12.2,12.2,12.8,10.3,7.6,7.2,6.1,5.3,4.8,4.0,2.3,2.0,1.1,0.6,0.5,0.5
+United States,qndayevp,Currently used electronic vapor products daily,,,,,,,,,,,,,2.0,2.4,7.2,5.0,5.0,4.7
+United States,qndayskl,Currently used smokeless tobacco daily,,,,,,,,,,,,,,,,,,0.7
+United States,qndaytb4,Currently smoked cigarettes or cigars or used smokeless tobacco or electronic vapor products daily,,,,,,,,,,,,,,,,,,5.3
+United States,qndlype,Attended physical education (PE) classes on all 5 days,41.6,34.3,25.4,27.4,29.1,32.2,28.4,33.0,30.3,33.3,31.5,29.4,29.8,29.9,25.9,19.0,27.4,19.8
+United States,qnemoabuseace,Were insulted at home,,,,,,,,,,,,,,,,,11.3,9.3
+United States,qnexpwttheraphy,"needed counseling or therapy but did not get it because of cost, not knowing how or where to get help, or another reason",,,,,,,,,,,,,,,,,,15.4
+United States,qnextremeheat,Reported being worried or very worried about extreme heat,,,,,,,,,,,,,,,,,,29.8
+United States,qnfdinsc,Food insecurity,,,,,,,,,,,,,,,,,,17.3
+United States,qnfrcgr,Currently smoked cigars frequently,,,,,1.6,1.3,1.9,1.3,1.7,1.7,1.9,1.8,1.3,1.3,1.1,0.6,0.8,0.6
+United States,qnfrcig,Currently smoked cigarettes frequently,12.7,13.8,16.1,16.7,16.8,13.8,9.7,9.4,8.1,7.3,6.4,5.6,3.4,2.6,1.3,0.7,0.6,0.7
+United States,qnfrevp,Currently smoked electronic vapor products frequently,,,,,,,,,,,,,3.0,3.3,10.7,7.3,6.4,6.0
+United States,qnfrskl,Currently used smokeless tobacco frequently,,,,,,,,,,,,,,,,,,0.9
+United States,qnfrtb4,Currently smoked cigarettes or cigars or used smokeless tobacco or electronic vapor products frequently,,,,,,,,,,,,,,,,,,6.6
+United States,qnfruit1,Ate fruit one or more times per day,,,,,27.4,25.9,26.8,26.2,29.1,34.1,33.2,34.1,34.4,33.6,33.0,29.4,32.9,38.9
+United States,qnfruit2,Ate fruit two or more times per day,,,,,17.7,15.1,16.6,16.3,18.6,21.8,21.8,23.2,22.9,23.1,22.2,19.0,21.4,28.1
+United States,qnfruit3,Ate fruit three or more times per day,,,,,8.5,7.2,8.2,7.4,8.7,10.3,10.4,11.8,11.4,11.5,10.8,8.8,9.3,13.5
+United States,qnhallucdrug,Ever used hallucinogenic drugs,,,,,,13.3,10.6,8.5,7.8,8.0,8.7,7.1,6.4,6.6,7.0,6.5,5.5,5.2
+United States,qnillict,Ever used select illicit drugs,,,,,,26.5,22.9,21.2,20.9,18.6,19.3,16.4,13.3,12.7,12.9,13.3,9.9,9.7
+United States,qnincarparentace,"Have ever been separated from a parent or guardian because they went to jail, prison, or a detention center",,,,,,,,,,,,,,,,,14.4,
+United States,qnintviolenceace,"Reported that their parents or other adults in their home most of the time or always slapped, hit, kicked, punched, or beat each other up",,,,,,,,,,,,,,,,,2.0,
+United States,qniudimp,Used an IUD (such as Mirena or ParaGard) or implant (such as Implanon or Nexplanon) before last sexual intercourse with an opposite-sex partner,,,,,,,,,,,,,,,,8.7,8.5,6.7
+United States,qnlivedwabuseace,Ever lived with a parent or guardian who was having a problem with alcohol or drug use,,,,,,,,,,,,,,,,,24.8,
+United States,qnlivedwillace,"Ever lived with a parent or guardian who had severe depression, anxiety, or another mental illness, or was suicidal",,,,,,,,,,,,,,,,,28.5,
+United States,qnmusclestrength,Did exercises to strengthen or tone their muscles on three or more days,47.8,51.9,50.3,51.4,53.6,53.4,51.9,,,,55.6,51.7,53.4,51.1,49.5,44.9,51.1,50.6
+United States,qnnodnt,Never saw a dentist,,,,,,2.9,3.0,,,,,,1.9,1.5,1.9,1.4,1.8,1.8
+United States,qnobese,Had obesity,,,,,10.6,10.5,12.0,13.1,12.9,11.9,13.1,13.8,14.0,14.8,15.5,16.3,15.9,14.4
+United States,qnothhpl,"Used birth control pills; an IUD (such as Mirena or ParaGard) or implant (such as Implanon or Nexplanon); or a shot (such as Depo-Provera), patch (such as OrthoEvra), or birth control ring (such as NuvaRing) before last sexual intercourse with an opposite-",,,,,,,,,,,,,,,,32.7,32.9,30.2
+United States,qnowt,Were overweight,,,,,14.1,13.6,14.7,15.5,15.6,15.6,15.2,16.6,16.0,15.6,16.2,16.0,14.7,13.4
+United States,qnpa0day,Did not participate in at least 60 minutes of physical activity on at least 1 day,,,,,,,,,,,13.8,15.2,14.3,15.4,17.0,15.8,15.9,13.9
+United States,qnpa7day,Were physically active at least 60 minutes per day on all 7 days,,,,,,,,,,,28.7,27.1,27.1,26.1,23.2,23.9,24.6,25.0
+United States,qnparentalmonitoring,Reported that their parents or other adults in their family most of the time or always know where they are going or with whom they will be,,,,,,,,,,,,,,,,86.4,84.0,86.8
+United States,qnphyabuseace,Were physically abused at home,,,,,,,,,,,,,,,,,2.4,1.8
+United States,qnsexabuseace,Reported that an adult or person at least 5 years older than them ever made them do sexual things they did not want to do,,,,,,,,,,,,,,,,,7.2,
+United States,qnsoda1,"Drank a can, bottle, or glass of soda or pop one or more times per day",,,,,,,,,33.8,29.2,27.8,27.0,20.4,18.7,15.1,14.7,14.5,17.0
+United States,qnsoda2,"Drank a can, bottle, or glass of soda or pop two or more times per day",,,,,,,,,24.4,19.7,19.0,19.4,13.0,12.5,9.3,8.5,7.5,9.5
+United States,qnspdrk1,"Drank a can, bottle, or glass of a sports drink one or more times per day",,,,,,,,,,,,,13.8,12.4,10.6,11.2,10.9,11.5
+United States,qnspdrk2,"Drank a can, bottle, or glass of a sports drink two or more times per day",,,,,,,,,,,,,8.3,7.6,6.1,6.4,5.4,6.6
+United States,qnspeakenglish,Speak English well or very well,,,,,,,,,,,,,98.1,98.2,97.9,98.1,97.6,98.2
+United States,qnsportsdrink,"Did not drink a can, bottle, or glass of a sports drink",,,,,,,,,,,,,42.4,47.7,50.1,48.2,48.5,50.8
+United States,qnsunburn,Had a sunburn,,,,,,,,,,,,,55.8,57.2,,64.4,54.7,61.1
+United States,qntb2,Currently smoked cigarettes or cigars,,,,,38.6,31.5,26.1,26.5,23.8,23.6,21.5,19.5,14.7,11.8,8.2,5.2,5.9,5.4
+United States,qntb4,Currently smoked cigarettes or cigars or used smokeless tobacco or electronic vapor products,,,,,,,,,,,,,,,,,,18.6
+United States,qntimealonewthp,Talked with the doctor or nurse about their health and behaviors without a parent or guardian being in the room with them,,,,,,,,,,,,,,,,,,49.5
+United States,qnunfairlydisc,Have been unfairly disciplined at school,,,,,,,,,,,,,,,,,19.3,21.7
+United States,qnveg0,Did not eat vegetables,,,,,4.2,4.6,5.2,6.0,5.9,6.0,5.7,6.6,6.7,7.2,7.9,9.3,6.8,6.4
+United States,qnveg1,Ate vegetables one or more times per day,,,,,64.5,64.2,63.1,61.7,60.7,62.7,62.3,61.5,61.0,59.4,59.3,54.7,57.5,62.5
+United States,qnveg2,Ate vegetables two or more times per day,,,,,28.5,28.9,28.6,26.3,26.9,27.6,28.3,28.4,28.0,26.6,26.1,22.0,24.6,30.1
+United States,qnveg3,Ate vegetables three or more times per day,,,,,14.0,13.5,14.6,12.9,13.2,13.8,15.3,15.7,14.8,13.9,14.0,11.2,13.1,16.2
+United States,qnwater,Did not drink a bottle or glass of plain water,,,,,,,,,,,,,3.5,3.8,4.0,3.8,2.9,2.1
+United States,qnwater1,Drank a bottle or glass of plain water one or more times per day,,,,,,,,,,,,,73.6,75.4,77.2,76.8,78.0,80.6
+United States,qnwater2,Drank a bottle or glass of plain water two or more times per day,,,,,,,,,,,,,64.3,66.8,69.9,69.5,70.5,72.8
+United States,qnwater3,Drank a bottle or glass of plain water three or more times per day,,,,,,,,,,,,,49.5,51.3,55.4,55.8,53.6,58.3

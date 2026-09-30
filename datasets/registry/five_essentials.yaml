@@ -1,0 +1,32 @@
+dataset_id: five_essentials
+title: CPS 5Essentials survey results
+domain: five_essentials
+description: >-
+  School-level 5Essentials essential and measure scores for all CPS schools, latest
+  five survey years, with benchmark and subgroup breakouts.
+source:
+  url: https://www.5-essentials.org/cps/5e/
+  publisher: UChicago Impact / Chicago Public Schools
+  source_type: html_embedded_json
+  metadata_status: verified_from_scraper
+refresh:
+  cadence: annual
+  manual_refresh_eligible: true
+  metadata_status: verified
+ingestion:
+  method: five_essentials/scripts/01_scrape.py
+  expected_file_types: [html]
+  metadata_status: verified
+schema:
+  grain: school_year_indicator_group
+  primary_keys: [survey_year, school_id, level, indicator_slug, group_type, group]
+  time_field: survey_year
+  geography_or_school_identifiers: [school_id, school_name]
+  metadata_status: verified
+public_output:
+  path: five_essentials/data/clean/
+  format: csv
+  metadata_status: verified
+governance:
+  pii_assessment: aggregate_school_level_public
+  public_use_notes: Scores are suppressed by the source when response rates are too low.

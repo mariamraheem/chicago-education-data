@@ -1,0 +1,52 @@
+name: Update YRBS
+
+on:
+  schedule:
+    # Quarterly, 06:30 UTC on the 1st. CDC releases YRBS every two years, so
+    # most runs find the raw files already present and commit nothing.
+    - cron: "30 6 1 1,4,7,10 *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Re-download raw CDC files even if present"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Download CDC combined (SADC) files
+        run: python yrbs/scripts/01_scrape.py ${{ inputs.force && '--force' || '' }}
+
+      - name: Compile microdata + weighted prevalence
+        run: python yrbs/scripts/02_compile.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add yrbs/data
+          git diff --cached --quiet && exit 0
+          git commit -m "yrbs: scrape/compile $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push && exit 0
+            echo "Push attempt $i failed (remote moved) -- retrying..."
+            sleep $((RANDOM % 10 + 5))
+          done
+          echo "::error::Could not push after 5 attempts -- remote kept moving."
+          exit 1

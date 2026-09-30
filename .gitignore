@@ -3,3 +3,5 @@ budget/data/.DS_Store
 budget/.DS_Store
 budget/data/.DS_Store
 .Rhistory
+__pycache__/
+*.pyc

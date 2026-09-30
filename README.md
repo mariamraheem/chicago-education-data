@@ -165,3 +165,21 @@ funds (e.g. student based budget, revenue), split the roll-up logic out into
 combines EL/IEP and RACE aggregation - `02_clean.py` should stay focused on
 standardizing each raw file type into a tidy CSV; save cross-category
 combining for the compile stage.
+
+## More domains
+
+- **yrbs/** - CDC Youth Risk Behavior Survey: historic (1991-present) high school
+  results for Chicago, Illinois and the U.S. `01_scrape.py` downloads CDC's combined
+  datasets; `02_compile.py` builds student-level files and weighted prevalence tables
+  with 95% CIs. Raw files are stored with Git LFS. See `yrbs/README.md`.
+- **five_essentials/** - CPS 5Essentials survey: every school's essential and measure
+  scores for the latest five survey years, with benchmark and subgroup breakouts.
+  See `five_essentials/README.md`.
+
+```bash
+python yrbs/scripts/01_scrape.py && python yrbs/scripts/02_compile.py
+python five_essentials/scripts/01_scrape.py
+```
+
+Workflows `update-yrbs.yml` (quarterly check) and `update-5essentials.yml` (Jul-Oct)
+run these on GitHub Actions and can also be run on demand from the Actions tab.
