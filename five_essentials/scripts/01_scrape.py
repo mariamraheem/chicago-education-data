@@ -9,10 +9,13 @@ Usage:
     python five_essentials/scripts/01_scrape.py                  # last 5 surveys (e.g. 2022-2026)
     python five_essentials/scripts/01_scrape.py --years 2024 2025 2026
     python five_essentials/scripts/01_scrape.py --workers 2
+    python five_essentials/scripts/01_scrape.py --dictionary-only   # only the measure/question dictionary
 
 Outputs (five_essentials/data/clean/ unless --out is given):
     5essentials_long_<year>.csv.gz  one row per school x indicator x student/teacher group (gzipped, per year)
     5essentials_scores_wide.csv     all-respondent scores, one row per school-year, one column per indicator
+    5essentials_measures_dictionary.csv  each essential and measure: who is asked, description, question stem
+    5essentials_questions.csv       every survey question behind each measure, with its answer choices
     5essentials_schools.csv         school metadata, overall rating label and response rates by year
 Score codes: 1-99 = score; negative codes are the site's "no score" flags, decoded in
 `score_status` (no_report, not_eligible, P).
@@ -133,6 +136,85 @@ def scrape_one(year, sid):
     return parse(j, year)
 
 
+def _strip_html(h):
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html.unescape(h or ""))).strip()
+
+
+def build_dictionary(years, out, sample=8):
+    """Measure descriptions and survey questions for each year.
+
+    Each school's report carries the definitions of every measure, and the
+    report's "$measure-items" endpoint lists the questions behind a measure.
+    Elementary and high schools see slightly different measures, so a spread
+    of schools is sampled per year and the results are combined."""
+    meas_rows, item_rows, seen_items = {}, [], set()
+    for year in years:
+        ids = school_ids(year)
+        if not ids:
+            continue
+        step = max(1, len(ids) // sample)
+        for sid in ids[::step][:sample]:
+            page = get(f"{BASE}/cps/5e/{year}/s/{sid}/measures/")
+            j = app_data(page) if page else None
+            if not j or not j.get("measures"):
+                continue
+            subjects = {int(k): v for k, v in j["other_config"]["subjects"].items()}
+            ess_names = {e["slug"]: e["name"] for e in j["essentials"]}
+            for e in j["essentials"]:
+                key = (year, "essential", e["slug"])
+                if key not in meas_rows:
+                    text = _strip_html(((e.get("text") or {}).get("overview") or {}).get("__html"))
+                    meas_rows[key] = {
+                        "survey_year": year, "level": "essential", "essential": e["name"],
+                        "indicator_slug": e["slug"], "indicator": e["name"], "asked_of": "",
+                        "description": text[len(e["name"]):].strip() if text.startswith(e["name"]) else text,
+                        "question_stem": "",
+                    }
+            for m in j["measures"]:
+                key = (year, "measure", m["slug"])
+                if m["slug"] == "all":
+                    continue
+                if key not in meas_rows:
+                    text = _strip_html(((m.get("text") or {}).get("overview") or {}).get("__html"))
+                    parent = m.get("parent_slug")
+                    meas_rows[key] = {
+                        "survey_year": year, "level": "measure",
+                        "essential": "Supplemental measures" if parent == "_supplemental" else ess_names.get(parent, parent),
+                        "indicator_slug": m["slug"], "indicator": m["name"],
+                        "asked_of": subjects.get(m.get("subject"), ""),
+                        "description": text[len(m["name"]):].strip() if text.startswith(m["name"]) else text,
+                        "question_stem": m.get("stem") or "",
+                    }
+                if (year, m["slug"]) in seen_items:
+                    continue
+                try:
+                    r = session.get(f"{BASE}/cps/5e/{year}/s/{sid}/$measure-items", params={"m": m["slug"]}, timeout=30)
+                    items = r.json().get("items") if r.ok else None
+                except (requests.RequestException, ValueError):
+                    items = None
+                if not items:
+                    continue
+                seen_items.add((year, m["slug"]))
+                row = meas_rows[key]
+                for n, it in enumerate(items, 1):
+                    choices = it.get("choices") or {}
+                    item_rows.append({
+                        "survey_year": year, "essential": row["essential"], "indicator_slug": m["slug"],
+                        "indicator": m["name"], "asked_of": row["asked_of"], "question_stem": row["question_stem"],
+                        "question_order": n, "question_code": it.get("slug"),
+                        "question": (it.get("prompt") or "").strip(),
+                        "answer_choices": " | ".join(choices[k] for k in sorted(choices, key=lambda x: int(x))),
+                    })
+        print(f"dictionary {year}: {sum(1 for k in meas_rows if k[0] == year)} indicators, "
+              f"{sum(1 for r in item_rows if r['survey_year'] == year)} questions", flush=True)
+    if meas_rows:
+        pd.DataFrame(meas_rows.values()).sort_values(["survey_year", "level", "essential", "indicator"]) \
+          .to_csv(out / "5essentials_measures_dictionary.csv", index=False)
+    if item_rows:
+        pd.DataFrame(item_rows).sort_values(["survey_year", "essential", "indicator", "question_order"]) \
+          .to_csv(out / "5essentials_questions.csv", index=False)
+
+
 def main():
     this_year = date.today().year
     ap = argparse.ArgumentParser()
@@ -141,6 +223,8 @@ def main():
     ap.add_argument("--n-years", type=int, default=5)
     ap.add_argument("--out", default=str(REPO_ROOT / "five_essentials" / "data" / "clean"))
     ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--dictionary-only", action="store_true",
+                    help="only build the measure/question dictionary, skip school scores")
     args = ap.parse_args()
     if not args.years:
         latest = next(y for y in range(this_year + 1, this_year - 3, -1) if get(f"{BASE}/cps/5e/{y}/"))
@@ -148,6 +232,10 @@ def main():
     print("survey years:", args.years, flush=True)
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
+
+    build_dictionary(args.years, out)
+    if args.dictionary_only:
+        return
 
     rows, metas = [], []
     for year in args.years:
