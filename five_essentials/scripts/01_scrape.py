@@ -120,6 +120,7 @@ def parse(j, year):
         "student_response_rate": t.get("student_response_rate"),
         "teacher_response_rate": t.get("teacher_response_rate"),
         "parent_response_rate": t.get("parent_response_rate"),
+        "overall_label": j.get("overall_long_label"),
     }
     return rows, meta
 

@@ -82,6 +82,36 @@ DOMAINS = [
             DataFile("budget_dashboard_data.csv", "dashboard_data", "District Managed Funds"),
         ],
     ),
+    Domain(
+        id="yrbs",
+        label="Student health (YRBS)",
+        description="CDC Youth Risk Behavior Survey: Chicago, Illinois and U.S. high school students, 1991 to the latest survey.",
+        tab_url="index.html#yrbs",
+        refresh_workflow_url=(
+            "https://github.com/mariamraheem/chicago-education-data/"
+            "actions/workflows/update-yrbs.yml"
+        ),
+        source_dir=REPO_ROOT / "yrbs" / "data" / "clean",
+        data_files=[
+            DataFile("yrbs_prevalence_long.csv", "prevalence_long", "Weighted % by geography/year/indicator/group"),
+            DataFile("yrbs_prevalence_total_wide.csv", "prevalence_total_wide", "Overall % by year (wide)"),
+        ],
+    ),
+    Domain(
+        id="five_essentials",
+        label="School climate (5Essentials)",
+        description="5Essentials essential and measure scores for every CPS school, latest five survey years.",
+        tab_url="index.html#5e",
+        refresh_workflow_url=(
+            "https://github.com/mariamraheem/chicago-education-data/"
+            "actions/workflows/update-5essentials.yml"
+        ),
+        source_dir=REPO_ROOT / "five_essentials" / "data" / "clean",
+        data_files=[
+            DataFile("5essentials_scores_wide.csv", "scores_wide", "All-respondent scores by school and year"),
+            DataFile("5essentials_schools.csv", "schools", "School type, rating and response rates by year"),
+        ],
+    ),
 ]
 
 
@@ -143,6 +173,7 @@ HEADLINE_FUNCS = {
     "enrollment": enrollment_headline,
     "budget": budget_headline,
 }
+# (YRBS and 5Essentials headlines are built by scripts/build_trends.py.)
 
 
 def build_domain(domain: Domain, generated_at: str) -> dict:
@@ -200,6 +231,13 @@ def main() -> None:
     print(f"Wrote {API_DIR / 'manifest.json'}")
     for source in manifest["sources"]:
         print(f"  {source['id']}: {len(source['api'])} file(s), row_count={source['row_count']}")
+
+    # Trend summaries for the home page's YRBS and 5Essentials tabs.
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("build_trends", Path(__file__).with_name("build_trends.py"))
+    build_trends = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(build_trends)
+    build_trends.main()
 
 
 if __name__ == "__main__":

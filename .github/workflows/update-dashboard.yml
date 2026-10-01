@@ -1,16 +1,16 @@
 name: Update Site
 
-# Fast site assembly + deploy -- NO scraping here. It assumes
-# update-enrollment.yml and update-budget.yml have already committed fresh
-# data to main (they run on their own schedule / on demand), and just
-# copies what's currently committed into a Pages site: the landing page,
-# the enrollment tab, the budget tab, and a JSON export API + manifest for
-# all of it. Runs in seconds, so it's safe to fire on every push that
-# touches either dashboard's files, not just manually.
+# Assembles and deploys the whole GitHub Pages site -- NO scraping here:
+#   /              home page: overview, Student health (YRBS), School climate (5Essentials)
+#   /enrollment/   enrollment dashboard
+#   /budget/       budget dashboard
+#   /monitor/      CPS file monitor (built from the committed monitor/data)
+#   /api/          JSON export API, manifest, and trend summaries
 #
-# Note: this replaces whatever is currently live on Pages, including
-# update-monitor.yml's own site content if that's what's live at the time.
-# The two are not coordinated; whichever workflow ran most recently wins.
+# It runs whenever a data workflow finishes (their bot commits can't trigger
+# a push event), on pushes that touch the site or its data, and on demand.
+# This is now the ONLY workflow that deploys Pages, so the monitor no longer
+# overwrites the rest of the site.
 
 on:
   push:
@@ -18,8 +18,15 @@ on:
     paths:
       - "enrollment/dashboard/**"
       - "budget/dashboard/**"
+      - "yrbs/data/clean/**"
+      - "five_essentials/data/clean/**"
+      - "monitor/**"
       - "site-landing/**"
       - "scripts/build_site_manifest.py"
+      - "scripts/build_trends.py"
+  workflow_run:
+    workflows: ["Update Enrollment", "Update Budget", "Update YRBS", "Update 5Essentials", "Update Monitor"]
+    types: [completed]
   workflow_dispatch: {}
 
 permissions:
@@ -36,6 +43,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
@@ -43,12 +52,18 @@ jobs:
 
       - name: Assemble Pages site
         run: |
-          mkdir -p site/enrollment site/budget
+          mkdir -p site/enrollment site/budget site/monitor
           cp -r site-landing/. site/
           cp -r enrollment/dashboard/. site/enrollment/
           cp -r budget/dashboard/. site/budget/
 
-      - name: Build JSON export API + manifest
+      - name: Build file monitor page from committed scan data
+        run: |
+          python monitor/02_export_api.py
+          python monitor/03_render_dashboard.py
+          cp -r monitor/site/. site/monitor/
+
+      - name: Build JSON export API, manifest and trend summaries
         run: python scripts/build_site_manifest.py
 
       - name: Upload site artifact
