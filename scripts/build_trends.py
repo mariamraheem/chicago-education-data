@@ -7,7 +7,7 @@ Builds the compact JSON the site's trend pages read:
 
 Inputs (committed by the domain pipelines):
     yrbs/data/clean/yrbs_prevalence_long.csv
-    five_essentials/data/clean/5essentials_long.csv
+    five_essentials/data/clean/5essentials_long_<year>.csv.gz
     five_essentials/data/clean/5essentials_schools.csv
 
 Missing inputs are skipped; the pages show "no data yet" for that source.
@@ -16,6 +16,7 @@ Called from scripts/build_site_manifest.py, so the existing site workflow picks 
 from __future__ import annotations
 
 import csv
+import gzip
 import json
 import math
 import statistics
@@ -26,7 +27,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = REPO_ROOT / "site" / "api" / "trends"
 
 YRBS_CSV = REPO_ROOT / "yrbs" / "data" / "clean" / "yrbs_prevalence_long.csv"
-FE_LONG = REPO_ROOT / "five_essentials" / "data" / "clean" / "5essentials_long.csv"
+FE_DIR = REPO_ROOT / "five_essentials" / "data" / "clean"
+FE_LONG = FE_DIR / "5essentials_long.csv"  # older single-file layout, still read if present
 FE_SCHOOLS = REPO_ROOT / "five_essentials" / "data" / "clean" / "5essentials_schools.csv"
 
 # ---------------------------------------------------------------- YRBS topics
@@ -150,15 +152,22 @@ def _band(score: float) -> str:
 
 
 def build_five_essentials() -> dict | None:
-    if not FE_LONG.exists():
+    long_files = sorted(FE_DIR.glob("5essentials_long_*.csv.gz")) or ([FE_LONG] if FE_LONG.exists() else [])
+    if not long_files:
         return None
     ess_slug = {name: slug for slug, name in ESSENTIALS}
     ess_scores = defaultdict(lambda: defaultdict(list))      # slug -> year -> [scores]
     meas_scores = defaultdict(lambda: defaultdict(list))     # measure -> year -> [scores]
     meas_meta = {}
     schools = defaultdict(lambda: {"n": "", "y": {}})
-    with open(FE_LONG, newline="", encoding="utf-8") as f:
-        for r in csv.DictReader(f):
+    def rows():
+        for path in long_files:
+            opener = gzip.open if path.suffix == ".gz" else open
+            with opener(path, "rt", newline="", encoding="utf-8") as f:
+                yield from csv.DictReader(f)
+
+    if True:
+        for r in rows():
             if r["group"] != "All respondents" or r["score_status"] != "reported":
                 continue
             yr, sid, s = int(r["survey_year"]), r["school_id"], float(r["score"])

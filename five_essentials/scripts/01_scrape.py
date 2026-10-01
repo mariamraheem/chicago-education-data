@@ -11,9 +11,9 @@ Usage:
     python five_essentials/scripts/01_scrape.py --workers 2
 
 Outputs (five_essentials/data/clean/ unless --out is given):
-    5essentials_long.csv            one row per school x year x indicator x student/teacher group
+    5essentials_long_<year>.csv.gz  one row per school x indicator x student/teacher group (gzipped, per year)
     5essentials_scores_wide.csv     all-respondent scores, one row per school-year, one column per indicator
-    5essentials_schools.csv         school metadata + response rates by year
+    5essentials_schools.csv         school metadata, overall rating label and response rates by year
 Score codes: 1-99 = score; negative codes are the site's "no score" flags, decoded in
 `score_status` (no_report, not_eligible, P).
 """
@@ -175,8 +175,14 @@ def main():
         sys.exit("No data scraped. Check the years and that www.5-essentials.org is reachable.")
 
     df = pd.DataFrame(rows)
-    df.sort_values(["survey_year", "school_id", "level", "indicator", "group_type", "group"]) \
-      .to_csv(out / "5essentials_long.csv", index=False)
+    # The full long file is ~300 MB (every subgroup breakout), over GitHub's 100 MB
+    # file limit, so it is written as one gzipped file per survey year (~10 MB each).
+    df = df.sort_values(["survey_year", "school_id", "level", "indicator", "group_type", "group"])
+    for yr, part in df.groupby("survey_year"):
+        part.to_csv(out / f"5essentials_long_{yr}.csv.gz", index=False, compression="gzip")
+    stale = out / "5essentials_long.csv"
+    if stale.exists():
+        stale.unlink()
     pd.DataFrame(metas).sort_values(["survey_year", "school_id"]) \
       .to_csv(out / "5essentials_schools.csv", index=False)
 
