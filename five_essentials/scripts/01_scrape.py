@@ -13,7 +13,7 @@ Usage:
 Outputs (five_essentials/data/clean/ unless --out is given):
     5essentials_long.csv            one row per school x year x indicator x student/teacher group
     5essentials_scores_wide.csv     all-respondent scores, one row per school-year, one column per indicator
-    5essentials_schools.csv         school metadata + response rates by year
+    5essentials_schools.csv         school metadata, overall rating label and response rates by year
 Score codes: 1-99 = score; negative codes are the site's "no score" flags, decoded in
 `score_status` (no_report, not_eligible, P).
 """
@@ -120,6 +120,7 @@ def parse(j, year):
         "student_response_rate": t.get("student_response_rate"),
         "teacher_response_rate": t.get("teacher_response_rate"),
         "parent_response_rate": t.get("parent_response_rate"),
+        "overall_label": j.get("overall_long_label"),
     }
     return rows, meta
 

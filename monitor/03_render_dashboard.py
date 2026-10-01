@@ -253,6 +253,7 @@ function Hero({ latest, runs, apiIndex, onOpenDocs }) {
       <div className="p-6 sm:p-8">
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
           <div>
+            <a href="../index.html" className="text-sm text-indigo-100 hover:text-white">&larr; Chicago Education Data</a>
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Chicago Education Data Monitor</h1>
             <p className="text-indigo-100 mt-1 text-sm sm:text-base">
               Live inventory of every data file CPS publishes, tracked for changes.

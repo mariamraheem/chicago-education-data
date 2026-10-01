@@ -13,16 +13,12 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
-# Only one Pages deployment at a time; don't cancel one that's already running.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+# Deploying is done by update-dashboard.yml ("Update Site"), which runs
+# automatically when this workflow finishes and publishes the monitor at /monitor/.
 
 jobs:
-  scan-and-build:
+  scan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -37,22 +33,6 @@ jobs:
       - name: Scan cps.edu + api.cps.edu
         run: python monitor/01_scan.py
 
-      - name: Export static JSON/CSV API
-        run: python monitor/02_export_api.py
-
-      - name: Render React dashboard
-        run: python monitor/03_render_dashboard.py
-
-      - name: Add enrollment dashboard
-        run: |
-          mkdir -p monitor/site/enrollment
-          cp enrollment/dashboard/index.html monitor/site/enrollment/index.html
-          if [ -f enrollment/dashboard/enrollment_dashboard_data.csv ]; then
-            cp enrollment/dashboard/enrollment_dashboard_data.csv monitor/site/enrollment/enrollment_dashboard_data.csv
-          else
-            echo "::warning::enrollment_dashboard_data.csv not found -- has update-enrollment.yml run yet?"
-          fi
-
       - name: Commit updated inventory data
         run: |
           git config user.name "github-actions[bot]"
@@ -60,18 +40,3 @@ jobs:
           git add monitor/data
           git diff --cached --quiet || git commit -m "monitor: scan $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           git push
-
-      - name: Upload dashboard artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: monitor/site
-
-  deploy:
-    needs: scan-and-build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
