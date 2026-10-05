@@ -43,10 +43,13 @@ jobs:
           git add yrbs/data
           git diff --cached --quiet && exit 0
           git commit -m "yrbs: scrape/compile $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          # --autostash: files the run touched but didn't stage (e.g. line-ending or
+          # LFS normalization on checkout) must not block the rebase.
           for i in 1 2 3 4 5; do
-            git pull --rebase origin main && git push && exit 0
-            echo "Push attempt $i failed (remote moved) -- retrying..."
+            git pull --rebase --autostash origin main && git push && exit 0
+            echo "Push attempt $i failed -- retrying..."
+            git status --short | head -20
             sleep $((RANDOM % 10 + 5))
           done
-          echo "::error::Could not push after 5 attempts -- remote kept moving."
+          echo "::error::Could not push after 5 attempts. See the git output above."
           exit 1
