@@ -1,0 +1,40 @@
+dataset_id: reference_schools
+title: School crosswalk and boundaries (shared reference)
+domain: reference
+description: >-
+  Current assignment of each CPS school to a network, community area and
+  Elected School Board sub-district, with school locations and the boundary
+  files used for maps. Shared by every dataset and app in this repo.
+source:
+  url: https://github.com/mariamraheem/cps-enrollment-dashboard
+  publisher: Kids First Chicago (derived from CPS 20th-day reports and Chicago Data Portal boundaries)
+  source_type: copied_json_and_geojson
+  metadata_status: partially_verified_locations_and_esb_source_not_recorded
+refresh:
+  cadence: when_boundaries_or_school_list_change
+  manual_refresh_eligible: true
+  metadata_status: manual_copy_until_enrollment_dashboard_is_merged
+ingestion:
+  method: copy from cps-enrollment-dashboard docs/data, then reference/scripts/build_crosswalk.py
+  expected_file_types: [json, geojson]
+  metadata_status: verified
+schema:
+  grain: one_record_per_school (crosswalk); one_feature_per_area (geo)
+  primary_keys: [school_id]
+  time_field: none_current_assignments_only
+  geography_or_school_identifiers: [school_id, network, community_area, esb_district]
+  metadata_status: verified
+quality:
+  row_count_thresholds: {}
+  change_thresholds: {}
+  allowed_values: {}
+  metadata_status: placeholder
+public_output:
+  path: reference/
+  format: [csv, json, geojson]
+  metadata_status: verified
+governance:
+  pii_assessment: public_school_level_reference_data
+  public_use_notes: Current assignments; don't apply them to past years without checking the year's network.
+provenance:
+  fields: [copied_from, copied_at]

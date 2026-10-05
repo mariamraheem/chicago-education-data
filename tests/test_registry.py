@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 class RegistryTests(unittest.TestCase):
     def test_existing_registry_entries_load(self):
         registry = load_registry(ROOT / "datasets" / "registry")
-        self.assertEqual(set(registry), {"enrollment", "enrollment_20th_day_membership", "budget", "monitor"})
+        self.assertEqual(set(registry), {"enrollment", "enrollment_20th_day_membership", "budget", "monitor", "five_essentials", "yrbs", "reference_schools"})
 
     def test_missing_required_fields_are_reported(self):
         errors = validate_registry_entry({"dataset_id": "example"})

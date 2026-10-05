@@ -30,3 +30,13 @@ public_output:
 governance:
   pii_assessment: public_use_deidentified_cdc_files
   public_use_notes: Estimates with n < 100 are flagged suppress=True and should not be reported.
+quality:
+  row_count_thresholds: {}
+  change_thresholds: {}
+  allowed_values:
+    suppress: [true, false]
+  suppression_rule: estimates based on fewer than 100 students are flagged suppress=True
+  metadata_status: verified_suppression_rule_thresholds_placeholder
+provenance:
+  fields: [source_url, release, source_file_name, retrieved_at]
+  metadata_status: placeholder_scraper_does_not_record_run_metadata_yet

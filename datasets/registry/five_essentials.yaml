@@ -30,3 +30,16 @@ public_output:
 governance:
   pii_assessment: aggregate_school_level_public
   public_use_notes: Scores are suppressed by the source when response rates are too low.
+quality:
+  row_count_thresholds: {}
+  change_thresholds: {}
+  allowed_values:
+    score: 1-99 or blank (blank explained by score_status)
+    score_status: [no_report, not_eligible, P]
+  known_issues:
+    - Grit reported only in 2022-2023
+    - 2025 lacks the overall rating, Ambitious Instruction and six student measures; Supportive Environment covers only 164 schools
+  metadata_status: placeholder_pending_baseline_review
+provenance:
+  fields: [source_url, survey_year, school_id, retrieved_at]
+  metadata_status: placeholder_scraper_does_not_record_run_metadata_yet

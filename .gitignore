@@ -5,3 +5,13 @@ budget/data/.DS_Store
 .Rhistory
 __pycache__/
 *.pyc
+
+# Copies made by five_essentials/apps/explorer/update_data.R
+five_essentials/apps/explorer/data/
+five_essentials/apps/explorer/www/geo/
+
+# R and Shiny
+.Rproj.user/
+*.Rproj
+.RData
+rsconnect/
