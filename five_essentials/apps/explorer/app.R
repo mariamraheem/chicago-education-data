@@ -77,6 +77,10 @@ MAP_LAYERS <- list(
                         key = "sub", to_key = tolower)
 )
 SCHOOLS_LAYER <- "school"
+# Boundaries drawn as thin outlines under the school points, so the city
+# edge and neighborhoods are visible. Any MAP_LAYERS name works here.
+SCHOOL_MAP_OUTLINE <- "community_area"
+OUTLINE_COLOR <- "#718096"
 MAP_CENTER    <- list(lat = 41.835, lon = -87.69)
 MAP_ZOOM      <- 9.3
 MAP_STYLE     <- "carto-positron"     # free basemap, no token needed
@@ -764,6 +768,7 @@ unmapped_units <- function(df, geo_keys, geography) {
 plot_map <- function(df, geo_keys, geography, measure, stat, source, color_mode = "bands") {
   df$hover <- map_hover(df, geography, measure, stat)
   p <- plot_ly(source = source)
+  if (geography == SCHOOLS_LAYER) p <- add_outline(p, geo_keys, SCHOOL_MAP_OUTLINE)
   relative <- color_mode == "relative"
   colorbar <- list(title = list(text = "Score", font = list(size = 11)),
                    thickness = 12, len = 0.5, x = 0.98)
@@ -832,6 +837,21 @@ plot_map <- function(df, geo_keys, geography, measure, stat, source, color_mode 
     ) |>
     config(displayModeBar = FALSE, scrollZoom = TRUE) |>
     event_register("plotly_click")
+}
+
+#' Draw a layer's boundaries as outlines only (no fill, no hover), e.g. the
+#' community areas under the school points.
+add_outline <- function(p, geo_keys, layer_name) {
+  layer <- MAP_LAYERS[[layer_name]]
+  keys  <- geo_keys[[layer_name]]
+  add_trace(
+    p, type = "choroplethmapbox", geojson = layer$url,
+    featureidkey = paste0("properties.", layer$key), locations = keys,
+    z = rep(1, length(keys)), showscale = FALSE,
+    colorscale = list(c(0, 1), c("rgba(0,0,0,0)", "rgba(0,0,0,0)")),
+    marker = list(line = list(color = OUTLINE_COLOR, width = 0.8)),
+    hoverinfo = "skip"
+  )
 }
 
 band_legend <- function() {
