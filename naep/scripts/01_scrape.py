@@ -127,9 +127,12 @@ def call_api(subject: str, grade: int, variable: str, year: int, juris: list[str
     }
     try:
         r = requests.get(API_URL, params=params, headers=HEADERS, timeout=TIMEOUT)
-        body = r.json()
+        # error bodies have raw line breaks in them, so they don't parse as strict json
+        body = json.loads(r.text, strict=False)
     except (requests.RequestException, ValueError) as e:
         return {"status": None, "error": str(e), "params": params}
+    if "status" not in body and "statusCode" in body:
+        body["status"] = body["statusCode"]
     body["params"] = params
     return body
 
@@ -141,10 +144,22 @@ def pull_one(subject: str, grade: int, variable: str, year: int) -> tuple[list, 
     if body.get("status") == 200 and isinstance(body.get("result"), list):
         return body["result"], [{"params": body["params"], "status": 200, "rows": len(body["result"])}]
 
-    # whole-batch call failed -- usually means one jurisdiction wasn't assessed that
-    # year/grade. go one by one so the rest still come through.
-    rows, log = [], [{"params": body.get("params"), "status": body.get("status"),
-                      "error": str(body.get("error") or body.get("result"))[:300]}]
+    log = [{"params": body.get("params"), "status": body.get("status"),
+            "error": str(body.get("error") or body.get("result"))[:300]}]
+
+    # districts that weren't assessed come back as 999 / not displayable, not as
+    # errors. a failed batch usually means the subject wasn't given that year at all
+    # (e.g. math 2002 -> 400 "did not return exactly 1 framework"). check national
+    # public first -- if that fails too, skip the year instead of trying all 32 codes.
+    time.sleep(SLEEP_BETWEEN_CALLS)
+    probe = call_api(subject, grade, variable, year, ["NP"])
+    if probe.get("status") != 200:
+        log.append({"params": probe.get("params"), "status": probe.get("status"), "rows": 0,
+                    "note": "not assessed this year -- skipped"})
+        return [], log
+
+    # national public works, so go one by one so the rest still come through
+    rows = []
     for code in codes:
         time.sleep(SLEEP_BETWEEN_CALLS)
         b = call_api(subject, grade, variable, year, [code])
@@ -163,6 +178,8 @@ def scrape_file(subject: str, grade: int, variable: str, dest: Path) -> int:
     all_rows, all_log = [], []
     for year in YEARS:
         rows, log = pull_one(subject, grade, variable, year)
+        skipped = any(x.get("note", "").startswith("not assessed") for x in log)
+        print(f"    {year}: {'not assessed' if skipped else f'{len(rows)} rows'}", flush=True)
         all_rows.extend(rows)
         all_log.extend(log)
         time.sleep(SLEEP_BETWEEN_CALLS)
@@ -197,8 +214,9 @@ def main() -> None:
             if dest.exists() and dest.stat().st_size > 0 and not args.force:
                 skipped += 1
                 continue
+            print(f"  {dest.name}", flush=True)
             n = scrape_file(subject, grade, variable, dest)
-            print(f"  {dest.name}: {n} rows")
+            print(f"  {dest.name}: {n} rows", flush=True)
             written += 1
             if n == 0:
                 empty.append(dest.name)
