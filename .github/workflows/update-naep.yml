@@ -1,0 +1,67 @@
+name: Update NAEP
+
+on:
+  schedule:
+    # Quarterly, 07:30 UTC on the 1st. NAEP releases every two years, so most
+    # runs find the raw files already present and commit nothing.
+    - cron: "30 7 1 1,4,7,10 *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Re-pull everything from the NAEP API (picks up revisions)"
+        type: boolean
+        default: false
+  # test run on pull requests that touch naep/ -- scrapes and validates but
+  # doesn't commit anything
+  pull_request:
+    paths:
+      - "naep/**"
+      - ".github/workflows/update-naep.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Pull from the NAEP API
+        run: python naep/scripts/01_scrape.py ${{ inputs.force && '--force' || '' }}
+
+      - name: Compile long + wide tables
+        run: python naep/scripts/02_compile.py
+
+      - name: Check against the 2026 brief
+        run: python naep/scripts/03_validate.py
+
+      - name: Upload outputs (PR test runs)
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: naep-outputs
+          path: naep/data
+
+      - name: Commit updated data
+        if: github.event_name != 'pull_request'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add naep/data
+          git diff --cached --quiet && exit 0
+          git commit -m "naep: scrape/compile $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main && git push && exit 0
+            echo "Push attempt $i failed -- retrying..."
+            sleep $((RANDOM % 10 + 5))
+          done
+          echo "::error::Could not push after 5 attempts. See the git output above."
+          exit 1
