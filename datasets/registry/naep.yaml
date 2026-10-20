@@ -1,0 +1,41 @@
+dataset_id: naep
+title: NAEP average scale scores (Chicago, TUDA districts, Illinois, national)
+domain: naep
+description: >-
+  NAEP math and reading average scale scores, grades 4, 8 and 12, by student group,
+  for Chicago, all TUDA districts, the large-city average, Illinois and the nation.
+source:
+  url: https://www.nationsreportcard.gov/api_documentation.aspx
+  publisher: National Center for Education Statistics
+  source_type: json_api
+  metadata_status: verified_from_api_docs
+refresh:
+  cadence: biennial
+  manual_refresh_eligible: true
+  metadata_status: verified
+ingestion:
+  method: naep/scripts/01_scrape.py then 02_compile.py then 03_validate.py
+  expected_file_types: [json]
+  metadata_status: placeholder_not_yet_run_against_live_api
+schema:
+  grain: year_jurisdiction_subject_grade_group
+  primary_keys: [year, jurisdiction, subject, grade, group_type, group]
+  time_field: year
+  geography_or_school_identifiers: [jurisdiction, jurisdiction_code]
+  metadata_status: verified
+public_output:
+  path: naep/data/clean/
+  format: csv
+  metadata_status: verified
+governance:
+  pii_assessment: public_aggregate_statistics
+  public_use_notes: Point estimates only; scores NAEP marks as not displayable are left blank.
+quality:
+  row_count_thresholds: {}
+  change_thresholds: {}
+  allowed_values: {}
+  suppression_rule: isStatDisplayable = 0 -> blank
+  metadata_status: placeholder
+provenance:
+  fields: [source, retrieved_at, request_log]
+  metadata_status: recorded_in_raw_json
