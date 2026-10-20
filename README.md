@@ -16,6 +16,7 @@ workflow finishes.
 | [`enrollment/`](enrollment/) | 20th-day enrollment by school, grade, race, EL/IEP | CPS demographics reports | 1999-2000 to now | Monthly check (Actions) | [README](enrollment/README.md) |
 | [`five_essentials/`](five_essentials/) | 5Essentials survey scores by school, essential and measure | UChicago Impact (5-essentials.org) | Latest 5 surveys | Jul-Oct (Actions) | [README](five_essentials/README.md) |
 | [`yrbs/`](yrbs/) | Youth Risk Behavior Survey, Chicago / Illinois / U.S. | CDC (SADC files) | 1991 to now | Quarterly check (Actions) | [README](yrbs/README.md) |
+| [`naep/`](naep/) | NAEP average scale scores by student group, Chicago / TUDA districts / Illinois / U.S. | NCES NAEP Data Service API | 1990 to now | Quarterly check (Actions) | [README](naep/README.md) |
 | [`budget/`](budget/) | School budgets (District Managed Funds, charter/contract) | CPS budget pages | FY2025 to now | Monthly check (Actions) | [README](budget/README.md) |
 | [`monitor/`](monitor/) | Inventory of every downloadable file on cps.edu, and what changed | cps.edu, api.cps.edu | Rolling | Weekly (Actions) | [README](monitor/README.md) |
 | [`reference/`](reference/) | Shared lookups: school to network / community area / ESB district, school locations, boundaries | CPS reports and Chicago Data Portal | Current | When boundaries change | [README](reference/README.md) |
@@ -62,6 +63,7 @@ python enrollment/scripts/03_compile.py
 
 python five_essentials/scripts/01_scrape.py
 python yrbs/scripts/01_scrape.py && python yrbs/scripts/02_compile.py
+python naep/scripts/01_scrape.py && python naep/scripts/02_compile.py && python naep/scripts/03_validate.py
 python budget/scripts/01_scrape.py && python budget/scripts/02_clean.py
 
 # Tests for the shared helpers
