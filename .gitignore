@@ -15,3 +15,7 @@ five_essentials/apps/explorer/www/geo/
 *.Rproj
 .RData
 rsconnect/
+
+# Copy made by naep/apps/explorer/update_data.R
+naep/apps/explorer/NAEP_Compiled_Wide.xlsx
+naep/data/raw/*.part
