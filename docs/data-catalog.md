@@ -55,6 +55,17 @@ Source: CDC combined (SADC) datasets. Folder: [`yrbs/`](../yrbs/).
 Don't report estimates where `suppress = True` (fewer than 100 students).
 Chicago has no 2015 data.
 
+## NAEP
+
+Source: NCES NAEP Data Service API. Folder: [`naep/`](../naep/).
+
+| File | One row per | Key columns | Years |
+|---|---|---|---|
+| `data/clean/naep_scores_long.csv` | year x jurisdiction x subject x grade x student group | `year`, `jurisdiction`, `subject`, `grade`, `group_type`, `group`, `average_scale_score`, `is_displayable` | 1990 to latest |
+| `data/clean/naep_scores_wide.csv` | year x jurisdiction x subject x grade | `Year`, `Jurisdiction`, `Subject`, `Grade`, one column per student group (same layout as the hand-built workbook) | 1990 to latest |
+
+Point estimates only. Blank = NAEP's reporting standards not met, or not assessed.
+
 ## Budget
 
 Source: CPS budget documents. Folder: [`budget/`](../budget/).
