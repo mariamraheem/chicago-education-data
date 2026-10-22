@@ -18,6 +18,9 @@ underscores: `five_essentials`, not `5E`):
   apps/<name>/       interactive apps (Shiny, Streamlit), one folder each
 ```
 
+**Starter files:** copy [`docs/templates/dataset/`](templates/dataset/) to start a new
+dataset folder (README, numbered script and registry entry, ready to fill in).
+
 Lookups used by more than one dataset (school crosswalks, boundaries) go in
 [`reference/`](../reference/), not inside a dataset folder.
 
