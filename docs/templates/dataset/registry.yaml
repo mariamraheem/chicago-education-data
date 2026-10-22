@@ -1,0 +1,42 @@
+# copy to datasets/registry/<dataset>.yaml, fill in, and add the dataset id to
+# tests/test_registry.py. see datasets/registry/README.md for what each field means.
+dataset_id: <dataset>
+title: <Human-readable title>
+domain: <dataset>
+description: >-
+  <What it is, in one or two sentences.>
+source:
+  url: <url>
+  publisher: <agency>
+  source_type: <csv | xlsx | json_api | html | fixed_width_ascii>
+  metadata_status: placeholder
+refresh:
+  cadence: <annual | biennial | monthly | ad_hoc>
+  manual_refresh_eligible: true
+  metadata_status: placeholder
+ingestion:
+  method: <dataset>/scripts/01_scrape.py then 02_clean.py
+  expected_file_types: [<csv>]
+  metadata_status: placeholder
+schema:
+  grain: <school_year_school>
+  primary_keys: [<school_id>, <school_year>]
+  time_field: <school_year>
+  geography_or_school_identifiers: [<school_id>]
+  metadata_status: placeholder
+public_output:
+  path: <dataset>/data/clean/
+  format: csv
+  metadata_status: placeholder
+governance:
+  pii_assessment: <public_aggregate_statistics>
+  public_use_notes: <suppression rules, caveats>
+quality:
+  row_count_thresholds: {}
+  change_thresholds: {}
+  allowed_values: {}
+  suppression_rule: <how the source marks suppressed values>
+  metadata_status: placeholder
+provenance:
+  fields: [source_url, retrieved_at]
+  metadata_status: placeholder
