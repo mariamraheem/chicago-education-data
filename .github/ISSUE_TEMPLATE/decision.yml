@@ -1,0 +1,49 @@
+name: Decision needed
+description: A question that has to be settled before work can move
+title: "Decide: <question>"
+projects: ["mariamraheem/1"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Set **Status** to *Decision needed* on the board so it shows up in the Decisions view.
+        When it's decided, fill in the decision below and close the issue.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+    validations:
+      required: true
+
+  - type: textarea
+    id: options
+    attributes:
+      label: Options
+      placeholder: |
+        1. ...
+        2. ...
+
+  - type: input
+    id: who
+    attributes:
+      label: Who decides
+      placeholder: Mariam + comms
+
+  - type: input
+    id: needed_by
+    attributes:
+      label: Needed by
+      placeholder: Nov 7, 2026
+
+  - type: textarea
+    id: blocks
+    attributes:
+      label: What's waiting on this
+      placeholder: "#25 How to read this report"
+
+  - type: textarea
+    id: decision
+    attributes:
+      label: Decision (fill in when decided)
+      placeholder: What we chose, why, and the date.

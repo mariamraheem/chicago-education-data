@@ -1,0 +1,63 @@
+name: Data pipeline
+description: Add a new dataset to the repo, or pull a new release of one that's already here
+title: "<dataset>: <add / pull YYYY release>"
+projects: ["mariamraheem/1"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For anything that downloads or cleans data. Folder rules are in
+        `docs/conventions.md`; the starter files are in `docs/templates/dataset/`.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of work?
+      options:
+        - New dataset (new folder)
+        - New release of an existing dataset
+        - Fix or change to an existing pipeline
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Source URL
+      placeholder: https://www.illinoisreportcard.com/...
+    validations:
+      required: true
+
+  - type: input
+    id: release
+    attributes:
+      label: Release date / refresh cadence
+      placeholder: Oct 31, 2026 at 9am; yearly
+
+  - type: input
+    id: folder
+    attributes:
+      label: Folder
+      description: lowercase with underscores, named for the data
+      placeholder: report_card
+
+  - type: textarea
+    id: check
+    attributes:
+      label: What will we check the output against?
+      description: A published number we can match, so we know the scrape is right.
+      placeholder: ISBE's district total enrollment for 2025; Chicago IAR ELA 2024 from the report card site
+
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      value: |
+        - [ ] Folder follows the layout in docs/templates/dataset/
+        - [ ] Numbered scripts run from the repo root; scraper skips files it has (`--force` to re-pull)
+        - [ ] Raw files committed as downloaded; clean files written by the scripts
+        - [ ] Validation step passes against a published number
+        - [ ] README filled in (including Known data issues)
+        - [ ] Registry entry in datasets/registry/
+        - [ ] Outputs added to docs/data-catalog.md and the front-door README table
+        - [ ] Workflow in .github/workflows/ (if it should refresh on its own)
