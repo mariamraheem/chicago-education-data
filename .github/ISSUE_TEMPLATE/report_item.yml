@@ -1,0 +1,80 @@
+name: Report item
+description: One analysis, chart or section of a report (e.g. State of CPS)
+title: "<Section>: <what this shows>"
+projects: ["mariamraheem/1"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        One issue = one thing that ends up in the report (a chart, a number, a paragraph).
+        After creating it, set **Section**, **Data source** and **Status** on the project board.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: What question does this answer?
+      description: One or two sentences, plain language.
+      placeholder: How has chronic absenteeism changed since 2019, citywide and by ESB district?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: source
+    attributes:
+      label: Data source
+      options:
+        - Illinois Report Card
+        - CPS 20th Day
+        - NAEP
+        - 5Essentials
+        - YRBSS
+        - To&Through
+        - Other (say below)
+    validations:
+      required: true
+
+  - type: input
+    id: years
+    attributes:
+      label: Years
+      placeholder: 2019-2026
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: cuts
+    attributes:
+      label: How is it cut?
+      options:
+        - label: Citywide
+        - label: Network
+        - label: ESB district
+        - label: Community area
+        - label: Student group (race, EL, IEP, low income)
+        - label: School
+
+  - type: input
+    id: repo_path
+    attributes:
+      label: Repo data / script
+      description: Where the clean data lives, if it exists already.
+      placeholder: naep/data/clean/naep_scores_wide.csv
+
+  - type: textarea
+    id: depends
+    attributes:
+      label: Depends on
+      description: Issues that have to be done first (data pulls, decisions).
+      placeholder: "#26 Illinois Report Card pipeline, #42 region definition"
+
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      value: |
+        - [ ] Data pulled and in the repo (or source noted if it can't be)
+        - [ ] Numbers checked against the source / a published figure
+        - [ ] Suppressed or missing values handled and noted
+        - [ ] Chart or table built (link)
+        - [ ] Copy written in plain language
+        - [ ] Reviewed by someone else
