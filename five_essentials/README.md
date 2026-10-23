@@ -103,8 +103,12 @@ How it's built:
   Areas with fewer than 5 scored schools are flagged and left out of rankings.
 - **5Essentials levels:** scores are labelled Very Weak (1-19), Weak (20-39), Neutral
   (40-59), Strong (60-79) or Very Strong (80-99), the same cutoffs 5-essentials.org
-  uses, classified on the rounded score shown. Trend charts shade these bands, and the
-  map can be colored by level.
+  uses, classified on the rounded score shown. Trend charts shade these bands, the map's
+  ranked list sits on the scale, and the map can also be colored by level.
+- **Rating changes:** the School Climate tab shows whether an area's rating moved
+  (e.g. Weak to Neutral) since the first survey, not just the point change: in the
+  summary, the KPI card, a "Did the rating change?" table for every well-being measure,
+  the small trend charts, and a chart of how many areas sit at each level by year.
   Themes, featured YRBS indicators and year limits are set in the script's config block.
 - **Links:** `#esb-4B`, `#ca-Austin` (spaces as `_`, e.g. `#ca-West_Town`) or `#net-Network_9`
   open an area on the School Climate tab; `#health` and `#map` open those tabs.

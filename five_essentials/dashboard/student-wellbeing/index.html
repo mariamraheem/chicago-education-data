@@ -101,10 +101,26 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
 .mini .th { font-size: 10px; font-weight: 700; color: var(--faint); letter-spacing: .6px; text-transform: uppercase; }
 .mini .row { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
 .mini .v { font-size: 18px; font-weight: 700; }
+.move { font-size: 11.5px; font-weight: 700; white-space: nowrap; }
+.move.up { color: var(--up); } .move.down { color: var(--down); } .move.same { color: var(--muted); }
+.mini .mv { font-size: 11px; color: var(--ink-3); display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+table.rt { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+table.rt th { text-align: left; font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: .4px; text-transform: uppercase; padding: 6px 8px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+table.rt td { padding: 7px 8px; border-bottom: 1px solid var(--grid); vertical-align: middle; }
+table.rt tr.click { cursor: pointer; } table.rt tr.click:hover td { background: #fbfdfb; }
+table.rt tr.sel td { background: var(--k1c-light); }
+table.rt td.th { color: var(--faint); font-size: 10.5px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; white-space: nowrap; }
+.rt-sum { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.rt-sum span { background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 6px 10px; font-size: 12px; color: var(--ink-3); }
+.rt-sum b { font-size: 16px; margin-right: 4px; }
+.dist { display: grid; gap: 6px; }
+.dist-row { display: grid; grid-template-columns: 40px minmax(0, 1fr) 92px; gap: 10px; align-items: center; font-size: 12px; }
+.dist-bar { display: flex; height: 24px; gap: 2px; }
+.dist-bar span { display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; min-width: 0; overflow: hidden; border-radius: 3px; }
 .delta { font-size: 11.5px; font-weight: 700; }
 .delta.up { color: var(--up); } .delta.down { color: var(--down); } .delta.flat { color: var(--muted); }
 
-.map-wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+.map-wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 14px; align-items: start; }
 @media (max-width: 1080px) { .map-wrap { grid-template-columns: 1fr; } }
 .shape { cursor: pointer; stroke: #fff; stroke-width: .8; }
 .shape:hover { stroke: var(--ink); stroke-width: 1.5; }
@@ -112,14 +128,18 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
 .scale { display: flex; align-items: center; gap: 2px; font-size: 11.5px; color: var(--ink-3); flex-wrap: wrap; margin-top: 6px; }
 .scale i { width: 24px; height: 10px; display: inline-block; }
 .bars { display: grid; gap: 1px; }
-.bar-row { display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr) 30px 82px; gap: 8px; align-items: center; font-size: 12px; padding: 2px 4px; border-radius: 3px; cursor: pointer; }
+.bar-row { display: grid; grid-template-columns: minmax(0, 118px) minmax(0, 1fr) 26px 76px; gap: 8px; align-items: center; font-size: 12px; padding: 2px 4px; border-radius: 3px; cursor: pointer; }
 .bar-row:hover { background: var(--grid); }
 .bar-row.sel { background: var(--k1c-light); font-weight: 700; }
 .bar-row .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .bar-row.small .nm { color: var(--faint); }
-.bar-track { position: relative; height: 12px; }
-.bar-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 0 3px 3px 0; }
-.bar-cps { position: absolute; top: -3px; bottom: -3px; width: 0; border-left: 1.5px dashed var(--ink); }
+.bar-track { position: relative; height: 16px; background: linear-gradient(to right, #fbe3e1 0 20%, #fdeedf 20% 40%, #f1f2ef 40% 60%, #e4f3e9 60% 80%, #cfe9d8 80% 100%); border-radius: 2px; }
+.bar-track::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to right, transparent calc(20% - .5px), #fff calc(20% - .5px) calc(20% + .5px), transparent calc(20% + .5px) calc(40% - .5px), #fff calc(40% - .5px) calc(40% + .5px), transparent calc(40% + .5px) calc(60% - .5px), #fff calc(60% - .5px) calc(60% + .5px), transparent calc(60% + .5px) calc(80% - .5px), #fff calc(80% - .5px) calc(80% + .5px), transparent calc(80% + .5px)); pointer-events: none; }
+.bar-head { display: grid; grid-template-columns: minmax(0, 118px) minmax(0, 1fr) 26px 76px; gap: 8px; padding: 0 4px 4px; font-size: 10px; font-weight: 700; color: var(--muted); align-items: end; }
+.bar-head .lv { display: grid; grid-template-columns: repeat(5, 1fr); text-align: center; }
+.bar-head .lv span { white-space: nowrap; }
+.bar-fill { position: absolute; left: 0; top: 4px; bottom: 4px; border-radius: 0 3px 3px 0; z-index: 1; box-shadow: 0 0 0 1px rgba(26,32,44,.18); }
+.bar-cps { position: absolute; top: -3px; bottom: -3px; width: 0; border-left: 1.5px dashed var(--ink); z-index: 2; }
 
 svg text { font-family: var(--font); }
 .app-footer { font-size: 11px; color: var(--faint); text-align: center; padding: 20px 10px 26px; line-height: 1.7; }
@@ -170,8 +190,12 @@ svg text { font-family: var(--font); }
       <div class="kpis" id="c-kpis"></div>
       <div class="card"><div class="card-title"><span id="c-main-title"></span><small id="c-main-sub"></small></div>
         <div class="legend" id="c-main-legend"></div><div id="c-main"></div><div class="scale5" id="c-scale"></div><p class="desc" id="c-desc"></p></div>
+      <div class="card"><div class="card-title"><span id="c-rt-title"></span><small>Click a row to make it the main chart</small></div>
+        <div class="rt-sum" id="c-rt-sum"></div><div class="tbl-wrap" style="overflow-x:auto"><table class="rt" id="c-rt"></table></div></div>
       <div class="card"><div class="card-title"><span id="c-mult-title"></span><small>Same scale on every chart · click one to make it the main chart</small></div>
         <div class="legend" id="c-mult-legend"></div><div class="multiples" id="c-mult"></div></div>
+      <div class="card"><div class="card-title"><span id="c-dist-title"></span><small id="c-dist-sub"></small></div>
+        <div class="dist" id="c-dist"></div><div class="scale5" id="c-dist-key"></div></div>
       <div class="card"><div class="card-title"><span id="c-all-title"></span><small>Hover to identify an area · click to select it</small></div>
         <div class="legend" id="c-all-legend"></div><div id="c-all"></div></div>
       <ul class="notes">
@@ -292,6 +316,18 @@ const LEVELS = [
   { name: "Very Strong", lo: 80, hi: 100, tint: "#cfe9d8", chip: "#1B4D25", ink: "#fff" },
 ];
 const levelOf = v => v == null ? null : LEVELS.find(L => Math.round(v) < L.hi) || LEVELS[4];
+const levelIdx = v => v == null ? null : LEVELS.indexOf(levelOf(v));
+/* Rating move between two scores: up/down by how many levels, or same. */
+function moveOf(a, b) {
+  if (a == null || b == null) return null;
+  const d = levelIdx(b) - levelIdx(a), from = levelOf(a).name, to = levelOf(b).name;
+  const n = Math.abs(d), lv = n === 1 ? "level" : "levels";
+  return { d, from, to, cls: d > 0 ? "up" : d < 0 ? "down" : "same",
+    arrow: d > 0 ? "▲" : d < 0 ? "▼" : "=",
+    text: d === 0 ? `stayed ${to}` : `${from} → ${to}`,
+    long: d === 0 ? `stayed ${to}` : `moved ${d > 0 ? "up" : "down"} ${n} ${lv}, from ${from} to ${to}` };
+}
+const moveHtml = mv => mv ? `<span class="move ${mv.cls}">${mv.arrow} ${esc(mv.text)}</span>` : "";
 const lvlChip = v => { const L = levelOf(v); return L ? `<span class="lvl" style="background:${L.chip};color:${L.ink}">${L.name}</span>` : ""; };
 const scaleKey = () => `<span class="k">5Essentials scale:</span>` + LEVELS.map(L => `<span class="b"><i style="background:${L.tint}"></i>${L.name} ${L.lo === 0 ? 1 : L.lo}–${L.hi === 100 ? 99 : L.hi - 1}</span>`).join("");
 const statRadio = (el, name) => radios(el, name, [["mean", "Average"], ["median", "Median"]], S.stat, x => { S.stat = x; renderTab(); });
@@ -465,6 +501,7 @@ function renderClimate() {
   if (li < 0) info = `<b>${esc(S.ind)}</b> has no scores for ${esc(aName)}. Pick another measure or area.`;
   else {
     info = `In ${esc(aName)}, the ${SW()} school score on <b>${esc(S.ind)}</b> ${ch == null ? `was <b>${fmt(latest)}</b> (${levelOf(latest).name}) in ${ly}` : `went from <b>${fmt(first)}</b> (${levelOf(first).name}) in ${YEARS[fi]} to <b>${fmt(latest)}</b> (${levelOf(latest).name}) in ${ly} (${sgn(ch)} point${Math.abs(Math.round(ch)) === 1 ? "" : "s"})`}.`;
+    if (ch != null) { const mv = moveOf(first, latest); info += mv.d === 0 ? ` Its rating <b>stayed ${mv.to}</b>.` : ` Its rating <b>${mv.long}</b>.`; }
     if (!isCPS) info += ` CPS overall ${cpsCh == null ? `was ${fmt(cpsL)}` : `moved ${sgn(cpsCh)} over the same years, to ${fmt(cpsL)}`}, so ${esc(aName)} is ${gap == null ? "not comparable" : Math.abs(gap) < 2 ? "about even with CPS" : `<b>${fmt(Math.abs(gap))} points ${gap > 0 ? "above" : "below"}</b> CPS`} in ${ly}.`;
     if (!isCPS && ch != null && cpsCh != null) { const rel = ch - cpsCh; info += Math.abs(rel) >= 3 ? ` It ${rel > 0 ? "gained" : "lost"} ground relative to the city (${sgn(rel)} points).` : ` It moved roughly in step with the city.`; }
     if (!isCPS && n < SMALL) info += ` <span style="color:var(--orange)">Only ${n} scored school${n === 1 ? "" : "s"}, so read this with caution.</span>`;
@@ -474,7 +511,8 @@ function renderClimate() {
   // KPIs
   const kpi = (val, lbl, col) => `<div class="kpi" style="border-top-color:${col}"><div class="v num" style="color:${col}">${val}</div><div class="l">${lbl}</div></div>`;
   $("#c-kpis").innerHTML = kpi(`${fmt(latest)} <span style="font-size:0">&nbsp;</span>${lvlChip(latest)}`, `${esc(S.ind)}, ${ly || LAST}`, "var(--k1c-green)")
-    + kpi(sgn(ch), `change since ${YEARS[fi] || FIRST}${cpsCh != null && !isCPS ? ` (CPS ${sgn(cpsCh)})` : ""}`, ch == null || Math.abs(ch) < 1 ? "var(--gray)" : ch > 0 ? "var(--up)" : "var(--down)")
+    + (() => { const mv = moveOf(first, latest); return kpi(mv ? `<span style="font-size:17px">${mv.arrow} ${mv.d === 0 ? esc(mv.to) : esc(mv.from) + " → " + esc(mv.to)}</span>` : "–",
+        `rating since ${YEARS[fi] || FIRST} (${sgn(ch)} points${cpsCh != null && !isCPS ? `; CPS ${sgn(cpsCh)}` : ""})`, !mv || mv.d === 0 ? "var(--gray)" : mv.d > 0 ? "var(--up)" : "var(--down)"); })()
     + (isCPS ? kpi(fmt(A[li]?.q1) + "–" + fmt(A[li]?.q3), "middle 50% of schools", "var(--il)") : kpi(sgn(gap), `vs CPS ${SW()} (${fmt(cpsL)})`, gap == null || Math.abs(gap) < 2 ? "var(--gray)" : gap > 0 ? "var(--up)" : "var(--down)"))
     + (isCPS ? kpi(n, "schools scored", "var(--orange)") : kpi(rk?.r ? `${ord(rk.r)}<span style="font-size:13px;color:var(--muted);font-weight:600"> of ${rk.of}</span>` : "–", rk?.r ? `among ${VIEWS[v].plural} with 5+ schools` : "too few schools to rank", "var(--il)"))
     + (isCPS ? "" : kpi(n, "schools scored", "var(--orange)"));
@@ -499,13 +537,35 @@ function renderClimate() {
   const dmin = Math.floor((Math.min(...multVals) - 2) / 10) * 10, dmax = Math.ceil((Math.max(...multVals) + 2) / 10) * 10, dom = [Math.max(0, dmin), Math.min(100, dmax), dmax - dmin > 50 ? 20 : 10];
   $("#c-mult").innerHTML = mdata.map(d => { const l = lastWith(d.a), f = firstWith(d.a), chg = l > f ? d.a[l] - d.a[f] : null;
     return `<button class="mini" data-m="${esc(d.m)}" aria-pressed="${d.m === S.ind}"><span class="th">${esc(d.t)}</span><span class="t">${esc(IND[d.i].short)}</span>
-      <span class="row"><span class="v num">${fmt(d.a[l])} ${lvlChip(d.a[l])}</span><span class="delta ${deltaCls(chg)}">${chg == null ? "" : sgn(chg) + " since " + YEARS[f]}</span></span><span class="ch" data-i="${d.i}"></span></button>`; }).join("");
+      <span class="row"><span class="v num">${fmt(d.a[l])} ${lvlChip(d.a[l])}</span><span class="delta ${deltaCls(chg)}">${chg == null ? "" : sgn(chg) + " pts"}</span></span>
+      <span class="mv">${chg == null ? "" : `Since ${YEARS[f]}: ` + moveHtml(moveOf(d.a[f], d.a[l]))}</span><span class="ch" data-i="${d.i}"></span></button>`; }).join("");
   $("#c-mult").querySelectorAll(".mini").forEach((b, j) => {
     const d = mdata[j], ss = [{ name: aName, color: COL.area, values: d.a, width: 2.2 }];
     if (!isCPS) ss.unshift({ name: "CPS", color: COL.cps, values: d.c, dash: "3 3", width: 1.3 });
     lineChart(b.querySelector(".ch"), { years: YEARS, series: ss, compact: true, height: 74, domain: dom, scale5: true });
     b.onclick = () => { S.ind = d.m; renderClimate(); $("#c-main-title").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" }); };
   });
+  // rating changes table: every well-being measure for this area
+  const rows = mdata.map(d => { const f = firstWith(d.a), l = lastWith(d.a); return { ...d, f, l, mv: l > f ? moveOf(d.a[f], d.a[l]) : null, pts: l > f ? d.a[l] - d.a[f] : null }; });
+  const up = rows.filter(r => r.mv && r.mv.d > 0).length, down = rows.filter(r => r.mv && r.mv.d < 0).length, same = rows.filter(r => r.mv && r.mv.d === 0).length;
+  $("#c-rt-title").textContent = `Did the rating change? ${aName}, ${FIRST} to ${LAST}`;
+  $("#c-rt-sum").innerHTML = `<span><b style="color:var(--up)">${up}</b>moved up a level</span><span><b>${same}</b>stayed at the same level</span><span><b style="color:var(--down)">${down}</b>moved down a level</span>`;
+  $("#c-rt").innerHTML = `<thead><tr><th>Theme</th><th>Measure</th><th>First year</th><th>Latest</th><th>Rating change</th><th style="text-align:right">Points</th></tr></thead><tbody>` +
+    rows.map(r => `<tr class="click${r.m === S.ind ? " sel" : ""}" data-m="${esc(r.m)}"><td class="th">${esc(r.t)}</td><td><b style="font-weight:600">${esc(IND[r.i].short)}</b></td>
+      <td>${r.f < 0 ? "–" : `${fmt(r.a[r.f])} ${lvlChip(r.a[r.f])} <span class="note" style="color:var(--faint);font-size:11px">${YEARS[r.f]}</span>`}</td>
+      <td>${r.l < 0 ? "–" : `${fmt(r.a[r.l])} ${lvlChip(r.a[r.l])} <span class="note" style="color:var(--faint);font-size:11px">${YEARS[r.l]}</span>`}</td>
+      <td>${moveHtml(r.mv) || "–"}</td><td class="num" style="text-align:right"><span class="delta ${deltaCls(r.pts)}">${sgn(r.pts)}</span></td></tr>`).join("") + `</tbody>`;
+  $("#c-rt").onclick = e => { const tr = e.target.closest("[data-m]"); if (tr) { S.ind = tr.dataset.m; renderClimate(); $("#c-main-title").scrollIntoView({ behavior: "smooth", block: "center" }); } };
+  // how many areas sit at each level, by year
+  $("#c-dist-title").textContent = `${S.ind}: how many ${VIEWS[v].plural} are at each level`;
+  $("#c-dist-sub").textContent = `${VIEWS[v].plural} with 5+ scored schools${isCPS ? "" : ` · right column = ${aName}`}`;
+  $("#c-dist").innerHTML = YEARS.map(y => { const vals = keys.map(k => stat(v, k, ind, y)).filter(s => s.med != null && s.n >= SMALL);
+    if (!vals.length) return `<div class="dist-row"><span class="num">${y}</span><span class="note" style="color:var(--faint)">not scored</span><span></span></div>`;
+    const cnt = LEVELS.map((_, i) => vals.filter(s => levelIdx(s.med) === i).length), me = !isCPS ? stat(v, S.area, ind, y) : null;
+    return `<div class="dist-row"><span class="num" style="font-weight:600">${y}</span><span class="dist-bar">${cnt.map((c, i) => c ? `<span style="flex:${c} 1 0;background:${LEVELS[i].chip};color:${LEVELS[i].ink}" title="${LEVELS[i].name}: ${c} ${VIEWS[v].plural}">${c}</span>` : "").join("")}</span>
+      <span>${me && me.med != null ? lvlChip(me.med) : `<span style="font-size:11px;color:var(--muted)">${vals.length} total</span>`}</span></div>`; }).join("");
+  $("#c-dist-key").innerHTML = LEVELS.map(L => `<span class="b"><i style="background:${L.chip}"></i>${L.name}</span>`).join("");
+
   // all areas
   $("#c-all-title").textContent = `${S.ind}: every ${VIEWS[v].one} over time`;
   const allSer = keys.map(k => { const sv = series(v, k, ind); const ok = sv.some(x => x.n >= SMALL);
@@ -606,11 +666,11 @@ function renderMap() {
   $("#m-year").innerHTML = [...YEARS].reverse().map(y => `<option${y === S.mYear ? " selected" : ""}>${y}</option>`).join(""); $("#m-year").onchange = e => { S.mYear = e.target.value; renderMap(); };
   statRadio($("#m-stat"), "m-stat");
   $("#m-bar-sub").textContent = `dashed line = CPS ${SW()}`;
-  radios($("#m-color"), "m-color", [["cps", "Points above or below CPS"], ["level", "5Essentials level"], ["chg", `Change since ${FIRST}`]], S.mColor, x => { S.mColor = x; renderMap(); });
+  radios($("#m-color"), "m-color", [["cps", "Points above or below CPS"], ["chg", `Point change since ${FIRST}`], ["level", "5Essentials level"]], S.mColor, x => { S.mColor = x; renderMap(); });
   $("#m-reset").onclick = () => { Object.assign(S, { stat: "mean", mView: "esb", mResp: "Student", mInd: "Safety", mYear: LAST, mColor: "cps", mNet: "elem" }); renderMap(); };
 
   const ind = IX[S.mInd], y = S.mYear, cps = stat(v, "CPS", ind, y).med;
-  const rows = areaKeys(v).map(k => { const s = stat(v, k, ind, y), f = stat(v, k, ind, FIRST); return { k, ...s, chg: s.med != null && f.med != null && y !== FIRST ? s.med - f.med : null }; });
+  const rows = areaKeys(v).map(k => { const s = stat(v, k, ind, y), f = stat(v, k, ind, FIRST); return { k, ...s, first: y !== FIRST ? f.med : null, chg: s.med != null && f.med != null && y !== FIRST ? s.med - f.med : null }; });
   const val = r => S.mColor !== "chg" ? (r.med == null || cps == null ? null : r.med - cps) : r.chg;
   const ok = rows.filter(r => r.med != null && r.n >= SMALL);
   const cpsChg = S.mColor === "chg" && y !== FIRST ? cps - stat(v, "CPS", ind, FIRST).med : null;
@@ -618,7 +678,8 @@ function renderMap() {
   if (!ok.length) $("#m-info").innerHTML = `<b>${esc(S.mInd)}</b> was not scored for enough schools in ${y} to compare ${VIEWS[v].plural}.`;
   else { const sr = [...ok].sort((a, b) => b.med - a.med);
     $("#m-info").innerHTML = `In ${y}, ${SW()} <b>${esc(S.mInd)}</b> scores ranged from <b>${fmt(sr[sr.length - 1].med)}</b> (${esc(areaName(v, sr[sr.length - 1].k))}) to <b>${fmt(sr[0].med)}</b> (${esc(areaName(v, sr[0].k))}) across ${ok.length} ${VIEWS[v].plural} with 5 or more scored schools. The CPS ${SW()} was ${fmt(cps)} (${levelOf(cps)?.name}).`
-      + (S.mColor === "chg" && cpsChg != null ? ` Since ${FIRST}, CPS moved ${sgn(cpsChg)} points.` : ""); }
+      + (S.mColor === "chg" && cpsChg != null ? ` Since ${FIRST}, CPS moved ${sgn(cpsChg)} points.` : "")
+; }
   // map
   const geo = D.geo[v], host = $("#m-map");
   let feats = Object.entries(geo);
@@ -646,8 +707,8 @@ function renderMap() {
   const list = rows.filter(r => r.med != null).sort((a, b) => (b.med - a.med));
   $("#m-bar-title").textContent = `Ranked, ${y}`;
   const mx = 100;
-  $("#m-bars").innerHTML = list.map(r => `<div class="bar-row${r.n < SMALL ? " small" : ""}" data-k="${esc(r.k)}" title="${r.n} scored schools"><span class="nm">${esc(areaName(v, r.k))}${r.n < SMALL ? " (small)" : ""}</span>
-    <span class="bar-track"><span class="bar-fill" style="width:${r.med / mx * 100}%;background:${r.n < SMALL ? "#cbd5e0" : colorOf(r)}"></span><span class="bar-cps" style="left:${cps / mx * 100}%"></span></span><span class="num" style="text-align:right">${fmt(r.med)}</span><span>${lvlChip(r.med)}</span></div>`).join("") + `<div class="scale5" style="margin-top:12px">${scaleKey()}</div>`;
+  $("#m-bars").innerHTML = `<div class="bar-head"><span></span><span class="lv">${LEVELS.map(L => `<span style="color:${L.chip === "#e2e8f0" ? "#718096" : L.chip}" title="${L.name} ${L.lo === 0 ? 1 : L.lo}–${L.hi === 100 ? 99 : L.hi - 1}">${L.name.replace("Very ", "V. ").replace("Strong", L.name === "Very Strong" ? "strong" : "Strong").replace("Weak", L.name === "Very Weak" ? "weak" : "Weak")}</span>`).join("")}</span><span></span><span>Rating</span></div>` + list.map(r => `<div class="bar-row${r.n < SMALL ? " small" : ""}" data-k="${esc(r.k)}" title="${r.n} scored schools"><span class="nm">${esc(areaName(v, r.k))}${r.n < SMALL ? " (small)" : ""}</span>
+    <span class="bar-track"><span class="bar-fill" style="width:${r.med / mx * 100}%;background:${r.n < SMALL ? "#cbd5e0" : colorOf(r)}"></span><span class="bar-cps" style="left:${cps / mx * 100}%"></span></span><span class="num" style="text-align:right">${fmt(r.med)}</span><span>${lvlChip(r.med)}</span></div>`).join("") + `<div class="scale5" style="margin-top:12px">${scaleKey()}</div><p class="desc">Bars sit on the 5Essentials scale; their color matches the map. Dashed line = CPS ${SW()}.</p>`;
   $("#m-bars").onclick = e => { const b = e.target.closest("[data-k]"); if (b) openArea(v, b.dataset.k); };
 }
 function centroid(p) { let a = 0, cx = 0, cy = 0; for (let i = 0; i < p.length - 1; i++) { const f = p[i][0] * p[i + 1][1] - p[i + 1][0] * p[i][1]; a += f; cx += (p[i][0] + p[i + 1][0]) * f; cy += (p[i][1] + p[i + 1][1]) * f; } return Math.abs(a) < 1e-9 ? p[0] : [cx / (3 * a), cy / (3 * a)]; }
