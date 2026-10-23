@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="State of CPS 2026: student well-being measures from the 5Essentials survey by Chicago Board of Education district, with a one-district snapshot.">
+<script>
+/* ?theme=light or ?theme=dark pins the theme (use ?theme=light when embedding on a light page). */
+(function () { var m = /[?&]theme=(light|dark)/.exec(location.search); if (m) document.documentElement.setAttribute("data-theme", m[1]); })();
+</script>
+<title>Student Well-being by District</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: chicago-education-data tokens; green masthead, sticky district picker, map + overview/snapshot, citywide YRBS below. */
+:root {
+  --bg: #f4f6f2; --surface: #fcfcfb; --surface-2: #eef1ec; --ink: #12201a; --ink-2: #4c5650; --muted: #7f8781;
+  --grid: #e1e4dd; --axis: #c3c7bf; --border: rgba(18,32,26,.10); --brand: #1b4332; --brand-ink: #ffffff; --brand-soft: #d8e8dd;
+  --focus: #2a78d6; --chi: #2a78d6; --chi-band: rgba(42,120,214,.14);
+  --b1: #c8423f; --b3: #dedcd5; --b5: #256abf; --on-strong: #ffffff; --sel: #1b4332;
+  --r1: #2a78d6; --r2: #eb6834; --r3: #1baf7a; --r4: #8a5cc2;
+  --font-sans: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1412; --surface: #171d1a; --surface-2: #1e2622; --ink: #f2f5f2; --ink-2: #c3cbc5; --muted: #8b948e;
+    --grid: #26302b; --axis: #3a4540; --border: rgba(255,255,255,.10); --brand: #163828; --brand-ink: #ffffff; --brand-soft: #23402f;
+    --focus: #6da7ec; --chi: #3987e5; --chi-band: rgba(57,135,229,.20);
+    --b1: #d9534f; --b3: #3a3f3b; --b5: #5598e7; --on-strong: #0f1412; --sel: #9fd3b4;
+    --r1: #3987e5; --r2: #d95926; --r3: #199e70; --r4: #a07ad6;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1412; --surface: #171d1a; --surface-2: #1e2622; --ink: #f2f5f2; --ink-2: #c3cbc5; --muted: #8b948e;
+  --grid: #26302b; --axis: #3a4540; --border: rgba(255,255,255,.10); --brand: #163828; --brand-ink: #ffffff; --brand-soft: #23402f;
+  --focus: #6da7ec; --chi: #3987e5; --chi-band: rgba(57,135,229,.20);
+  --b1: #d9534f; --b3: #3a3f3b; --b5: #5598e7; --on-strong: #0f1412; --sel: #9fd3b4;
+  --r1: #3987e5; --r2: #d95926; --r3: #199e70; --r4: #a07ad6;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-sans); font-size: 15px; line-height: 1.5; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.num { font-variant-numeric: tabular-nums; }
+.eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.mast { background: var(--brand); color: var(--brand-ink); }
+.mast .wrap { padding-block: 28px 26px; }
+.mast .eyebrow { color: rgba(255,255,255,.7); }
+.mast h1 { font-size: clamp(26px, 4vw, 34px); font-weight: 800; letter-spacing: -.02em; margin-top: 4px; }
+.mast p { margin: 8px 0 0; max-width: 70ch; color: rgba(255,255,255,.84); }
+
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border-bottom: 1px solid var(--border); }
+.bar .wrap { padding-block: 10px; display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: end; }
+.ctl { display: grid; gap: 3px; min-width: 0; }
+.ctl > label, .ctl > span { font-size: 11.5px; font-weight: 600; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+.seg { display: inline-flex; background: var(--surface-2); border-radius: 10px; padding: 3px; gap: 2px; flex-wrap: wrap; }
+.seg button { border: 0; background: transparent; padding: 5px 10px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--ink-2); }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+select { background: var(--surface); border: 1px solid var(--axis); border-radius: 10px; padding: 7px 10px; font-size: 15px; font-weight: 600; min-width: 0; max-width: 100%; }
+#pick { min-width: 220px; }
+@media (max-width: 700px) { .bar { position: static; } .bar .wrap { gap: 8px 14px; } }
+
+main .wrap { padding-block: 24px 56px; display: grid; gap: 30px; }
+section.block { display: grid; gap: 14px; min-width: 0; }
+.block-head h2 { font-size: 22px; font-weight: 700; letter-spacing: -.01em; }
+.sub { color: var(--ink-2); font-size: 14px; max-width: 76ch; margin-top: 4px; }
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; min-width: 0; }
+.note { font-size: 13px; color: var(--muted); }
+.notes { display: grid; gap: 4px; font-size: 13px; color: var(--muted); margin: 0; padding-left: 18px; }
+.btn { border: 1px solid var(--axis); background: var(--surface); border-radius: 10px; padding: 6px 12px; font-weight: 600; cursor: pointer; font-size: 14px; }
+.btn:hover { background: var(--surface-2); }
+
+.top { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 860px) { .top { grid-template-columns: 1fr; } }
+.mapbox svg { display: block; margin: 0 auto; }
+.shape { cursor: pointer; stroke: var(--surface); stroke-width: 1; }
+.shape:hover { opacity: .85; }
+.shape.sel { stroke: var(--sel); stroke-width: 3; }
+.divlegend { display: flex; align-items: center; gap: 2px; font-size: 12px; color: var(--ink-2); flex-wrap: wrap; }
+.divlegend i { width: 22px; height: 11px; display: inline-block; }
+.divlegend i:first-of-type { border-radius: 3px 0 0 3px; } .divlegend i:last-of-type { border-radius: 0 3px 3px 0; }
+.mapctl { display: grid; gap: 6px; margin-bottom: 8px; }
+
+.hero h2 { font-size: clamp(24px, 3.4vw, 30px); font-weight: 800; letter-spacing: -.02em; }
+.hero .meta { color: var(--ink-2); font-size: 14px; margin-top: 4px; }
+.takeaways { margin: 12px 0 0; padding-left: 18px; display: grid; gap: 6px; font-size: 15px; max-width: 78ch; }
+.takeaways b { font-weight: 700; }
+.stats { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.stat { background: var(--surface-2); border-radius: 10px; padding: 8px 12px; min-width: 120px; }
+.stat .v { font-size: 22px; font-weight: 800; letter-spacing: -.01em; line-height: 1.1; }
+.stat .l { font-size: 12px; color: var(--ink-2); }
+
+.resp-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.resp-head h3 { font-size: 18px; font-weight: 800; }
+.themes { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 12px; }
+@media (max-width: 420px) { .themes { grid-template-columns: 1fr; } }
+.theme h4 { margin: 0 0 6px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.mrow { display: grid; grid-template-columns: minmax(0, 1fr) auto 112px; gap: 10px; align-items: center; padding: 8px 0; border-top: 1px solid var(--grid); }
+.mrow:first-of-type { border-top: 0; }
+.mname { font-weight: 600; font-size: 14px; line-height: 1.3; }
+.mname small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; margin-top: 2px; }
+.mval { text-align: right; }
+.mval .big { font-size: 22px; font-weight: 800; line-height: 1; }
+.chip { display: inline-block; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 1px 7px; margin-top: 3px; white-space: nowrap; }
+.spark-legend { display: flex; gap: 12px; font-size: 12px; color: var(--ink-2); flex-wrap: wrap; align-items: center; }
+
+.tbl-wrap { overflow-x: auto; }
+table.heat { border-collapse: separate; border-spacing: 2px; font-size: 12.5px; }
+table.heat th { font-weight: 600; color: var(--ink-2); vertical-align: bottom; }
+table.heat thead tr.themes-row th { font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); text-align: left; border-bottom: 2px solid var(--grid); padding: 0 2px 2px; }
+table.heat thead th.m { writing-mode: vertical-rl; transform: rotate(180deg); text-align: left; padding: 4px 0; height: 150px; white-space: normal; line-height: 1.15; cursor: pointer; font-size: 12px; }
+table.heat thead th.m.sort { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+table.heat td { width: 40px; min-width: 40px; height: 26px; text-align: center; border-radius: 4px; font-variant-numeric: tabular-nums; }
+table.heat td.g { text-align: left; width: auto; white-space: nowrap; padding: 0 10px 0 4px; font-weight: 600; position: sticky; left: 0; background: var(--surface); z-index: 1; }
+table.heat td.g small { color: var(--muted); font-weight: 400; }
+table.heat tbody tr.click { cursor: pointer; }
+table.heat tbody tr.click:hover td.g { text-decoration: underline; }
+table.heat tr.cps td.g { color: var(--ink-2); }
+table.heat tr.cps td.c { background: var(--surface-2); color: var(--ink); font-weight: 700; }
+table.heat td.sep, table.heat th.sep { width: 6px; min-width: 6px; background: none; }
+table.schools td.g { max-width: 260px; overflow: hidden; text-overflow: ellipsis; }
+
+.callout { border-left: 3px solid var(--r2); background: var(--surface); border-radius: 0 12px 12px 0; padding: 14px 16px; max-width: 92ch; font-size: 14.5px; }
+.callout b { display: block; margin-bottom: 4px; }
+.ygrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 12px; }
+@media (max-width: 420px) { .ygrid { grid-template-columns: 1fr; } }
+.ycard h3 { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+.legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12.5px; color: var(--ink-2); }
+.legend span { display: inline-flex; gap: 6px; align-items: center; }
+svg text { font-family: var(--font-sans); }
+#tip { position: fixed; pointer-events: none; z-index: 20; background: var(--ink); color: var(--bg); border-radius: 8px; padding: 8px 10px; font-size: 12.5px; line-height: 1.4; max-width: 280px; box-shadow: 0 4px 14px rgba(0,0,0,.2); }
+#tip .t-row { display: flex; justify-content: space-between; gap: 14px; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+
+<header class="mast"><div class="wrap">
+  <div class="eyebrow">State of CPS 2026 · Student Well-being</div>
+  <h1>Student well-being by school board district</h1>
+  <p>The 5Essentials measures from the Student Well-being section, broken out by Elected School Board district. Pick a district for a snapshot, or compare all of them side by side.</p>
+</div></header>
+
+<div class="bar"><div class="wrap">
+  <div class="ctl"><label for="pick">District</label><select id="pick"></select></div>
+  <div class="ctl"><span>Boundaries</span><div class="seg" id="c-level"></div></div>
+  <div class="ctl"><span>Survey year</span><div class="seg" id="c-year"></div></div>
+</div></div>
+
+<main><div class="wrap">
+  <section class="block">
+    <div class="top">
+      <div class="panel mapbox">
+        <div class="mapctl"><div class="ctl"><label for="map-m">Map colors by</label><select id="map-m" style="font-weight:500;font-size:14px"></select></div></div>
+        <div id="map"></div>
+        <div class="divlegend" id="map-legend" style="margin-top:8px"></div>
+        <p class="note" style="margin:6px 0 0">Click a district to see its snapshot.</p>
+      </div>
+      <div id="main" style="min-width:0;display:grid;gap:16px"></div>
+    </div>
+  </section>
+  <div id="detail" style="display:grid;gap:18px;min-width:0"></div>
+  <ul class="notes">
+    <li>District scores are the median of the scores of the district's schools, so every school counts once. "CPS" is the median of all scored CPS schools, calculated the same way.</li>
+    <li>Schools are placed in districts by their address. Schools without a location are left out.</li>
+    <li>Student Peer Relationships was not reported in 2024. Higher Classroom Disruptions scores mean fewer disruptions.</li>
+    <li>Scores are 1 to 99, where 50 was the 2013 CPS average.</li>
+  </ul>
+
+  <section class="block" id="yrbs">
+    <div class="block-head"><h2>Youth Risk Behavior Survey, Chicago, 2017 to 2025</h2>
+      <div class="sub">The YRBS measures from the same section, citywide.</div></div>
+    <div class="callout"><b>Not available by district</b>CDC surveys Chicago as one district and publishes no school or location for students, so YRBS cannot be split by board district. These charts are the citywide picture. For district-level student wellbeing, use the 5Essentials student measures above.</div>
+    <div class="ctl"><span>Year for race/ethnicity split</span><div class="seg" id="y-year"></div></div>
+    <div class="ygrid" id="ygrid"></div>
+    <ul class="notes">
+      <li>Shaded band and whiskers are 95% confidence intervals. Hollow points are based on fewer than 100 students and are unreliable.</li>
+      <li>CDC's combined file groups Asian students into "All other races", so Asian students can't be shown separately here.</li>
+      <li>Chicago has no 2015 survey. The 2025 sample is the smallest on record (887 students for these questions), so the 2025 drop should be checked against CDC's YRBS Explorer before citing.</li>
+    </ul>
+  </section>
+</div></main>
+<div id="tip" hidden></div>
+
+<script>
+function start(D) {
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmt = (v, d = 0) => v == null || Number.isNaN(v) ? "–" : Number(v).toFixed(d);
+const sgn = v => v == null ? "–" : (v > 0 ? "+" : v < 0 ? "−" : "±") + fmt(Math.abs(v));
+const MS = D.measures.map(m => m.name), MI = Object.fromEntries(MS.map((m, i) => [m, i]));
+const short = n => D.measures[MI[n]].short;
+const YEARS = D.years.map(String);
+const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+const state = { level: store.get("wb.level") === "district" ? "district" : "sub", pick: "all", year: YEARS[YEARS.length - 1], mapM: "Safety", sortBy: null, schoolResp: "Student", yYear: String(D.yrbs.years[D.yrbs.years.length - 1]) };
+const hashPick = location.hash.slice(1).toUpperCase();
+
+/* ---------- groups ---------- */
+const keyOf = esb => state.level === "sub" ? esb : esb.replace(/[AB]$/, "");
+const labelOf = k => k === "all" ? "All districts" : state.level === "sub" ? "Sub-district " + k : "District " + k;
+function groupKeys() {
+  const ks = [...new Set(D.schools.filter(s => s.e).map(s => keyOf(s.e)))];
+  return ks.sort((a, b) => parseInt(a) - parseInt(b) || a.localeCompare(b));
+}
+const median = a => { if (!a.length) return null; const s = [...a].sort((x, y) => x - y), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+const cache = {};
+function stats(year) {
+  const ck = state.level + year; if (cache[ck]) return cache[ck];
+  const out = { cps: [], g: {} };
+  MS.forEach((m, i) => {
+    const all = D.schools.map(s => s.s[year]?.[i]).filter(v => v != null);
+    out.cps[i] = { v: median(all), n: all.length };
+  });
+  groupKeys().forEach(k => {
+    const sch = D.schools.filter(s => s.e && keyOf(s.e) === k);
+    out.g[k] = { n: sch.length, m: MS.map((m, i) => { const v = sch.map(s => s.s[year]?.[i]).filter(v => v != null); return { v: median(v), n: v.length }; }) };
+  });
+  return (cache[ck] = out);
+}
+function rankOf(k, i, year) {
+  const st = stats(year), vals = Object.entries(st.g).map(([g, x]) => [g, x.m[i].v]).filter(x => x[1] != null).sort((a, b) => b[1] - a[1]);
+  const me = st.g[k].m[i].v; if (me == null) return null;
+  return { r: vals.filter(x => x[1] > me).length + 1, of: vals.length, tie: vals.filter(x => x[1] === me).length > 1 };
+}
+const ord = n => n + (n % 100 >= 11 && n % 100 <= 13 ? "th" : ["th", "st", "nd", "rd"][n % 10] || "th");
+
+/* ---------- color vs CPS ---------- */
+const STEPS = [[-Infinity, -9, "var(--b1)", 1], [-9, -5, "color-mix(in oklab, var(--b1) 62%, var(--b3))", 0], [-5, -2, "color-mix(in oklab, var(--b1) 30%, var(--b3))", 0],
+  [-2, 2.0001, "var(--b3)", 0], [2.0001, 5, "color-mix(in oklab, var(--b5) 30%, var(--b3))", 0], [5, 9, "color-mix(in oklab, var(--b5) 62%, var(--b3))", 0], [9, Infinity, "var(--b5)", 1]];
+const step = d => STEPS.find(s => d >= s[0] && d < s[1]) || STEPS[3];
+const cellStyle = d => { const s = step(d); return `background:${s[2]};color:${s[3] ? "var(--on-strong)" : "var(--ink)"}`; };
+const legendHtml = () => `<span style="margin-right:6px">vs CPS</span>` + STEPS.map((s, i) => `<i style="background:${s[2]}" title="${["9+ points below", "5–9 below", "2–5 below", "within 2", "2–5 above", "5–9 above", "9+ above"][i]}"></i>`).join("") + `<span style="margin-left:6px">below ← → above</span>`;
+
+/* ---------- tooltip ---------- */
+const tip = $("#tip");
+function showTip(e, h) { tip.innerHTML = h; tip.hidden = false; const w = tip.offsetWidth, hh = tip.offsetHeight; let x = e.clientX + 14, y = e.clientY + 14; if (x + w > innerWidth - 8) x = e.clientX - w - 14; if (y + hh > innerHeight - 8) y = e.clientY - hh - 14; tip.style.left = Math.max(8, x) + "px"; tip.style.top = Math.max(8, y) + "px"; }
+const hideTip = () => { tip.hidden = true; };
+
+/* ---------- controls ---------- */
+function seg(el, opts, cur, on) { el.innerHTML = opts.map(([v, l]) => `<button type="button" data-v="${esc(v)}" aria-pressed="${String(v) === String(cur)}">${esc(l)}</button>`).join(""); el.onclick = e => { const b = e.target.closest("[data-v]"); if (b) on(b.dataset.v); }; }
+function renderBar() {
+  const ks = groupKeys();
+  $("#pick").innerHTML = `<option value="all">All districts (overview)</option>` + ks.map(k => `<option value="${k}"${k === state.pick ? " selected" : ""}>${esc(labelOf(k))}</option>`).join("");
+  $("#pick").value = state.pick;
+  $("#pick").onchange = e => select(e.target.value);
+  seg($("#c-level"), [["sub", "20 sub-districts"], ["district", "10 districts"]], state.level, v => {
+    state.level = v; store.set("wb.level", v); state.pick = state.pick === "all" ? "all" : (v === "district" ? state.pick.replace(/[AB]$/, "") : state.pick + "A"); render(); });
+  seg($("#c-year"), YEARS.map(y => [y, y]), state.year, v => { state.year = v; render(); });
+}
+function select(k, scroll = true) { state.pick = k; try { history.replaceState(null, "", k === "all" ? location.pathname + location.search : location.pathname + location.search + "#" + k); } catch (e) {} render(); if (scroll && k !== "all") $("#main").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); }
+
+/* ---------- map ---------- */
+function renderMap() {
+  const host = $("#map"), st = stats(state.year), i = MI[state.mapM], cps = st.cps[i].v;
+  $("#map-m").innerHTML = D.themes.map(t => `<optgroup label="${esc(t.resp === "Student" ? "Students: " : "Teachers: ")}${esc(t.name)}">${t.m.map(m => `<option value="${esc(m)}"${m === state.mapM ? " selected" : ""}>${esc(short(m))}</option>`).join("")}</optgroup>`).join("");
+  $("#map-m").onchange = e => { state.mapM = e.target.value; renderMap(); };
+  $("#map-legend").innerHTML = legendHtml();
+  let minx = 1e9, maxx = -1e9, miny = 1e9, maxy = -1e9;
+  Object.values(D.geo).forEach(rs => rs.forEach(r => r.forEach(([x, y]) => { minx = Math.min(minx, x); maxx = Math.max(maxx, x); miny = Math.min(miny, y); maxy = Math.max(maxy, y); })));
+  const k = Math.cos(41.84 * Math.PI / 180), W = Math.min(330, Math.max(240, host.clientWidth)), sw = (maxx - minx) * k, sh = maxy - miny, H = Math.round(W * sh / sw), sc = (W - 6) / sw;
+  const P = ([x, y]) => [3 + (x - minx) * k * sc, 3 + (maxy - y) * sc];
+  let s = `<svg width="${W}" height="${H + 6}" viewBox="0 0 ${W} ${H + 6}" role="img" aria-label="Map of school board districts">`, labels = "", selPaths = "";
+  Object.entries(D.geo).forEach(([sub, rs]) => {
+    if (!rs.length) return;
+    const g = keyOf(sub), x = st.g[g], v = x?.m[i].v;
+    const d = rs.map(r => "M" + r.map(p => P(p).map(n => n.toFixed(1)).join(",")).join("L") + "Z").join("");
+    const fill = v != null && cps != null ? step(v - cps)[2] : "var(--surface-2)";
+    const path = `<path class="shape${g === state.pick ? " sel" : ""}" data-g="${g}" d="${d}" fill="${fill}"/>`;
+    if (g === state.pick) selPaths += path; else s += path;
+    const big = rs.reduce((a, b) => b.length > a.length ? b : a, rs[0]), c = centroid(big.map(P));
+    if (state.level === "sub" || sub.endsWith("A")) labels += `<text x="${c[0]}" y="${c[1] + 4}" text-anchor="middle" font-size="10.5" font-weight="700" fill="var(--ink)" pointer-events="none" paint-order="stroke" stroke="var(--surface)" stroke-width="3">${esc(state.level === "sub" ? sub : g)}</text>`;
+  });
+  host.innerHTML = s + selPaths + labels + `</svg>`;
+  host.querySelectorAll(".shape").forEach(el => {
+    const g = el.dataset.g, x = st.g[g];
+    el.addEventListener("mousemove", e => showTip(e, `<b>${esc(labelOf(g))}</b><div class="t-row"><span>${esc(short(state.mapM))}</span><span>${fmt(x?.m[i].v)}</span></div><div class="t-row"><span>CPS</span><span>${fmt(cps)}</span></div><div class="t-row"><span>Schools</span><span>${x?.m[i].n ?? 0}</span></div>`));
+    el.addEventListener("mouseleave", hideTip);
+    el.addEventListener("click", () => select(g === state.pick ? "all" : g));
+  });
+}
+function centroid(p) { let a = 0, cx = 0, cy = 0; for (let i = 0; i < p.length - 1; i++) { const f = p[i][0] * p[i + 1][1] - p[i + 1][0] * p[i][1]; a += f; cx += (p[i][0] + p[i + 1][0]) * f; cy += (p[i][1] + p[i + 1][1]) * f; } return Math.abs(a) < 1e-9 ? p[0] : [cx / (3 * a), cy / (3 * a)]; }
+
+/* ---------- overview (all districts) ---------- */
+function heatTable(resp, keys, st, opts = {}) {
+  const themes = D.themes.filter(t => t.resp === resp);
+  const cols = []; themes.forEach((t, ti) => { if (ti) cols.push(null); t.m.forEach(m => cols.push(m)); });
+  let h = `<thead><tr class="themes-row"><th></th>${themes.map((t, ti) => `${ti ? `<th class="sep"></th>` : ""}<th colspan="${t.m.length}">${esc(t.name)}</th>`).join("")}</tr>`;
+  h += `<tr><th style="text-align:left">${opts.first || (state.level === "sub" ? "Sub-district" : "District")}</th>${cols.map(m => m ? `<th class="m${state.sortBy === m ? " sort" : ""}" data-m="${esc(m)}" title="Click to sort">${esc(short(m))}</th>` : `<th class="sep"></th>`).join("")}</tr></thead><tbody>`;
+  h += `<tr class="cps"><td class="g">CPS median</td>${cols.map(m => m ? `<td class="c">${fmt(st.cps[MI[m]].v)}</td>` : `<td class="sep"></td>`).join("")}</tr>`;
+  keys.forEach(k => {
+    const row = opts.row ? opts.row(k) : st.g[k];
+    h += `<tr class="${opts.noclick ? "" : "click"}" data-g="${esc(k)}"><td class="g">${opts.name ? opts.name(k) : esc(labelOf(k))} <small>${opts.n ? opts.n(k) : row.n}</small></td>`;
+    cols.forEach(m => {
+      if (!m) { h += `<td class="sep"></td>`; return; }
+      const v = row.m ? row.m[MI[m]].v : row[MI[m]], c = st.cps[MI[m]].v;
+      h += v == null || c == null ? `<td class="c" style="background:var(--surface-2);color:var(--muted)" data-m="${esc(m)}">·</td>` : `<td class="c" data-m="${esc(m)}" style="${cellStyle(v - c)}">${fmt(v)}</td>`;
+    });
+    h += `</tr>`;
+  });
+  return h + `</tbody>`;
+}
+function bindHeat(tbl, st, getVal, nameOf, canClick = true) {
+  tbl.querySelectorAll("th.m").forEach(th => th.addEventListener("click", () => { state.sortBy = state.sortBy === th.dataset.m ? null : th.dataset.m; render(); }));
+  tbl.querySelectorAll("tbody tr[data-g]").forEach(tr => {
+    if (canClick) tr.addEventListener("click", () => select(tr.dataset.g));
+    tr.querySelectorAll("td.c").forEach(td => td.addEventListener("mousemove", e => { const m = td.dataset.m, v = getVal(tr.dataset.g, m), c = st.cps[MI[m]].v;
+      showTip(e, `<b>${esc(nameOf(tr.dataset.g))}</b><div style="opacity:.8">${esc(m)}</div><div class="t-row"><span>Score</span><span>${fmt(v)}</span></div><div class="t-row"><span>CPS median</span><span>${fmt(c)}</span></div><div class="t-row"><span>Difference</span><span>${v == null ? "–" : sgn(v - c)}</span></div>`); }));
+    tr.addEventListener("mouseleave", hideTip);
+  });
+}
+function sortedKeys(st) {
+  const ks = groupKeys(); if (!state.sortBy) return ks;
+  const i = MI[state.sortBy]; return [...ks].sort((a, b) => (st.g[b].m[i].v ?? -1) - (st.g[a].m[i].v ?? -1));
+}
+function renderOverview() {
+  const st = stats(state.year), ks = sortedKeys(st), n = ks.length;
+  // headline: biggest above/below across student measures
+  const facts = [];
+  D.themes.forEach(t => t.m.forEach(m => { const i = MI[m], c = st.cps[i].v; const vals = ks.map(k => [k, st.g[k].m[i].v]).filter(x => x[1] != null); if (vals.length < 2 || c == null) return;
+    vals.sort((a, b) => b[1] - a[1]); facts.push({ m, hi: vals[0], lo: vals[vals.length - 1], gap: vals[0][1] - vals[vals.length - 1][1] }); }));
+  facts.sort((a, b) => b.gap - a.gap);
+  const f = facts[0], g2 = facts[facts.length - 1];
+  $("#main").innerHTML = `<div class="hero"><div class="eyebrow">Overview · ${state.year}</div><h2>All ${n} ${state.level === "sub" ? "sub-districts" : "districts"}</h2>
+    <ul class="takeaways">
+      ${f ? `<li>The widest gap between districts is on <b>${esc(f.m)}</b>: ${fmt(f.hi[1])} in ${esc(labelOf(f.hi[0]))} vs ${fmt(f.lo[1])} in ${esc(labelOf(f.lo[0]))}.</li>` : ""}
+      ${g2 ? `<li>Districts are most alike on <b>${esc(g2.m)}</b>, where all fall within ${fmt(g2.gap)} points.</li>` : ""}
+      <li>Each row below is one district. Color shows how far its median school is above or below the CPS median. Click a row or the map for a snapshot, or a column to sort.</li>
+    </ul></div>`;
+  $("#detail").innerHTML = ["Student", "Teacher"].map(r => `<section class="panel"><div class="resp-head" style="margin-bottom:8px"><h3>What ${r === "Student" ? "students" : "teachers"} report, ${state.year}</h3><div class="divlegend">${legendHtml()}</div></div>
+    <div class="tbl-wrap"><table class="heat" id="heat-${r}">${heatTable(r, ks, st)}</table></div></section>`).join("");
+  ["Student", "Teacher"].forEach(r => bindHeat($("#heat-" + r), st, (g, m) => st.g[g].m[MI[m]].v, labelOf));
+}
+
+/* ---------- district snapshot ---------- */
+function spark(k, i) {
+  const W = 112, H = 38, lo = 10, hi = 85, X = j => 4 + j * (W - 8) / (YEARS.length - 1), Y = v => 3 + (1 - (v - lo) / (hi - lo)) * (H - 6);
+  const ser = YEARS.map(y => stats(y).g[k]?.m[i].v ?? null), cps = YEARS.map(y => stats(y).cps[i].v);
+  const line = (arr, extra) => { let d = "", pen = false; arr.forEach((v, j) => { if (v == null) { pen = false; return; } d += (pen ? "L" : "M") + X(j).toFixed(1) + "," + Y(v).toFixed(1); pen = true; }); return `<path d="${d}" fill="none" ${extra}/>`; };
+  const ci = YEARS.indexOf(state.year);
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" aria-hidden="true">${line(cps, `stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="3 2"`)}${line(ser, `stroke="var(--chi)" stroke-width="2" stroke-linejoin="round"`)}
+    ${ser[ci] != null ? `<circle cx="${X(ci)}" cy="${Y(ser[ci])}" r="3.5" fill="var(--chi)" stroke="var(--surface)" stroke-width="1.5"/>` : ""}</svg>`;
+}
+function renderSnapshot(k) {
+  const st = stats(state.year), g = st.g[k];
+  if (!g) { select("all"); return; }
+  const sch = D.schools.filter(s => s.e && keyOf(s.e) === k);
+  const types = {}; sch.forEach(s => { const t = /high/i.test(s.t) ? "High schools" : /elem|middle/i.test(s.t) ? "Elementary schools" : "Other"; types[t] = (types[t] || 0) + 1; });
+  const firstY = YEARS[0], f0 = stats(firstY);
+  const rows = MS.map((m, i) => ({ m, i, v: g.m[i].v, c: st.cps[i].v, d: g.m[i].v != null && st.cps[i].v != null ? g.m[i].v - st.cps[i].v : null,
+    ch: g.m[i].v != null && f0.g[k]?.m[i].v != null && state.year !== firstY ? g.m[i].v - f0.g[k].m[i].v : null, chC: st.cps[i].v != null && f0.cps[i].v != null ? st.cps[i].v - f0.cps[i].v : null }));
+  const scored = rows.filter(r => r.d != null), above = scored.filter(r => r.d >= 2).length, below = scored.filter(r => r.d <= -2).length;
+  const best = [...scored].sort((a, b) => b.d - a.d)[0], worst = [...scored].sort((a, b) => a.d - b.d)[0];
+  const moved = rows.filter(r => r.ch != null && r.chC != null).map(r => ({ ...r, rel: r.ch - r.chC })).sort((a, b) => b.rel - a.rel);
+  $("#main").innerHTML = `<div class="hero"><div class="eyebrow">Snapshot · ${state.year}</div>
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:end"><h2>${esc(labelOf(k))}</h2><button class="btn" id="back">← All districts</button></div>
+    <div class="meta">${sch.length} CPS schools: ${Object.entries(types).map(([t, n]) => `${n} ${t.toLowerCase()}`).join(", ")}${state.level === "district" ? ` · sub-districts ${k}A and ${k}B combined` : ""}</div>
+    <div class="stats">
+      <div class="stat"><div class="v num">${above}<span style="font-size:14px;color:var(--muted)"> / ${scored.length}</span></div><div class="l">measures above CPS</div></div>
+      <div class="stat"><div class="v num">${below}<span style="font-size:14px;color:var(--muted)"> / ${scored.length}</span></div><div class="l">measures below CPS</div></div>
+      <div class="stat"><div class="v num">${scored.length - above - below}</div><div class="l">within 2 points of CPS</div></div>
+    </div>
+    <ul class="takeaways">
+      ${best && best.d >= 2 ? `<li>Furthest above CPS: <b>${esc(best.m)}</b> at ${fmt(best.v)}, ${sgn(best.d)} points (${ord(rankOf(k, best.i, state.year).r)} of ${rankOf(k, best.i, state.year).of}).</li>` : `<li>No measure is more than 2 points above the CPS median.</li>`}
+      ${worst && worst.d <= -2 ? `<li>Furthest below CPS: <b>${esc(worst.m)}</b> at ${fmt(worst.v)}, ${sgn(worst.d)} points (${ord(rankOf(k, worst.i, state.year).r)} of ${rankOf(k, worst.i, state.year).of}).</li>` : `<li>No measure is more than 2 points below the CPS median.</li>`}
+      ${moved.length ? `<li>Since ${firstY}, <b>${esc(moved[0].m)}</b> improved most relative to CPS (${sgn(moved[0].ch)} here vs ${sgn(moved[0].chC)} citywide)${moved[moved.length - 1].rel < -2 ? `; <b>${esc(moved[moved.length - 1].m)}</b> lost the most ground (${sgn(moved[moved.length - 1].ch)} vs ${sgn(moved[moved.length - 1].chC)}).` : "."}</li>` : ""}
+    </ul></div>`;
+  $("#back").onclick = () => select("all");
+  const card = r => { const rk = rankOf(k, r.i, state.year), desc = D.measures[r.i].desc;
+    return `<div class="mrow" title="${esc(desc)}"><div class="mname">${esc(r.m)}<small>${rk ? `${ord(rk.r)}${rk.tie ? " (tie)" : ""} of ${rk.of}` : "not scored"}${r.ch != null ? ` · ${sgn(r.ch)} since ${firstY}` : ""}</small></div>
+      <div class="mval"><div class="big num">${fmt(r.v)}</div>${r.d != null ? `<span class="chip num" style="${cellStyle(r.d)}">${sgn(r.d)} vs CPS</span>` : `<span class="note">no data</span>`}</div>
+      <div>${spark(k, r.i)}</div></div>`; };
+  const sparkLeg = `<div class="spark-legend"><span><svg width="18" height="6"><line x1="0" y1="3" x2="18" y2="3" stroke="var(--chi)" stroke-width="2"/></svg>${esc(labelOf(k))}</span><span><svg width="18" height="6"><line x1="0" y1="3" x2="18" y2="3" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="3 2"/></svg>CPS median</span><span>${YEARS[0]}–${YEARS[YEARS.length - 1]}</span></div>`;
+  const respBlock = r => `<section class="block"><div class="resp-head"><h3>What ${r === "Student" ? "students" : "teachers"} report</h3>${sparkLeg}</div>
+    <div class="themes">${D.themes.filter(t => t.resp === r).map(t => `<div class="panel theme"><h4>${esc(t.name)}</h4>${t.m.map(m => card(rows[MI[m]])).join("")}</div>`).join("")}</div></section>`;
+  // schools table
+  const schSorted = [...sch].sort((a, b) => a.n.localeCompare(b.n));
+  const schRow = id => { const s = sch.find(x => x.id === id); return s.s[state.year] || MS.map(() => null); };
+  $("#detail").innerHTML = respBlock("Student") + respBlock("Teacher") + `<section class="panel"><div class="resp-head" style="margin-bottom:8px;justify-content:space-between"><h3>Schools in ${esc(labelOf(k))}, ${state.year}</h3><div class="seg" id="c-sresp"></div></div>
+    <div class="divlegend" style="margin-bottom:8px">${legendHtml()}</div>
+    <div class="tbl-wrap"><table class="heat schools" id="heat-sch"></table></div>
+    <p class="note" style="margin:8px 0 0">Blank cells: the school had no score that year (too few responses, or the measure wasn't asked at that grade level).</p></section>`;
+  seg($("#c-sresp"), [["Student", "Student measures"], ["Teacher", "Teacher measures"]], state.schoolResp, v => { state.schoolResp = v; renderSnapshot(k); });
+  const t = $("#heat-sch");
+  t.innerHTML = heatTable(state.schoolResp, schSorted.map(s => s.id), st, { first: "School", noclick: true, row: schRow, n: () => "", name: id => { const s = sch.find(x => x.id === id); return `${esc(s.n.length > 42 ? s.n.slice(0, 41) + "…" : s.n)}`; } });
+  bindHeat(t, st, (id, m) => schRow(id)[MI[m]], id => sch.find(x => x.id === id).n, false);
+  t.querySelectorAll("th.m").forEach(th => th.replaceWith(th.cloneNode(true)));
+}
+
+function render() {
+  renderBar(); renderMap();
+  if (state.pick === "all") renderOverview(); else renderSnapshot(state.pick);
+}
+
+/* ---------- YRBS ---------- */
+const RACES = [["Black or African American", "Black", "--r1"], ["Hispanic/Latino", "Latine", "--r2"], ["White", "White", "--r3"], ["All other races", "All other races", "--r4"]];
+function renderYrbs() {
+  const Y = D.yrbs;
+  seg($("#y-year"), Y.years.map(y => [y, y]), state.yYear, v => { state.yYear = v; renderYrbs(); });
+  $("#ygrid").innerHTML = Y.order.map(id => { const ind = Y.ind[id]; if (!ind) return ""; return `<div class="panel ycard"><h3>${esc(ind.label)}</h3><div class="note" style="margin-bottom:6px">Chicago public high school students</div><div data-line="${id}"></div><div data-race="${id}"></div></div>`; }).join("");
+  Y.order.forEach(id => { const ind = Y.ind[id]; if (!ind) return; drawLine(document.querySelector(`[data-line="${id}"]`), ind); drawRace(document.querySelector(`[data-race="${id}"]`), ind); });
+}
+function drawLine(host, ind) {
+  const Y = D.yrbs, tot = ind.d.Total || {}, W = Math.max(280, host.clientWidth), H = 150, m = { l: 34, r: 46, t: 10, b: 22 };
+  const yrs = Y.years.filter(y => tot[y]); if (!yrs.length) { host.innerHTML = `<p class="note">Not asked in 2017 to 2025.</p>`; return; }
+  const raw = Math.max(...yrs.map(y => tot[y][2])) * 1.1, stp = [5, 10, 20].find(s => raw / s <= 5) || 25, ymax = Math.ceil(raw / stp) * stp;
+  const X = y => m.l + Y.years.indexOf(y) / (Y.years.length - 1) * (W - m.l - m.r), YY = v => m.t + (1 - v / ymax) * (H - m.t - m.b);
+  let s = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(ind.label)} trend">`;
+  for (let v = 0; v <= ymax; v += stp) s += `<line x1="${m.l}" x2="${W - m.r}" y1="${YY(v)}" y2="${YY(v)}" stroke="var(--grid)"/><text x="${m.l - 5}" y="${YY(v) + 4}" text-anchor="end" font-size="10.5" fill="var(--muted)">${v}%</text>`;
+  Y.years.forEach(y => s += `<text x="${X(y)}" y="${H - 6}" text-anchor="middle" font-size="10.5" fill="var(--muted)" font-weight="${String(y) === state.yYear ? 700 : 400}">${y}</text>`);
+  if (yrs.length > 1) s += `<path d="M${yrs.map(y => `${X(y)},${YY(tot[y][2])}`).join("L")}L${[...yrs].reverse().map(y => `${X(y)},${YY(tot[y][1])}`).join("L")}Z" fill="var(--chi-band)"/>`;
+  if (yrs.length > 1) s += `<path d="M${yrs.map(y => `${X(y)},${YY(tot[y][0])}`).join("L")}" fill="none" stroke="var(--chi)" stroke-width="2"/>`;
+  yrs.forEach(y => s += `<circle cx="${X(y)}" cy="${YY(tot[y][0])}" r="${String(y) === state.yYear ? 5 : 3.5}" fill="var(--chi)" stroke="var(--surface)" stroke-width="2"/>`);
+  const ly = yrs[yrs.length - 1]; s += `<text x="${X(ly) + 8}" y="${YY(tot[ly][0]) + 4}" font-size="11.5" font-weight="700" fill="var(--ink)">${fmt(tot[ly][0], 0)}%</text>`;
+  yrs.forEach(y => s += `<rect class="yh" data-y="${y}" x="${X(y) - 22}" y="${m.t}" width="44" height="${H - m.t - m.b}" fill="transparent"/>`);
+  host.innerHTML = s + `</svg>`;
+  host.querySelectorAll(".yh").forEach(el => { const y = +el.dataset.y, v = tot[y]; el.addEventListener("mousemove", e => showTip(e, `<b>${y}</b><div class="t-row"><span>All Chicago</span><span>${fmt(v[0], 1)}%</span></div><div class="t-row"><span>95% CI</span><span>${fmt(v[1], 1)}–${fmt(v[2], 1)}%</span></div><div class="t-row"><span>Students</span><span>${v[3]}</span></div>`)); el.addEventListener("mouseleave", hideTip); el.addEventListener("click", () => { state.yYear = String(y); renderYrbs(); }); });
+}
+function drawRace(host, ind) {
+  const yr = +state.yYear, tot = ind.d.Total?.[yr];
+  if (!tot) { host.innerHTML = `<p class="note" style="margin:6px 0 0">Not asked in ${yr}.</p>`; return; }
+  const rows = RACES.map(([k, l, c]) => ({ l, c, v: ind.d[k]?.[yr] }));
+  const raw = Math.max(tot[2], ...rows.filter(r => r.v).map(r => r.v[2])) * 1.05, stp = [5, 10, 20].find(s => raw / s <= 5) || 25, xmax = Math.ceil(raw / stp) * stp;
+  const W = Math.max(280, host.clientWidth), RH = 22, labW = 104, m = { t: 22, b: 20 }, x0 = labW + 8, x1 = W - 12, H = m.t + rows.length * RH + m.b, X = v => x0 + v / xmax * (x1 - x0);
+  let s = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="By race/ethnicity, ${yr}"><text x="0" y="12" font-size="11" font-weight="700" fill="var(--muted)" letter-spacing=".04em">BY RACE/ETHNICITY, ${yr}</text>`;
+  for (let v = 0; v <= xmax; v += stp) s += `<line x1="${X(v)}" x2="${X(v)}" y1="${m.t}" y2="${H - m.b}" stroke="var(--grid)"/><text x="${X(v)}" y="${H - 5}" text-anchor="middle" font-size="10.5" fill="var(--muted)">${v}%</text>`;
+  rows.forEach((r, i) => { const y = m.t + i * RH + RH / 2;
+    s += `<text x="${labW}" y="${y + 4}" text-anchor="end" font-size="12" fill="var(--ink)">${esc(r.l)}</text>`;
+    if (!r.v) { s += `<text x="${x0}" y="${y + 4}" font-size="11" fill="var(--muted)">no estimate</text>`; return; }
+    s += `<g class="rh" data-i="${i}"><rect x="0" y="${y - RH / 2}" width="${W}" height="${RH}" fill="transparent"/><line x1="${X(r.v[1])}" x2="${X(r.v[2])}" y1="${y}" y2="${y}" stroke="var(${r.c})" stroke-width="2" opacity=".5" stroke-linecap="round"/>
+      <circle cx="${X(r.v[0])}" cy="${y}" r="5" fill="${r.v[4] ? "var(--surface)" : `var(${r.c})`}" stroke="${r.v[4] ? `var(${r.c})` : "var(--surface)"}" stroke-width="2"/></g>`; });
+  s += `<line x1="${X(tot[0])}" x2="${X(tot[0])}" y1="${m.t}" y2="${H - m.b}" stroke="var(--ink-2)" stroke-dasharray="3 2" stroke-width="1.5"/><text x="${Math.min(X(tot[0]) + 4, W - 80)}" y="12" font-size="11" fill="var(--ink-2)">All ${fmt(tot[0], 0)}%</text></svg>`;
+  host.innerHTML = s;
+  host.querySelectorAll(".rh").forEach(el => { const r = rows[+el.dataset.i]; el.addEventListener("mousemove", e => showTip(e, `<b>${esc(r.l)}, ${yr}</b><div class="t-row"><span>Estimate</span><span>${fmt(r.v[0], 1)}%</span></div><div class="t-row"><span>95% CI</span><span>${fmt(r.v[1], 1)}–${fmt(r.v[2], 1)}%</span></div><div class="t-row"><span>Students</span><span>${r.v[3]}${r.v[4] ? " (unreliable)" : ""}</span></div>`)); el.addEventListener("mouseleave", hideTip); });
+}
+
+if (hashPick && /^\d{1,2}[AB]?$/.test(hashPick)) { state.level = /[AB]$/.test(hashPick) ? "sub" : "district"; state.pick = hashPick; }
+if (state.pick !== "all" && !groupKeys().includes(state.pick)) state.pick = "all";
+render(); renderYrbs();
+let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { renderMap(); renderYrbs(); }, 150); });
+}
+
+/* Tell a parent page our height so an embedding iframe can resize to fit (see README). */
+function reportHeight() {
+  if (window.parent === window) return;
+  window.parent.postMessage({ type: "k1c-embed-height", id: "student-wellbeing", height: document.documentElement.scrollHeight }, "*");
+}
+new ResizeObserver(reportHeight).observe(document.body);
+
+fetch("data.json")
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(start)
+  .catch(() => { document.getElementById("main").innerHTML = '<p class="note">The data file did not load. Refresh the page, or open it directly at mariamraheem.github.io/chicago-education-data/student-wellbeing/.</p>'; });
+</script>
+</body>
+</html>

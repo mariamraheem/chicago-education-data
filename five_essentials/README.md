@@ -22,7 +22,11 @@ No browser needed: each report page embeds its data as JSON
 ```
 five_essentials/
   scripts/01_scrape.py        the scraper (writes data/clean/)
+  scripts/02_build_wellbeing_dashboard.py
+                              data for the student well-being dashboard (below)
   data/clean/                 scraper outputs (below)
+  dashboard/student-wellbeing/
+                              State of CPS student well-being by board district
   apps/explorer/              Shiny app: trends by district, network, community
                               area, ESB sub-district and school, plus a map
 ```
@@ -71,3 +75,32 @@ See [apps/explorer/README.md](apps/explorer/README.md).
 - Scores are suppressed by the source when response rates are too low; check
   the response-rate columns in `5essentials_schools.csv` before comparing
   small schools.
+
+## Student well-being dashboard
+
+Live at `/student-wellbeing/` on the GitHub Pages site. It shows the 15 5Essentials
+measures from the State of CPS Student Well-being section for every Elected School
+Board sub-district (or the 10 full districts), with a picker for a one-district
+snapshot, plus the section's YRBS indicators citywide (YRBS has no school or location,
+so it can't be split by district).
+
+- **Data:** `scripts/02_build_wellbeing_dashboard.py` writes `dashboard/student-wellbeing/data.json`.
+  Standard library only. The Update Site workflow re-runs it on every deploy, so the
+  page refreshes whenever 5Essentials, YRBS or the school crosswalk changes.
+- **Method:** a district's score is the median of its schools' scores (each school
+  counts once); "CPS" is the median of all scored schools, calculated the same way.
+  Measures, themes and YRBS indicators are set in the script's config block.
+- **Links:** `#4B` opens a sub-district snapshot, `#4` a full district.
+  `?theme=light` pins the light theme, which is the one to use when embedding.
+- **Embedding** (for example on kidsfirstchicago.org):
+
+  ```html
+  <iframe id="k1c-wellbeing" src="https://mariamraheem.github.io/chicago-education-data/student-wellbeing/?theme=light"
+          title="Student well-being by school board district" style="width:100%;height:1800px;border:0" loading="lazy"></iframe>
+  <script>
+    // Optional: resize the iframe to fit its content (the page posts its height).
+    addEventListener("message", e => {
+      if (e.data && e.data.type === "k1c-embed-height") document.getElementById("k1c-wellbeing").style.height = e.data.height + "px";
+    });
+  </script>
+  ```

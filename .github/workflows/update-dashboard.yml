@@ -4,6 +4,7 @@ name: Update Site
 #   /              home page: overview, Student health (YRBS), School climate (5Essentials)
 #   /enrollment/   enrollment dashboard
 #   /budget/       budget dashboard
+#   /student-wellbeing/  State of CPS student well-being by board district (5Essentials + YRBS)
 #   /monitor/      CPS file monitor (built from the committed monitor/data)
 #   /api/          JSON export API, manifest, and trend summaries
 #
@@ -18,6 +19,9 @@ on:
     paths:
       - "enrollment/dashboard/**"
       - "budget/dashboard/**"
+      - "five_essentials/dashboard/**"
+      - "five_essentials/scripts/02_build_wellbeing_dashboard.py"
+      - "reference/**"
       - "yrbs/data/clean/**"
       - "five_essentials/data/clean/**"
       - "monitor/**"
@@ -56,6 +60,12 @@ jobs:
           cp -r site-landing/. site/
           cp -r enrollment/dashboard/. site/enrollment/
           cp -r budget/dashboard/. site/budget/
+
+      - name: Build student well-being dashboard (5Essentials + YRBS by board district)
+        run: |
+          python five_essentials/scripts/02_build_wellbeing_dashboard.py
+          mkdir -p site/student-wellbeing
+          cp -r five_essentials/dashboard/student-wellbeing/. site/student-wellbeing/
 
       - name: Build file monitor page from committed scan data
         run: |
