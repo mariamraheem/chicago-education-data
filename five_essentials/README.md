@@ -97,8 +97,9 @@ How it's built:
 - **Data:** `scripts/02_build_wellbeing_dashboard.py` writes `dashboard/student-wellbeing/data.json`
   (school scores for every essential and measure, simplified boundaries, YRBS).
   Standard library only. The Update Site workflow re-runs it on every deploy.
-- **Method:** an area's score is the median of its schools' scores (each school
-  counts once); "CPS" is the median of all scored schools, calculated the same way.
+- **Method:** an area's score is the average (mean) of its schools' scores, as in the
+  State of CPS report, with a toggle to switch to the median. Each school counts once;
+  "CPS" is the average (or median) of all scored schools, calculated the same way.
   Areas with fewer than 5 scored schools are flagged and left out of rankings.
   Themes, featured YRBS indicators and year limits are set in the script's config block.
 - **Links:** `#esb-4B`, `#ca-Austin` (spaces as `_`, e.g. `#ca-West_Town`) or `#net-Network_9`

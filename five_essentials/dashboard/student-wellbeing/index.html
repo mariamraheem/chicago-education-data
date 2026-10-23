@@ -153,8 +153,10 @@ svg text { font-family: var(--font); }
       <div class="radio inline" id="c-resp"></div>
       <div class="sec-lbl">Measure</div>
       <select id="c-ind" aria-label="Measure"></select>
+      <div class="sec-lbl">Statistic</div>
+      <div class="radio inline" id="c-stat"></div>
       <label class="check" style="margin-top:8px"><input type="checkbox" id="c-band"> Show middle 50% of schools</label>
-      <p class="hint">Scores run 1 to 99; 50 was the 2013 CPS average. An area's score is the median of its schools' scores.</p>
+      <p class="hint" id="c-hint"></p>
       <button class="reset-link" id="c-reset">↺ Reset this tab</button>
     </aside>
     <div class="main">
@@ -220,6 +222,8 @@ svg text { font-family: var(--font); }
       <select id="m-ind" aria-label="Measure"></select>
       <div class="sec-lbl">Survey year</div>
       <select id="m-year" aria-label="Survey year"></select>
+      <div class="sec-lbl">Statistic</div>
+      <div class="radio inline" id="m-stat"></div>
       <div class="sec-lbl">Color by</div>
       <div class="radio" id="m-color"></div>
       <p class="hint">Click an area on the map or in the list to see its trends on the School Climate tab.</p>
@@ -229,7 +233,7 @@ svg text { font-family: var(--font); }
       <div class="info-box" id="m-info"></div>
       <div class="map-wrap">
         <div class="card"><div class="card-title"><span id="m-map-title"></span></div><div id="m-map"></div><div class="scale" id="m-scale"></div><p class="desc" id="m-map-note"></p></div>
-        <div class="card"><div class="card-title"><span id="m-bar-title"></span><small>dashed line = CPS median</small></div><div class="bars" id="m-bars"></div></div>
+        <div class="card"><div class="card-title"><span id="m-bar-title"></span><small id="m-bar-sub"></small></div><div class="bars" id="m-bars"></div></div>
       </div>
     </div>
   </section>
@@ -262,15 +266,19 @@ const VIEWS = {
 const areaKeys = v => [...new Set(D.schools.map(s => s[v]).filter(Boolean))].sort(VIEWS[v].sort);
 const areaName = (v, k) => k === "CPS" ? "All CPS" : VIEWS[v].name(k);
 
-/* ---------- stats (medians of school scores), memoized ---------- */
+/* ---------- stats (mean or median of school scores, per S.stat), memoized ---------- */
 const memo = new Map();
 const quant = (s, p) => { const i = (s.length - 1) * p, lo = Math.floor(i), hi = Math.ceil(i); return s[lo] + (s[hi] - s[lo]) * (i - lo); };
 function stat(v, k, ind, year) {
-  const key = v + "|" + k + "|" + ind + "|" + year; if (memo.has(key)) return memo.get(key);
+  const key = S.stat + "|" + v + "|" + k + "|" + ind + "|" + year; if (memo.has(key)) return memo.get(key);
   const vals = D.schools.filter(s => k === "CPS" || s[v] === k).map(s => s.s[year]?.[ind]).filter(x => x != null).sort((a, b) => a - b);
-  const r = vals.length ? { med: quant(vals, .5), q1: quant(vals, .25), q3: quant(vals, .75), n: vals.length } : { med: null, q1: null, q3: null, n: 0 };
+  // "med" holds whichever statistic is selected: the mean (as in the State of CPS report) or the median.
+  const center = !vals.length ? null : S.stat === "mean" ? vals.reduce((a, b) => a + b, 0) / vals.length : quant(vals, .5);
+  const r = vals.length ? { med: center, q1: quant(vals, .25), q3: quant(vals, .75), n: vals.length } : { med: null, q1: null, q3: null, n: 0 };
   memo.set(key, r); return r;
 }
+const SW = () => S.stat === "mean" ? "average" : "median";
+const statRadio = (el, name) => radios(el, name, [["mean", "Average"], ["median", "Median"]], S.stat, x => { S.stat = x; renderTab(); });
 const series = (v, k, ind) => YEARS.map(y => stat(v, k, ind, y));
 function rankIn(v, k, ind, year) {
   const ks = areaKeys(v).map(a => [a, stat(v, a, ind, year)]).filter(([, s]) => s.med != null && s.n >= SMALL).sort((a, b) => b[1].med - a[1].med);
@@ -378,7 +386,7 @@ function indOptions(resp, cur, opts = {}) {
   h += `<optgroup label="Essentials">${ess.map(o).join("")}</optgroup><optgroup label="Other measures">${meas.map(o).join("")}</optgroup>`;
   return h;
 }
-const STATE0 = { tab: "climate", view: "esb", area: "CPS", comp: "", resp: "Student", ind: "Safety", band: false,
+const STATE0 = { tab: "climate", stat: "mean", view: "esb", area: "CPS", comp: "", resp: "Student", ind: "Safety", band: false,
   yInd: D.yrbs.featured[1] || D.yrbs.indicators[0].id, yBreak: "Total", yIL: true, yUS: true, yCI: true, yHidden: [],
   mView: "esb", mResp: "Student", mInd: "Safety", mYear: LAST, mColor: "cps", mNet: "elem" };
 const S = { ...STATE0 };
@@ -417,8 +425,10 @@ function renderClimate() {
   $("#c-comp").onchange = e => { S.comp = e.target.value; renderClimate(); };
   radios($("#c-resp"), "c-resp", [["Student", "Students"], ["Teacher", "Teachers"]], S.resp, x => { S.resp = x; S.ind = x === "Student" ? "Safety" : "Classroom Disruptions"; renderClimate(); });
   $("#c-ind").innerHTML = indOptions(S.resp, S.ind); $("#c-ind").onchange = e => { S.ind = e.target.value; renderClimate(); };
+  statRadio($("#c-stat"), "c-stat");
+  $("#c-hint").textContent = `Scores run 1 to 99; 50 was the 2013 CPS average. An area's score is the ${S.stat === "mean" ? "average (mean)" : "median"} of its schools' scores. The State of CPS report uses the average.`;
   $("#c-band").checked = S.band; $("#c-band").onchange = e => { S.band = e.target.checked; renderClimate(); };
-  $("#c-reset").onclick = () => { Object.assign(S, { view: "esb", area: "CPS", comp: "", resp: "Student", ind: "Safety", band: false }); renderClimate(); writeHash(); };
+  $("#c-reset").onclick = () => { Object.assign(S, { stat: "mean", view: "esb", area: "CPS", comp: "", resp: "Student", ind: "Safety", band: false }); renderClimate(); writeHash(); };
 
   // quick chips: the report's themes
   $("#c-chips").innerHTML = `<span class="lbl">Jump to a theme from the report:</span>` + D.themes.map(t => `<button class="quick-chip" data-m="${esc(t.m[0])}" data-r="${t.resp}" aria-pressed="${t.m.includes(S.ind)}">${esc(t.name)}</button>`).join("");
@@ -435,7 +445,7 @@ function renderClimate() {
   let info;
   if (li < 0) info = `<b>${esc(S.ind)}</b> has no scores for ${esc(aName)}. Pick another measure or area.`;
   else {
-    info = `In ${esc(aName)}, the median school's <b>${esc(S.ind)}</b> score ${ch == null ? `was <b>${fmt(latest)}</b> in ${ly}` : `went from <b>${fmt(first)}</b> in ${YEARS[fi]} to <b>${fmt(latest)}</b> in ${ly} (${sgn(ch)} point${Math.abs(Math.round(ch)) === 1 ? "" : "s"})`}.`;
+    info = `In ${esc(aName)}, the ${SW()} school score on <b>${esc(S.ind)}</b> ${ch == null ? `was <b>${fmt(latest)}</b> in ${ly}` : `went from <b>${fmt(first)}</b> in ${YEARS[fi]} to <b>${fmt(latest)}</b> in ${ly} (${sgn(ch)} point${Math.abs(Math.round(ch)) === 1 ? "" : "s"})`}.`;
     if (!isCPS) info += ` CPS overall ${cpsCh == null ? `was ${fmt(cpsL)}` : `moved ${sgn(cpsCh)} over the same years, to ${fmt(cpsL)}`}, so ${esc(aName)} is ${gap == null ? "not comparable" : Math.abs(gap) < 2 ? "about even with CPS" : `<b>${fmt(Math.abs(gap))} points ${gap > 0 ? "above" : "below"}</b> CPS`} in ${ly}.`;
     if (!isCPS && ch != null && cpsCh != null) { const rel = ch - cpsCh; info += Math.abs(rel) >= 3 ? ` It ${rel > 0 ? "gained" : "lost"} ground relative to the city (${sgn(rel)} points).` : ` It moved roughly in step with the city.`; }
     if (!isCPS && n < SMALL) info += ` <span style="color:var(--orange)">Only ${n} scored school${n === 1 ? "" : "s"}, so read this with caution.</span>`;
@@ -446,7 +456,7 @@ function renderClimate() {
   const kpi = (val, lbl, col) => `<div class="kpi" style="border-top-color:${col}"><div class="v num" style="color:${col}">${val}</div><div class="l">${lbl}</div></div>`;
   $("#c-kpis").innerHTML = kpi(fmt(latest), `${esc(S.ind)}, ${ly || LAST}`, "var(--k1c-green)")
     + kpi(sgn(ch), `change since ${YEARS[fi] || FIRST}${cpsCh != null && !isCPS ? ` (CPS ${sgn(cpsCh)})` : ""}`, ch == null || Math.abs(ch) < 1 ? "var(--gray)" : ch > 0 ? "var(--up)" : "var(--down)")
-    + (isCPS ? kpi(fmt(A[li]?.q1) + "–" + fmt(A[li]?.q3), "middle 50% of schools", "var(--il)") : kpi(sgn(gap), `vs CPS median (${fmt(cpsL)})`, gap == null || Math.abs(gap) < 2 ? "var(--gray)" : gap > 0 ? "var(--up)" : "var(--down)"))
+    + (isCPS ? kpi(fmt(A[li]?.q1) + "–" + fmt(A[li]?.q3), "middle 50% of schools", "var(--il)") : kpi(sgn(gap), `vs CPS ${SW()} (${fmt(cpsL)})`, gap == null || Math.abs(gap) < 2 ? "var(--gray)" : gap > 0 ? "var(--up)" : "var(--down)"))
     + (isCPS ? kpi(n, "schools scored", "var(--orange)") : kpi(rk?.r ? `${ord(rk.r)}<span style="font-size:13px;color:var(--muted);font-weight:600"> of ${rk.of}</span>` : "–", rk?.r ? `among ${VIEWS[v].plural} with 5+ schools` : "too few schools to rank", "var(--il)"))
     + (isCPS ? "" : kpi(n, "schools scored", "var(--orange)"));
   // main chart
@@ -455,7 +465,7 @@ function renderClimate() {
   const ser = [{ key: "a", name: aName, color: COL.area, values: A.map(x => x.med), band: A.map(x => [x.q1, x.q3]), width: 3 }];
   if (!isCPS) ser.push({ key: "c", name: "CPS", color: COL.cps, dash: "5 4", values: C.map(x => x.med), width: 2 });
   if (P) ser.push({ key: "p", name: areaName(v, S.comp), color: COL.comp, values: P.map(x => x.med), band: P.map(x => [x.q1, x.q3]), width: 2.5, bandOpacity: .1 });
-  $("#c-main-legend").innerHTML = ser.map(se => legendItem(se.color, se.name + (se.key === "c" ? " median" : ""), se.dash)).join("") + (S.band ? `<span><i style="display:inline-block;width:18px;height:10px;background:var(--k1c-green);opacity:.15;border-radius:2px"></i>middle 50% of schools</span>` : "");
+  $("#c-main-legend").innerHTML = ser.map(se => legendItem(se.color, se.name + (se.key === "c" ? " " + SW() : ""), se.dash)).join("") + (S.band ? `<span><i style="display:inline-block;width:18px;height:10px;background:var(--k1c-green);opacity:.15;border-radius:2px"></i>middle 50% of schools</span>` : "");
   lineChart($("#c-main"), { years: YEARS, series: ser, height: 330, showBand: S.band, labelRoom: 160, aria: `${S.ind} trend`,
     tipNote: i => { const a = A[i]; return a.n ? `${aName}: ${a.n} schools, middle 50% ${fmt(a.q1)}–${fmt(a.q3)}` : ""; } });
   $("#c-desc").textContent = meta.desc || "";
@@ -463,7 +473,7 @@ function renderClimate() {
   const wb = D.themes.filter(t => t.resp === S.resp).flatMap(t => t.m.map(m => ({ m, t: t.name })));
   if (!wb.some(x => x.m === S.ind)) wb.push({ m: S.ind, t: meta.kind === "essential" ? "Essential" : meta.essential });
   $("#c-mult-title").textContent = `${S.resp === "Student" ? "Student" : "Teacher"} well-being measures over time: ${aName}`;
-  $("#c-mult-legend").innerHTML = legendItem(COL.area, aName) + (isCPS ? "" : legendItem(COL.cps, "CPS median", "5 4"));
+  $("#c-mult-legend").innerHTML = legendItem(COL.area, aName) + (isCPS ? "" : legendItem(COL.cps, "CPS " + SW(), "5 4"));
   const multVals = [];
   const mdata = wb.map(({ m, t }) => { const i = IX[m], a = series(v, S.area, i).map(x => x.med), c = series(v, "CPS", i).map(x => x.med); multVals.push(...a.filter(x => x != null), ...(isCPS ? [] : c.filter(x => x != null))); return { m, t, i, a, c }; });
   const dmin = Math.floor((Math.min(...multVals) - 2) / 10) * 10, dmax = Math.ceil((Math.max(...multVals) + 2) / 10) * 10, dom = [Math.max(0, dmin), Math.min(100, dmax), dmax - dmin > 50 ? 20 : 10];
@@ -483,8 +493,8 @@ function renderClimate() {
   const selSer = allSer.find(s => s.key === S.area), cmpSer = allSer.find(s => s.key === S.comp);
   if (cmpSer) Object.assign(cmpSer, { faint: false, color: COL.comp, width: 2.5 });
   if (selSer) Object.assign(selSer, { faint: false, color: COL.area, width: 3.2 });
-  allSer.push({ key: "CPS", name: "CPS median", color: COL.cps, dash: "5 4", values: C.map(x => x.med), width: 2, faint: false });
-  $("#c-all-legend").innerHTML = (selSer ? legendItem(COL.area, aName) : "") + (cmpSer ? legendItem(COL.comp, cmpSer.name) : "") + legendItem(COL.cps, "CPS median", "5 4") + legendItem("var(--faint)", `other ${VIEWS[v].plural} with 5+ schools`);
+  allSer.push({ key: "CPS", name: "CPS " + SW(), color: COL.cps, dash: "5 4", values: C.map(x => x.med), width: 2, faint: false });
+  $("#c-all-legend").innerHTML = (selSer ? legendItem(COL.area, aName) : "") + (cmpSer ? legendItem(COL.comp, cmpSer.name) : "") + legendItem(COL.cps, "CPS " + SW(), "5 4") + legendItem("var(--faint)", `other ${VIEWS[v].plural} with 5+ schools`);
   lineChart($("#c-all"), { years: YEARS, series: allSer, height: 340, labelRoom: 150, nearest: true, aria: `All ${VIEWS[v].plural}`,
     nearestTip: (se, i) => `<b>${esc(se.name)}</b><div class="tr"><span>${YEARS[i]}</span><span>${fmt(se.values[i])}</span></div>${se.n ? `<div class="tr"><span>Schools</span><span>${se.n[i]}</span></div>` : ""}<div style="color:var(--muted);margin-top:3px">${se.key === "CPS" ? "" : "Click to select"}</div>`,
     onPick: se => { if (se.key === "CPS") return; S.area = se.key; if (S.comp === S.area) S.comp = ""; renderClimate(); writeHash(); $("#c-info").scrollIntoView({ behavior: "smooth", block: "start" }); } });
@@ -574,8 +584,10 @@ function renderMap() {
   radios($("#m-resp"), "m-resp", [["Student", "Students"], ["Teacher", "Teachers"]], S.mResp, x => { S.mResp = x; S.mInd = x === "Student" ? "Safety" : "Classroom Disruptions"; renderMap(); });
   $("#m-ind").innerHTML = indOptions(S.mResp, S.mInd); $("#m-ind").onchange = e => { S.mInd = e.target.value; renderMap(); };
   $("#m-year").innerHTML = [...YEARS].reverse().map(y => `<option${y === S.mYear ? " selected" : ""}>${y}</option>`).join(""); $("#m-year").onchange = e => { S.mYear = e.target.value; renderMap(); };
+  statRadio($("#m-stat"), "m-stat");
+  $("#m-bar-sub").textContent = `dashed line = CPS ${SW()}`;
   radios($("#m-color"), "m-color", [["cps", "Points above or below CPS"], ["chg", `Change since ${FIRST}`]], S.mColor, x => { S.mColor = x; renderMap(); });
-  $("#m-reset").onclick = () => { Object.assign(S, { mView: "esb", mResp: "Student", mInd: "Safety", mYear: LAST, mColor: "cps", mNet: "elem" }); renderMap(); };
+  $("#m-reset").onclick = () => { Object.assign(S, { stat: "mean", mView: "esb", mResp: "Student", mInd: "Safety", mYear: LAST, mColor: "cps", mNet: "elem" }); renderMap(); };
 
   const ind = IX[S.mInd], y = S.mYear, cps = stat(v, "CPS", ind, y).med;
   const rows = areaKeys(v).map(k => { const s = stat(v, k, ind, y), f = stat(v, k, ind, FIRST); return { k, ...s, chg: s.med != null && f.med != null && y !== FIRST ? s.med - f.med : null }; });
@@ -585,7 +597,7 @@ function renderMap() {
   // info
   if (!ok.length) $("#m-info").innerHTML = `<b>${esc(S.mInd)}</b> was not scored for enough schools in ${y} to compare ${VIEWS[v].plural}.`;
   else { const sr = [...ok].sort((a, b) => b.med - a.med);
-    $("#m-info").innerHTML = `In ${y}, median <b>${esc(S.mInd)}</b> scores ranged from <b>${fmt(sr[sr.length - 1].med)}</b> (${esc(areaName(v, sr[sr.length - 1].k))}) to <b>${fmt(sr[0].med)}</b> (${esc(areaName(v, sr[0].k))}) across ${ok.length} ${VIEWS[v].plural} with 5 or more scored schools. The CPS median was ${fmt(cps)}.`
+    $("#m-info").innerHTML = `In ${y}, ${SW()} <b>${esc(S.mInd)}</b> scores ranged from <b>${fmt(sr[sr.length - 1].med)}</b> (${esc(areaName(v, sr[sr.length - 1].k))}) to <b>${fmt(sr[0].med)}</b> (${esc(areaName(v, sr[0].k))}) across ${ok.length} ${VIEWS[v].plural} with 5 or more scored schools. The CPS ${SW()} was ${fmt(cps)}.`
       + (S.mColor === "chg" && cpsChg != null ? ` Since ${FIRST}, CPS moved ${sgn(cpsChg)} points.` : ""); }
   // map
   const geo = D.geo[v], host = $("#m-map");
