@@ -4,7 +4,7 @@ name: Update Site
 #   /              home page: overview, Student health (YRBS), School climate (5Essentials)
 #   /enrollment/   enrollment dashboard
 #   /budget/       budget dashboard
-#   /student-wellbeing/  State of CPS student well-being by board district (5Essentials + YRBS)
+#   /student-wellbeing/  State of CPS student well-being explorer (5Essentials by area + YRBS)
 #   /monitor/      CPS file monitor (built from the committed monitor/data)
 #   /api/          JSON export API, manifest, and trend summaries
 #
