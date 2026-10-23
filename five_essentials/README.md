@@ -22,7 +22,11 @@ No browser needed: each report page embeds its data as JSON
 ```
 five_essentials/
   scripts/01_scrape.py        the scraper (writes data/clean/)
+  scripts/02_build_wellbeing_dashboard.py
+                              data for the student well-being dashboard (below)
   data/clean/                 scraper outputs (below)
+  dashboard/student-wellbeing/
+                              State of CPS student well-being by board district
   apps/explorer/              Shiny app: trends by district, network, community
                               area, ESB sub-district and school, plus a map
 ```
@@ -71,3 +75,44 @@ See [apps/explorer/README.md](apps/explorer/README.md).
 - Scores are suppressed by the source when response rates are too low; check
   the response-rate columns in `5essentials_schools.csv` before comparing
   small schools.
+
+## Student well-being dashboard
+
+Live at `/student-wellbeing/` on the GitHub Pages site, built in the style of the NAEP
+dashboard. Three tabs:
+
+- **School Climate (5Essentials):** pick a view (board district, community area or
+  network) and an area to follow any essential or measure over the last 5 surveys
+  against the CPS median, with an optional comparison area. Below the main chart,
+  small trend charts show every State of CPS well-being measure for that area, and
+  an "every area over time" chart shows where it sits among the rest.
+- **Student Health (YRBS):** Chicago trends for the last 10 years against Illinois and
+  the U.S., or by race/ethnicity, sex or grade. YRBS has no school or location, so it
+  can't be split by area.
+- **Map View:** any measure and year by area, colored by gap to CPS or change since
+  the first survey, with a ranked list. Clicking an area opens its trends.
+
+How it's built:
+
+- **Data:** `scripts/02_build_wellbeing_dashboard.py` writes `dashboard/student-wellbeing/data.json`
+  (school scores for every essential and measure, simplified boundaries, YRBS).
+  Standard library only. The Update Site workflow re-runs it on every deploy.
+- **Method:** an area's score is the average (mean) of its schools' scores, as in the
+  State of CPS report, with a toggle to switch to the median. Each school counts once;
+  "CPS" is the average (or median) of all scored schools, calculated the same way.
+  Areas with fewer than 5 scored schools are flagged and left out of rankings.
+  Themes, featured YRBS indicators and year limits are set in the script's config block.
+- **Links:** `#esb-4B`, `#ca-Austin` (spaces as `_`, e.g. `#ca-West_Town`) or `#net-Network_9`
+  open an area on the School Climate tab; `#health` and `#map` open those tabs.
+- **Embedding** (for example on kidsfirstchicago.org):
+
+  ```html
+  <iframe id="k1c-wellbeing" src="https://mariamraheem.github.io/chicago-education-data/student-wellbeing/"
+          title="Student well-being by school board district" style="width:100%;height:1800px;border:0" loading="lazy"></iframe>
+  <script>
+    // Optional: resize the iframe to fit its content (the page posts its height).
+    addEventListener("message", e => {
+      if (e.data && e.data.type === "k1c-embed-height") document.getElementById("k1c-wellbeing").style.height = e.data.height + "px";
+    });
+  </script>
+  ```

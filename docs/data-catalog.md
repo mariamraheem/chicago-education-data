@@ -37,6 +37,7 @@ Source: UChicago Impact, www.5-essentials.org. Folder: [`five_essentials/`](../f
 | `data/clean/5essentials_schools.csv` | school x year | `survey_year`, `school_id`, `school_name`, `school_type`, `address`, `student_/teacher_/parent_response_rate`, `overall_label` | latest 5 |
 | `data/clean/5essentials_measures_dictionary.csv` | year x essential or measure | `survey_year`, `level`, `essential`, `indicator`, `asked_of`, `description` | 2022-2026 |
 | `data/clean/5essentials_questions.csv` | year x measure x question | `survey_year`, `indicator`, `asked_of`, `question_code`, `question`, `answer_choices` | 2022-2026 |
+| `dashboard/student-wellbeing/data.json` | (one file) | school scores for every essential and measure with network, community area and ESB sub-district; simplified boundaries; Chicago, Illinois and U.S. YRBS | 5E latest 5; YRBS last 10 years |
 
 Scores are 1-99. See [the 5Essentials README](../five_essentials/README.md#known-data-issues)
 for known gaps (2025 in particular).

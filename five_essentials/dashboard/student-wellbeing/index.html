@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Student Well-being Explorer</title>
+<meta name="description" content="State of CPS 2026: 5Essentials school climate trends by board district, community area and network, and Chicago Youth Risk Behavior Survey trends.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: K1C NAEP dashboard pattern. Dark green title bar, green tabs, left sidebar of
+   labelled controls, main column of info box, KPI cards and chart cards. Light theme only,
+   to match the K1C site it is embedded in. */
+:root {
+  --k1c-green: #2C8C4C; --k1c-dark: #1B4D25; --k1c-light: #E8F5EE; --orange: #C05621;
+  --il: #2B6CB0; --nat: #718096; --gray: #718096; --gray-light: #E2E8F0; --bg: #F7F9F7;
+  --ink: #1a202c; --ink-2: #2d3748; --ink-3: #4a5568; --muted: #718096; --faint: #a0aec0;
+  --card: #ffffff; --border: #e2e8f0; --grid: #edf2f7; --up: #276749; --down: #c53030;
+  --g1: #C05621; --g2: #6B46C1; --g3: #B7791F; --g4: #2C7A7B;
+  --font: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 14px; line-height: 1.5; }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--il); outline-offset: 2px; border-radius: 3px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+.num { font-variant-numeric: tabular-nums; }
+.page { max-width: 1240px; margin: 0 auto; padding-block: 16px 8px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+.title-header { background: var(--k1c-dark); color: #fff; padding: 16px 22px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+.title-header .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.title-header img { height: 44px; width: 44px; display: block; background: #fff; border-radius: 50%; }
+.title-header h1 { font-size: 18px; font-weight: 700; }
+.title-header p { margin: 2px 0 0; font-size: 12px; opacity: .82; }
+.data-badge { font-size: 10.5px; background: rgba(255,255,255,.15); padding: 3px 9px; border-radius: 10px; white-space: nowrap; }
+
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin-bottom: 16px; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { border: 1px solid transparent; border-bottom: 0; background: none; color: var(--k1c-dark); font-size: 13px; font-weight: 600; padding: 8px 14px; border-radius: 4px 4px 0 0; cursor: pointer; white-space: nowrap; }
+.tab:hover { background: var(--k1c-light); }
+.tab[aria-selected="true"] { background: var(--k1c-green); color: #fff; border-color: var(--k1c-green); }
+
+.layout { display: grid; grid-template-columns: minmax(0, 270px) minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+.sidebar { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 14px; display: grid; gap: 4px; position: sticky; top: 12px; }
+@media (max-width: 900px) { .sidebar { position: static; } }
+.sec-lbl { font-size: 11px; font-weight: 700; color: var(--ink-3); letter-spacing: 1px; text-transform: uppercase; margin: 10px 0 4px; }
+.sec-lbl:first-child { margin-top: 0; }
+.sidebar hr { border: 0; border-top: 1px solid var(--border); margin: 8px 0 2px; width: 100%; }
+.sidebar select { width: 100%; border: 1px solid #cbd5e0; border-radius: 4px; padding: 6px 8px; background: #fff; font-size: 13px; }
+.radio { display: grid; gap: 3px; }
+.radio label, .check { display: flex; gap: 7px; align-items: center; font-size: 13px; color: var(--ink-2); cursor: pointer; }
+.radio input, .check input { accent-color: var(--k1c-green); margin: 0; }
+.radio.inline { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.hint { font-size: 11.5px; color: var(--muted); line-height: 1.45; margin: 4px 0 0; }
+.reset-link { background: none; border: 0; padding: 0; font-size: 11.5px; color: var(--faint); font-weight: 600; cursor: pointer; justify-self: start; margin-top: 8px; }
+.reset-link:hover { color: var(--orange); }
+
+.main { display: grid; gap: 14px; min-width: 0; }
+.info-box { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 12px 16px; font-size: 13.5px; line-height: 1.7; color: var(--ink-3); }
+.info-box b { color: var(--ink); }
+.callout { background: #FFFAF0; border-left: 4px solid var(--orange); border-radius: 4px; padding: 10px 14px; font-size: 12.5px; line-height: 1.6; color: var(--ink-3); }
+.callout b { color: var(--ink-2); }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-top: 3px solid var(--k1c-green); border-radius: 4px; padding: 10px 12px; min-width: 0; }
+.kpi .v { font-size: 24px; font-weight: 700; line-height: 1.1; }
+.kpi .l { font-size: 11px; color: var(--muted); margin-top: 3px; line-height: 1.35; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 14px 16px; min-width: 0; }
+.card-title { font-size: 13px; font-weight: 600; color: var(--ink-2); padding-bottom: 8px; margin-bottom: 10px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: baseline; }
+.card-title small { font-weight: 500; color: var(--muted); font-size: 11.5px; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--ink-3); margin-bottom: 6px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.lg-btn { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--border); background: #fff; border-radius: 14px; padding: 3px 10px 3px 7px; font-size: 12px; font-weight: 600; color: var(--ink-2); cursor: pointer; }
+.lg-btn:hover { border-color: var(--faint); }
+.lg-btn .sq { width: 12px; height: 12px; border-radius: 3px; border: 2px solid; flex: none; }
+.lg-btn[aria-pressed="false"] { color: var(--faint); background: var(--bg); }
+.lg-btn[aria-pressed="false"] .sq { background: transparent !important; }
+.lg-hint { font-size: 11.5px; color: var(--muted); align-self: center; }
+.desc { font-size: 12px; color: var(--muted); margin: 8px 0 0; line-height: 1.55; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.chips .lbl { font-size: 11px; color: var(--muted); font-weight: 600; margin-right: 2px; }
+.quick-chip { background: var(--k1c-light); color: var(--k1c-dark); border: 1px solid #bbe3cc; border-radius: 14px; font-size: 11.5px; font-weight: 600; padding: 4px 11px; cursor: pointer; }
+.quick-chip:hover, .quick-chip[aria-pressed="true"] { background: var(--k1c-green); color: #fff; border-color: var(--k1c-green); }
+
+.multiples { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.mini { border: 1px solid var(--border); border-radius: 4px; padding: 8px 10px 4px; cursor: pointer; background: #fff; text-align: left; display: grid; gap: 2px; }
+.mini:hover { border-color: var(--k1c-green); }
+.mini[aria-pressed="true"] { border-color: var(--k1c-green); box-shadow: inset 0 0 0 1px var(--k1c-green); background: #fbfefc; }
+.mini { min-width: 0; overflow: hidden; }
+.mini .ch { display: block; width: 100%; min-width: 0; }
+.mini .t { font-size: 12px; font-weight: 600; color: var(--ink-2); line-height: 1.3; min-height: 2.6em; }
+.mini .th { font-size: 10px; font-weight: 700; color: var(--faint); letter-spacing: .6px; text-transform: uppercase; }
+.mini .row { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
+.mini .v { font-size: 18px; font-weight: 700; }
+.delta { font-size: 11.5px; font-weight: 700; }
+.delta.up { color: var(--up); } .delta.down { color: var(--down); } .delta.flat { color: var(--muted); }
+
+.map-wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+@media (max-width: 1080px) { .map-wrap { grid-template-columns: 1fr; } }
+.shape { cursor: pointer; stroke: #fff; stroke-width: .8; }
+.shape:hover { stroke: var(--ink); stroke-width: 1.5; }
+.shape.sel { stroke: var(--ink); stroke-width: 2.5; }
+.scale { display: flex; align-items: center; gap: 2px; font-size: 11.5px; color: var(--ink-3); flex-wrap: wrap; margin-top: 6px; }
+.scale i { width: 24px; height: 10px; display: inline-block; }
+.bars { display: grid; gap: 1px; }
+.bar-row { display: grid; grid-template-columns: minmax(0, 150px) minmax(0, 1fr) 38px; gap: 8px; align-items: center; font-size: 12px; padding: 2px 4px; border-radius: 3px; cursor: pointer; }
+.bar-row:hover { background: var(--grid); }
+.bar-row.sel { background: var(--k1c-light); font-weight: 700; }
+.bar-row .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-row.small .nm { color: var(--faint); }
+.bar-track { position: relative; height: 12px; }
+.bar-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 0 3px 3px 0; }
+.bar-cps { position: absolute; top: -3px; bottom: -3px; width: 0; border-left: 1.5px dashed var(--ink); }
+
+svg text { font-family: var(--font); }
+.app-footer { font-size: 11px; color: var(--faint); text-align: center; padding: 20px 10px 26px; line-height: 1.7; }
+.app-footer b { color: var(--muted); }
+.notes { font-size: 11.5px; color: var(--muted); margin: 0; padding-left: 18px; display: grid; gap: 3px; }
+#tip { position: fixed; pointer-events: none; z-index: 20; background: #fff; color: var(--ink); border: 1px solid var(--border); border-radius: 4px; padding: 8px 10px; font-size: 12px; line-height: 1.45; max-width: 300px; box-shadow: 0 4px 14px rgba(26,32,44,.14); }
+#tip .tr { display: flex; justify-content: space-between; gap: 14px; font-variant-numeric: tabular-nums; }
+#tip .sw { display: inline-block; width: 10px; height: 3px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="title-header">
+    <div class="brand"><img src="k1c-logo.png" alt="Kids First Chicago">
+      <div><h1>State of CPS 2026: Student Well-being</h1><p>School climate and student health trends, by board district, community area and network</p></div></div>
+    <span class="data-badge" id="badge">5Essentials 2022–2026 · YRBS 2017–2025</span>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" data-tab="climate" aria-selected="true">School Climate (5Essentials)</button>
+    <button class="tab" role="tab" data-tab="health" aria-selected="false">Student Health (YRBS)</button>
+    <button class="tab" role="tab" data-tab="map" aria-selected="false">Map View</button>
+  </nav>
+
+  <!-- ============ 5ESSENTIALS ============ -->
+  <section id="tab-climate" class="layout">
+    <aside class="sidebar">
+      <div class="sec-lbl">View by</div>
+      <div class="radio" id="c-view"></div>
+      <div class="sec-lbl">Area</div>
+      <select id="c-area" aria-label="Area"></select>
+      <div class="sec-lbl">Compare to</div>
+      <select id="c-comp" aria-label="Compare to"></select>
+      <hr>
+      <div class="sec-lbl">Reported by</div>
+      <div class="radio inline" id="c-resp"></div>
+      <div class="sec-lbl">Measure</div>
+      <select id="c-ind" aria-label="Measure"></select>
+      <div class="sec-lbl">Statistic</div>
+      <div class="radio inline" id="c-stat"></div>
+      <label class="check" style="margin-top:8px"><input type="checkbox" id="c-band"> Show middle 50% of schools</label>
+      <p class="hint" id="c-hint"></p>
+      <button class="reset-link" id="c-reset">↺ Reset this tab</button>
+    </aside>
+    <div class="main">
+      <div class="chips" id="c-chips"></div>
+      <div class="info-box" id="c-info"></div>
+      <div class="kpis" id="c-kpis"></div>
+      <div class="card"><div class="card-title"><span id="c-main-title"></span><small id="c-main-sub"></small></div>
+        <div class="legend" id="c-main-legend"></div><div id="c-main"></div><p class="desc" id="c-desc"></p></div>
+      <div class="card"><div class="card-title"><span id="c-mult-title"></span><small>Same scale on every chart · click one to make it the main chart</small></div>
+        <div class="legend" id="c-mult-legend"></div><div class="multiples" id="c-mult"></div></div>
+      <div class="card"><div class="card-title"><span id="c-all-title"></span><small>Hover to identify an area · click to select it</small></div>
+        <div class="legend" id="c-all-legend"></div><div id="c-all"></div></div>
+      <ul class="notes">
+        <li>2025 has limited data: the survey reported fewer student measures, and Ambitious Instruction and Supportive Environment were scored for few schools. Student Peer Relationships was not reported in 2024.</li>
+        <li>Areas with fewer than 5 scored schools move a lot from year to year; they are marked "small" and left out of rankings.</li>
+        <li>Networks include the 17 geographic networks plus Charter, ISP, Options and Contract schools, which are grouped by governance rather than place.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ YRBS ============ -->
+  <section id="tab-health" class="layout" hidden>
+    <aside class="sidebar">
+      <div class="sec-lbl">Indicator</div>
+      <select id="y-ind" aria-label="Indicator"></select>
+      <hr>
+      <div class="sec-lbl">Students</div>
+      <div class="radio" id="y-break"></div>
+      <div class="sec-lbl">Compare to</div>
+      <label class="check"><input type="checkbox" id="y-il" checked> Illinois</label>
+      <label class="check"><input type="checkbox" id="y-us" checked> United States</label>
+      <label class="check" style="margin-top:6px"><input type="checkbox" id="y-ci" checked> Show 95% confidence intervals</label>
+      <hr>
+      <div class="callout" style="margin-top:6px"><b>Why no district view?</b> CDC surveys Chicago as one district and publishes no school or location for students, so YRBS can't be split by board district, community area or network. Use the 5Essentials student measures for area-level well-being.</div>
+      <button class="reset-link" id="y-reset">↺ Reset this tab</button>
+    </aside>
+    <div class="main">
+      <div class="chips" id="y-chips"></div>
+      <div class="info-box" id="y-info"></div>
+      <div class="kpis" id="y-kpis"></div>
+      <div class="card"><div class="card-title"><span id="y-main-title"></span><small>Chicago public high school students, weighted</small></div>
+        <div class="legend" id="y-main-legend"></div><div id="y-main"></div></div>
+      <div class="card"><div class="card-title"><span>State of CPS indicators at a glance</span><small>Chicago vs United States · click one to make it the main chart</small></div>
+        <div class="multiples" id="y-mult"></div></div>
+      <ul class="notes">
+        <li>Hollow points are based on fewer than 100 students (CDC's reporting floor) and are unreliable.</li>
+        <li>CDC's combined file groups Asian students into "All other races". Chicago has no 2015 survey.</li>
+        <li>Chicago's 2025 sample is the smallest on record (about 890 students), and many rates drop sharply from 2023. Check against CDC's YRBS Explorer before citing 2025.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ MAP ============ -->
+  <section id="tab-map" class="layout" hidden>
+    <aside class="sidebar">
+      <div class="sec-lbl">View by</div>
+      <div class="radio" id="m-view"></div>
+      <div id="m-netwrap" hidden><div class="sec-lbl">Networks</div><div class="radio" id="m-net"></div></div>
+      <hr>
+      <div class="sec-lbl">Reported by</div>
+      <div class="radio inline" id="m-resp"></div>
+      <div class="sec-lbl">Measure</div>
+      <select id="m-ind" aria-label="Measure"></select>
+      <div class="sec-lbl">Survey year</div>
+      <select id="m-year" aria-label="Survey year"></select>
+      <div class="sec-lbl">Statistic</div>
+      <div class="radio inline" id="m-stat"></div>
+      <div class="sec-lbl">Color by</div>
+      <div class="radio" id="m-color"></div>
+      <p class="hint">Click an area on the map or in the list to see its trends on the School Climate tab.</p>
+      <button class="reset-link" id="m-reset">↺ Reset this tab</button>
+    </aside>
+    <div class="main">
+      <div class="info-box" id="m-info"></div>
+      <div class="map-wrap">
+        <div class="card"><div class="card-title"><span id="m-map-title"></span></div><div id="m-map"></div><div class="scale" id="m-scale"></div><p class="desc" id="m-map-note"></p></div>
+        <div class="card"><div class="card-title"><span id="m-bar-title"></span><small id="m-bar-sub"></small></div><div class="bars" id="m-bars"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="app-footer">
+    <b>Sources:</b> UChicago Impact, 5Essentials Survey (5-essentials.org); CDC Youth Risk Behavior Surveillance System (combined high school datasets); Chicago Public Schools school locations and network assignments.<br>
+    Built by Kids First Chicago · Data and code: github.com/mariamraheem/chicago-education-data
+  </footer>
+</div>
+<div id="tip" hidden></div>
+
+<script>
+function start(D) {
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const fmt = (v, d = 0) => v == null || Number.isNaN(v) ? "–" : Number(v).toFixed(d);
+const sgn = (v, d = 0) => v == null || Number.isNaN(v) ? "–" : (v > 0 ? "+" : v < 0 ? "−" : "±") + Math.abs(v).toFixed(d);
+const deltaCls = (v, good = 1) => v == null ? "flat" : Math.abs(v) < 1 ? "flat" : (v * good > 0 ? "up" : "down");
+const YEARS = D.years.map(String), FIRST = YEARS[0], LAST = YEARS[YEARS.length - 1];
+const IND = D.indicators, IX = Object.fromEntries(IND.map((d, i) => [d.name, i]));
+const SMALL = 5;
+const COL = { area: "var(--k1c-green)", cps: "#1a202c", comp: "var(--orange)", il: "var(--il)", us: "var(--nat)" };
+
+/* ---------- groupings ---------- */
+const VIEWS = {
+  esb: { label: "Board district (ESB)", one: "board district", plural: "board districts", name: k => "Sub-district " + k, sort: (a, b) => parseInt(a) - parseInt(b) || a.localeCompare(b) },
+  ca: { label: "Community area", one: "community area", plural: "community areas", name: k => k, sort: (a, b) => a.localeCompare(b) },
+  net: { label: "Network", one: "network", plural: "networks", name: k => k, sort: (a, b) => { const na = /^Network (\d+)/.exec(a), nb = /^Network (\d+)/.exec(b); return na && nb ? na[1] - nb[1] : na ? -1 : nb ? 1 : a.localeCompare(b); } },
+};
+const areaKeys = v => [...new Set(D.schools.map(s => s[v]).filter(Boolean))].sort(VIEWS[v].sort);
+const areaName = (v, k) => k === "CPS" ? "All CPS" : VIEWS[v].name(k);
+
+/* ---------- stats (mean or median of school scores, per S.stat), memoized ---------- */
+const memo = new Map();
+const quant = (s, p) => { const i = (s.length - 1) * p, lo = Math.floor(i), hi = Math.ceil(i); return s[lo] + (s[hi] - s[lo]) * (i - lo); };
+function stat(v, k, ind, year) {
+  const key = S.stat + "|" + v + "|" + k + "|" + ind + "|" + year; if (memo.has(key)) return memo.get(key);
+  const vals = D.schools.filter(s => k === "CPS" || s[v] === k).map(s => s.s[year]?.[ind]).filter(x => x != null).sort((a, b) => a - b);
+  // "med" holds whichever statistic is selected: the mean (as in the State of CPS report) or the median.
+  const center = !vals.length ? null : S.stat === "mean" ? vals.reduce((a, b) => a + b, 0) / vals.length : quant(vals, .5);
+  const r = vals.length ? { med: center, q1: quant(vals, .25), q3: quant(vals, .75), n: vals.length } : { med: null, q1: null, q3: null, n: 0 };
+  memo.set(key, r); return r;
+}
+const SW = () => S.stat === "mean" ? "average" : "median";
+const statRadio = (el, name) => radios(el, name, [["mean", "Average"], ["median", "Median"]], S.stat, x => { S.stat = x; renderTab(); });
+const series = (v, k, ind) => YEARS.map(y => stat(v, k, ind, y));
+function rankIn(v, k, ind, year) {
+  const ks = areaKeys(v).map(a => [a, stat(v, a, ind, year)]).filter(([, s]) => s.med != null && s.n >= SMALL).sort((a, b) => b[1].med - a[1].med);
+  const me = stat(v, k, ind, year); if (k === "CPS" || me.med == null || me.n < SMALL) return { of: ks.length };
+  return { r: ks.filter(([, s]) => s.med > me.med).length + 1, of: ks.length };
+}
+const ord = n => n + (n % 100 >= 11 && n % 100 <= 13 ? "th" : ["th", "st", "nd", "rd"][n % 10] || "th");
+const lastWith = arr => { for (let i = arr.length - 1; i >= 0; i--) if (arr[i] != null) return i; return -1; };
+const firstWith = arr => arr.findIndex(x => x != null);
+
+/* ---------- tooltip ---------- */
+const tip = $("#tip");
+function showTip(e, h) { tip.innerHTML = h; tip.hidden = false; const w = tip.offsetWidth, hh = tip.offsetHeight; let x = e.clientX + 14, y = e.clientY + 14; if (x + w > innerWidth - 8) x = e.clientX - w - 14; if (y + hh > innerHeight - 8) y = e.clientY - hh - 14; tip.style.left = Math.max(8, x) + "px"; tip.style.top = Math.max(8, y) + "px"; }
+const hideTip = () => { tip.hidden = true; };
+
+/* ---------- generic line chart ----------
+   s: { name, color, values[], band?[[lo,hi]], hollow?[], dash?, width?, faint?, label?, key? } */
+function niceDomain(vals, pad = .08, steps = [1, 2, 5, 10, 20, 25]) {
+  let lo = Math.min(...vals), hi = Math.max(...vals); if (!isFinite(lo)) { lo = 0; hi = 100; }
+  const span = Math.max(hi - lo, 4); lo -= span * pad; hi += span * pad;
+  const st = steps.find(s => (hi - lo) / s <= 6) || 50;
+  return [Math.floor(lo / st) * st, Math.ceil(hi / st) * st, st];
+}
+function lineChart(host, o) {
+  const compact = !!o.compact, W = Math.max(compact ? 120 : 260, host.clientWidth), H = o.height || 320;
+  const m = compact ? { l: 24, r: 8, t: 6, b: 16 } : { l: 40, r: o.labelRoom ?? 150, t: 12, b: 26 };
+  if (!compact && W < 520) m.r = Math.min(m.r, 96);
+  const xs = o.years, all = [];
+  o.series.forEach(s => s.values.forEach((v, i) => { if (v != null) all.push(v); if (s.band && s.band[i] && o.showBand !== false) all.push(...s.band[i].filter(x => x != null)); }));
+  const [lo, hi, st] = o.domain || niceDomain(all, .08, o.pct ? [2, 5, 10, 20, 25] : undefined);
+  const X = i => m.l + (xs.length === 1 ? (W - m.l - m.r) / 2 : i * (W - m.l - m.r) / (xs.length - 1));
+  const Y = v => m.t + (1 - (v - lo) / (hi - lo)) * (H - m.t - m.b);
+  const unit = o.pct ? "%" : "";
+  let s = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.aria || "Trend chart")}">`;
+  for (let v = lo; v <= hi + 1e-9; v += st) {
+    s += `<line x1="${m.l}" x2="${W - m.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)" stroke-width="1"/>`;
+    if (!compact || v === lo || v + st > hi) s += `<text x="${m.l - 6}" y="${Y(v) + 4}" text-anchor="end" font-size="${compact ? 9 : 11}" fill="var(--faint)">${fmt(v)}${unit}</text>`;
+  }
+  xs.forEach((y, i) => { if (!compact || i === 0 || i === xs.length - 1) s += `<text x="${X(i)}" y="${H - (compact ? 3 : 7)}" text-anchor="${compact ? (i === 0 ? "start" : "end") : "middle"}" font-size="${compact ? 9 : 11}" fill="var(--muted)">${y}</text>`; });
+  if (o.marker != null) { const i = xs.indexOf(String(o.marker)); if (i >= 0) s += `<line x1="${X(i)}" x2="${X(i)}" y1="${m.t}" y2="${H - m.b}" stroke="var(--border)" stroke-width="6" opacity=".6"/>`; }
+  // bands first
+  o.series.forEach(se => { if (!se.band || o.showBand === false) return;
+    const idx = xs.map((_, i) => i).filter(i => se.band[i] && se.band[i][0] != null && se.band[i][1] != null);
+    runs(idx).forEach(r => { if (r.length < 2) return;
+      s += `<path d="M${r.map(i => `${X(i)},${Y(se.band[i][1])}`).join("L")}L${[...r].reverse().map(i => `${X(i)},${Y(se.band[i][0])}`).join("L")}Z" fill="${se.color}" opacity="${se.bandOpacity ?? .12}"/>`; });
+    if (idx.length === 1 || o.whiskers) idx.forEach(i => s += `<line x1="${X(i)}" x2="${X(i)}" y1="${Y(se.band[i][0])}" y2="${Y(se.band[i][1])}" stroke="${se.color}" stroke-width="2" opacity=".35"/>`);
+  });
+  // lines: faint first, then emphasized
+  const order = [...o.series].sort((a, b) => (a.faint ? 0 : 1) - (b.faint ? 0 : 1));
+  order.forEach(se => {
+    const idx = se.values.map((v, i) => v == null ? -1 : i).filter(i => i >= 0);
+    const w = se.width || 2;
+    runs(idx).forEach(r => { if (r.length > 1) s += `<path d="M${r.map(i => `${X(i).toFixed(1)},${Y(se.values[i]).toFixed(1)}`).join("L")}" fill="none" stroke="${se.color}" stroke-width="${w}" ${se.dash ? `stroke-dasharray="${se.dash}"` : ""} stroke-linejoin="round" stroke-linecap="round" opacity="${se.faint ? .35 : 1}" data-k="${esc(se.key ?? "")}" class="ln"/>`; });
+    // dashed connector across a missing year
+    if (idx.length > 1) for (let j = 1; j < idx.length; j++) if (idx[j] - idx[j - 1] > 1) s += `<path d="M${X(idx[j - 1])},${Y(se.values[idx[j - 1]])}L${X(idx[j])},${Y(se.values[idx[j]])}" stroke="${se.color}" stroke-width="1.2" stroke-dasharray="2 3" fill="none" opacity="${se.faint ? .3 : .7}"/>`;
+    if (!se.faint) idx.forEach(i => { const hol = se.hollow && se.hollow[i]; s += `<circle cx="${X(i)}" cy="${Y(se.values[i])}" r="${compact ? 2.6 : 4}" fill="${hol ? "#fff" : se.color}" stroke="${hol ? se.color : "#fff"}" stroke-width="${compact ? 1 : 1.6}"/>`; });
+  });
+  // end labels
+  if (!compact) {
+    const labs = o.series.filter(se => se.label !== false && !se.faint).map(se => { const i = lastWith(se.values); return i < 0 ? null : { y: Y(se.values[i]), x: X(i), t: se.labelText ?? `${se.name} ${fmt(se.values[i], o.pct ? 1 : 0)}${unit}`, c: se.color }; }).filter(Boolean).sort((a, b) => a.y - b.y);
+    for (let i = 1; i < labs.length; i++) if (labs[i].y - labs[i - 1].y < 14) labs[i].y = labs[i - 1].y + 14;
+    const maxCh = Math.max(6, Math.floor((m.r - 10) / 6.6));
+    labs.forEach(l => { const t = l.t.length > maxCh ? l.t.slice(0, maxCh - 1) + "…" : l.t; s += `<text x="${l.x + 8}" y="${l.y + 4}" font-size="11.5" font-weight="700" fill="${l.c}">${esc(t)}</text>`; });
+  }
+  if (!compact) xs.forEach((_, i) => { const w = xs.length > 1 ? (W - m.l - m.r) / (xs.length - 1) : W; s += `<rect class="hit" data-i="${i}" x="${X(i) - w / 2}" y="${m.t}" width="${w}" height="${H - m.t - m.b}" fill="transparent"/>`; });
+  host.innerHTML = s + `</svg>`;
+  if (compact) return;
+  const svg = host.querySelector("svg");
+  if (o.nearest) {
+    svg.addEventListener("mousemove", e => {
+      const r = svg.getBoundingClientRect(), px = e.clientX - r.left, py = e.clientY - r.top;
+      const i = Math.max(0, Math.min(xs.length - 1, Math.round((px - m.l) / ((W - m.l - m.r) / (xs.length - 1)))));
+      let best = null, bd = 1e9; o.series.forEach(se => { const v = se.values[i]; if (v == null) return; const d = Math.abs(Y(v) - py); if (d < bd) { bd = d; best = se; } });
+      svg.querySelectorAll(".ln").forEach(p => { const on = best && p.dataset.k === String(best.key); p.setAttribute("opacity", on ? 1 : p.closest("svg") && o.series.find(se => String(se.key) === p.dataset.k)?.faint ? .2 : 1); if (on) { p.setAttribute("stroke-width", 3); p.setAttribute("stroke", "var(--ink-2)"); } else { const se = o.series.find(z => String(z.key) === p.dataset.k); if (se) { p.setAttribute("stroke-width", se.width || 2); p.setAttribute("stroke", se.color); } } });
+      if (best && bd < 22) showTip(e, o.nearestTip(best, i)); else hideTip();
+      svg.style.cursor = best && bd < 22 && o.onPick ? "pointer" : "default"; svg._best = bd < 22 ? best : null;
+    });
+    svg.addEventListener("mouseleave", () => { hideTip(); lineChart(host, o); });
+    svg.addEventListener("click", () => { if (svg._best && o.onPick) o.onPick(svg._best); });
+  } else {
+    svg.querySelectorAll(".hit").forEach(el => {
+      const i = +el.dataset.i;
+      el.addEventListener("mousemove", e => {
+        const rows = o.series.filter(se => !se.faint && se.values[i] != null).sort((a, b) => b.values[i] - a.values[i]).map(se => `<div class="tr"><span><i class="sw" style="background:${se.color}"></i>${esc(se.name)}</span><span>${fmt(se.values[i], o.pct ? 1 : 0)}${unit}${se.band && se.band[i] && o.pct ? ` <span style="color:var(--faint)">(${fmt(se.band[i][0], 1)}–${fmt(se.band[i][1], 1)})</span>` : ""}${se.hollow && se.hollow[i] ? " *" : ""}</span></div>`).join("");
+        showTip(e, `<b>${xs[i]}</b>${rows || `<div>No data</div>`}${o.tipNote ? `<div style="color:var(--muted);margin-top:4px">${o.tipNote(i)}</div>` : ""}`);
+      });
+      el.addEventListener("mouseleave", hideTip);
+    });
+  }
+}
+function runs(idx) { const out = []; let cur = []; idx.forEach((i, j) => { if (j && i !== idx[j - 1] + 1) { out.push(cur); cur = []; } cur.push(i); }); if (cur.length) out.push(cur); return out; }
+const legendItem = (color, label, dash) => `<span><svg width="22" height="8"><line x1="1" y1="4" x2="21" y2="4" stroke="${color}" stroke-width="2.5" ${dash ? `stroke-dasharray="${dash}"` : ""} stroke-linecap="round"/></svg>${esc(label)}</span>`;
+
+/* ---------- controls ---------- */
+function radios(el, name, opts, cur, on) {
+  el.innerHTML = opts.map(([v, l]) => `<label><input type="radio" name="${name}" value="${esc(v)}"${String(v) === String(cur) ? " checked" : ""}> ${esc(l)}</label>`).join("");
+  el.onchange = e => on(e.target.value);
+}
+function indOptions(resp, cur, opts = {}) {
+  const wb = IND.filter(i => i.theme && i.resp === resp), other = IND.filter(i => !i.theme && i.resp === resp);
+  const ess = other.filter(i => i.kind === "essential"), meas = other.filter(i => i.kind === "measure");
+  const o = i => `<option value="${esc(i.name)}"${i.name === cur ? " selected" : ""}>${esc(i.name)}</option>`;
+  let h = "";
+  D.themes.filter(t => t.resp === resp).forEach(t => { h += `<optgroup label="Well-being: ${esc(t.name)}">${t.m.map(m => o(IND[IX[m]])).join("")}</optgroup>`; });
+  h += `<optgroup label="Essentials">${ess.map(o).join("")}</optgroup><optgroup label="Other measures">${meas.map(o).join("")}</optgroup>`;
+  return h;
+}
+const STATE0 = { tab: "climate", stat: "mean", view: "esb", area: "CPS", comp: "", resp: "Student", ind: "Safety", band: false,
+  yInd: D.yrbs.featured[1] || D.yrbs.indicators[0].id, yBreak: "Total", yIL: true, yUS: true, yCI: true, yHidden: [],
+  mView: "esb", mResp: "Student", mInd: "Safety", mYear: LAST, mColor: "cps", mNet: "elem" };
+const S = { ...STATE0 };
+
+/* ---------- tabs and links ---------- */
+function setTab(t) {
+  S.tab = t;
+  document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === t));
+  ["climate", "health", "map"].forEach(p => { $("#tab-" + p).hidden = p !== t; });
+  renderTab(); writeHash();
+}
+document.querySelector(".tabs").addEventListener("click", e => { const b = e.target.closest("[data-tab]"); if (b) setTab(b.dataset.tab); });
+function writeHash() {
+  let h = S.tab;
+  if (S.tab === "climate" && S.area !== "CPS") h = `${S.view}-${S.area.replace(/ /g, "_")}`;
+  try { history.replaceState(null, "", location.pathname + location.search + "#" + h); } catch (e) {}
+}
+function readHash() {
+  const h = decodeURIComponent(location.hash.slice(1)); if (!h) return;
+  if (["climate", "health", "map"].includes(h)) { S.tab = h; return; }
+  const m = /^(esb|ca|net)-(.+)$/i.exec(h); if (!m) return;
+  const v = m[1].toLowerCase(), want = m[2].replace(/_/g, " ").toLowerCase(), k = areaKeys(v).find(a => a.toLowerCase() === want);
+  if (k) { S.tab = "climate"; S.view = v; S.area = k; }
+}
+function renderTab() { if (S.tab === "climate") renderClimate(); else if (S.tab === "health") renderHealth(); else renderMap(); }
+
+/* ================= SCHOOL CLIMATE ================= */
+function renderClimate() {
+  const v = S.view, keys = areaKeys(v), ind = IX[S.ind], meta = IND[ind];
+  radios($("#c-view"), "c-view", Object.entries(VIEWS).map(([k, x]) => [k, x.label]), v, x => { S.view = x; S.area = "CPS"; S.comp = ""; renderClimate(); writeHash(); });
+  const nOf = k => D.schools.filter(s => s[v] === k).length;
+  const opt = (k, cur) => `<option value="${esc(k)}"${k === cur ? " selected" : ""}>${esc(areaName(v, k))}${k !== "CPS" ? ` (${nOf(k)} schools)` : ""}</option>`;
+  $("#c-area").innerHTML = opt("CPS", S.area) + keys.map(k => opt(k, S.area)).join("");
+  $("#c-area").onchange = e => { S.area = e.target.value; if (S.comp === S.area) S.comp = ""; renderClimate(); writeHash(); };
+  $("#c-comp").innerHTML = `<option value="">Nothing else</option>` + keys.filter(k => k !== S.area).map(k => opt(k, S.comp)).join("");
+  $("#c-comp").onchange = e => { S.comp = e.target.value; renderClimate(); };
+  radios($("#c-resp"), "c-resp", [["Student", "Students"], ["Teacher", "Teachers"]], S.resp, x => { S.resp = x; S.ind = x === "Student" ? "Safety" : "Classroom Disruptions"; renderClimate(); });
+  $("#c-ind").innerHTML = indOptions(S.resp, S.ind); $("#c-ind").onchange = e => { S.ind = e.target.value; renderClimate(); };
+  statRadio($("#c-stat"), "c-stat");
+  $("#c-hint").textContent = `Scores run 1 to 99; 50 was the 2013 CPS average. An area's score is the ${S.stat === "mean" ? "average (mean)" : "median"} of its schools' scores. The State of CPS report uses the average.`;
+  $("#c-band").checked = S.band; $("#c-band").onchange = e => { S.band = e.target.checked; renderClimate(); };
+  $("#c-reset").onclick = () => { Object.assign(S, { stat: "mean", view: "esb", area: "CPS", comp: "", resp: "Student", ind: "Safety", band: false }); renderClimate(); writeHash(); };
+
+  // quick chips: the report's themes
+  $("#c-chips").innerHTML = `<span class="lbl">Jump to a theme from the report:</span>` + D.themes.map(t => `<button class="quick-chip" data-m="${esc(t.m[0])}" data-r="${t.resp}" aria-pressed="${t.m.includes(S.ind)}">${esc(t.name)}</button>`).join("");
+  $("#c-chips").onclick = e => { const b = e.target.closest("[data-m]"); if (!b) return; S.resp = b.dataset.r; S.ind = b.dataset.m; renderClimate(); };
+
+  const A = series(v, S.area, ind), C = series(v, "CPS", ind), P = S.comp ? series(v, S.comp, ind) : null;
+  const aName = areaName(v, S.area), isCPS = S.area === "CPS";
+  const li = lastWith(A.map(x => x.med)), fi = firstWith(A.map(x => x.med));
+  const ly = YEARS[li], latest = A[li]?.med, first = A[fi]?.med, ch = li > fi ? latest - first : null;
+  const cpsL = C[li]?.med, gap = latest != null && cpsL != null ? latest - cpsL : null;
+  const rk = !isCPS && ly ? rankIn(v, S.area, ind, ly) : null, n = A[li]?.n ?? 0;
+  const cpsCh = li > fi && C[fi]?.med != null ? cpsL - C[fi].med : null;
+  // info box
+  let info;
+  if (li < 0) info = `<b>${esc(S.ind)}</b> has no scores for ${esc(aName)}. Pick another measure or area.`;
+  else {
+    info = `In ${esc(aName)}, the ${SW()} school score on <b>${esc(S.ind)}</b> ${ch == null ? `was <b>${fmt(latest)}</b> in ${ly}` : `went from <b>${fmt(first)}</b> in ${YEARS[fi]} to <b>${fmt(latest)}</b> in ${ly} (${sgn(ch)} point${Math.abs(Math.round(ch)) === 1 ? "" : "s"})`}.`;
+    if (!isCPS) info += ` CPS overall ${cpsCh == null ? `was ${fmt(cpsL)}` : `moved ${sgn(cpsCh)} over the same years, to ${fmt(cpsL)}`}, so ${esc(aName)} is ${gap == null ? "not comparable" : Math.abs(gap) < 2 ? "about even with CPS" : `<b>${fmt(Math.abs(gap))} points ${gap > 0 ? "above" : "below"}</b> CPS`} in ${ly}.`;
+    if (!isCPS && ch != null && cpsCh != null) { const rel = ch - cpsCh; info += Math.abs(rel) >= 3 ? ` It ${rel > 0 ? "gained" : "lost"} ground relative to the city (${sgn(rel)} points).` : ` It moved roughly in step with the city.`; }
+    if (!isCPS && n < SMALL) info += ` <span style="color:var(--orange)">Only ${n} scored school${n === 1 ? "" : "s"}, so read this with caution.</span>`;
+    if (P) { const pl = P[li]?.med; info += ` ${esc(areaName(v, S.comp))} was ${fmt(pl)} in ${ly}.`; }
+  }
+  $("#c-info").innerHTML = info;
+  // KPIs
+  const kpi = (val, lbl, col) => `<div class="kpi" style="border-top-color:${col}"><div class="v num" style="color:${col}">${val}</div><div class="l">${lbl}</div></div>`;
+  $("#c-kpis").innerHTML = kpi(fmt(latest), `${esc(S.ind)}, ${ly || LAST}`, "var(--k1c-green)")
+    + kpi(sgn(ch), `change since ${YEARS[fi] || FIRST}${cpsCh != null && !isCPS ? ` (CPS ${sgn(cpsCh)})` : ""}`, ch == null || Math.abs(ch) < 1 ? "var(--gray)" : ch > 0 ? "var(--up)" : "var(--down)")
+    + (isCPS ? kpi(fmt(A[li]?.q1) + "–" + fmt(A[li]?.q3), "middle 50% of schools", "var(--il)") : kpi(sgn(gap), `vs CPS ${SW()} (${fmt(cpsL)})`, gap == null || Math.abs(gap) < 2 ? "var(--gray)" : gap > 0 ? "var(--up)" : "var(--down)"))
+    + (isCPS ? kpi(n, "schools scored", "var(--orange)") : kpi(rk?.r ? `${ord(rk.r)}<span style="font-size:13px;color:var(--muted);font-weight:600"> of ${rk.of}</span>` : "–", rk?.r ? `among ${VIEWS[v].plural} with 5+ schools` : "too few schools to rank", "var(--il)"))
+    + (isCPS ? "" : kpi(n, "schools scored", "var(--orange)"));
+  // main chart
+  $("#c-main-title").textContent = `${S.ind}: ${aName}${isCPS ? "" : " vs CPS"}, ${FIRST}–${LAST}`;
+  $("#c-main-sub").textContent = `${meta.resp === "Student" ? "Student" : "Teacher"}-reported · ${meta.kind === "essential" ? "essential" : meta.essential}`;
+  const ser = [{ key: "a", name: aName, color: COL.area, values: A.map(x => x.med), band: A.map(x => [x.q1, x.q3]), width: 3 }];
+  if (!isCPS) ser.push({ key: "c", name: "CPS", color: COL.cps, dash: "5 4", values: C.map(x => x.med), width: 2 });
+  if (P) ser.push({ key: "p", name: areaName(v, S.comp), color: COL.comp, values: P.map(x => x.med), band: P.map(x => [x.q1, x.q3]), width: 2.5, bandOpacity: .1 });
+  $("#c-main-legend").innerHTML = ser.map(se => legendItem(se.color, se.name + (se.key === "c" ? " " + SW() : ""), se.dash)).join("") + (S.band ? `<span><i style="display:inline-block;width:18px;height:10px;background:var(--k1c-green);opacity:.15;border-radius:2px"></i>middle 50% of schools</span>` : "");
+  lineChart($("#c-main"), { years: YEARS, series: ser, height: 330, showBand: S.band, labelRoom: 160, aria: `${S.ind} trend`,
+    tipNote: i => { const a = A[i]; return a.n ? `${aName}: ${a.n} schools, middle 50% ${fmt(a.q1)}–${fmt(a.q3)}` : ""; } });
+  $("#c-desc").textContent = meta.desc || "";
+  // small multiples: report measures for this respondent
+  const wb = D.themes.filter(t => t.resp === S.resp).flatMap(t => t.m.map(m => ({ m, t: t.name })));
+  if (!wb.some(x => x.m === S.ind)) wb.push({ m: S.ind, t: meta.kind === "essential" ? "Essential" : meta.essential });
+  $("#c-mult-title").textContent = `${S.resp === "Student" ? "Student" : "Teacher"} well-being measures over time: ${aName}`;
+  $("#c-mult-legend").innerHTML = legendItem(COL.area, aName) + (isCPS ? "" : legendItem(COL.cps, "CPS " + SW(), "5 4"));
+  const multVals = [];
+  const mdata = wb.map(({ m, t }) => { const i = IX[m], a = series(v, S.area, i).map(x => x.med), c = series(v, "CPS", i).map(x => x.med); multVals.push(...a.filter(x => x != null), ...(isCPS ? [] : c.filter(x => x != null))); return { m, t, i, a, c }; });
+  const dmin = Math.floor((Math.min(...multVals) - 2) / 10) * 10, dmax = Math.ceil((Math.max(...multVals) + 2) / 10) * 10, dom = [Math.max(0, dmin), Math.min(100, dmax), dmax - dmin > 50 ? 20 : 10];
+  $("#c-mult").innerHTML = mdata.map(d => { const l = lastWith(d.a), f = firstWith(d.a), chg = l > f ? d.a[l] - d.a[f] : null;
+    return `<button class="mini" data-m="${esc(d.m)}" aria-pressed="${d.m === S.ind}"><span class="th">${esc(d.t)}</span><span class="t">${esc(IND[d.i].short)}</span>
+      <span class="row"><span class="v num">${fmt(d.a[l])}</span><span class="delta ${deltaCls(chg)}">${chg == null ? "" : sgn(chg) + " since " + YEARS[f]}</span></span><span class="ch" data-i="${d.i}"></span></button>`; }).join("");
+  $("#c-mult").querySelectorAll(".mini").forEach((b, j) => {
+    const d = mdata[j], ss = [{ name: aName, color: COL.area, values: d.a, width: 2.2 }];
+    if (!isCPS) ss.unshift({ name: "CPS", color: COL.cps, values: d.c, dash: "3 3", width: 1.3 });
+    lineChart(b.querySelector(".ch"), { years: YEARS, series: ss, compact: true, height: 74, domain: dom });
+    b.onclick = () => { S.ind = d.m; renderClimate(); $("#c-main-title").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" }); };
+  });
+  // all areas
+  $("#c-all-title").textContent = `${S.ind}: every ${VIEWS[v].one} over time`;
+  const allSer = keys.map(k => { const sv = series(v, k, ind); const ok = sv.some(x => x.n >= SMALL);
+    return { key: k, name: areaName(v, k), color: "var(--faint)", values: sv.map(x => x.n >= SMALL ? x.med : null), faint: true, width: 1.4, n: sv.map(x => x.n), ok }; }).filter(s => s.ok);
+  const selSer = allSer.find(s => s.key === S.area), cmpSer = allSer.find(s => s.key === S.comp);
+  if (cmpSer) Object.assign(cmpSer, { faint: false, color: COL.comp, width: 2.5 });
+  if (selSer) Object.assign(selSer, { faint: false, color: COL.area, width: 3.2 });
+  allSer.push({ key: "CPS", name: "CPS " + SW(), color: COL.cps, dash: "5 4", values: C.map(x => x.med), width: 2, faint: false });
+  $("#c-all-legend").innerHTML = (selSer ? legendItem(COL.area, aName) : "") + (cmpSer ? legendItem(COL.comp, cmpSer.name) : "") + legendItem(COL.cps, "CPS " + SW(), "5 4") + legendItem("var(--faint)", `other ${VIEWS[v].plural} with 5+ schools`);
+  lineChart($("#c-all"), { years: YEARS, series: allSer, height: 340, labelRoom: 150, nearest: true, aria: `All ${VIEWS[v].plural}`,
+    nearestTip: (se, i) => `<b>${esc(se.name)}</b><div class="tr"><span>${YEARS[i]}</span><span>${fmt(se.values[i])}</span></div>${se.n ? `<div class="tr"><span>Schools</span><span>${se.n[i]}</span></div>` : ""}<div style="color:var(--muted);margin-top:3px">${se.key === "CPS" ? "" : "Click to select"}</div>`,
+    onPick: se => { if (se.key === "CPS") return; S.area = se.key; if (S.comp === S.area) S.comp = ""; renderClimate(); writeHash(); $("#c-info").scrollIntoView({ behavior: "smooth", block: "start" }); } });
+}
+
+/* ================= STUDENT HEALTH ================= */
+const YI = Object.fromEntries(D.yrbs.indicators.map(i => [i.id, i]));
+const YY = D.yrbs.years.map(String);
+const BREAKS = { Total: { label: "All students" }, "Race/ethnicity": { label: "By race/ethnicity", groups: [["Black or African American", "Black"], ["Hispanic/Latino", "Latine"], ["White", "White"], ["All other races", "All other races"]] },
+  Sex: { label: "By sex", groups: [["Female", "Female"], ["Male", "Male"]] }, Grade: { label: "By grade", groups: [["9th", "9th grade"], ["10th", "10th grade"], ["11th", "11th grade"], ["12th", "12th grade"]] } };
+const GCOL = ["var(--g1)", "var(--g2)", "var(--g3)", "var(--g4)"];
+const ySeries = (ind, key) => YY.map(y => ind.d[key]?.[y] || null);
+function renderHealth() {
+  const ind = YI[S.yInd] || D.yrbs.indicators[0];
+  $("#y-ind").innerHTML = `<optgroup label="In the State of CPS report">${D.yrbs.featured.filter(k => YI[k]).map(k => `<option value="${k}"${k === ind.id ? " selected" : ""}>${esc(YI[k].label)}</option>`).join("")}</optgroup>
+    <optgroup label="All other indicators">${D.yrbs.indicators.filter(i => !D.yrbs.featured.includes(i.id)).map(i => `<option value="${i.id}"${i.id === ind.id ? " selected" : ""}>${esc(i.label)}</option>`).join("")}</optgroup>`;
+  $("#y-ind").onchange = e => { S.yInd = e.target.value; renderHealth(); };
+  radios($("#y-break"), "y-break", Object.entries(BREAKS).map(([k, b]) => [k, b.label]), S.yBreak, x => { S.yBreak = x; S.yCI = x === "Total"; S.yHidden = []; renderHealth(); });
+  $("#y-il").checked = S.yIL; $("#y-us").checked = S.yUS; $("#y-ci").checked = S.yCI;
+  $("#y-il").onchange = e => { S.yIL = e.target.checked; renderHealth(); }; $("#y-us").onchange = e => { S.yUS = e.target.checked; renderHealth(); }; $("#y-ci").onchange = e => { S.yCI = e.target.checked; renderHealth(); };
+  $("#y-reset").onclick = () => { Object.assign(S, { yInd: STATE0.yInd, yBreak: "Total", yIL: true, yUS: true, yCI: true, yHidden: [] }); renderHealth(); };
+  $("#y-chips").innerHTML = `<span class="lbl">Jump to an indicator from the report:</span>` + D.yrbs.featured.filter(k => YI[k]).map(k => `<button class="quick-chip" data-y="${k}" aria-pressed="${k === ind.id}">${esc(shortY(YI[k].label))}</button>`).join("");
+  $("#y-chips").onclick = e => { const b = e.target.closest("[data-y]"); if (b) { S.yInd = b.dataset.y; renderHealth(); } };
+
+  const chi = ySeries(ind, "Chicago|Total|Total"), il = ySeries(ind, "Illinois|Total|Total"), us = ySeries(ind, "United States|Total|Total");
+  const pv = a => a.map(x => x ? x[0] : null), bd = a => a.map(x => x ? [x[1], x[2]] : null), hol = a => a.map(x => x ? x[4] : false);
+  const li = lastWith(pv(chi)), fi = firstWith(pv(chi));
+  const ch = li > fi ? chi[li][0] - chi[fi][0] : null;
+  // info
+  let info = li < 0 ? `This question was not asked in Chicago in ${YY[0]}–${YY[YY.length - 1]}.` :
+    `In ${YY[li]}, <b>${fmt(chi[li][0], 1)}%</b> of Chicago public high school students ${lower(ind.label)}${ch == null ? "" : `, ${Math.abs(ch) < 1 ? "about the same as" : ch > 0 ? `up ${fmt(ch, 1)} points from` : `down ${fmt(-ch, 1)} points from`} ${YY[fi]} (${fmt(chi[fi][0], 1)}%)`}.`;
+  if (li >= 0 && us[li]) info += ` Nationally the figure was ${fmt(us[li][0], 1)}%${il[li] ? `, and in Illinois ${fmt(il[li][0], 1)}%` : ""}.`;
+  if (li >= 0 && S.yBreak !== "Total") { const gs = BREAKS[S.yBreak].groups.map(([k, l]) => [l, ind.d[`Chicago|${S.yBreak}|${k}`]?.[YY[li]]]).filter(([, x]) => x && x[0] != null && !x[4]).sort((a, b) => b[1][0] - a[1][0]);
+    if (gs.length > 1) info += ` By ${S.yBreak === "Race/ethnicity" ? "race/ethnicity" : S.yBreak.toLowerCase()}, the rate was highest for ${gs[0][0]} students (${fmt(gs[0][1][0], 1)}%) and lowest for ${gs[gs.length - 1][0]} students (${fmt(gs[gs.length - 1][1][0], 1)}%) in ${YY[li]}; check the confidence intervals before calling a gap real.`; }
+  if (YY[li] === "2025") info += ` <span style="color:var(--orange)">2025 is based on the smallest Chicago sample on record.</span>`;
+  $("#y-info").innerHTML = info;
+  const kpi = (val, lbl, col) => `<div class="kpi" style="border-top-color:${col}"><div class="v num" style="color:${col}">${val}</div><div class="l">${lbl}</div></div>`;
+  $("#y-kpis").innerHTML = kpi(li < 0 ? "–" : fmt(chi[li][0], 1) + "%", `Chicago, ${YY[li] || ""}`, "var(--k1c-green)")
+    + kpi(ch == null ? "–" : sgn(ch, 1), `points since ${YY[fi] || YY[0]}`, "var(--gray)")
+    + kpi(li >= 0 && il[li] ? fmt(il[li][0], 1) + "%" : "–", `Illinois, ${YY[li] || ""}`, "var(--il)")
+    + kpi(li >= 0 && us[li] ? fmt(us[li][0], 1) + "%" : "–", `United States, ${YY[li] || ""}`, "var(--nat)");
+  // main chart
+  $("#y-main-title").textContent = `${ind.label}, ${YY[0]}–${YY[YY.length - 1]}`;
+  const ser = [];
+  if (S.yBreak === "Total") {
+    ser.push({ name: "Chicago", color: COL.area, values: pv(chi), band: bd(chi), hollow: hol(chi), width: 3 });
+    if (S.yIL) ser.push({ name: "Illinois", color: COL.il, values: pv(il), band: bd(il), width: 2, bandOpacity: .08 });
+    if (S.yUS) ser.push({ name: "U.S.", color: COL.us, values: pv(us), band: bd(us), width: 2, bandOpacity: .08 });
+  } else {
+    ser.push({ name: "All Chicago", color: COL.cps, values: pv(chi), dash: "5 4", width: 1.8 });
+    BREAKS[S.yBreak].groups.forEach(([k, l], j) => { const a = ySeries(ind, `Chicago|${S.yBreak}|${k}`); ser.push({ name: l, color: GCOL[j], values: pv(a), band: bd(a), hollow: hol(a), width: 2.4, bandOpacity: .08 }); });
+  }
+  let shown = ser;
+  if (S.yBreak === "Total") {
+    $("#y-main-legend").innerHTML = ser.map(se => legendItem(se.color, se.name, se.dash)).join("") + (S.yCI ? `<span style="color:var(--muted)">shading = 95% confidence interval</span>` : "");
+  } else {
+    // Breakdowns: square swatches that show or hide each group. Colors stay with the group.
+    shown = ser.filter(se => !S.yHidden.includes(se.name));
+    $("#y-main-legend").innerHTML = ser.map(se => `<button type="button" class="lg-btn" data-name="${esc(se.name)}" aria-pressed="${!S.yHidden.includes(se.name)}" title="${S.yHidden.includes(se.name) ? "Show" : "Hide"} ${esc(se.name)}"><span class="sq" style="border-color:${se.color};background:${se.color}"></span>${esc(se.name)}</button>`).join("")
+      + `<span class="lg-hint">Click a group to show or hide it${S.yCI ? " · shading = 95% confidence interval" : ""}</span>`;
+    $("#y-main-legend").onclick = e => { const b = e.target.closest("[data-name]"); if (!b) return; const n = b.dataset.name;
+      S.yHidden = S.yHidden.includes(n) ? S.yHidden.filter(x => x !== n) : [...S.yHidden, n]; renderHealth(); };
+  }
+  lineChart($("#y-main"), { years: YY, series: shown.length ? shown : [{ name: "", color: "transparent", values: YY.map(() => null), label: false }], pct: true, height: 340, showBand: S.yCI, labelRoom: 130, aria: ind.label,
+    tipNote: () => S.yCI ? "Ranges are 95% confidence intervals. * fewer than 100 students" : "* fewer than 100 students" });
+  // featured multiples
+  const fs = D.yrbs.featured.filter(k => YI[k]);
+  $("#y-mult").innerHTML = fs.map(k => { const a = ySeries(YI[k], "Chicago|Total|Total"), l = lastWith(pv(a)), f = firstWith(pv(a)), c = l > f ? a[l][0] - a[f][0] : null;
+    return `<button class="mini" data-y="${k}" aria-pressed="${k === ind.id}"><span class="th">Chicago</span><span class="t">${esc(shortY(YI[k].label))}</span><span class="row"><span class="v num">${l < 0 ? "–" : fmt(a[l][0], 1) + "%"}</span><span class="delta ${deltaCls(c, -1)}">${c == null ? "" : sgn(c, 1) + " since " + YY[f]}</span></span><span class="ch"></span></button>`; }).join("");
+  $("#y-mult").querySelectorAll(".mini").forEach(b => { const it = YI[b.dataset.y], a = ySeries(it, "Chicago|Total|Total"), u = ySeries(it, "United States|Total|Total");
+    const vals = [...pv(a), ...pv(u)].filter(x => x != null);
+    lineChart(b.querySelector(".ch"), { years: YY, compact: true, height: 74, pct: true, domain: niceDomain(vals.concat([0]), .05, [5, 10, 20]), series: [{ name: "U.S.", color: COL.us, values: pv(u), dash: "3 3", width: 1.3 }, { name: "Chicago", color: COL.area, values: pv(a), width: 2.2 }] });
+    b.onclick = () => { S.yInd = it.id; renderHealth(); $("#y-main-title").scrollIntoView({ behavior: "smooth", block: "center" }); }; });
+}
+function shortY(l) { return ({ "Ever saw someone get physically attacked, beaten, stabbed, or shot in their neighborhood": "Saw violence in their neighborhood", "Reported that their mental health was most of the time or always not good": "Mental health not good most of the time", "Made a plan about how they would attempt suicide": "Made a suicide plan" })[l] || l; }
+function lower(l) { const s = l.replace(/^Reported that /, "reported that ").replace(/^Ever /, "ever "); return s.charAt(0).toLowerCase() + s.slice(1); }
+
+/* ================= MAP ================= */
+const STEPS = [[-Infinity, -9, "#C05621"], [-9, -5, "#e2a47c"], [-5, -2, "#f4d8c4"], [-2, 2.0001, "#e9ece8"], [2.0001, 5, "#c3e3cf"], [5, 9, "#7fc196"], [9, Infinity, "#2C8C4C"]];
+const SEQ = ["#f0f7f2", "#cfe8d7", "#9fd0ae", "#62b07f", "#2C8C4C", "#1B4D25"];
+const stepCol = d => (STEPS.find(s => d >= s[0] && d < s[1]) || STEPS[3])[2];
+function renderMap() {
+  const v = S.mView;
+  radios($("#m-view"), "m-view", Object.entries(VIEWS).map(([k, x]) => [k, x.label]), v, x => { S.mView = x; renderMap(); });
+  $("#m-netwrap").hidden = v !== "net";
+  radios($("#m-net"), "m-net", [["elem", "Elementary (1–13)"], ["hs", "High school (14–17)"]], S.mNet, x => { S.mNet = x; renderMap(); });
+  radios($("#m-resp"), "m-resp", [["Student", "Students"], ["Teacher", "Teachers"]], S.mResp, x => { S.mResp = x; S.mInd = x === "Student" ? "Safety" : "Classroom Disruptions"; renderMap(); });
+  $("#m-ind").innerHTML = indOptions(S.mResp, S.mInd); $("#m-ind").onchange = e => { S.mInd = e.target.value; renderMap(); };
+  $("#m-year").innerHTML = [...YEARS].reverse().map(y => `<option${y === S.mYear ? " selected" : ""}>${y}</option>`).join(""); $("#m-year").onchange = e => { S.mYear = e.target.value; renderMap(); };
+  statRadio($("#m-stat"), "m-stat");
+  $("#m-bar-sub").textContent = `dashed line = CPS ${SW()}`;
+  radios($("#m-color"), "m-color", [["cps", "Points above or below CPS"], ["chg", `Change since ${FIRST}`]], S.mColor, x => { S.mColor = x; renderMap(); });
+  $("#m-reset").onclick = () => { Object.assign(S, { stat: "mean", mView: "esb", mResp: "Student", mInd: "Safety", mYear: LAST, mColor: "cps", mNet: "elem" }); renderMap(); };
+
+  const ind = IX[S.mInd], y = S.mYear, cps = stat(v, "CPS", ind, y).med;
+  const rows = areaKeys(v).map(k => { const s = stat(v, k, ind, y), f = stat(v, k, ind, FIRST); return { k, ...s, chg: s.med != null && f.med != null && y !== FIRST ? s.med - f.med : null }; });
+  const val = r => S.mColor === "cps" ? (r.med == null || cps == null ? null : r.med - cps) : r.chg;
+  const ok = rows.filter(r => r.med != null && r.n >= SMALL);
+  const cpsChg = S.mColor === "chg" && y !== FIRST ? cps - stat(v, "CPS", ind, FIRST).med : null;
+  // info
+  if (!ok.length) $("#m-info").innerHTML = `<b>${esc(S.mInd)}</b> was not scored for enough schools in ${y} to compare ${VIEWS[v].plural}.`;
+  else { const sr = [...ok].sort((a, b) => b.med - a.med);
+    $("#m-info").innerHTML = `In ${y}, ${SW()} <b>${esc(S.mInd)}</b> scores ranged from <b>${fmt(sr[sr.length - 1].med)}</b> (${esc(areaName(v, sr[sr.length - 1].k))}) to <b>${fmt(sr[0].med)}</b> (${esc(areaName(v, sr[0].k))}) across ${ok.length} ${VIEWS[v].plural} with 5 or more scored schools. The CPS ${SW()} was ${fmt(cps)}.`
+      + (S.mColor === "chg" && cpsChg != null ? ` Since ${FIRST}, CPS moved ${sgn(cpsChg)} points.` : ""); }
+  // map
+  const geo = D.geo[v], host = $("#m-map");
+  let feats = Object.entries(geo);
+  if (v === "net") feats = feats.filter(([k]) => { const n = +k.split(" ")[1]; return S.mNet === "elem" ? n <= 13 : n > 13; });
+  let minx = 1e9, maxx = -1e9, miny = 1e9, maxy = -1e9;
+  feats.forEach(([, rs]) => rs.forEach(r => r.forEach(([x, yy]) => { minx = Math.min(minx, x); maxx = Math.max(maxx, x); miny = Math.min(miny, yy); maxy = Math.max(maxy, yy); })));
+  const kk = Math.cos(41.84 * Math.PI / 180), W = Math.max(260, Math.min(host.clientWidth, 520)), sw = (maxx - minx) * kk, sh = maxy - miny, H = Math.round(W * sh / sw), sc = (W - 6) / sw;
+  const Pp = ([x, yy]) => [3 + (x - minx) * kk * sc, 3 + (maxy - yy) * sc];
+  const byK = Object.fromEntries(rows.map(r => [r.k, r]));
+  const colorOf = r => { if (!r || r.med == null || r.n < SMALL) return "url(#hatch)"; const d = val(r); if (d == null) return "url(#hatch)"; return S.mColor === "cps" ? stepCol(d) : stepCol(d - (cpsChg ?? 0)); };
+  let s = `<svg width="${W}" height="${H + 6}" viewBox="0 0 ${W} ${H + 6}" role="img" aria-label="Map of ${esc(S.mInd)} by ${esc(VIEWS[v].label)}" style="display:block;margin:0 auto"><defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#f4f5f4"/><line x1="0" y1="0" x2="0" y2="6" stroke="#cbd5e0" stroke-width="1.5"/></pattern></defs>`, labels = "";
+  feats.forEach(([k, rs]) => { if (!rs.length) return;
+    s += `<path class="shape" data-k="${esc(k)}" d="${rs.map(r => "M" + r.map(p => Pp(p).map(n => n.toFixed(1)).join(",")).join("L") + "Z").join("")}" fill="${colorOf(byK[k])}"/>`;
+    if (v !== "ca") { const big = rs.reduce((a, b) => b.length > a.length ? b : a, rs[0]), c = centroid(big.map(Pp)); labels += `<text x="${c[0]}" y="${c[1] + 4}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1a202c" pointer-events="none" paint-order="stroke" stroke="#fff" stroke-width="3">${esc(v === "net" ? k.replace("Network ", "") : k)}</text>`; } });
+  host.innerHTML = s + labels + `</svg>`;
+  $("#m-map-title").textContent = `${S.mInd} by ${VIEWS[v].one}, ${y}`;
+  const scaleLab = S.mColor === "cps" ? ["9+ below CPS", "", "", "within 2", "", "", "9+ above CPS"] : ["fell 9+ more than CPS", "", "", "moved with CPS", "", "", "rose 9+ more than CPS"];
+  $("#m-scale").innerHTML = `<span style="margin-right:6px">${scaleLab[0]}</span>` + STEPS.map(st => `<i style="background:${st[2]}"></i>`).join("") + `<span style="margin-left:6px">${scaleLab[6]}</span><span style="margin-left:10px"><i style="background:url(#);background:repeating-linear-gradient(45deg,#cbd5e0 0 1.5px,#f4f5f4 1.5px 5px);width:16px"></i> fewer than 5 schools</span>`;
+  $("#m-map-note").textContent = v === "net" ? "Charter, ISP, Options and Contract schools have no network boundary; they appear in the list only." : "";
+  host.querySelectorAll(".shape").forEach(el => { const r = byK[el.dataset.k];
+    el.addEventListener("mousemove", e => showTip(e, `<b>${esc(areaName(v, el.dataset.k))}</b>${r && r.med != null ? `<div class="tr"><span>${esc(S.mInd)}</span><span>${fmt(r.med)}</span></div><div class="tr"><span>vs CPS (${fmt(cps)})</span><span>${sgn(r.med - cps)}</span></div>${r.chg != null ? `<div class="tr"><span>Change since ${FIRST}</span><span>${sgn(r.chg)}</span></div>` : ""}<div class="tr"><span>Schools</span><span>${r.n}</span></div>` : "<div>No scored schools</div>"}<div style="color:var(--muted);margin-top:3px">Click to see trends</div>`));
+    el.addEventListener("mouseleave", hideTip);
+    el.addEventListener("click", () => openArea(v, el.dataset.k)); });
+  // ranked list
+  const list = rows.filter(r => r.med != null).sort((a, b) => (b.med - a.med));
+  $("#m-bar-title").textContent = `Ranked, ${y}`;
+  const mx = 100;
+  $("#m-bars").innerHTML = list.map(r => `<div class="bar-row${r.n < SMALL ? " small" : ""}" data-k="${esc(r.k)}" title="${r.n} scored schools"><span class="nm">${esc(areaName(v, r.k))}${r.n < SMALL ? " (small)" : ""}</span>
+    <span class="bar-track"><span class="bar-fill" style="width:${r.med / mx * 100}%;background:${r.n < SMALL ? "#cbd5e0" : colorOf(r)}"></span><span class="bar-cps" style="left:${cps / mx * 100}%"></span></span><span class="num" style="text-align:right">${fmt(r.med)}</span></div>`).join("");
+  $("#m-bars").onclick = e => { const b = e.target.closest("[data-k]"); if (b) openArea(v, b.dataset.k); };
+}
+function centroid(p) { let a = 0, cx = 0, cy = 0; for (let i = 0; i < p.length - 1; i++) { const f = p[i][0] * p[i + 1][1] - p[i + 1][0] * p[i][1]; a += f; cx += (p[i][0] + p[i + 1][0]) * f; cy += (p[i][1] + p[i + 1][1]) * f; } return Math.abs(a) < 1e-9 ? p[0] : [cx / (3 * a), cy / (3 * a)]; }
+function openArea(v, k) { Object.assign(S, { view: v, area: k, comp: "", resp: S.mResp, ind: S.mInd }); setTab("climate"); window.scrollTo({ top: 0, behavior: "smooth" }); }
+
+readHash();
+setTab(S.tab);
+let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(renderTab, 150); });
+}
+
+/* Tell a parent page our height so an embedding iframe can resize to fit (see README). */
+function reportHeight() { if (window.parent !== window) window.parent.postMessage({ type: "k1c-embed-height", id: "student-wellbeing", height: document.documentElement.scrollHeight }, "*"); }
+new ResizeObserver(reportHeight).observe(document.body);
+
+fetch("data.json")
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(start)
+  .catch(err => { console.error(err); document.querySelector(".page").insertAdjacentHTML("afterbegin", '<div class="callout" style="margin-bottom:12px">The data file did not load. Refresh the page to try again.</div>'); });
+</script>
+</body>
+</html>
