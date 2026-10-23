@@ -74,6 +74,12 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
 .card-title small { font-weight: 500; color: var(--muted); font-size: 11.5px; }
 .legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--ink-3); margin-bottom: 6px; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
+.lg-btn { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--border); background: #fff; border-radius: 14px; padding: 3px 10px 3px 7px; font-size: 12px; font-weight: 600; color: var(--ink-2); cursor: pointer; }
+.lg-btn:hover { border-color: var(--faint); }
+.lg-btn .sq { width: 12px; height: 12px; border-radius: 3px; border: 2px solid; flex: none; }
+.lg-btn[aria-pressed="false"] { color: var(--faint); background: var(--bg); }
+.lg-btn[aria-pressed="false"] .sq { background: transparent !important; }
+.lg-hint { font-size: 11.5px; color: var(--muted); align-self: center; }
 .desc { font-size: 12px; color: var(--muted); margin: 8px 0 0; line-height: 1.55; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .chips .lbl { font-size: 11px; color: var(--muted); font-weight: 600; margin-right: 2px; }
@@ -373,7 +379,7 @@ function indOptions(resp, cur, opts = {}) {
   return h;
 }
 const STATE0 = { tab: "climate", view: "esb", area: "CPS", comp: "", resp: "Student", ind: "Safety", band: false,
-  yInd: D.yrbs.featured[1] || D.yrbs.indicators[0].id, yBreak: "Total", yIL: true, yUS: true, yCI: true,
+  yInd: D.yrbs.featured[1] || D.yrbs.indicators[0].id, yBreak: "Total", yIL: true, yUS: true, yCI: true, yHidden: [],
   mView: "esb", mResp: "Student", mInd: "Safety", mYear: LAST, mColor: "cps", mNet: "elem" };
 const S = { ...STATE0 };
 
@@ -496,10 +502,10 @@ function renderHealth() {
   $("#y-ind").innerHTML = `<optgroup label="In the State of CPS report">${D.yrbs.featured.filter(k => YI[k]).map(k => `<option value="${k}"${k === ind.id ? " selected" : ""}>${esc(YI[k].label)}</option>`).join("")}</optgroup>
     <optgroup label="All other indicators">${D.yrbs.indicators.filter(i => !D.yrbs.featured.includes(i.id)).map(i => `<option value="${i.id}"${i.id === ind.id ? " selected" : ""}>${esc(i.label)}</option>`).join("")}</optgroup>`;
   $("#y-ind").onchange = e => { S.yInd = e.target.value; renderHealth(); };
-  radios($("#y-break"), "y-break", Object.entries(BREAKS).map(([k, b]) => [k, b.label]), S.yBreak, x => { S.yBreak = x; S.yCI = x === "Total"; renderHealth(); });
+  radios($("#y-break"), "y-break", Object.entries(BREAKS).map(([k, b]) => [k, b.label]), S.yBreak, x => { S.yBreak = x; S.yCI = x === "Total"; S.yHidden = []; renderHealth(); });
   $("#y-il").checked = S.yIL; $("#y-us").checked = S.yUS; $("#y-ci").checked = S.yCI;
   $("#y-il").onchange = e => { S.yIL = e.target.checked; renderHealth(); }; $("#y-us").onchange = e => { S.yUS = e.target.checked; renderHealth(); }; $("#y-ci").onchange = e => { S.yCI = e.target.checked; renderHealth(); };
-  $("#y-reset").onclick = () => { Object.assign(S, { yInd: STATE0.yInd, yBreak: "Total", yIL: true, yUS: true, yCI: true }); renderHealth(); };
+  $("#y-reset").onclick = () => { Object.assign(S, { yInd: STATE0.yInd, yBreak: "Total", yIL: true, yUS: true, yCI: true, yHidden: [] }); renderHealth(); };
   $("#y-chips").innerHTML = `<span class="lbl">Jump to an indicator from the report:</span>` + D.yrbs.featured.filter(k => YI[k]).map(k => `<button class="quick-chip" data-y="${k}" aria-pressed="${k === ind.id}">${esc(shortY(YI[k].label))}</button>`).join("");
   $("#y-chips").onclick = e => { const b = e.target.closest("[data-y]"); if (b) { S.yInd = b.dataset.y; renderHealth(); } };
 
@@ -531,8 +537,18 @@ function renderHealth() {
     ser.push({ name: "All Chicago", color: COL.cps, values: pv(chi), dash: "5 4", width: 1.8 });
     BREAKS[S.yBreak].groups.forEach(([k, l], j) => { const a = ySeries(ind, `Chicago|${S.yBreak}|${k}`); ser.push({ name: l, color: GCOL[j], values: pv(a), band: bd(a), hollow: hol(a), width: 2.4, bandOpacity: .08 }); });
   }
-  $("#y-main-legend").innerHTML = ser.map(se => legendItem(se.color, se.name, se.dash)).join("") + (S.yCI ? `<span style="color:var(--muted)">shading = 95% confidence interval</span>` : "");
-  lineChart($("#y-main"), { years: YY, series: ser, pct: true, height: 340, showBand: S.yCI, labelRoom: 130, aria: ind.label,
+  let shown = ser;
+  if (S.yBreak === "Total") {
+    $("#y-main-legend").innerHTML = ser.map(se => legendItem(se.color, se.name, se.dash)).join("") + (S.yCI ? `<span style="color:var(--muted)">shading = 95% confidence interval</span>` : "");
+  } else {
+    // Breakdowns: square swatches that show or hide each group. Colors stay with the group.
+    shown = ser.filter(se => !S.yHidden.includes(se.name));
+    $("#y-main-legend").innerHTML = ser.map(se => `<button type="button" class="lg-btn" data-name="${esc(se.name)}" aria-pressed="${!S.yHidden.includes(se.name)}" title="${S.yHidden.includes(se.name) ? "Show" : "Hide"} ${esc(se.name)}"><span class="sq" style="border-color:${se.color};background:${se.color}"></span>${esc(se.name)}</button>`).join("")
+      + `<span class="lg-hint">Click a group to show or hide it${S.yCI ? " · shading = 95% confidence interval" : ""}</span>`;
+    $("#y-main-legend").onclick = e => { const b = e.target.closest("[data-name]"); if (!b) return; const n = b.dataset.name;
+      S.yHidden = S.yHidden.includes(n) ? S.yHidden.filter(x => x !== n) : [...S.yHidden, n]; renderHealth(); };
+  }
+  lineChart($("#y-main"), { years: YY, series: shown.length ? shown : [{ name: "", color: "transparent", values: YY.map(() => null), label: false }], pct: true, height: 340, showBand: S.yCI, labelRoom: 130, aria: ind.label,
     tipNote: () => S.yCI ? "Ranges are 95% confidence intervals. * fewer than 100 students" : "* fewer than 100 students" });
   // featured multiples
   const fs = D.yrbs.featured.filter(k => YI[k]);
