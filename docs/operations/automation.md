@@ -13,6 +13,7 @@ also be started by hand: **Actions** tab, pick the workflow, **Run workflow**.
 | `update-yrbs.yml` | 06:30 UTC, 1st of Jan/Apr/Jul/Oct | `yrbs/scripts/01`, `02` (manual run can force re-download) | `yrbs/data` |
 | `update-5essentials.yml` | 07:00 UTC, 1st of Jul-Oct | `five_essentials/scripts/01_scrape.py` (manual run can pick years) | `five_essentials/data` |
 | `update-monitor.yml` | 07:00 UTC Mondays | `monitor/01_scan.py` | `monitor/data` |
+| `backup-data.yml` | 09:00 UTC, 2nd of every month | `scripts/check_data_changes.py`, then copies data to S3 (once [AWS is set up](aws-setup.md)); opens a GitHub issue when data changed | `datasets/changes/` |
 | `update-dashboard.yml` | After any workflow above finishes, on pushes to site/data paths, or by hand | Assembles the site, builds the monitor page and JSON API | Deploys to GitHub Pages (no commit) |
 
 07:00 UTC is 2:00 am Chicago time in summer (CDT) and 1:00 am in winter (CST).
