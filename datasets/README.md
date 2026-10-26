@@ -8,6 +8,7 @@ Reading these files never downloads or writes anything.
 | [`registry/`](registry/) | One YAML file per dataset: source, refresh cadence, grain, keys, output location, public-use notes. Every dataset folder should have one. |
 | [`contracts/`](contracts/) | Stricter, versioned rules for a publishable output (fields, types, allowed values, thresholds). Only `enrollment_20th_day_membership` has one so far. |
 | [`manifests/`](manifests/) | Schema for run manifests: a record of one pipeline run (inputs, row counts, validation result). Runs land in `manifests/runs/`. |
+| [`changes/`](changes/) | Monthly data check (`scripts/check_data_changes.py`, run by `backup-data.yml`): `snapshot.json` (row counts, columns and hash for every cleaned file), `CHANGELOG.md` (what changed each month) and `latest_summary.md`. Created on the first run. |
 
 Fields that haven't been checked against real data are marked `placeholder`
 or `unverified` rather than guessed.

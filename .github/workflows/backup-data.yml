@@ -1,0 +1,105 @@
+name: Back Up Data
+
+# Monthly: check every cleaned data file for changes, log them, open an issue
+# when something changed, and copy the data to Amazon S3.
+#
+#   1. scripts/check_data_changes.py compares each file with last month's
+#      snapshot (rows, columns, content hash) and updates datasets/changes/.
+#   2. The change log is committed; the summary also shows on the run page.
+#   3. If anything changed, a GitHub issue is opened with the details.
+#   4. If AWS is set up (repo variables AWS_ROLE_ARN, AWS_REGION, S3_BUCKET),
+#      the data is copied to s3://<bucket>/chicago-education-data/<YYYY-MM>/
+#      and to .../latest/. Until then this step is skipped with a notice.
+#
+# AWS setup steps: docs/operations/aws-setup.md
+
+on:
+  schedule:
+    # 09:00 UTC on the 2nd, after the 1st-of-month data workflows have run.
+    - cron: "0 9 2 * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write    # commit the change log
+  issues: write      # open an issue when data changed
+  id-token: write    # sign in to AWS without stored keys (OIDC)
+
+concurrency:
+  group: backup-data
+  cancel-in-progress: false
+
+jobs:
+  check-and-backup:
+    runs-on: ubuntu-latest
+    env:
+      S3_PREFIX: chicago-education-data
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download large cleaned files from Git LFS
+        # Only the cleaned outputs; the big raw YRBS files are not needed here.
+        run: git lfs pull --include="*/data/clean/*"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check for data changes
+        id: check
+        run: python scripts/check_data_changes.py
+
+      - name: Show the summary on the run page
+        run: cat datasets/changes/latest_summary.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit the change log
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add datasets/changes
+          git diff --cached --quiet && exit 0
+          git commit -m "data check: $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4 5; do
+            git pull --rebase --autostash origin main && git push && exit 0
+            echo "Push attempt $i failed -- retrying..."
+            sleep $((RANDOM % 10 + 5))
+          done
+          echo "::error::Could not push the change log after 5 attempts."
+          exit 1
+
+      - name: Open an issue when data changed
+        if: steps.check.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Data changed: $(date -u '+%B %Y') check"
+          body="$(cat datasets/changes/latest_summary.md)
+
+          Full history: ${{ github.server_url }}/${{ github.repository }}/blob/main/datasets/changes/CHANGELOG.md · Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          gh label create data-change --color C05621 --description "Monthly data check found changes" 2>/dev/null || true
+          gh issue create --title "$title" --body "$body" --label data-change
+
+      - name: Sign in to AWS
+        if: vars.AWS_ROLE_ARN != ''
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Copy data to S3
+        if: vars.AWS_ROLE_ARN != ''
+        env:
+          BUCKET: ${{ vars.S3_BUCKET }}
+        run: |
+          month="$(date -u +%Y-%m)"
+          for dir in */data/clean reference datasets/changes; do
+            [ -d "$dir" ] || continue
+            # Monthly copy: a browsable snapshot per month.
+            aws s3 sync "$dir" "s3://$BUCKET/$S3_PREFIX/$month/$dir" --exclude "*.gitkeep" --only-show-errors
+            # Latest copy: always mirrors main (bucket versioning keeps older versions).
+            aws s3 sync "$dir" "s3://$BUCKET/$S3_PREFIX/latest/$dir" --exclude "*.gitkeep" --delete --only-show-errors
+          done
+          echo "Copied to s3://$BUCKET/$S3_PREFIX/$month/ and .../latest/" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Note that S3 is not set up yet
+        if: vars.AWS_ROLE_ARN == ''
+        run: echo "::notice::S3 copy skipped. Set repo variables AWS_ROLE_ARN, AWS_REGION and S3_BUCKET (see docs/operations/aws-setup.md)."
