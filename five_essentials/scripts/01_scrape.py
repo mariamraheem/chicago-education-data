@@ -297,6 +297,16 @@ def build_dictionary(years, out, sample=8):
           .to_csv(out / "5essentials_questions.csv", index=False)
 
 
+def published(year):
+    """True if the site has a report index for this survey year."""
+    # unpublished years don't always return a clean 404 (2027 errored in Actions,
+    # Oct 2026), so any failure here just means "not out yet"
+    try:
+        return get(f"{BASE}/cps/5e/{year}/", tries=1) is not None
+    except RuntimeError:
+        return False
+
+
 def main():
     this_year = date.today().year
     ap = argparse.ArgumentParser()
@@ -311,7 +321,7 @@ def main():
                     help="only write the trend files, from the latest survey year's reports")
     args = ap.parse_args()
     if not args.years:
-        latest = next(y for y in range(this_year + 1, this_year - 3, -1) if get(f"{BASE}/cps/5e/{y}/"))
+        latest = next(y for y in range(this_year + 1, this_year - 3, -1) if published(y))
         args.years = list(range(latest - args.n_years + 1, latest + 1))
     print("survey years:", args.years, flush=True)
     out = Path(args.out)
