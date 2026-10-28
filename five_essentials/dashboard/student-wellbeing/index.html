@@ -377,12 +377,17 @@ function radios(el, name, opts, cur, on) {
   el.innerHTML = opts.map(([v, l]) => `<label><input type="radio" name="${name}" value="${esc(v)}"${String(v) === String(cur) ? " checked" : ""}> ${esc(l)}</label>`).join("");
   el.onchange = e => on(e.target.value);
 }
+/* Map theme → pillar label for optgroups: use the essential of the first indicator in each theme, or the theme name if unmapped. */
+function themeLabel(t) {
+  const first = t.m.map(m => IND[IX[m]]).find(i => i && i.essential && i.essential !== "Supplemental Measures");
+  return first ? first.essential : t.name;
+}
 function indOptions(resp, cur, opts = {}) {
   const wb = IND.filter(i => i.theme && i.resp === resp), other = IND.filter(i => !i.theme && i.resp === resp);
   const ess = other.filter(i => i.kind === "essential"), meas = other.filter(i => i.kind === "measure");
   const o = i => `<option value="${esc(i.name)}"${i.name === cur ? " selected" : ""}>${esc(i.name)}</option>`;
   let h = "";
-  D.themes.filter(t => t.resp === resp).forEach(t => { h += `<optgroup label="Well-being: ${esc(t.name)}">${t.m.map(m => o(IND[IX[m]])).join("")}</optgroup>`; });
+  D.themes.filter(t => t.resp === resp).forEach(t => { h += `<optgroup label="${esc(themeLabel(t))}">${t.m.map(m => o(IND[IX[m]])).join("")}</optgroup>`; });
   h += `<optgroup label="Essentials">${ess.map(o).join("")}</optgroup><optgroup label="Other measures">${meas.map(o).join("")}</optgroup>`;
   return h;
 }
@@ -430,8 +435,8 @@ function renderClimate() {
   $("#c-band").checked = S.band; $("#c-band").onchange = e => { S.band = e.target.checked; renderClimate(); };
   $("#c-reset").onclick = () => { Object.assign(S, { stat: "mean", view: "esb", area: "CPS", comp: "", resp: "Student", ind: "Safety", band: false }); renderClimate(); writeHash(); };
 
-  // quick chips: the report's themes
-  $("#c-chips").innerHTML = `<span class="lbl">Jump to a theme from the report:</span>` + D.themes.map(t => `<button class="quick-chip" data-m="${esc(t.m[0])}" data-r="${t.resp}" aria-pressed="${t.m.includes(S.ind)}">${esc(t.name)}</button>`).join("");
+  // quick chips: the report's themes, labelled by pillar name
+  $("#c-chips").innerHTML = `<span class="lbl">Jump to a theme from the report:</span>` + D.themes.map(t => `<button class="quick-chip" data-m="${esc(t.m[0])}" data-r="${t.resp}" aria-pressed="${t.m.includes(S.ind)}">${esc(themeLabel(t))}</button>`).join("");
   $("#c-chips").onclick = e => { const b = e.target.closest("[data-m]"); if (!b) return; S.resp = b.dataset.r; S.ind = b.dataset.m; renderClimate(); };
 
   const A = series(v, S.area, ind), C = series(v, "CPS", ind), P = S.comp ? series(v, S.comp, ind) : null;
@@ -470,7 +475,7 @@ function renderClimate() {
     tipNote: i => { const a = A[i]; return a.n ? `${aName}: ${a.n} schools, middle 50% ${fmt(a.q1)}–${fmt(a.q3)}` : ""; } });
   $("#c-desc").textContent = meta.desc || "";
   // small multiples: report measures for this respondent
-  const wb = D.themes.filter(t => t.resp === S.resp).flatMap(t => t.m.map(m => ({ m, t: t.name })));
+  const wb = D.themes.filter(t => t.resp === S.resp).flatMap(t => t.m.map(m => ({ m, t: themeLabel(t) })));
   if (!wb.some(x => x.m === S.ind)) wb.push({ m: S.ind, t: meta.kind === "essential" ? "Essential" : meta.essential });
   $("#c-mult-title").textContent = `${S.resp === "Student" ? "Student" : "Teacher"} well-being measures over time: ${aName}`;
   $("#c-mult-legend").innerHTML = legendItem(COL.area, aName) + (isCPS ? "" : legendItem(COL.cps, "CPS " + SW(), "5 4"));
@@ -576,6 +581,16 @@ function lower(l) { const s = l.replace(/^Reported that /, "reported that ").rep
 const STEPS = [[-Infinity, -9, "#C05621"], [-9, -5, "#e2a47c"], [-5, -2, "#f4d8c4"], [-2, 2.0001, "#e9ece8"], [2.0001, 5, "#c3e3cf"], [5, 9, "#7fc196"], [9, Infinity, "#2C8C4C"]];
 const SEQ = ["#f0f7f2", "#cfe8d7", "#9fd0ae", "#62b07f", "#2C8C4C", "#1B4D25"];
 const stepCol = d => (STEPS.find(s => d >= s[0] && d < s[1]) || STEPS[3])[2];
+/* Essential rating buckets: Very Weak / Weak / Neutral / Strong / Very Strong */
+const ESS_RATING = [
+  { lo: 0,  hi: 20, label: "Very Weak",  color: "#C05621" },
+  { lo: 20, hi: 40, label: "Weak",        color: "#e2a47c" },
+  { lo: 40, hi: 60, label: "Neutral",     color: "#e9ece8" },
+  { lo: 60, hi: 80, label: "Strong",      color: "#7fc196" },
+  { lo: 80, hi: Infinity, label: "Very Strong", color: "#2C8C4C" },
+];
+const essRating = v => v == null ? null : ESS_RATING.find(b => v >= b.lo && v < b.hi) || ESS_RATING[ESS_RATING.length - 1];
+const essCol = v => { const r = essRating(v); return r ? r.color : "#e9ece8"; };
 function renderMap() {
   const v = S.mView;
   radios($("#m-view"), "m-view", Object.entries(VIEWS).map(([k, x]) => [k, x.label]), v, x => { S.mView = x; renderMap(); });
@@ -586,12 +601,12 @@ function renderMap() {
   $("#m-year").innerHTML = [...YEARS].reverse().map(y => `<option${y === S.mYear ? " selected" : ""}>${y}</option>`).join(""); $("#m-year").onchange = e => { S.mYear = e.target.value; renderMap(); };
   statRadio($("#m-stat"), "m-stat");
   $("#m-bar-sub").textContent = `dashed line = CPS ${SW()}`;
-  radios($("#m-color"), "m-color", [["cps", "Points above or below CPS"], ["chg", `Change since ${FIRST}`]], S.mColor, x => { S.mColor = x; renderMap(); });
+  radios($("#m-color"), "m-color", [["cps", "Points above or below CPS"], ["chg", `Change since ${FIRST}`], ["ess", "Essential rating"]], S.mColor, x => { S.mColor = x; renderMap(); });
   $("#m-reset").onclick = () => { Object.assign(S, { stat: "mean", mView: "esb", mResp: "Student", mInd: "Safety", mYear: LAST, mColor: "cps", mNet: "elem" }); renderMap(); };
 
   const ind = IX[S.mInd], y = S.mYear, cps = stat(v, "CPS", ind, y).med;
   const rows = areaKeys(v).map(k => { const s = stat(v, k, ind, y), f = stat(v, k, ind, FIRST); return { k, ...s, chg: s.med != null && f.med != null && y !== FIRST ? s.med - f.med : null }; });
-  const val = r => S.mColor === "cps" ? (r.med == null || cps == null ? null : r.med - cps) : r.chg;
+  const val = r => S.mColor === "cps" ? (r.med == null || cps == null ? null : r.med - cps) : S.mColor === "chg" ? r.chg : r.med;
   const ok = rows.filter(r => r.med != null && r.n >= SMALL);
   const cpsChg = S.mColor === "chg" && y !== FIRST ? cps - stat(v, "CPS", ind, FIRST).med : null;
   // info
@@ -608,18 +623,22 @@ function renderMap() {
   const kk = Math.cos(41.84 * Math.PI / 180), W = Math.max(260, Math.min(host.clientWidth, 520)), sw = (maxx - minx) * kk, sh = maxy - miny, H = Math.round(W * sh / sw), sc = (W - 6) / sw;
   const Pp = ([x, yy]) => [3 + (x - minx) * kk * sc, 3 + (maxy - yy) * sc];
   const byK = Object.fromEntries(rows.map(r => [r.k, r]));
-  const colorOf = r => { if (!r || r.med == null || r.n < SMALL) return "url(#hatch)"; const d = val(r); if (d == null) return "url(#hatch)"; return S.mColor === "cps" ? stepCol(d) : stepCol(d - (cpsChg ?? 0)); };
+  const colorOf = r => { if (!r || r.med == null || r.n < SMALL) return "url(#hatch)"; const d = val(r); if (d == null) return "url(#hatch)"; return S.mColor === "ess" ? essCol(d) : S.mColor === "cps" ? stepCol(d) : stepCol(d - (cpsChg ?? 0)); };
   let s = `<svg width="${W}" height="${H + 6}" viewBox="0 0 ${W} ${H + 6}" role="img" aria-label="Map of ${esc(S.mInd)} by ${esc(VIEWS[v].label)}" style="display:block;margin:0 auto"><defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#f4f5f4"/><line x1="0" y1="0" x2="0" y2="6" stroke="#cbd5e0" stroke-width="1.5"/></pattern></defs>`, labels = "";
   feats.forEach(([k, rs]) => { if (!rs.length) return;
     s += `<path class="shape" data-k="${esc(k)}" d="${rs.map(r => "M" + r.map(p => Pp(p).map(n => n.toFixed(1)).join(",")).join("L") + "Z").join("")}" fill="${colorOf(byK[k])}"/>`;
     if (v !== "ca") { const big = rs.reduce((a, b) => b.length > a.length ? b : a, rs[0]), c = centroid(big.map(Pp)); labels += `<text x="${c[0]}" y="${c[1] + 4}" text-anchor="middle" font-size="10.5" font-weight="700" fill="#1a202c" pointer-events="none" paint-order="stroke" stroke="#fff" stroke-width="3">${esc(v === "net" ? k.replace("Network ", "") : k)}</text>`; } });
   host.innerHTML = s + labels + `</svg>`;
   $("#m-map-title").textContent = `${S.mInd} by ${VIEWS[v].one}, ${y}`;
-  const scaleLab = S.mColor === "cps" ? ["9+ below CPS", "", "", "within 2", "", "", "9+ above CPS"] : ["fell 9+ more than CPS", "", "", "moved with CPS", "", "", "rose 9+ more than CPS"];
-  $("#m-scale").innerHTML = `<span style="margin-right:6px">${scaleLab[0]}</span>` + STEPS.map(st => `<i style="background:${st[2]}"></i>`).join("") + `<span style="margin-left:6px">${scaleLab[6]}</span><span style="margin-left:10px"><i style="background:url(#);background:repeating-linear-gradient(45deg,#cbd5e0 0 1.5px,#f4f5f4 1.5px 5px);width:16px"></i> fewer than 5 schools</span>`;
+  if (S.mColor === "ess") {
+    $("#m-scale").innerHTML = ESS_RATING.map(b => `<span><i style="background:${b.color};width:16px;height:10px;display:inline-block;border-radius:2px;margin-right:3px"></i>${b.label} (${b.lo === 0 ? "0" : b.lo}–${b.hi === Infinity ? "100" : b.hi})</span>`).join("") + `<span style="margin-left:10px"><i style="background:repeating-linear-gradient(45deg,#cbd5e0 0 1.5px,#f4f5f4 1.5px 5px);width:16px;height:10px;display:inline-block;border-radius:2px;margin-right:3px"></i> fewer than 5 schools</span>`;
+  } else {
+    const scaleLab = S.mColor === "cps" ? ["9+ below CPS", "", "", "within 2", "", "", "9+ above CPS"] : ["fell 9+ more than CPS", "", "", "moved with CPS", "", "", "rose 9+ more than CPS"];
+    $("#m-scale").innerHTML = `<span style="margin-right:6px">${scaleLab[0]}</span>` + STEPS.map(st => `<i style="background:${st[2]}"></i>`).join("") + `<span style="margin-left:6px">${scaleLab[6]}</span><span style="margin-left:10px"><i style="background:url(#);background:repeating-linear-gradient(45deg,#cbd5e0 0 1.5px,#f4f5f4 1.5px 5px);width:16px"></i> fewer than 5 schools</span>`;
+  }
   $("#m-map-note").textContent = v === "net" ? "Charter, ISP, Options and Contract schools have no network boundary; they appear in the list only." : "";
   host.querySelectorAll(".shape").forEach(el => { const r = byK[el.dataset.k];
-    el.addEventListener("mousemove", e => showTip(e, `<b>${esc(areaName(v, el.dataset.k))}</b>${r && r.med != null ? `<div class="tr"><span>${esc(S.mInd)}</span><span>${fmt(r.med)}</span></div><div class="tr"><span>vs CPS (${fmt(cps)})</span><span>${sgn(r.med - cps)}</span></div>${r.chg != null ? `<div class="tr"><span>Change since ${FIRST}</span><span>${sgn(r.chg)}</span></div>` : ""}<div class="tr"><span>Schools</span><span>${r.n}</span></div>` : "<div>No scored schools</div>"}<div style="color:var(--muted);margin-top:3px">Click to see trends</div>`));
+    el.addEventListener("mousemove", e => showTip(e, `<b>${esc(areaName(v, el.dataset.k))}</b>${r && r.med != null ? `<div class="tr"><span>${esc(S.mInd)}</span><span>${fmt(r.med)}</span></div>${S.mColor === "ess" ? `<div class="tr"><span>Rating</span><span>${esc(essRating(r.med)?.label ?? "–")}</span></div>` : `<div class="tr"><span>vs CPS (${fmt(cps)})</span><span>${sgn(r.med - cps)}</span></div>`}${r.chg != null ? `<div class="tr"><span>Change since ${FIRST}</span><span>${sgn(r.chg)}</span></div>` : ""}<div class="tr"><span>Schools</span><span>${r.n}</span></div>` : "<div>No scored schools</div>"}<div style="color:var(--muted);margin-top:3px">Click to see trends</div>`));
     el.addEventListener("mouseleave", hideTip);
     el.addEventListener("click", () => openArea(v, el.dataset.k)); });
   // ranked list
