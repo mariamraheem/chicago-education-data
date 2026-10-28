@@ -1,0 +1,677 @@
+survey_year,school_type,level,indicator_slug,indicator,essential,respondent,cps_score,n_schools
+2023,Elementary School (K/PK-8),essential,environment,Supportive Environment,Supportive Environment,,45,442
+2023,Elementary School (K/PK-8),essential,families,Involved Families,Involved Families,,52,442
+2023,Elementary School (K/PK-8),essential,instruction,Ambitious Instruction,Ambitious Instruction,,53,442
+2023,Elementary School (K/PK-8),essential,leaders,Effective Leaders,Effective Leaders,,52,442
+2023,Elementary School (K/PK-8),essential,overall,5Essentials,5Essentials,,52,442
+2023,Elementary School (K/PK-8),essential,teachers,Collaborative Teachers,Collaborative Teachers,,51,442
+2023,Elementary School (K/PK-8),measure,acno24,Peer Support for Academic Work,Supportive Environment,Student,48,427
+2023,Elementary School (K/PK-8),measure,acno24,Peer Support for Academic Work,Supportive Environment,Student,54,1
+2023,Elementary School (K/PK-8),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,49,387
+2023,Elementary School (K/PK-8),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,54,1
+2023,Elementary School (K/PK-8),measure,clar24,Course Clarity,Supplemental Measures,Student,26,1
+2023,Elementary School (K/PK-8),measure,clar24,Course Clarity,Supplemental Measures,Student,49,427
+2023,Elementary School (K/PK-8),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,53,392
+2023,Elementary School (K/PK-8),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,56,1
+2023,Elementary School (K/PK-8),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,49,394
+2023,Elementary School (K/PK-8),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,60,1
+2023,Elementary School (K/PK-8),measure,emhl24,Emotional Health,Supplemental Measures,Student,48,427
+2023,Elementary School (K/PK-8),measure,emhl24,Emotional Health,Supplemental Measures,Student,56,1
+2023,Elementary School (K/PK-8),measure,engg24,Academic Engagement,Supplemental Measures,Student,53,427
+2023,Elementary School (K/PK-8),measure,engg24,Academic Engagement,Supplemental Measures,Student,66,1
+2023,Elementary School (K/PK-8),measure,engl24,English Instruction,Ambitious Instruction,Student,53,427
+2023,Elementary School (K/PK-8),measure,engl24,English Instruction,Ambitious Instruction,Student,65,1
+2023,Elementary School (K/PK-8),measure,humr24,Human & Social Resources in the Community,Supplemental Measures,Student,38,427
+2023,Elementary School (K/PK-8),measure,humr24,Human & Social Resources in the Community,Supplemental Measures,Student,47,1
+2023,Elementary School (K/PK-8),measure,inf24,Teacher Influence,Effective Leaders,Teacher,54,392
+2023,Elementary School (K/PK-8),measure,inf24,Teacher Influence,Effective Leaders,Teacher,66,1
+2023,Elementary School (K/PK-8),measure,innv24,Innovation,Supplemental Measures,Teacher,53,392
+2023,Elementary School (K/PK-8),measure,innv24,Innovation,Supplemental Measures,Teacher,64,1
+2023,Elementary School (K/PK-8),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,53,394
+2023,Elementary School (K/PK-8),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,61,1
+2023,Elementary School (K/PK-8),measure,math24,Math Instruction,Ambitious Instruction,Student,51,427
+2023,Elementary School (K/PK-8),measure,math24,Math Instruction,Ambitious Instruction,Student,62,1
+2023,Elementary School (K/PK-8),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,47,427
+2023,Elementary School (K/PK-8),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,53,1
+2023,Elementary School (K/PK-8),measure,perc24,Academic Personalism,Supportive Environment,Student,48,427
+2023,Elementary School (K/PK-8),measure,perc24,Academic Personalism,Supportive Environment,Student,58,1
+2023,Elementary School (K/PK-8),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,53,394
+2023,Elementary School (K/PK-8),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,67,1
+2023,Elementary School (K/PK-8),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,55,392
+2023,Elementary School (K/PK-8),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,67,1
+2023,Elementary School (K/PK-8),measure,pres24,Academic Press,Ambitious Instruction,Student,52,427
+2023,Elementary School (K/PK-8),measure,pres24,Academic Press,Ambitious Instruction,Student,64,1
+2023,Elementary School (K/PK-8),measure,prs24,Parent Supportiveness,Supplemental Measures,Student,45,427
+2023,Elementary School (K/PK-8),measure,prs24,Parent Supportiveness,Supplemental Measures,Student,62,1
+2023,Elementary School (K/PK-8),measure,prt24,Parent Involvement in School,Involved Families,Teacher,49,391
+2023,Elementary School (K/PK-8),measure,prt24,Parent Involvement in School,Involved Families,Teacher,59,1
+2023,Elementary School (K/PK-8),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,47,1
+2023,Elementary School (K/PK-8),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,48,387
+2023,Elementary School (K/PK-8),measure,pssm24,School Connectedness,Supplemental Measures,Student,48,427
+2023,Elementary School (K/PK-8),measure,pssm24,School Connectedness,Supplemental Measures,Student,49,1
+2023,Elementary School (K/PK-8),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,53,394
+2023,Elementary School (K/PK-8),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,65,1
+2023,Elementary School (K/PK-8),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,52,394
+2023,Elementary School (K/PK-8),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,60,1
+2023,Elementary School (K/PK-8),measure,rigr24,Classroom Rigor,Supplemental Measures,Student,47,427
+2023,Elementary School (K/PK-8),measure,rigr24,Classroom Rigor,Supplemental Measures,Student,56,1
+2023,Elementary School (K/PK-8),measure,safe24,Safety,Supportive Environment,Student,40,1
+2023,Elementary School (K/PK-8),measure,safe24,Safety,Supportive Environment,Student,42,427
+2023,Elementary School (K/PK-8),measure,scie24,Inquiry-Based Science Instruction,Supplemental Measures,Student,39,1
+2023,Elementary School (K/PK-8),measure,scie24,Inquiry-Based Science Instruction,Supplemental Measures,Student,53,427
+2023,Elementary School (K/PK-8),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,47,394
+2023,Elementary School (K/PK-8),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,54,1
+2023,Elementary School (K/PK-8),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,54,388
+2023,Elementary School (K/PK-8),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,60,1
+2023,Elementary School (K/PK-8),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,38,1
+2023,Elementary School (K/PK-8),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,45,392
+2023,Elementary School (K/PK-8),measure,ssaf24,School Safety,Supplemental Measures,Student,50,427
+2023,Elementary School (K/PK-8),measure,ssaf24,School Safety,Supplemental Measures,Student,61,1
+2023,Elementary School (K/PK-8),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,43,427
+2023,Elementary School (K/PK-8),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,51,1
+2023,Elementary School (K/PK-8),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,52,393
+2023,Elementary School (K/PK-8),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,58,1
+2023,Elementary School (K/PK-8),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,48,394
+2023,Elementary School (K/PK-8),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,50,1
+2023,Elementary School (K/PK-8),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,52,392
+2023,Elementary School (K/PK-8),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,56,1
+2023,Elementary School (K/PK-8),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,43,427
+2023,Elementary School (K/PK-8),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,45,1
+2023,Elementary School (K/PK-8),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,52,393
+2023,Elementary School (K/PK-8),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,69,1
+2023,High School (9-12),essential,environment,Supportive Environment,Supportive Environment,,54,168
+2023,High School (9-12),essential,families,Involved Families,Involved Families,,50,168
+2023,High School (9-12),essential,instruction,Ambitious Instruction,Ambitious Instruction,,58,168
+2023,High School (9-12),essential,leaders,Effective Leaders,Effective Leaders,,51,168
+2023,High School (9-12),essential,overall,5Essentials,5Essentials,,57,168
+2023,High School (9-12),essential,teachers,Collaborative Teachers,Collaborative Teachers,,51,168
+2023,High School (9-12),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,40,127
+2023,High School (9-12),measure,clar24,Course Clarity,Supplemental Measures,Student,53,151
+2023,High School (9-12),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,59,125
+2023,High School (9-12),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,50,142
+2023,High School (9-12),measure,emhl24,Emotional Health,Supplemental Measures,Student,50,151
+2023,High School (9-12),measure,engg24,Academic Engagement,Supplemental Measures,Student,65,151
+2023,High School (9-12),measure,engl24,English Instruction,Ambitious Instruction,Student,62,151
+2023,High School (9-12),measure,futr24,Importance of High School for the Future,Supplemental Measures,Student,59,151
+2023,High School (9-12),measure,humr24,Human & Social Resources in the Community,Supplemental Measures,Student,31,151
+2023,High School (9-12),measure,inf24,Teacher Influence,Effective Leaders,Teacher,51,136
+2023,High School (9-12),measure,innv24,Innovation,Supplemental Measures,Teacher,57,137
+2023,High School (9-12),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,54,142
+2023,High School (9-12),measure,math24,Math Instruction,Ambitious Instruction,Student,64,151
+2023,High School (9-12),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,61,151
+2023,High School (9-12),measure,perc24,Academic Personalism,Supplemental Measures,Student,57,151
+2023,High School (9-12),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,54,142
+2023,High School (9-12),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,54,136
+2023,High School (9-12),measure,pres24,Academic Press,Ambitious Instruction,Student,53,151
+2023,High School (9-12),measure,prs24,Parent Supportiveness,Supplemental Measures,Student,38,151
+2023,High School (9-12),measure,prt24,Parent Involvement in School,Involved Families,Teacher,48,123
+2023,High School (9-12),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,38,127
+2023,High School (9-12),measure,pssm24,School Connectedness,Supplemental Measures,Student,50,151
+2023,High School (9-12),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,52,142
+2023,High School (9-12),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,59,142
+2023,High School (9-12),measure,rigr24,Classroom Rigor,Supplemental Measures,Student,54,151
+2023,High School (9-12),measure,safe24,Safety,Supportive Environment,Student,45,151
+2023,High School (9-12),measure,scie24,Inquiry-Based Science Instruction,Supplemental Measures,Student,53,148
+2023,High School (9-12),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,42,142
+2023,High School (9-12),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,51,127
+2023,High School (9-12),measure,slap24,School-Wide Future Orientation,Supportive Environment,Student,60,151
+2023,High School (9-12),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,41,137
+2023,High School (9-12),measure,ssaf24,School Safety,Supplemental Measures,Student,55,151
+2023,High School (9-12),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,47,151
+2023,High School (9-12),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,48,130
+2023,High School (9-12),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,46,142
+2023,High School (9-12),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,50,137
+2023,High School (9-12),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,52,151
+2023,High School (9-12),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,44,142
+2023,High School (9-12),measure,uexp24,Expectations for Postsecondary Education,Supportive Environment,Teacher,55,126
+2023,Middle School (6-8),essential,environment,Supportive Environment,Supportive Environment,,49,9
+2023,Middle School (6-8),essential,families,Involved Families,Involved Families,,60,9
+2023,Middle School (6-8),essential,instruction,Ambitious Instruction,Ambitious Instruction,,54,9
+2023,Middle School (6-8),essential,leaders,Effective Leaders,Effective Leaders,,59,9
+2023,Middle School (6-8),essential,overall,5Essentials,5Essentials,,71,9
+2023,Middle School (6-8),essential,teachers,Collaborative Teachers,Collaborative Teachers,,58,9
+2023,Middle School (6-8),measure,acno24,Peer Support for Academic Work,Supportive Environment,Student,50,9
+2023,Middle School (6-8),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,48,9
+2023,Middle School (6-8),measure,clar24,Course Clarity,Supplemental Measures,Student,50,9
+2023,Middle School (6-8),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,61,9
+2023,Middle School (6-8),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,57,9
+2023,Middle School (6-8),measure,emhl24,Emotional Health,Supplemental Measures,Student,51,9
+2023,Middle School (6-8),measure,engg24,Academic Engagement,Supplemental Measures,Student,64,9
+2023,Middle School (6-8),measure,engl24,English Instruction,Ambitious Instruction,Student,58,9
+2023,Middle School (6-8),measure,humr24,Human & Social Resources in the Community,Supplemental Measures,Student,25,9
+2023,Middle School (6-8),measure,inf24,Teacher Influence,Effective Leaders,Teacher,60,9
+2023,Middle School (6-8),measure,innv24,Innovation,Supplemental Measures,Teacher,71,9
+2023,Middle School (6-8),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,62,9
+2023,Middle School (6-8),measure,math24,Math Instruction,Ambitious Instruction,Student,50,9
+2023,Middle School (6-8),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,50,9
+2023,Middle School (6-8),measure,perc24,Academic Personalism,Supportive Environment,Student,54,9
+2023,Middle School (6-8),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,68,9
+2023,Middle School (6-8),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,70,9
+2023,Middle School (6-8),measure,pres24,Academic Press,Ambitious Instruction,Student,50,9
+2023,Middle School (6-8),measure,prs24,Parent Supportiveness,Supplemental Measures,Student,25,9
+2023,Middle School (6-8),measure,prt24,Parent Involvement in School,Involved Families,Teacher,55,9
+2023,Middle School (6-8),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,47,9
+2023,Middle School (6-8),measure,pssm24,School Connectedness,Supplemental Measures,Student,49,9
+2023,Middle School (6-8),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,61,9
+2023,Middle School (6-8),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,59,9
+2023,Middle School (6-8),measure,rigr24,Classroom Rigor,Supplemental Measures,Student,46,9
+2023,Middle School (6-8),measure,safe24,Safety,Supportive Environment,Student,39,9
+2023,Middle School (6-8),measure,scie24,Inquiry-Based Science Instruction,Supplemental Measures,Student,50,9
+2023,Middle School (6-8),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,51,9
+2023,Middle School (6-8),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,59,9
+2023,Middle School (6-8),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,38,9
+2023,Middle School (6-8),measure,ssaf24,School Safety,Supplemental Measures,Student,42,9
+2023,Middle School (6-8),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,32,9
+2023,Middle School (6-8),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,56,9
+2023,Middle School (6-8),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,50,9
+2023,Middle School (6-8),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,61,9
+2023,Middle School (6-8),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,51,9
+2023,Middle School (6-8),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,55,9
+2023,Primary School (K/PK-5),essential,environment,Supportive Environment,Supportive Environment,,49,25
+2023,Primary School (K/PK-5),essential,families,Involved Families,Involved Families,,62,25
+2023,Primary School (K/PK-5),essential,instruction,Ambitious Instruction,Ambitious Instruction,,63,25
+2023,Primary School (K/PK-5),essential,leaders,Effective Leaders,Effective Leaders,,61,25
+2023,Primary School (K/PK-5),essential,overall,5Essentials,5Essentials,,62,25
+2023,Primary School (K/PK-5),essential,teachers,Collaborative Teachers,Collaborative Teachers,,58,25
+2023,Primary School (K/PK-5),measure,acno24,Peer Support for Academic Work,Supportive Environment,Student,54,14
+2023,Primary School (K/PK-5),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,54,16
+2023,Primary School (K/PK-5),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,56,20
+2023,Primary School (K/PK-5),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,60,21
+2023,Primary School (K/PK-5),measure,engg24,Academic Engagement,Supplemental Measures,Student,66,14
+2023,Primary School (K/PK-5),measure,engl24,English Instruction,Ambitious Instruction,Student,65,14
+2023,Primary School (K/PK-5),measure,inf24,Teacher Influence,Effective Leaders,Teacher,66,20
+2023,Primary School (K/PK-5),measure,innv24,Innovation,Supplemental Measures,Teacher,64,20
+2023,Primary School (K/PK-5),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,61,21
+2023,Primary School (K/PK-5),measure,math24,Math Instruction,Ambitious Instruction,Student,62,14
+2023,Primary School (K/PK-5),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,53,14
+2023,Primary School (K/PK-5),measure,perc24,Academic Personalism,Supportive Environment,Student,58,14
+2023,Primary School (K/PK-5),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,67,21
+2023,Primary School (K/PK-5),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,67,20
+2023,Primary School (K/PK-5),measure,pres24,Academic Press,Ambitious Instruction,Student,64,14
+2023,Primary School (K/PK-5),measure,prt24,Parent Involvement in School,Involved Families,Teacher,59,20
+2023,Primary School (K/PK-5),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,47,16
+2023,Primary School (K/PK-5),measure,pssm24,School Connectedness,Supplemental Measures,Student,49,14
+2023,Primary School (K/PK-5),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,65,21
+2023,Primary School (K/PK-5),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,60,21
+2023,Primary School (K/PK-5),measure,rigr24,Classroom Rigor,Supplemental Measures,Student,56,14
+2023,Primary School (K/PK-5),measure,safe24,Safety,Supportive Environment,Student,40,14
+2023,Primary School (K/PK-5),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,54,21
+2023,Primary School (K/PK-5),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,60,16
+2023,Primary School (K/PK-5),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,38,20
+2023,Primary School (K/PK-5),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,51,14
+2023,Primary School (K/PK-5),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,58,21
+2023,Primary School (K/PK-5),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,50,21
+2023,Primary School (K/PK-5),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,56,20
+2023,Primary School (K/PK-5),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,45,14
+2023,Primary School (K/PK-5),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,69,21
+2024,Elementary School (K/PK-8),essential,environment,Supportive Environment,Supportive Environment,,47,442
+2024,Elementary School (K/PK-8),essential,families,Involved Families,Involved Families,,53,442
+2024,Elementary School (K/PK-8),essential,instruction,Ambitious Instruction,Ambitious Instruction,,53,442
+2024,Elementary School (K/PK-8),essential,leaders,Effective Leaders,Effective Leaders,,52,442
+2024,Elementary School (K/PK-8),essential,overall,5Essentials,5Essentials,,53,442
+2024,Elementary School (K/PK-8),essential,teachers,Collaborative Teachers,Collaborative Teachers,,51,442
+2024,Elementary School (K/PK-8),measure,acno24,Peer Support for Academic Work,Supportive Environment,Student,50,437
+2024,Elementary School (K/PK-8),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,48,388
+2024,Elementary School (K/PK-8),measure,clar24,Course Clarity,Supplemental Measures,Student,50,437
+2024,Elementary School (K/PK-8),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,54,393
+2024,Elementary School (K/PK-8),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,49,396
+2024,Elementary School (K/PK-8),measure,emhl24,Emotional Health,Supplemental Measures,Student,49,437
+2024,Elementary School (K/PK-8),measure,engg24,Academic Engagement,Supplemental Measures,Student,54,437
+2024,Elementary School (K/PK-8),measure,engl24,English Instruction,Ambitious Instruction,Student,55,437
+2024,Elementary School (K/PK-8),measure,humr24,Human & Social Resources in the Community,Supplemental Measures,Student,43,437
+2024,Elementary School (K/PK-8),measure,inf24,Teacher Influence,Effective Leaders,Teacher,53,395
+2024,Elementary School (K/PK-8),measure,innv24,Innovation,Supplemental Measures,Teacher,53,395
+2024,Elementary School (K/PK-8),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,54,396
+2024,Elementary School (K/PK-8),measure,math24,Math Instruction,Ambitious Instruction,Student,54,437
+2024,Elementary School (K/PK-8),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,46,437
+2024,Elementary School (K/PK-8),measure,perc24,Academic Personalism,Supportive Environment,Student,48,437
+2024,Elementary School (K/PK-8),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,54,396
+2024,Elementary School (K/PK-8),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,57,395
+2024,Elementary School (K/PK-8),measure,pres24,Academic Press,Ambitious Instruction,Student,52,437
+2024,Elementary School (K/PK-8),measure,prs24,Parent Supportiveness,Supplemental Measures,Student,45,437
+2024,Elementary School (K/PK-8),measure,prt24,Parent Involvement in School,Involved Families,Teacher,50,392
+2024,Elementary School (K/PK-8),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,45,388
+2024,Elementary School (K/PK-8),measure,pssm24,School Connectedness,Supplemental Measures,Student,49,437
+2024,Elementary School (K/PK-8),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,55,396
+2024,Elementary School (K/PK-8),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,53,396
+2024,Elementary School (K/PK-8),measure,rigr24,Classroom Rigor,Supplemental Measures,Student,50,437
+2024,Elementary School (K/PK-8),measure,safe24,Safety,Supportive Environment,Student,43,437
+2024,Elementary School (K/PK-8),measure,scie24,Inquiry-Based Science Instruction,Supplemental Measures,Student,55,436
+2024,Elementary School (K/PK-8),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,47,396
+2024,Elementary School (K/PK-8),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,52,388
+2024,Elementary School (K/PK-8),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,46,395
+2024,Elementary School (K/PK-8),measure,ssaf24,School Safety,Supplemental Measures,Student,50,437
+2024,Elementary School (K/PK-8),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,44,437
+2024,Elementary School (K/PK-8),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,51,395
+2024,Elementary School (K/PK-8),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,49,396
+2024,Elementary School (K/PK-8),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,51,395
+2024,Elementary School (K/PK-8),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,44,437
+2024,Elementary School (K/PK-8),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,51,396
+2024,High School (9-12),essential,environment,Supportive Environment,Supportive Environment,,52,168
+2024,High School (9-12),essential,families,Involved Families,Involved Families,,51,168
+2024,High School (9-12),essential,instruction,Ambitious Instruction,Ambitious Instruction,,59,168
+2024,High School (9-12),essential,leaders,Effective Leaders,Effective Leaders,,52,168
+2024,High School (9-12),essential,overall,5Essentials,5Essentials,,57,168
+2024,High School (9-12),essential,teachers,Collaborative Teachers,Collaborative Teachers,,51,168
+2024,High School (9-12),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,40,126
+2024,High School (9-12),measure,clar24,Course Clarity,Supplemental Measures,Student,51,151
+2024,High School (9-12),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,60,120
+2024,High School (9-12),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,52,139
+2024,High School (9-12),measure,emhl24,Emotional Health,Supplemental Measures,Student,50,151
+2024,High School (9-12),measure,engg24,Academic Engagement,Supplemental Measures,Student,66,150
+2024,High School (9-12),measure,engl24,English Instruction,Ambitious Instruction,Student,64,151
+2024,High School (9-12),measure,futr24,Importance of High School for the Future,Supplemental Measures,Student,60,150
+2024,High School (9-12),measure,humr24,Human & Social Resources in the Community,Supplemental Measures,Student,35,151
+2024,High School (9-12),measure,inf24,Teacher Influence,Effective Leaders,Teacher,50,131
+2024,High School (9-12),measure,innv24,Innovation,Supplemental Measures,Teacher,57,132
+2024,High School (9-12),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,55,140
+2024,High School (9-12),measure,math24,Math Instruction,Ambitious Instruction,Student,66,151
+2024,High School (9-12),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,55,151
+2024,High School (9-12),measure,perc24,Academic Personalism,Supplemental Measures,Student,55,150
+2024,High School (9-12),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,54,140
+2024,High School (9-12),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,54,131
+2024,High School (9-12),measure,pres24,Academic Press,Ambitious Instruction,Student,53,151
+2024,High School (9-12),measure,prs24,Parent Supportiveness,Supplemental Measures,Student,38,151
+2024,High School (9-12),measure,prt24,Parent Involvement in School,Involved Families,Teacher,49,120
+2024,High School (9-12),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,37,126
+2024,High School (9-12),measure,pssm24,School Connectedness,Supplemental Measures,Student,50,151
+2024,High School (9-12),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,53,140
+2024,High School (9-12),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,59,140
+2024,High School (9-12),measure,rigr24,Classroom Rigor,Supplemental Measures,Student,53,151
+2024,High School (9-12),measure,safe24,Safety,Supportive Environment,Student,43,151
+2024,High School (9-12),measure,scie24,Inquiry-Based Science Instruction,Supplemental Measures,Student,56,150
+2024,High School (9-12),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,42,140
+2024,High School (9-12),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,50,126
+2024,High School (9-12),measure,slap24,School-Wide Future Orientation,Supportive Environment,Student,58,150
+2024,High School (9-12),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,40,132
+2024,High School (9-12),measure,ssaf24,School Safety,Supplemental Measures,Student,51,151
+2024,High School (9-12),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,50,151
+2024,High School (9-12),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,50,125
+2024,High School (9-12),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,47,140
+2024,High School (9-12),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,49,131
+2024,High School (9-12),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,50,151
+2024,High School (9-12),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,45,140
+2024,High School (9-12),measure,uexp24,Expectations for Postsecondary Education,Supportive Environment,Teacher,55,122
+2024,Middle School (6-8),essential,environment,Supportive Environment,Supportive Environment,,51,9
+2024,Middle School (6-8),essential,families,Involved Families,Involved Families,,62,9
+2024,Middle School (6-8),essential,instruction,Ambitious Instruction,Ambitious Instruction,,57,9
+2024,Middle School (6-8),essential,leaders,Effective Leaders,Effective Leaders,,63,9
+2024,Middle School (6-8),essential,overall,5Essentials,5Essentials,,71,9
+2024,Middle School (6-8),essential,teachers,Collaborative Teachers,Collaborative Teachers,,63,9
+2024,Middle School (6-8),measure,acno24,Peer Support for Academic Work,Supportive Environment,Student,56,9
+2024,Middle School (6-8),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,51,8
+2024,Middle School (6-8),measure,clar24,Course Clarity,Supplemental Measures,Student,47,9
+2024,Middle School (6-8),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,67,8
+2024,Middle School (6-8),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,61,8
+2024,Middle School (6-8),measure,emhl24,Emotional Health,Supplemental Measures,Student,53,9
+2024,Middle School (6-8),measure,engg24,Academic Engagement,Supplemental Measures,Student,67,9
+2024,Middle School (6-8),measure,engl24,English Instruction,Ambitious Instruction,Student,64,9
+2024,Middle School (6-8),measure,humr24,Human & Social Resources in the Community,Supplemental Measures,Student,31,9
+2024,Middle School (6-8),measure,inf24,Teacher Influence,Effective Leaders,Teacher,63,8
+2024,Middle School (6-8),measure,innv24,Innovation,Supplemental Measures,Teacher,71,8
+2024,Middle School (6-8),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,72,8
+2024,Middle School (6-8),measure,math24,Math Instruction,Ambitious Instruction,Student,57,9
+2024,Middle School (6-8),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,53,9
+2024,Middle School (6-8),measure,perc24,Academic Personalism,Supportive Environment,Student,54,9
+2024,Middle School (6-8),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,68,8
+2024,Middle School (6-8),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,71,8
+2024,Middle School (6-8),measure,pres24,Academic Press,Ambitious Instruction,Student,47,9
+2024,Middle School (6-8),measure,prs24,Parent Supportiveness,Supplemental Measures,Student,22,9
+2024,Middle School (6-8),measure,prt24,Parent Involvement in School,Involved Families,Teacher,56,8
+2024,Middle School (6-8),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,54,8
+2024,Middle School (6-8),measure,pssm24,School Connectedness,Supplemental Measures,Student,51,9
+2024,Middle School (6-8),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,73,8
+2024,Middle School (6-8),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,58,8
+2024,Middle School (6-8),measure,rigr24,Classroom Rigor,Supplemental Measures,Student,47,9
+2024,Middle School (6-8),measure,safe24,Safety,Supportive Environment,Student,42,9
+2024,Middle School (6-8),measure,scie24,Inquiry-Based Science Instruction,Supplemental Measures,Student,53,9
+2024,Middle School (6-8),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,54,8
+2024,Middle School (6-8),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,63,8
+2024,Middle School (6-8),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,43,8
+2024,Middle School (6-8),measure,ssaf24,School Safety,Supplemental Measures,Student,49,9
+2024,Middle School (6-8),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,33,9
+2024,Middle School (6-8),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,60,8
+2024,Middle School (6-8),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,53,8
+2024,Middle School (6-8),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,62,8
+2024,Middle School (6-8),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,50,9
+2024,Middle School (6-8),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,61,8
+2024,Primary School (K/PK-5),essential,environment,Supportive Environment,Supportive Environment,,50,25
+2024,Primary School (K/PK-5),essential,families,Involved Families,Involved Families,,64,25
+2024,Primary School (K/PK-5),essential,instruction,Ambitious Instruction,Ambitious Instruction,,63,25
+2024,Primary School (K/PK-5),essential,leaders,Effective Leaders,Effective Leaders,,65,25
+2024,Primary School (K/PK-5),essential,overall,5Essentials,5Essentials,,68,25
+2024,Primary School (K/PK-5),essential,teachers,Collaborative Teachers,Collaborative Teachers,,60,25
+2024,Primary School (K/PK-5),measure,acno24,Peer Support for Academic Work,Supportive Environment,Student,54,14
+2024,Primary School (K/PK-5),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,55,16
+2024,Primary School (K/PK-5),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,57,22
+2024,Primary School (K/PK-5),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,61,22
+2024,Primary School (K/PK-5),measure,engg24,Academic Engagement,Supplemental Measures,Student,67,14
+2024,Primary School (K/PK-5),measure,engl24,English Instruction,Ambitious Instruction,Student,64,14
+2024,Primary School (K/PK-5),measure,inf24,Teacher Influence,Effective Leaders,Teacher,71,22
+2024,Primary School (K/PK-5),measure,innv24,Innovation,Supplemental Measures,Teacher,65,22
+2024,Primary School (K/PK-5),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,64,22
+2024,Primary School (K/PK-5),measure,math24,Math Instruction,Ambitious Instruction,Student,61,14
+2024,Primary School (K/PK-5),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,49,14
+2024,Primary School (K/PK-5),measure,perc24,Academic Personalism,Supportive Environment,Student,58,14
+2024,Primary School (K/PK-5),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,70,22
+2024,Primary School (K/PK-5),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,71,22
+2024,Primary School (K/PK-5),measure,pres24,Academic Press,Ambitious Instruction,Student,65,14
+2024,Primary School (K/PK-5),measure,prt24,Parent Involvement in School,Involved Families,Teacher,61,22
+2024,Primary School (K/PK-5),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,50,16
+2024,Primary School (K/PK-5),measure,pssm24,School Connectedness,Supplemental Measures,Student,49,14
+2024,Primary School (K/PK-5),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,68,22
+2024,Primary School (K/PK-5),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,62,22
+2024,Primary School (K/PK-5),measure,rigr24,Classroom Rigor,Supplemental Measures,Student,55,14
+2024,Primary School (K/PK-5),measure,safe24,Safety,Supportive Environment,Student,41,14
+2024,Primary School (K/PK-5),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,56,22
+2024,Primary School (K/PK-5),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,63,16
+2024,Primary School (K/PK-5),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,44,22
+2024,Primary School (K/PK-5),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,47,14
+2024,Primary School (K/PK-5),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,60,22
+2024,Primary School (K/PK-5),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,52,22
+2024,Primary School (K/PK-5),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,56,22
+2024,Primary School (K/PK-5),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,47,14
+2024,Primary School (K/PK-5),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,68,22
+2025,Elementary School (K/PK-8),essential,families,Involved Families,Involved Families,,54,442
+2025,Elementary School (K/PK-8),essential,leaders,Effective Leaders,Effective Leaders,,53,442
+2025,Elementary School (K/PK-8),essential,teachers,Collaborative Teachers,Collaborative Teachers,,53,442
+2025,Elementary School (K/PK-8),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,50,394
+2025,Elementary School (K/PK-8),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,56,396
+2025,Elementary School (K/PK-8),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,50,396
+2025,Elementary School (K/PK-8),measure,emhl24,Emotional Health,Supplemental Measures,Student,52,435
+2025,Elementary School (K/PK-8),measure,engl24,English Instruction,Ambitious Instruction,Student,59,435
+2025,Elementary School (K/PK-8),measure,humr24,Human & Social Resources in the Community,Supplemental Measures,Student,43,435
+2025,Elementary School (K/PK-8),measure,inf24,Teacher Influence,Effective Leaders,Teacher,52,396
+2025,Elementary School (K/PK-8),measure,innv24,Innovation,Supplemental Measures,Teacher,54,396
+2025,Elementary School (K/PK-8),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,56,396
+2025,Elementary School (K/PK-8),measure,math24,Math Instruction,Ambitious Instruction,Student,57,435
+2025,Elementary School (K/PK-8),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,52,435
+2025,Elementary School (K/PK-8),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,53,396
+2025,Elementary School (K/PK-8),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,58,396
+2025,Elementary School (K/PK-8),measure,prs24,Parent Supportiveness,Supplemental Measures,Student,49,435
+2025,Elementary School (K/PK-8),measure,prt24,Parent Involvement in School,Involved Families,Teacher,51,395
+2025,Elementary School (K/PK-8),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,46,393
+2025,Elementary School (K/PK-8),measure,pssm24,School Connectedness,Supplemental Measures,Student,52,435
+2025,Elementary School (K/PK-8),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,57,396
+2025,Elementary School (K/PK-8),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,54,396
+2025,Elementary School (K/PK-8),measure,safe24,Safety,Supportive Environment,Student,45,435
+2025,Elementary School (K/PK-8),measure,scie24,Inquiry-Based Science Instruction,Supplemental Measures,Student,56,435
+2025,Elementary School (K/PK-8),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,48,396
+2025,Elementary School (K/PK-8),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,55,394
+2025,Elementary School (K/PK-8),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,47,396
+2025,Elementary School (K/PK-8),measure,ssaf24,School Safety,Supplemental Measures,Student,54,435
+2025,Elementary School (K/PK-8),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,48,435
+2025,Elementary School (K/PK-8),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,53,396
+2025,Elementary School (K/PK-8),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,49,396
+2025,Elementary School (K/PK-8),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,52,396
+2025,Elementary School (K/PK-8),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,48,435
+2025,Elementary School (K/PK-8),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,54,396
+2025,High School (9-12),essential,environment,Supportive Environment,Supportive Environment,,54,168
+2025,High School (9-12),essential,families,Involved Families,Involved Families,,52,168
+2025,High School (9-12),essential,leaders,Effective Leaders,Effective Leaders,,52,168
+2025,High School (9-12),essential,teachers,Collaborative Teachers,Collaborative Teachers,,52,168
+2025,High School (9-12),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,41,130
+2025,High School (9-12),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,60,127
+2025,High School (9-12),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,51,143
+2025,High School (9-12),measure,emhl24,Emotional Health,Supplemental Measures,Student,53,160
+2025,High School (9-12),measure,engl24,English Instruction,Ambitious Instruction,Student,66,160
+2025,High School (9-12),measure,futr24,Importance of High School for the Future,Supplemental Measures,Student,61,160
+2025,High School (9-12),measure,humr24,Human & Social Resources in the Community,Supplemental Measures,Student,34,160
+2025,High School (9-12),measure,inf24,Teacher Influence,Effective Leaders,Teacher,51,138
+2025,High School (9-12),measure,innv24,Innovation,Supplemental Measures,Teacher,57,139
+2025,High School (9-12),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,55,144
+2025,High School (9-12),measure,math24,Math Instruction,Ambitious Instruction,Student,69,160
+2025,High School (9-12),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,62,160
+2025,High School (9-12),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,52,143
+2025,High School (9-12),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,55,138
+2025,High School (9-12),measure,prs24,Parent Supportiveness,Supplemental Measures,Student,42,160
+2025,High School (9-12),measure,prt24,Parent Involvement in School,Involved Families,Teacher,49,126
+2025,High School (9-12),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,38,130
+2025,High School (9-12),measure,pssm24,School Connectedness,Supplemental Measures,Student,53,160
+2025,High School (9-12),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,55,143
+2025,High School (9-12),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,60,144
+2025,High School (9-12),measure,safe24,Safety,Supportive Environment,Student,46,160
+2025,High School (9-12),measure,scie24,Inquiry-Based Science Instruction,Supplemental Measures,Student,58,159
+2025,High School (9-12),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,43,144
+2025,High School (9-12),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,50,130
+2025,High School (9-12),measure,slap24,School-Wide Future Orientation,Supportive Environment,Student,60,160
+2025,High School (9-12),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,40,139
+2025,High School (9-12),measure,ssaf24,School Safety,Supplemental Measures,Student,55,160
+2025,High School (9-12),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,54,160
+2025,High School (9-12),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,51,131
+2025,High School (9-12),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,48,144
+2025,High School (9-12),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,50,139
+2025,High School (9-12),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,53,160
+2025,High School (9-12),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,47,144
+2025,High School (9-12),measure,uexp24,Expectations for Postsecondary Education,Supportive Environment,Teacher,55,126
+2025,Middle School (6-8),essential,families,Involved Families,Involved Families,,66,9
+2025,Middle School (6-8),essential,leaders,Effective Leaders,Effective Leaders,,65,9
+2025,Middle School (6-8),essential,teachers,Collaborative Teachers,Collaborative Teachers,,65,9
+2025,Middle School (6-8),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,53,9
+2025,Middle School (6-8),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,66,9
+2025,Middle School (6-8),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,65,9
+2025,Middle School (6-8),measure,emhl24,Emotional Health,Supplemental Measures,Student,65,9
+2025,Middle School (6-8),measure,engl24,English Instruction,Ambitious Instruction,Student,75,9
+2025,Middle School (6-8),measure,humr24,Human & Social Resources in the Community,Supplemental Measures,Student,34,9
+2025,Middle School (6-8),measure,inf24,Teacher Influence,Effective Leaders,Teacher,66,9
+2025,Middle School (6-8),measure,innv24,Innovation,Supplemental Measures,Teacher,76,9
+2025,Middle School (6-8),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,75,9
+2025,Middle School (6-8),measure,math24,Math Instruction,Ambitious Instruction,Student,65,9
+2025,Middle School (6-8),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,65,9
+2025,Middle School (6-8),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,66,9
+2025,Middle School (6-8),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,76,9
+2025,Middle School (6-8),measure,prs24,Parent Supportiveness,Supplemental Measures,Student,34,9
+2025,Middle School (6-8),measure,prt24,Parent Involvement in School,Involved Families,Teacher,58,9
+2025,Middle School (6-8),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,52,9
+2025,Middle School (6-8),measure,pssm24,School Connectedness,Supplemental Measures,Student,61,9
+2025,Middle School (6-8),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,73,9
+2025,Middle School (6-8),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,61,9
+2025,Middle School (6-8),measure,safe24,Safety,Supportive Environment,Student,50,9
+2025,Middle School (6-8),measure,scie24,Inquiry-Based Science Instruction,Supplemental Measures,Student,56,9
+2025,Middle School (6-8),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,58,9
+2025,Middle School (6-8),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,64,9
+2025,Middle School (6-8),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,51,9
+2025,Middle School (6-8),measure,ssaf24,School Safety,Supplemental Measures,Student,59,9
+2025,Middle School (6-8),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,41,9
+2025,Middle School (6-8),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,62,9
+2025,Middle School (6-8),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,54,9
+2025,Middle School (6-8),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,66,9
+2025,Middle School (6-8),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,60,9
+2025,Middle School (6-8),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,67,9
+2025,Primary School (K/PK-5),essential,families,Involved Families,Involved Families,,65,25
+2025,Primary School (K/PK-5),essential,leaders,Effective Leaders,Effective Leaders,,66,25
+2025,Primary School (K/PK-5),essential,teachers,Collaborative Teachers,Collaborative Teachers,,62,25
+2025,Primary School (K/PK-5),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,56,17
+2025,Primary School (K/PK-5),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,60,21
+2025,Primary School (K/PK-5),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,61,21
+2025,Primary School (K/PK-5),measure,engl24,English Instruction,Ambitious Instruction,Student,69,14
+2025,Primary School (K/PK-5),measure,inf24,Teacher Influence,Effective Leaders,Teacher,72,21
+2025,Primary School (K/PK-5),measure,innv24,Innovation,Supplemental Measures,Teacher,67,21
+2025,Primary School (K/PK-5),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,67,21
+2025,Primary School (K/PK-5),measure,math24,Math Instruction,Ambitious Instruction,Student,64,14
+2025,Primary School (K/PK-5),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,55,14
+2025,Primary School (K/PK-5),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,70,21
+2025,Primary School (K/PK-5),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,70,21
+2025,Primary School (K/PK-5),measure,prt24,Parent Involvement in School,Involved Families,Teacher,61,21
+2025,Primary School (K/PK-5),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,48,17
+2025,Primary School (K/PK-5),measure,pssm24,School Connectedness,Supplemental Measures,Student,48,14
+2025,Primary School (K/PK-5),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,71,21
+2025,Primary School (K/PK-5),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,63,21
+2025,Primary School (K/PK-5),measure,safe24,Safety,Supportive Environment,Student,39,14
+2025,Primary School (K/PK-5),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,57,21
+2025,Primary School (K/PK-5),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,61,17
+2025,Primary School (K/PK-5),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,48,21
+2025,Primary School (K/PK-5),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,51,14
+2025,Primary School (K/PK-5),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,63,21
+2025,Primary School (K/PK-5),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,54,21
+2025,Primary School (K/PK-5),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,61,21
+2025,Primary School (K/PK-5),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,47,14
+2025,Primary School (K/PK-5),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,69,21
+2026,Elementary School (K/PK-8),essential,environment,Supportive Environment,Supportive Environment,,51,442
+2026,Elementary School (K/PK-8),essential,families,Involved Families,Involved Families,,53,442
+2026,Elementary School (K/PK-8),essential,instruction,Ambitious Instruction,Ambitious Instruction,,56,442
+2026,Elementary School (K/PK-8),essential,leaders,Effective Leaders,Effective Leaders,,52,442
+2026,Elementary School (K/PK-8),essential,overall,5Essentials,5Essentials,,56,442
+2026,Elementary School (K/PK-8),essential,teachers,Collaborative Teachers,Collaborative Teachers,,52,442
+2026,Elementary School (K/PK-8),measure,acno24,Peer Support for Academic Work,Supportive Environment,Student,53,438
+2026,Elementary School (K/PK-8),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,48,407
+2026,Elementary School (K/PK-8),measure,clar24,Course Clarity,Supplemental Measures,Student,54,438
+2026,Elementary School (K/PK-8),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,57,407
+2026,Elementary School (K/PK-8),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,48,408
+2026,Elementary School (K/PK-8),measure,emhl24,Emotional Health,Supplemental Measures,Student,55,438
+2026,Elementary School (K/PK-8),measure,engg24,Academic Engagement,Supplemental Measures,Student,57,438
+2026,Elementary School (K/PK-8),measure,engl24,English Instruction,Ambitious Instruction,Student,59,438
+2026,Elementary School (K/PK-8),measure,humr24,Human & Social Resources in the Community,Supplemental Measures,Student,47,438
+2026,Elementary School (K/PK-8),measure,inf24,Teacher Influence,Effective Leaders,Teacher,52,408
+2026,Elementary School (K/PK-8),measure,innv24,Innovation,Supplemental Measures,Teacher,52,408
+2026,Elementary School (K/PK-8),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,55,408
+2026,Elementary School (K/PK-8),measure,math24,Math Instruction,Ambitious Instruction,Student,57,438
+2026,Elementary School (K/PK-8),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,54,438
+2026,Elementary School (K/PK-8),measure,perc24,Academic Personalism,Supportive Environment,Student,51,438
+2026,Elementary School (K/PK-8),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,53,408
+2026,Elementary School (K/PK-8),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,57,408
+2026,Elementary School (K/PK-8),measure,pres24,Academic Press,Ambitious Instruction,Student,53,438
+2026,Elementary School (K/PK-8),measure,prs24,Parent Supportiveness,Supplemental Measures,Student,48,438
+2026,Elementary School (K/PK-8),measure,prt24,Parent Involvement in School,Involved Families,Teacher,49,407
+2026,Elementary School (K/PK-8),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,47,407
+2026,Elementary School (K/PK-8),measure,pssm24,School Connectedness,Supplemental Measures,Student,53,438
+2026,Elementary School (K/PK-8),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,56,408
+2026,Elementary School (K/PK-8),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,54,408
+2026,Elementary School (K/PK-8),measure,rigr24,Classroom Rigor,Supplemental Measures,Student,53,438
+2026,Elementary School (K/PK-8),measure,safe24,Safety,Supportive Environment,Student,48,438
+2026,Elementary School (K/PK-8),measure,scie24,Inquiry-Based Science Instruction,Supplemental Measures,Student,59,438
+2026,Elementary School (K/PK-8),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,48,408
+2026,Elementary School (K/PK-8),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,53,407
+2026,Elementary School (K/PK-8),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,47,408
+2026,Elementary School (K/PK-8),measure,ssaf24,School Safety,Supplemental Measures,Student,54,438
+2026,Elementary School (K/PK-8),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,48,438
+2026,Elementary School (K/PK-8),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,52,408
+2026,Elementary School (K/PK-8),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,48,408
+2026,Elementary School (K/PK-8),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,51,408
+2026,Elementary School (K/PK-8),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,50,438
+2026,Elementary School (K/PK-8),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,53,408
+2026,High School (9-12),essential,environment,Supportive Environment,Supportive Environment,,56,168
+2026,High School (9-12),essential,families,Involved Families,Involved Families,,50,168
+2026,High School (9-12),essential,instruction,Ambitious Instruction,Ambitious Instruction,,60,168
+2026,High School (9-12),essential,leaders,Effective Leaders,Effective Leaders,,52,168
+2026,High School (9-12),essential,overall,5Essentials,5Essentials,,59,168
+2026,High School (9-12),essential,teachers,Collaborative Teachers,Collaborative Teachers,,52,168
+2026,High School (9-12),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,42,136
+2026,High School (9-12),measure,clar24,Course Clarity,Supplemental Measures,Student,54,162
+2026,High School (9-12),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,63,130
+2026,High School (9-12),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,52,150
+2026,High School (9-12),measure,emhl24,Emotional Health,Supplemental Measures,Student,57,162
+2026,High School (9-12),measure,engg24,Academic Engagement,Supplemental Measures,Student,70,162
+2026,High School (9-12),measure,engl24,English Instruction,Ambitious Instruction,Student,65,162
+2026,High School (9-12),measure,futr24,Importance of High School for the Future,Supplemental Measures,Student,67,162
+2026,High School (9-12),measure,humr24,Human & Social Resources in the Community,Supplemental Measures,Student,38,162
+2026,High School (9-12),measure,inf24,Teacher Influence,Effective Leaders,Teacher,50,138
+2026,High School (9-12),measure,innv24,Innovation,Supplemental Measures,Teacher,56,138
+2026,High School (9-12),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,56,150
+2026,High School (9-12),measure,math24,Math Instruction,Ambitious Instruction,Student,69,162
+2026,High School (9-12),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,65,162
+2026,High School (9-12),measure,perc24,Academic Personalism,Supplemental Measures,Student,58,162
+2026,High School (9-12),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,52,148
+2026,High School (9-12),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,53,138
+2026,High School (9-12),measure,pres24,Academic Press,Ambitious Instruction,Student,55,162
+2026,High School (9-12),measure,prs24,Parent Supportiveness,Supplemental Measures,Student,41,162
+2026,High School (9-12),measure,prt24,Parent Involvement in School,Involved Families,Teacher,49,129
+2026,High School (9-12),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,38,136
+2026,High School (9-12),measure,pssm24,School Connectedness,Supplemental Measures,Student,58,162
+2026,High School (9-12),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,55,148
+2026,High School (9-12),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,61,150
+2026,High School (9-12),measure,rigr24,Classroom Rigor,Supplemental Measures,Student,57,162
+2026,High School (9-12),measure,safe24,Safety,Supportive Environment,Student,49,162
+2026,High School (9-12),measure,scie24,Inquiry-Based Science Instruction,Supplemental Measures,Student,59,162
+2026,High School (9-12),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,43,150
+2026,High School (9-12),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,50,136
+2026,High School (9-12),measure,slap24,School-Wide Future Orientation,Supportive Environment,Student,62,162
+2026,High School (9-12),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,40,138
+2026,High School (9-12),measure,ssaf24,School Safety,Supplemental Measures,Student,57,162
+2026,High School (9-12),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,57,162
+2026,High School (9-12),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,50,136
+2026,High School (9-12),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,48,150
+2026,High School (9-12),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,49,138
+2026,High School (9-12),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,56,162
+2026,High School (9-12),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,48,150
+2026,High School (9-12),measure,uexp24,Expectations for Postsecondary Education,Supportive Environment,Teacher,56,129
+2026,Middle School (6-8),essential,environment,Supportive Environment,Supportive Environment,,64,9
+2026,Middle School (6-8),essential,families,Involved Families,Involved Families,,68,9
+2026,Middle School (6-8),essential,instruction,Ambitious Instruction,Ambitious Instruction,,70,9
+2026,Middle School (6-8),essential,leaders,Effective Leaders,Effective Leaders,,66,9
+2026,Middle School (6-8),essential,overall,5Essentials,5Essentials,,86,9
+2026,Middle School (6-8),essential,teachers,Collaborative Teachers,Collaborative Teachers,,70,9
+2026,Middle School (6-8),measure,acno24,Peer Support for Academic Work,Supportive Environment,Student,68,9
+2026,Middle School (6-8),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,57,9
+2026,Middle School (6-8),measure,clar24,Course Clarity,Supplemental Measures,Student,63,9
+2026,Middle School (6-8),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,76,9
+2026,Middle School (6-8),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,71,9
+2026,Middle School (6-8),measure,emhl24,Emotional Health,Supplemental Measures,Student,74,9
+2026,Middle School (6-8),measure,engg24,Academic Engagement,Supplemental Measures,Student,85,9
+2026,Middle School (6-8),measure,engl24,English Instruction,Ambitious Instruction,Student,79,9
+2026,Middle School (6-8),measure,humr24,Human & Social Resources in the Community,Supplemental Measures,Student,40,9
+2026,Middle School (6-8),measure,inf24,Teacher Influence,Effective Leaders,Teacher,63,9
+2026,Middle School (6-8),measure,innv24,Innovation,Supplemental Measures,Teacher,79,9
+2026,Middle School (6-8),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,72,9
+2026,Middle School (6-8),measure,math24,Math Instruction,Ambitious Instruction,Student,68,9
+2026,Middle School (6-8),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,68,9
+2026,Middle School (6-8),measure,perc24,Academic Personalism,Supportive Environment,Student,66,9
+2026,Middle School (6-8),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,74,9
+2026,Middle School (6-8),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,78,9
+2026,Middle School (6-8),measure,pres24,Academic Press,Ambitious Instruction,Student,64,9
+2026,Middle School (6-8),measure,prs24,Parent Supportiveness,Supplemental Measures,Student,32,9
+2026,Middle School (6-8),measure,prt24,Parent Involvement in School,Involved Families,Teacher,60,9
+2026,Middle School (6-8),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,53,9
+2026,Middle School (6-8),measure,pssm24,School Connectedness,Supplemental Measures,Student,68,9
+2026,Middle School (6-8),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,77,9
+2026,Middle School (6-8),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,74,9
+2026,Middle School (6-8),measure,rigr24,Classroom Rigor,Supplemental Measures,Student,65,9
+2026,Middle School (6-8),measure,safe24,Safety,Supportive Environment,Student,55,9
+2026,Middle School (6-8),measure,scie24,Inquiry-Based Science Instruction,Supplemental Measures,Student,59,9
+2026,Middle School (6-8),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,56,9
+2026,Middle School (6-8),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,67,9
+2026,Middle School (6-8),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,53,9
+2026,Middle School (6-8),measure,ssaf24,School Safety,Supplemental Measures,Student,62,9
+2026,Middle School (6-8),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,39,9
+2026,Middle School (6-8),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,65,9
+2026,Middle School (6-8),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,54,9
+2026,Middle School (6-8),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,70,9
+2026,Middle School (6-8),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,65,9
+2026,Middle School (6-8),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,68,9
+2026,Primary School (K/PK-5),essential,environment,Supportive Environment,Supportive Environment,,50,25
+2026,Primary School (K/PK-5),essential,families,Involved Families,Involved Families,,62,25
+2026,Primary School (K/PK-5),essential,instruction,Ambitious Instruction,Ambitious Instruction,,62,25
+2026,Primary School (K/PK-5),essential,leaders,Effective Leaders,Effective Leaders,,62,25
+2026,Primary School (K/PK-5),essential,overall,5Essentials,5Essentials,,68,25
+2026,Primary School (K/PK-5),essential,teachers,Collaborative Teachers,Collaborative Teachers,,59,25
+2026,Primary School (K/PK-5),measure,acno24,Peer Support for Academic Work,Supportive Environment,Student,58,14
+2026,Primary School (K/PK-5),measure,cdis24,Classroom Disruptions,Supplemental Measures,Teacher,54,16
+2026,Primary School (K/PK-5),measure,colb24,Collaborative Practices,Collaborative Teachers,Teacher,61,23
+2026,Primary School (K/PK-5),measure,colr24,Collective Responsibility,Collaborative Teachers,Teacher,56,23
+2026,Primary School (K/PK-5),measure,engg24,Academic Engagement,Supplemental Measures,Student,63,14
+2026,Primary School (K/PK-5),measure,engl24,English Instruction,Ambitious Instruction,Student,67,14
+2026,Primary School (K/PK-5),measure,inf24,Teacher Influence,Effective Leaders,Teacher,67,23
+2026,Primary School (K/PK-5),measure,innv24,Innovation,Supplemental Measures,Teacher,65,23
+2026,Primary School (K/PK-5),measure,ins24,Instructional Leadership,Effective Leaders,Teacher,63,23
+2026,Primary School (K/PK-5),measure,math24,Math Instruction,Ambitious Instruction,Student,62,14
+2026,Primary School (K/PK-5),measure,peer24,Student Peer Relationships,Supplemental Measures,Student,56,14
+2026,Primary School (K/PK-5),measure,perc24,Academic Personalism,Supportive Environment,Student,55,14
+2026,Primary School (K/PK-5),measure,pgmc24,Program Coherence,Effective Leaders,Teacher,67,23
+2026,Primary School (K/PK-5),measure,pnfl24,Parent Influence on Decision Making in Schools,Involved Families,Teacher,72,23
+2026,Primary School (K/PK-5),measure,pres24,Academic Press,Ambitious Instruction,Student,55,14
+2026,Primary School (K/PK-5),measure,prt24,Parent Involvement in School,Involved Families,Teacher,57,23
+2026,Primary School (K/PK-5),measure,prti24,Student Responsibility,Supplemental Measures,Teacher,46,16
+2026,Primary School (K/PK-5),measure,pssm24,School Connectedness,Supplemental Measures,Student,47,14
+2026,Primary School (K/PK-5),measure,qpd24,Quality Professional Development,Collaborative Teachers,Teacher,69,23
+2026,Primary School (K/PK-5),measure,refd24,Reflective Dialogue,Supplemental Measures,Teacher,60,23
+2026,Primary School (K/PK-5),measure,rigr24,Classroom Rigor,Supplemental Measures,Student,55,14
+2026,Primary School (K/PK-5),measure,safe24,Safety,Supportive Environment,Student,38,14
+2026,Primary School (K/PK-5),measure,scmt24,School Commitment,Collaborative Teachers,Teacher,56,23
+2026,Primary School (K/PK-5),measure,sdis24,Quality of Student Discussion,Ambitious Instruction,Teacher,59,16
+2026,Primary School (K/PK-5),measure,socz24,Socialization of New Teachers,Supplemental Measures,Teacher,46,23
+2026,Primary School (K/PK-5),measure,stdy24,Rigorous Study Habits,Supplemental Measures,Student,52,14
+2026,Primary School (K/PK-5),measure,trpa24,Teacher-Parent Trust,Involved Families,Teacher,57,23
+2026,Primary School (K/PK-5),measure,trpr24,Teacher-Principal Trust,Effective Leaders,Teacher,51,23
+2026,Primary School (K/PK-5),measure,trte24,Teacher-Teacher Trust,Collaborative Teachers,Teacher,55,23
+2026,Primary School (K/PK-5),measure,trts24,Student-Teacher Trust,Supportive Environment,Student,48,14
+2026,Primary School (K/PK-5),measure,tsaf24,Teacher Safety,Supplemental Measures,Teacher,68,23
