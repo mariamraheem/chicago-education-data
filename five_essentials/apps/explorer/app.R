@@ -16,6 +16,9 @@
 #   - Definitions come from the measures dictionary (latest year available).
 #   - District / network / community / ESB views show the median (or mean) of
 #     school scores, with the number of schools behind each point.
+#   - The District view can instead show the site's own CPS benchmark (the
+#     "CPS" comparison on each school report). The site publishes a separate
+#     benchmark for each school type, so it is shown for one type at a time.
 #
 # Inputs
 #   This app lives in chicago-education-data/five_essentials/apps/explorer/.
@@ -24,6 +27,7 @@
 #     data/5essentials_scores_wide.csv        <- five_essentials/data/clean/
 #     data/5essentials_schools.csv            <- five_essentials/data/clean/
 #     data/5essentials_measures_dictionary.csv <- five_essentials/data/clean/
+#     data/5essentials_cps_benchmark.csv      <- five_essentials/data/clean/ (optional)
 #     data/school_groups.json, school_esb.json, school_locations.json
 #                                             <- reference/schools/
 #     www/geo/*.geojson                       <- reference/geo/
@@ -48,6 +52,7 @@ library(stringr)
 SCORES_FILE   <- "data/5essentials_scores_wide.csv"
 SCHOOLS_FILE  <- "data/5essentials_schools.csv"
 DICT_FILE     <- "data/5essentials_measures_dictionary.csv"
+BENCHMARK_FILE <- "data/5essentials_cps_benchmark.csv"
 GROUPS_FILE   <- "data/school_groups.json"
 ESB_FILE      <- "data/school_esb.json"
 LOCATIONS_FILE <- "data/school_locations.json"
@@ -94,6 +99,7 @@ BAND_COLORS   <- c("#C05621", "#EDB98A", "#CBD5E0", "#8CC9A1", "#1B4D25")
 # hide a measure, e.g. c("Grit").
 EXCLUDE_INDICATORS <- character(0)
 
+BENCHMARK_STAT  <- "CPS benchmark"      # District view only
 OVERVIEW_CHOICE <- "Essential scores (overview)"
 ALL_CHOICE      <- "All measures"
 COMPOSITE_LABEL <- "Composite"        # respondent label for essential scores
@@ -172,6 +178,23 @@ load_schools <- function(path) {
               student_response_rate, teacher_response_rate)
 }
 
+#' The site's CPS benchmark: one value per school type, indicator and year.
+#' A few schools carry a stray value (e.g. after changing type), so the value
+#' shown on the most reports of that type is the benchmark; n_schools says how many.
+#' Returns NULL if the file isn't there yet, and the app runs without it.
+load_benchmark <- function(path) {
+  if (!file.exists(path)) {
+    message("No ", path, ": the CPS benchmark option is hidden. Run the scraper, then update_data.R.")
+    return(NULL)
+  }
+  read_csv_plain(path) |>
+    group_by(survey_year, school_type, indicator) |>
+    slice_max(n_schools, n = 1, with_ties = FALSE) |>
+    ungroup() |>
+    transmute(survey_year, school_type, indicator,
+              score = cps_score, n_schools)
+}
+
 #' Network, community area and ESB sub-district for each school, taken from
 #' the enrollment dashboard so groupings stay consistent across K1C tools.
 load_crosswalk <- function(groups_path, esb_path) {
@@ -242,6 +265,7 @@ load_all_data <- function() {
     schools       = schools,
     school_list   = school_choices(scores),
     school_types  = sort(unique(schools$school_type)),
+    benchmark     = load_benchmark(BENCHMARK_FILE),
     geo_keys      = load_geo_keys(),
     locations     = load_school_locations(LOCATIONS_FILE)
   )
@@ -292,8 +316,24 @@ fill_year_gaps <- function(df, years) {
   complete(df, survey_year = years, indicator)
 }
 
+#' The site's CPS benchmark for the selected measures and ONE school type.
+benchmark_scores <- function(benchmark, ctl, years) {
+  validate(need(!is.null(benchmark), "The CPS benchmark file isn't loaded."),
+           need(length(ctl$school_types) == 1,
+                paste("The site publishes a separate CPS benchmark for each school type.",
+                      "Pick one school type to see it.")))
+  out <- filter(benchmark, indicator %in% ctl$indicators,
+                school_type == ctl$school_types) |>
+    select(survey_year, indicator, score, n_schools)
+  if (nrow(out) == 0) return(out)
+  fill_year_gaps(out, years)
+}
+
 #' Filter school scores down to what one view should plot.
-view_scores <- function(school_scores, level, unit, ctl) {
+view_scores <- function(school_scores, level, unit, ctl, benchmark = NULL) {
+  if (level == "district" && identical(ctl$stat, BENCHMARK_STAT)) {
+    return(benchmark_scores(benchmark, ctl, sort(unique(school_scores$survey_year))))
+  }
   df <- filter(school_scores, indicator %in% ctl$indicators)
   if (level == "school") {
     out <- df |>
@@ -324,6 +364,10 @@ chart_subtitle <- function(unit_label, df, level, ctl) {
   types <- if (length(ctl$school_types) < length(ctl$all_types)) {
     paste0(" | ", paste(ctl$school_types, collapse = ", "))
   } else ""
+  if (identical(ctl$stat, BENCHMARK_STAT)) {
+    return(paste0(unit_label, " | CPS benchmark published by 5Essentials for ",
+                  ctl$school_types, " (", n_txt, " school reports per point)"))
+  }
   paste0(unit_label, " | ", ctl$stat, " of school scores (", n_txt,
          " schools per point)", types)
 }
@@ -578,7 +622,8 @@ overview_tab <- function() {
 # ---- View module (one per tab) ----------------------------------------------
 
 trend_view_ui <- function(id, data, aggregate = TRUE, selector_label = NULL,
-                          selector_note = NULL) {
+                          selector_note = NULL, benchmark = FALSE) {
+  stats <- c("Median", "Mean", if (benchmark && !is.null(data$benchmark)) BENCHMARK_STAT)
   ns <- NS(id)
   essentials <- sort(unique(filter(data$dict, level == "measure")$essential))
 
@@ -608,7 +653,10 @@ trend_view_ui <- function(id, data, aggregate = TRUE, selector_label = NULL,
       if (aggregate) tagList(
         hr(),
         section_label("Combine school scores"),
-        radioButtons(ns("stat"), NULL, choices = c("Median", "Mean"), inline = TRUE),
+        radioButtons(ns("stat"), NULL, choices = stats, inline = TRUE),
+        if (length(stats) > 2) div(class = "side-note",
+          "CPS benchmark is the CPS comparison shown on each school's 5Essentials",
+          "report. It is published for one school type at a time, so pick one below."),
         section_label("School types"),
         checkboxGroupInput(ns("school_types"), NULL, choices = data$school_types,
                            selected = data$school_types)
@@ -690,7 +738,7 @@ trend_view_server <- function(id, data, level, choices = NULL,
     })
 
     plot_data <- reactive({
-      df <- view_scores(data$school_scores, level, unit(), controls())
+      df <- view_scores(data$school_scores, level, unit(), controls(), data$benchmark)
       validate(need(nrow(df) > 0, "No scores for this selection."))
       df
     })
@@ -1055,7 +1103,7 @@ build_ui <- function(data) {
       list(id = "tabs",
            tabPanel("Overview", overview_tab()),
            tabPanel("Map", map_view_ui("map", data)),
-           tabPanel("District", trend_view_ui("district", data))),
+           tabPanel("District", trend_view_ui("district", data, benchmark = TRUE))),
       group_tabs,
       list(tabPanel("School",
                     trend_view_ui("school", data, aggregate = FALSE,

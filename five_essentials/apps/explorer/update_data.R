@@ -11,6 +11,7 @@
 #   five_essentials/data/clean/5essentials_scores_wide.csv
 #   five_essentials/data/clean/5essentials_schools.csv
 #   five_essentials/data/clean/5essentials_measures_dictionary.csv
+#   five_essentials/data/clean/5essentials_cps_benchmark.csv
 #   reference/schools/school_groups.json, school_esb.json, school_locations.json
 #   reference/geo/networks.geojson, community_areas.geojson, esb_districts.geojson
 #
@@ -28,7 +29,8 @@ APP_DIR <- "five_essentials/apps/explorer"
 SCORE_FILES <- c(
   "five_essentials/data/clean/5essentials_scores_wide.csv",
   "five_essentials/data/clean/5essentials_schools.csv",
-  "five_essentials/data/clean/5essentials_measures_dictionary.csv"
+  "five_essentials/data/clean/5essentials_measures_dictionary.csv",
+  "five_essentials/data/clean/5essentials_cps_benchmark.csv"
 )
 
 CROSSWALK_FILES <- c(
