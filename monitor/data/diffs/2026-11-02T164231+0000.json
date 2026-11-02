@@ -1,0 +1,793 @@
+{
+  "changed_api_services": [
+    "Maps API",
+    "School Profile API",
+    "School Actions API",
+    "Calendar API",
+    "District API",
+    "Health API",
+    "LSC API"
+  ],
+  "changed_files": [
+    {
+      "category": "District Data",
+      "columns": [
+        "College Enrollment and Persistence 2024 - District Level"
+      ],
+      "columns_error": null,
+      "content_length": "32112",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "etag": null,
+      "filename": "metrics_collenrollpersist_citywide_2024.xlsx",
+      "format": "Spreadsheet (xlsx)",
+      "found_on_pages": [
+        "https://www.cps.edu/about/district-data/metrics/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:42:34+00:00",
+      "last_modified": "Thu, 17 Oct 2024 14:30:12 GMT",
+      "new_last_modified": "Thu, 17 Oct 2024 14:30:12 GMT",
+      "old_last_modified": "Thu, 17 Oct 2024 14:30:12 GMT",
+      "sheet_names": [
+        "Overview",
+        "Enrollment & Persistence"
+      ],
+      "title_guess": "CW Report",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/district-data/metrics/metrics_collenrollpersist_citywide_2024.xlsx",
+      "year_guess": "2024"
+    },
+    {
+      "category": "District Data",
+      "columns": [
+        "Cohort Graduation and Dropout Rate 2024 -- Citywide"
+      ],
+      "columns_error": null,
+      "content_length": "40713",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "etag": null,
+      "filename": "metrics_cohortgraduationdropoutadjusted_citywide_2017to2024.xlsx",
+      "format": "Spreadsheet (xlsx)",
+      "found_on_pages": [
+        "https://www.cps.edu/about/district-data/metrics/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:42:36+00:00",
+      "last_modified": "Thu, 17 Oct 2024 14:30:12 GMT",
+      "new_last_modified": "Thu, 17 Oct 2024 14:30:12 GMT",
+      "old_last_modified": "Thu, 17 Oct 2024 14:30:12 GMT",
+      "sheet_names": [
+        "Overview",
+        "Citywide 5 Year Cohort Rates",
+        "Citywide 4 Year Cohort Rates"
+      ],
+      "title_guess": "CW REPORT",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/district-data/metrics/metrics_cohortgraduationdropoutadjusted_citywide_2017to2024.xlsx",
+      "year_guess": "2024"
+    },
+    {
+      "category": "District Data",
+      "columns": [
+        "One Year Dropout Rate 2024 -- Citywide"
+      ],
+      "columns_error": null,
+      "content_length": "48206",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "etag": null,
+      "filename": "metrics_oneyeardropoutadjusted_citywide_2011to2024.xlsx",
+      "format": "Spreadsheet (xlsx)",
+      "found_on_pages": [
+        "https://www.cps.edu/about/district-data/metrics/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:42:41+00:00",
+      "last_modified": "Thu, 17 Oct 2024 14:30:11 GMT",
+      "new_last_modified": "Thu, 17 Oct 2024 14:30:11 GMT",
+      "old_last_modified": "Thu, 17 Oct 2024 14:30:11 GMT",
+      "sheet_names": [
+        "Overview",
+        "All Students",
+        "Excluding Dropouts In Prior Two"
+      ],
+      "title_guess": "CW Report",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/district-data/metrics/metrics_oneyeardropoutadjusted_citywide_2011to2024.xlsx",
+      "year_guess": "2024"
+    },
+    {
+      "category": "District Data",
+      "columns": [
+        "9th Grade On-Track 2024 -- School Level"
+      ],
+      "columns_error": null,
+      "content_length": "51312",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "etag": null,
+      "filename": "metrics_9ot_schoollevel.xlsx",
+      "format": "Spreadsheet (xlsx)",
+      "found_on_pages": [
+        "https://www.cps.edu/about/district-data/metrics/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:42:45+00:00",
+      "last_modified": "Mon, 27 Jan 2025 22:33:57 GMT",
+      "new_last_modified": "Mon, 27 Jan 2025 22:33:57 GMT",
+      "old_last_modified": "Mon, 27 Jan 2025 22:33:57 GMT",
+      "sheet_names": [
+        "Overview",
+        "9OT - School Level"
+      ],
+      "title_guess": "SL REPORT",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/district-data/metrics/metrics_9ot_schoollevel.xlsx",
+      "year_guess": ""
+    },
+    {
+      "category": "District Data",
+      "columns": [
+        "9th Grade On-Track 2024 -- Citywide"
+      ],
+      "columns_error": null,
+      "content_length": "20729",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "etag": null,
+      "filename": "metrics_9ot_citywide.xlsx",
+      "format": "Spreadsheet (xlsx)",
+      "found_on_pages": [
+        "https://www.cps.edu/about/district-data/metrics/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:42:46+00:00",
+      "last_modified": "Mon, 27 Jan 2025 22:33:47 GMT",
+      "new_last_modified": "Mon, 27 Jan 2025 22:33:47 GMT",
+      "old_last_modified": "Mon, 27 Jan 2025 22:33:47 GMT",
+      "sheet_names": [
+        "Overview",
+        "9OT - CITYWIDE"
+      ],
+      "title_guess": "CW REPORT",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/district-data/metrics/metrics_9ot_citywide.xlsx",
+      "year_guess": ""
+    },
+    {
+      "category": "District Data",
+      "columns": [
+        "9th Grade On-Track 1997-2014",
+        "On Track Rate",
+        "Total Number of Freshmen"
+      ],
+      "columns_error": null,
+      "content_length": "51286",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "etag": null,
+      "filename": "ontrack_allschools_20150311.xlsx",
+      "format": "Spreadsheet (xlsx)",
+      "found_on_pages": [
+        "https://www.cps.edu/about/district-data/metrics/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:42:47+00:00",
+      "last_modified": "Mon, 27 Jan 2025 22:42:39 GMT",
+      "new_last_modified": "Mon, 27 Jan 2025 22:42:39 GMT",
+      "old_last_modified": "Mon, 27 Jan 2025 22:42:39 GMT",
+      "sheet_names": [
+        "Sheet1"
+      ],
+      "title_guess": "SL Report",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/district-data/metrics/ontrack_allschools_20150311.xlsx",
+      "year_guess": "2015"
+    },
+    {
+      "category": "Policies",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "22289",
+      "content_type": "application/pdf",
+      "etag": null,
+      "filename": "scc-2024-acknowledgement-of-receipt.pdf",
+      "format": "PDF",
+      "found_on_pages": [
+        "https://www.cps.edu/about/policies/student-code-of-conduct-policy/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:44:37+00:00",
+      "last_modified": "Wed, 14 Aug 2024 07:46:32 GMT",
+      "new_last_modified": "Wed, 14 Aug 2024 07:46:32 GMT",
+      "old_last_modified": "Wed, 14 Aug 2024 07:46:32 GMT",
+      "sheet_names": [],
+      "title_guess": "sign the SCC receipt",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/policies/student-code-of-conduct/scc-2024-acknowledgement-of-receipt.pdf",
+      "year_guess": "2024"
+    },
+    {
+      "category": "Policies",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "30357",
+      "content_type": "application/pdf",
+      "etag": "\"1D60C1EF4D28D80\"",
+      "filename": "payroll_form1095-c_reissuerequest.pdf",
+      "format": "PDF",
+      "found_on_pages": [
+        "https://www.cps.edu/about/policies/former-employees/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:44:47+00:00",
+      "last_modified": "Mon, 06 Apr 2020 14:23:35 GMT",
+      "new_last_modified": "Mon, 06 Apr 2020 14:23:35 GMT",
+      "old_last_modified": "Mon, 06 Apr 2020 14:23:35 GMT",
+      "sheet_names": [],
+      "title_guess": "1095-C Reissue Request",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/policies/former-employees/payroll_form1095-c_reissuerequest.pdf",
+      "year_guess": ""
+    },
+    {
+      "category": "District Data",
+      "columns": [
+        "School Code",
+        "School Name",
+        "Category",
+        "Managed By\nNetwork",
+        "Response Rate",
+        "The teacher(s)\nrespect me",
+        "I am comfortable\nsharing my\nconcerns with\nthis teacher(s)",
+        "My child will be\nmore successful\nas an adult\nbecause of this\nteacher(s)",
+        "The teacher(s)\nlets me know\nwhat they are\nworking on in\nclass",
+        "The teacher(s)\ncontacts me\npersonally to\ndiscuss my child\n(strengths,\nweaknesses,\naccomplishments\n, etc.)",
+        "The teacher(s)\nprovides\nsuggestions for\nhow to support\nmy child in\nschool",
+        "The office staff\ngreets visitors\nwarmly",
+        "The support staff\n(custodians,\nclerks, cafeteria\nstaff, security)\nseem to care\nabout the\nstudents",
+        "The school\ninvites me to\nmeetings and\nspecial school\nevents",
+        "I know what the\nimportant issues\nare in the school",
+        "I have\nopportunities to\nparticipate in\nmaking decisions\nthat affect the\nwhole school\ncommunity.",
+        "Bullying is not a\nproblem at this\nschool",
+        "My child is safe\ngoing to and from\nschool",
+        "My child is safe\nat this school",
+        "My child feels like\nthey are a part of\na community at\nthis school",
+        "My child's social\nand emotional\nneeds are met at\nthis school",
+        "The school's\npolicies and\nprograms reflect\nthe diversity of\nthe families in the\ncommunity",
+        "Students and\nparents are\ntreated fairly\nregardless of\nsocial or cultural\nbackground",
+        "There are many\ndifferent ways I\ncan be involved\nwith the school\n(for example:\nvolunteering,\nassisting in the\nclassroom,\nfundraising, etc.)",
+        "Your child's\nclassroom",
+        "Access to\ntechnology (for\nexample:\ncomputers,\niPads, etc.)",
+        "Gym",
+        "Food services \nnutritious meals",
+        "Overall\ncleanliness of the\nschool",
+        "Chicago Public\nSchools is\nmoving in a\npositive direction",
+        "My child(ren) is\nbeing prepared\nfor many types of\nopportunities\nafter graduating\nhigh school",
+        "My child(ren)'s\ncurrent learning\nneeds are met by\nChicago Public\nSchools",
+        "I feel informed\nabout resources\nto help me find\nthe best school\nfor my child(ren)",
+        "GoCPS has\nimproved the\napplication\nprocess for\nChicago Public\nSchools",
+        "Children in my\ncommunity have\naccess to quality\neducation\nthrough Chicago\nPublic Schools",
+        "How likely are\nyou to\nrecommend this\nschool?"
+      ],
+      "columns_error": null,
+      "content_length": "40842",
+      "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "etag": null,
+      "filename": "parent_survey_summary_2024_nice.xlsx",
+      "format": "Spreadsheet (xlsx)",
+      "found_on_pages": [
+        "https://www.cps.edu/about/surveys/parent-guardian-survey-school-culture-climate/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:45:00+00:00",
+      "last_modified": "Wed, 19 Mar 2025 18:01:55 GMT",
+      "new_last_modified": "Wed, 19 Mar 2025 18:01:55 GMT",
+      "old_last_modified": "Wed, 19 Mar 2025 18:01:55 GMT",
+      "sheet_names": [
+        "Parent_Survey_Summary_2024.csv"
+      ],
+      "title_guess": "School Level",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/district-data/metrics/my-voice-my-school-surveys/parent_survey_summary_2024_nice.xlsx",
+      "year_guess": "2024"
+    },
+    {
+      "category": "globalassets > cps-pages",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "55940",
+      "content_type": "application/pdf",
+      "etag": "\"1DA7180C6728F00\"",
+      "filename": "cultivate-parent-notification-110223.pdf",
+      "format": "PDF",
+      "found_on_pages": [
+        "https://www.cps.edu/about/surveys/cultivate-survey/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:45:12+00:00",
+      "last_modified": "Fri, 08 Mar 2024 17:48:06 GMT",
+      "new_last_modified": "Fri, 08 Mar 2024 17:48:06 GMT",
+      "old_last_modified": "Fri, 08 Mar 2024 17:48:06 GMT",
+      "sheet_names": [],
+      "title_guess": "read the parent letter",
+      "url": "https://www.cps.edu/globalassets/cps-pages/initiatives/cultivate-survey/cultivate-parent-notification-110223.pdf",
+      "year_guess": ""
+    },
+    {
+      "category": "Finance",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "63617",
+      "content_type": "application/pdf",
+      "etag": "\"1DAD1465DA71D80\"",
+      "filename": "cps_orgchart_070324.pdf",
+      "format": "PDF",
+      "found_on_pages": [
+        "https://www.cps.edu/about/finance/budget/budget-2025/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:46:48+00:00",
+      "last_modified": "Mon, 08 Jul 2024 14:51:51 GMT",
+      "new_last_modified": "Mon, 08 Jul 2024 14:51:51 GMT",
+      "old_last_modified": "Mon, 08 Jul 2024 14:51:51 GMT",
+      "sheet_names": [],
+      "title_guess": "ORGANIZATIONAL CHART",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/finance/budget/budget-2025/docs/cps_orgchart_070324.pdf",
+      "year_guess": "2025"
+    },
+    {
+      "category": "Finance",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "64482",
+      "content_type": "application/pdf",
+      "etag": null,
+      "filename": "appendixc.pdf",
+      "format": "PDF",
+      "found_on_pages": [
+        "https://www.cps.edu/about/finance/budget/budget-2015/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:47:46+00:00",
+      "last_modified": "Fri, 05 Jun 2020 13:28:37 GMT",
+      "new_last_modified": "Fri, 05 Jun 2020 13:28:37 GMT",
+      "old_last_modified": "Fri, 05 Jun 2020 13:28:37 GMT",
+      "sheet_names": [],
+      "title_guess": "Appendix C \u2013 Budget Process",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/finance/budget/budget-2015/appendixc.pdf",
+      "year_guess": "2015"
+    },
+    {
+      "category": "Finance",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "61447",
+      "content_type": "application/pdf",
+      "etag": null,
+      "filename": "attachment2_revenuesexpenditureschanges_allfunds.pdf",
+      "format": "PDF",
+      "found_on_pages": [
+        "https://www.cps.edu/about/finance/budget/budget-2013/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:47:59+00:00",
+      "last_modified": "Thu, 16 Apr 2020 17:23:07 GMT",
+      "new_last_modified": "Thu, 16 Apr 2020 17:23:07 GMT",
+      "old_last_modified": "Thu, 16 Apr 2020 17:23:07 GMT",
+      "sheet_names": [],
+      "title_guess": "All Funds, Statement of Revenues, Expenditures and Changes in Fund Balance",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/finance/budget/budget-2013/attachment2_revenuesexpenditureschanges_allfunds.pdf",
+      "year_guess": "2013"
+    },
+    {
+      "category": "Finance",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "60399",
+      "content_type": "application/pdf",
+      "etag": null,
+      "filename": "definitions2014.pdf",
+      "format": "PDF",
+      "found_on_pages": [
+        "https://www.cps.edu/about/finance/capital-plan/capital-plan-fy2014/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:49:09+00:00",
+      "last_modified": "Fri, 07 Feb 2020 20:33:24 GMT",
+      "new_last_modified": "Fri, 07 Feb 2020 20:33:24 GMT",
+      "old_last_modified": "Fri, 07 Feb 2020 20:33:24 GMT",
+      "sheet_names": [],
+      "title_guess": "Definitions",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/finance/capital-plan/capital-plan-fy2014/definitions2014.pdf",
+      "year_guess": "2014"
+    },
+    {
+      "category": "Finance",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "45722",
+      "content_type": "application/pdf",
+      "etag": null,
+      "filename": "capitalbudgetbasics2014.pdf",
+      "format": "PDF",
+      "found_on_pages": [
+        "https://www.cps.edu/about/finance/capital-plan/capital-plan-fy2014/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:49:10+00:00",
+      "last_modified": "Fri, 07 Feb 2020 20:33:24 GMT",
+      "new_last_modified": "Fri, 07 Feb 2020 20:33:24 GMT",
+      "old_last_modified": "Fri, 07 Feb 2020 20:33:24 GMT",
+      "sheet_names": [],
+      "title_guess": "Budget Basics",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/finance/capital-plan/capital-plan-fy2014/capitalbudgetbasics2014.pdf",
+      "year_guess": "2014"
+    },
+    {
+      "category": "Finance",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "60399",
+      "content_type": "application/pdf",
+      "etag": null,
+      "filename": "definitions.pdf",
+      "format": "PDF",
+      "found_on_pages": [
+        "https://www.cps.edu/about/finance/capital-plan/capital-plan-fy2013/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:49:12+00:00",
+      "last_modified": "Fri, 07 Feb 2020 20:59:06 GMT",
+      "new_last_modified": "Fri, 07 Feb 2020 20:59:06 GMT",
+      "old_last_modified": "Fri, 07 Feb 2020 20:59:06 GMT",
+      "sheet_names": [],
+      "title_guess": "Definitions",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/finance/capital-plan/capital-plan-fy2013/definitions.pdf",
+      "year_guess": "2013"
+    },
+    {
+      "category": "globalassets > cps-pages",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "44390",
+      "content_type": "application/pdf",
+      "etag": null,
+      "filename": "april-23rd-lscab-meeting-minutes.pdf",
+      "format": "PDF",
+      "found_on_pages": [
+        "https://www.cps.edu/about/local-school-councils/local-school-council-advisory-board/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:49:30+00:00",
+      "last_modified": "Mon, 21 Oct 2024 19:24:25 GMT",
+      "new_last_modified": "Mon, 21 Oct 2024 19:24:25 GMT",
+      "old_last_modified": "Mon, 21 Oct 2024 19:24:25 GMT",
+      "sheet_names": [],
+      "title_guess": "Minutes",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/local-school-councils-lscs/local-school-council-advisory-board/2024/april-23rd-lscab-meeting-minutes.pdf",
+      "year_guess": "2024"
+    },
+    {
+      "category": "globalassets > cps-pages",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "47545",
+      "content_type": "application/pdf",
+      "etag": "\"1D8E5733922A080\"",
+      "filename": "sept-19-2022-approved-lscab-meeting-minutes.pdf",
+      "format": "PDF",
+      "found_on_pages": [
+        "https://www.cps.edu/about/local-school-councils/local-school-council-advisory-board/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:49:49+00:00",
+      "last_modified": "Fri, 21 Oct 2022 17:33:25 GMT",
+      "new_last_modified": "Fri, 21 Oct 2022 17:33:25 GMT",
+      "old_last_modified": "Fri, 21 Oct 2022 17:33:25 GMT",
+      "sheet_names": [],
+      "title_guess": "Minutes",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/local-school-councils-lscs/sept-19-2022-approved-lscab-meeting-minutes.pdf",
+      "year_guess": "2022"
+    },
+    {
+      "category": "globalassets > cps-pages",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "59856",
+      "content_type": "application/pdf",
+      "etag": null,
+      "filename": "draft_english_spanish_lscab_january_2021_minutes.pdf",
+      "format": "PDF",
+      "found_on_pages": [
+        "https://www.cps.edu/about/local-school-councils/local-school-council-advisory-board/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:50:05+00:00",
+      "last_modified": "Fri, 16 Apr 2021 17:50:18 GMT",
+      "new_last_modified": "Fri, 16 Apr 2021 17:50:18 GMT",
+      "old_last_modified": "Fri, 16 Apr 2021 17:50:18 GMT",
+      "sheet_names": [],
+      "title_guess": "Minutes",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/local-school-councils-lscs/draft_english_spanish_lscab_january_2021_minutes.pdf",
+      "year_guess": "2021"
+    },
+    {
+      "category": "globalassets > cps-pages",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "61519",
+      "content_type": "application/pdf",
+      "etag": null,
+      "filename": "mediaconsentformandrelease_english_9-2.pdf",
+      "format": "PDF",
+      "found_on_pages": [
+        "https://www.cps.edu/about/departments/office-of-communications/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:51:00+00:00",
+      "last_modified": "Tue, 04 Jun 2024 19:48:58 GMT",
+      "new_last_modified": "Tue, 04 Jun 2024 19:48:58 GMT",
+      "old_last_modified": "Tue, 04 Jun 2024 19:48:58 GMT",
+      "sheet_names": [],
+      "title_guess": "English",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/department-directory/office-of-communications/mediaconsentformandrelease_english_9-2.pdf",
+      "year_guess": ""
+    },
+    {
+      "category": "globalassets > cps-pages",
+      "columns": [
+        "School Name"
+      ],
+      "columns_error": null,
+      "content_length": "30208",
+      "content_type": "application/vnd.ms-excel",
+      "etag": "\"1DC70C38F563F00\"",
+      "filename": "sources-and-uses-of-funds-for-facilities-report-template.xls",
+      "format": "Spreadsheet (xls)",
+      "found_on_pages": [
+        "https://www.cps.edu/about/non-district-school-management/2026-request-for-proposals-for-new-options-charter-and-contract-schools/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:51:19+00:00",
+      "last_modified": "Fri, 19 Dec 2025 08:43:34 GMT",
+      "new_last_modified": "Fri, 19 Dec 2025 08:43:34 GMT",
+      "old_last_modified": "Fri, 19 Dec 2025 08:43:34 GMT",
+      "sheet_names": [
+        "S&U"
+      ],
+      "title_guess": "Sources and Uses of Funds for Facility Development Report",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/non-district-school-management/2026-request-for-proposals-for-new-charter-schools/sources-and-uses-of-funds-for-facilities-report-template.xls",
+      "year_guess": "2026"
+    },
+    {
+      "category": "globalassets > cps-pages",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "47616",
+      "content_type": "application/msword",
+      "etag": "\"1DC70C3764D8E00\"",
+      "filename": "decision-making-authority-table.doc",
+      "format": "Document (doc)",
+      "found_on_pages": [
+        "https://www.cps.edu/about/non-district-school-management/2026-request-for-proposals-for-new-options-charter-and-contract-schools/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:51:26+00:00",
+      "last_modified": "Fri, 19 Dec 2025 08:42:52 GMT",
+      "new_last_modified": "Fri, 19 Dec 2025 08:42:52 GMT",
+      "old_last_modified": "Fri, 19 Dec 2025 08:42:52 GMT",
+      "sheet_names": [],
+      "title_guess": "Decision-Making Authority Table",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/non-district-school-management/2026-request-for-proposals-for-new-charter-schools/decision-making-authority-table.doc",
+      "year_guess": "2026"
+    },
+    {
+      "category": "globalassets > cps-pages",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "31638",
+      "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "etag": "\"1D7F76F968D6B80\"",
+      "filename": "2022-rfp-completeness-checklist-tier-i.docx",
+      "format": "Document (docx)",
+      "found_on_pages": [
+        "https://www.cps.edu/about/non-district-school-management/2022-request-for-proposal-to-open-a-new-school/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:51:31+00:00",
+      "last_modified": "Wed, 22 Dec 2021 20:07:47 GMT",
+      "new_last_modified": "Wed, 22 Dec 2021 20:07:47 GMT",
+      "old_last_modified": "Wed, 22 Dec 2021 20:07:47 GMT",
+      "sheet_names": [],
+      "title_guess": "COMPLETENESS CHECKLIST (TIER I)",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/non-district-school-management/2022-request-for-proposal-to-open-a-new-school/application-and-support-material/2022-rfp-completeness-checklist-tier-i.docx",
+      "year_guess": "2022"
+    },
+    {
+      "category": "globalassets > cps-pages",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "40235",
+      "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "etag": null,
+      "filename": "2022-rfp-completeness-checklist-tier-ii.docx",
+      "format": "Document (docx)",
+      "found_on_pages": [
+        "https://www.cps.edu/about/non-district-school-management/2022-request-for-proposal-to-open-a-new-school/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:51:32+00:00",
+      "last_modified": "Wed, 22 Dec 2021 20:07:59 GMT",
+      "new_last_modified": "Wed, 22 Dec 2021 20:07:59 GMT",
+      "old_last_modified": "Wed, 22 Dec 2021 20:07:59 GMT",
+      "sheet_names": [],
+      "title_guess": "COMPLETENESS CHECKLIST (TIER II)",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/non-district-school-management/2022-request-for-proposal-to-open-a-new-school/application-and-support-material/2022-rfp-completeness-checklist-tier-ii.docx",
+      "year_guess": "2022"
+    },
+    {
+      "category": "globalassets > cps-pages",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "13688",
+      "content_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "etag": "\"1D7F76FEFF59A80\"",
+      "filename": "fy22-el-title-iii-chartercontractschools-final-am.docx",
+      "format": "Document (docx)",
+      "found_on_pages": [
+        "https://www.cps.edu/about/non-district-school-management/2022-request-for-proposal-to-open-a-new-school/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:51:40+00:00",
+      "last_modified": "Wed, 22 Dec 2021 20:10:17 GMT",
+      "new_last_modified": "Wed, 22 Dec 2021 20:10:17 GMT",
+      "old_last_modified": "Wed, 22 Dec 2021 20:10:17 GMT",
+      "sheet_names": [],
+      "title_guess": "FY21 FEDERAL TITLE III OVERVIEW & FAQ",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/non-district-school-management/2022-request-for-proposal-to-open-a-new-school/application-and-support-material/fy22-el-title-iii-chartercontractschools-final-am.docx",
+      "year_guess": "2022"
+    },
+    {
+      "category": "globalassets > cps-pages",
+      "columns": [
+        "School Name",
+        "St. Ambrose"
+      ],
+      "columns_error": null,
+      "content_length": "48640",
+      "content_type": "application/vnd.ms-excel",
+      "etag": "\"1D6AC1BBF71A980\"",
+      "filename": "chicago-prep-middle-school---appendix-1.2---sources-and-uses-of-funds-report5ya0achicagpreparmiddleschool.xls",
+      "format": "Spreadsheet (xls)",
+      "found_on_pages": [
+        "https://www.cps.edu/about/non-district-school-management/2020-request-for-proposal-to-open-a-new-school/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:52:17+00:00",
+      "last_modified": "Tue, 27 Oct 2020 04:43:43 GMT",
+      "new_last_modified": "Tue, 27 Oct 2020 04:43:43 GMT",
+      "old_last_modified": "Tue, 27 Oct 2020 04:43:43 GMT",
+      "sheet_names": [
+        "S&U"
+      ],
+      "title_guess": "Appendix 1.2: Sources and Uses of Funds Report",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/non-district-school-management/2020-request-for-proposal-to-open-a-new-school/chicago-prep-middle-school---appendix-1.2---sources-and-uses-of-funds-report5ya0achicagpreparmiddleschool.xls",
+      "year_guess": "2020"
+    },
+    {
+      "category": "globalassets > cps-pages",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "14625",
+      "content_type": "application/pdf",
+      "etag": null,
+      "filename": "chicago-prep-middle-school---appendix-2.7.3---parent-handbook-narrative9iezchicagpreparmiddleschool.pdf",
+      "format": "PDF",
+      "found_on_pages": [
+        "https://www.cps.edu/about/non-district-school-management/2020-request-for-proposal-to-open-a-new-school/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:52:23+00:00",
+      "last_modified": "Tue, 27 Oct 2020 07:16:02 GMT",
+      "new_last_modified": "Tue, 27 Oct 2020 07:16:02 GMT",
+      "old_last_modified": "Tue, 27 Oct 2020 07:16:02 GMT",
+      "sheet_names": [],
+      "title_guess": "*Appendix 2.8: Parent Handbook",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/non-district-school-management/2020-request-for-proposal-to-open-a-new-school/chicago-prep-middle-school---appendix-2.7.3---parent-handbook-narrative9iezchicagpreparmiddleschool.pdf",
+      "year_guess": "2020"
+    },
+    {
+      "category": "globalassets > cps-pages",
+      "columns": [
+        "School Name"
+      ],
+      "columns_error": null,
+      "content_length": "31232",
+      "content_type": "application/vnd.ms-excel",
+      "etag": null,
+      "filename": "sourcesandusesreporttemplate_2019.xls",
+      "format": "Spreadsheet (xls)",
+      "found_on_pages": [
+        "https://www.cps.edu/about/non-district-school-management/2019-request-for-proposal-to-open-a-new-school/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:52:44+00:00",
+      "last_modified": "Tue, 07 Jul 2020 18:22:26 GMT",
+      "new_last_modified": "Tue, 07 Jul 2020 18:22:26 GMT",
+      "old_last_modified": "Tue, 07 Jul 2020 18:22:26 GMT",
+      "sheet_names": [
+        "S&U"
+      ],
+      "title_guess": "Sources and Uses Report",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/non-district-school-management/2019-request-for-proposal-to-open-a-new-school/sourcesandusesreporttemplate_2019.xls",
+      "year_guess": "2019"
+    },
+    {
+      "category": "globalassets > cps-pages",
+      "columns": [
+        "School Name"
+      ],
+      "columns_error": null,
+      "content_length": "35840",
+      "content_type": "application/vnd.ms-excel",
+      "etag": "\"1D653AD584E9180\"",
+      "filename": "sourcesandusesreport.xls",
+      "format": "Spreadsheet (xls)",
+      "found_on_pages": [
+        "https://www.cps.edu/about/non-district-school-management/2018-request-for-proposal-to-open-a-new-school/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:52:55+00:00",
+      "last_modified": "Mon, 06 Jul 2020 15:51:43 GMT",
+      "new_last_modified": "Mon, 06 Jul 2020 15:51:43 GMT",
+      "old_last_modified": "Mon, 06 Jul 2020 15:51:43 GMT",
+      "sheet_names": [
+        "S&U"
+      ],
+      "title_guess": "Sources and Uses Report",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/non-district-school-management/2018-request-for-proposal-to-open-a-new-school/sourcesandusesreport.xls",
+      "year_guess": "2018"
+    }
+  ],
+  "new_files": [
+    {
+      "category": "globalassets > cps-pages",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "199778",
+      "content_type": "application/pdf",
+      "etag": "\"1DD67D2476B7280\"",
+      "filename": "networkdirectoryforcps.edu10-29-26.pdf",
+      "format": "PDF",
+      "found_on_pages": [
+        "https://www.cps.edu/schools/networks/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:44:24+00:00",
+      "last_modified": "Thu, 29 Oct 2026 18:21:13 GMT",
+      "sheet_names": [],
+      "title_guess": "CHIEF OF SCHOOLS DIRECTORY",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/department-directory/office-of-network-support/networkdirectoryforcps.edu10-29-26.pdf",
+      "year_guess": ""
+    },
+    {
+      "category": "globalassets > cps-pages",
+      "columns": [],
+      "columns_error": null,
+      "content_length": "199778",
+      "content_type": "application/pdf",
+      "etag": "\"1DD67E463780F80\"",
+      "filename": "network-directory-for-cps.edu-printable.pdf",
+      "format": "PDF",
+      "found_on_pages": [
+        "https://www.cps.edu/about/departments/office-of-network-support/"
+      ],
+      "http_error": null,
+      "last_checked": "2026-11-02T16:51:13+00:00",
+      "last_modified": "Thu, 29 Oct 2026 20:30:51 GMT",
+      "sheet_names": [],
+      "title_guess": "Printable version of Chief of Schools Directory",
+      "url": "https://www.cps.edu/globalassets/cps-pages/about-cps/department-directory/office-of-network-support/network-directory-for-cps.edu-printable.pdf",
+      "year_guess": ""
+    }
+  ],
+  "new_google_docs": [
+    "http://docs.google.com/forms/d/1y33HQihYAvwi1CSa1VdSNojqSuw3dEEf_rWSyrCsCII/viewform?edit_requested=true",
+    "https://docs.google.com/forms/d/e/1FAIpQLScY2EBuIjj4_7BiXlhwdhka8mrqgFv4fAeqsBj3l3SuPvzb3Q/viewform"
+  ],
+  "removed_files": [
+    "https://www.cps.edu/globalassets/cps-pages/about-cps/department-directory/office-of-network-support/networkdirectory.pdf"
+  ],
+  "removed_google_docs": [
+    "https://docs.google.com/forms/d/e/1FAIpQLScPVZEBymNabxiDOIBtsJ1_LQMBmcamuGkdqYW8oVq5uNLN1Q/viewform?usp=header"
+  ],
+  "scan_time": "2026-11-02T16:42:31+00:00"
+}
