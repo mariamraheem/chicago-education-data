@@ -1,0 +1,1831 @@
+{
+  "years": [
+    "2017-2018",
+    "2018-2019",
+    "2019-2020",
+    "2020-2021",
+    "2021-2022",
+    "2022-2023",
+    "2023-2024",
+    "2024-2025",
+    "2025-2026"
+  ],
+  "series": {
+    "ela_proficiency": {
+      "cps": [
+        null,
+        27.0,
+        null,
+        21.5,
+        20.1,
+        25.2,
+        29.1,
+        42.0,
+        44.6
+      ],
+      "state": [
+        null,
+        null,
+        null,
+        30.6,
+        29.9,
+        34.6,
+        39.4,
+        52.4,
+        55.4
+      ]
+    },
+    "math_proficiency": {
+      "cps": [
+        null,
+        23.8,
+        null,
+        17.5,
+        15.7,
+        17.8,
+        18.4,
+        27.0,
+        28.6
+      ],
+      "state": [
+        null,
+        null,
+        null,
+        25.8,
+        25.8,
+        26.9,
+        27.9,
+        38.4,
+        39.2
+      ]
+    },
+    "science_proficiency": {
+      "cps": [
+        null,
+        33.4,
+        null,
+        29.1,
+        33.7,
+        36.8,
+        36.5,
+        32.6,
+        37.3
+      ],
+      "state": [
+        null,
+        null,
+        null,
+        42.3,
+        50.7,
+        51.8,
+        52.7,
+        44.6,
+        48.7
+      ]
+    },
+    "ela_growth": {
+      "cps": [
+        44.9,
+        42.4,
+        null,
+        null,
+        48.9,
+        51.2,
+        50.3,
+        49.8,
+        50.0
+      ],
+      "state": [
+        null,
+        null,
+        null,
+        null,
+        50.0,
+        50.0,
+        50.0,
+        50.0,
+        50.0
+      ]
+    },
+    "math_growth": {
+      "cps": [
+        46.2,
+        48.5,
+        null,
+        null,
+        49.1,
+        52.2,
+        50.8,
+        50.1,
+        51.0
+      ],
+      "state": [
+        null,
+        null,
+        null,
+        null,
+        49.9,
+        50.0,
+        50.0,
+        50.0,
+        50.0
+      ]
+    },
+    "iar_ela_rate": {
+      "cps": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        30.5,
+        42.8,
+        45.7
+      ],
+      "state": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        41.2,
+        53.1,
+        56.3
+      ]
+    },
+    "iar_math_rate": {
+      "cps": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        18.3,
+        27.3,
+        29.0
+      ],
+      "state": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        28.4,
+        38.5,
+        39.6
+      ]
+    },
+    "dropout_rate": {
+      "cps": [
+        4.7,
+        7.5,
+        4.9,
+        2.6,
+        4.3,
+        4.1,
+        4.0,
+        3.7,
+        3.8
+      ],
+      "state": [
+        null,
+        null,
+        3.5,
+        2.5,
+        3.4,
+        2.9,
+        2.7,
+        2.4,
+        2.3
+      ]
+    }
+  },
+  "subgroups_latest_year": "2025-2026",
+  "subgroups": {
+    "ela_proficiency": {
+      "Total": 44.6,
+      "White": 76.4,
+      "Black or African American": 35.6,
+      "Hispanic or Latino": 39.7,
+      "Asian": 72.1,
+      "American Indian or Alaska Native": 45.0,
+      "Native Hawaiian or Other Pacific Islander": 64.1,
+      "Two or More Races": 73.5,
+      "MENA": null,
+      "Male": 40.8,
+      "Female": 48.4,
+      "Non Binary": 82.0,
+      "EL": 20.0,
+      "Former EL": 78.8,
+      "Low Income": 36.3,
+      "Children with Disabilities": 25.4,
+      "IEP": 12.4,
+      "Youth in Care": 17.1,
+      "Homeless": 19.3,
+      "Migrant": null,
+      "Military": null
+    },
+    "math_proficiency": {
+      "Total": 28.6,
+      "White": 64.2,
+      "Black or African American": 17.0,
+      "Hispanic or Latino": 23.6,
+      "Asian": 66.4,
+      "American Indian or Alaska Native": 29.4,
+      "Native Hawaiian or Other Pacific Islander": 47.4,
+      "Two or More Races": 58.4,
+      "MENA": null,
+      "Male": 30.2,
+      "Female": 26.9,
+      "Non Binary": 55.6,
+      "EL": 13.0,
+      "Former EL": 52.6,
+      "Low Income": 20.0,
+      "Children with Disabilities": 16.5,
+      "IEP": 7.5,
+      "Youth in Care": 9.6,
+      "Homeless": 9.4,
+      "Migrant": null,
+      "Military": null
+    },
+    "dropout_rate": {
+      "Total": 3.8,
+      "White": 2.3,
+      "Black or African American": 4.1,
+      "Hispanic or Latino": 4.1,
+      "Asian": 1.4,
+      "American Indian or Alaska Native": null,
+      "Native Hawaiian or Other Pacific Islander": null,
+      "Two or More Races": 6.9,
+      "MENA": null,
+      "Male": 4.3,
+      "Female": 3.3,
+      "Non Binary": null,
+      "EL": 5.5,
+      "Former EL": null,
+      "Low Income": 4.0,
+      "Children with Disabilities": 2.2,
+      "IEP": 2.7,
+      "Youth in Care": null,
+      "Homeless": 8.5,
+      "Migrant": null,
+      "Military": null
+    }
+  },
+  "subgroup_groups": {
+    "race_ethnicity": [
+      "White",
+      "Black or African American",
+      "Hispanic or Latino",
+      "Asian",
+      "American Indian or Alaska Native",
+      "Native Hawaiian or Other Pacific Islander",
+      "Two or More Races",
+      "MENA"
+    ],
+    "sex": [
+      "Male",
+      "Female",
+      "Non Binary"
+    ],
+    "el_status": [
+      "EL",
+      "Former EL"
+    ],
+    "income_disability": [
+      "Low Income",
+      "Children with Disabilities",
+      "IEP"
+    ],
+    "other_populations": [
+      "Youth in Care",
+      "Homeless",
+      "Migrant",
+      "Military"
+    ]
+  },
+  "subgroup_trends": {
+    "ela_proficiency": {
+      "Total": {
+        "cps": [
+          null,
+          27.0,
+          null,
+          21.5,
+          20.1,
+          25.2,
+          29.1,
+          42.0,
+          44.6
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          30.6,
+          29.9,
+          34.6,
+          39.4,
+          52.4,
+          55.4
+        ]
+      },
+      "White": {
+        "cps": [
+          null,
+          55.9,
+          null,
+          48.6,
+          48.2,
+          54.3,
+          59.7,
+          72.6,
+          76.4
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          38.2,
+          39.4,
+          44.9,
+          50.2,
+          64.0,
+          67.3
+        ]
+      },
+      "Black or African American": {
+        "cps": [
+          null,
+          17.3,
+          null,
+          10.7,
+          11.2,
+          16.5,
+          21.0,
+          32.4,
+          35.6
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          11.3,
+          12.1,
+          16.1,
+          20.3,
+          31.1,
+          34.1
+        ]
+      },
+      "Hispanic or Latino": {
+        "cps": [
+          null,
+          25.1,
+          null,
+          17.4,
+          16.9,
+          21.2,
+          24.3,
+          38.0,
+          39.7
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          18.3,
+          18.4,
+          22.2,
+          26.7,
+          40.2,
+          42.6
+        ]
+      },
+      "Asian": {
+        "cps": [
+          null,
+          54.4,
+          null,
+          49.6,
+          49.7,
+          54.7,
+          57.7,
+          71.1,
+          72.1
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          57.2,
+          58.6,
+          62.8,
+          66.9,
+          77.8,
+          79.6
+        ]
+      },
+      "American Indian or Alaska Native": {
+        "cps": [
+          null,
+          29.7,
+          null,
+          28.7,
+          26.0,
+          31.2,
+          33.2,
+          43.9,
+          45.0
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          24.4,
+          23.5,
+          27.8,
+          31.0,
+          44.3,
+          47.8
+        ]
+      },
+      "Native Hawaiian or Other Pacific Islander": {
+        "cps": [
+          null,
+          56.4,
+          null,
+          49.4,
+          45.4,
+          51.1,
+          55.3,
+          58.4,
+          64.1
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          35.4,
+          38.7,
+          41.9,
+          46.1,
+          62.1,
+          64.3
+        ]
+      },
+      "Two or More Races": {
+        "cps": [
+          null,
+          53.4,
+          null,
+          48.6,
+          46.1,
+          53.9,
+          58.6,
+          69.1,
+          73.5
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          32.0,
+          33.6,
+          38.6,
+          42.5,
+          55.9,
+          59.9
+        ]
+      },
+      "MENA": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          59.3,
+          57.6
+        ]
+      },
+      "Male": {
+        "cps": [
+          null,
+          22.5,
+          null,
+          18.3,
+          16.7,
+          21.8,
+          25.9,
+          37.7,
+          40.8
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          26.0,
+          25.5,
+          30.3,
+          35.3,
+          47.5,
+          51.0
+        ]
+      },
+      "Female": {
+        "cps": [
+          null,
+          31.6,
+          null,
+          24.7,
+          23.5,
+          28.7,
+          32.4,
+          46.3,
+          48.4
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          35.5,
+          34.7,
+          39.1,
+          43.6,
+          57.6,
+          59.9
+        ]
+      },
+      "Non Binary": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          82.4,
+          82.0
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          81.6,
+          83.9
+        ]
+      },
+      "EL": {
+        "cps": [
+          null,
+          9.9,
+          null,
+          3.6,
+          5.3,
+          7.6,
+          9.7,
+          20.1,
+          20.0
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          5.1,
+          6.9,
+          9.4,
+          11.8,
+          22.2,
+          22.9
+        ]
+      },
+      "Former EL": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          78.8
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          77.7
+        ]
+      },
+      "Low Income": {
+        "cps": [
+          null,
+          21.1,
+          null,
+          13.7,
+          13.7,
+          18.1,
+          21.7,
+          33.9,
+          36.3
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          15.3,
+          15.9,
+          19.9,
+          24.6,
+          36.7,
+          39.3
+        ]
+      },
+      "Children with Disabilities": {
+        "cps": [
+          null,
+          12.4,
+          null,
+          12.5,
+          10.5,
+          13.8,
+          17.5,
+          17.8,
+          25.4
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          12.5,
+          12.9,
+          15.6,
+          18.7,
+          26.0,
+          31.4
+        ]
+      },
+      "IEP": {
+        "cps": [
+          null,
+          5.1,
+          null,
+          4.3,
+          3.9,
+          5.4,
+          7.1,
+          10.5,
+          12.4
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          7.2,
+          7.0,
+          8.7,
+          10.6,
+          16.0,
+          17.7
+        ]
+      },
+      "Youth in Care": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          7.8,
+          9.2,
+          13.7,
+          19.0,
+          17.1
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          null,
+          11.0,
+          12.6,
+          16.1,
+          24.1,
+          26.3
+        ]
+      },
+      "Homeless": {
+        "cps": [
+          null,
+          9.0,
+          null,
+          6.9,
+          5.4,
+          7.6,
+          7.0,
+          18.3,
+          19.3
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          10.8,
+          9.3,
+          11.7,
+          13.0,
+          24.9,
+          26.1
+        ]
+      },
+      "Migrant": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          0.0,
+          10.2,
+          9.0,
+          7.9,
+          16.4,
+          13.1
+        ]
+      },
+      "Military": {
+        "cps": [
+          null,
+          27.3,
+          null,
+          20.0,
+          18.2,
+          27.8,
+          null,
+          47.6,
+          null
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          27.8,
+          31.1,
+          38.3,
+          42.7,
+          55.0,
+          58.4
+        ]
+      }
+    },
+    "math_proficiency": {
+      "Total": {
+        "cps": [
+          null,
+          23.8,
+          null,
+          17.5,
+          15.7,
+          17.8,
+          18.4,
+          27.0,
+          28.6
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          25.8,
+          25.8,
+          26.9,
+          27.9,
+          38.4,
+          39.2
+        ]
+      },
+      "White": {
+        "cps": [
+          null,
+          53.0,
+          null,
+          45.2,
+          45.7,
+          48.4,
+          49.0,
+          61.8,
+          64.2
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          33.0,
+          35.6,
+          36.7,
+          38.0,
+          50.4,
+          51.2
+        ]
+      },
+      "Black or African American": {
+        "cps": [
+          null,
+          12.8,
+          null,
+          6.5,
+          6.2,
+          8.1,
+          9.3,
+          15.4,
+          17.0
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          6.2,
+          6.8,
+          8.0,
+          8.9,
+          15.3,
+          16.3
+        ]
+      },
+      "Hispanic or Latino": {
+        "cps": [
+          null,
+          22.0,
+          null,
+          12.5,
+          12.1,
+          13.6,
+          13.6,
+          22.4,
+          23.6
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          12.7,
+          13.5,
+          14.3,
+          15.3,
+          24.9,
+          25.8
+        ]
+      },
+      "Asian": {
+        "cps": [
+          null,
+          61.2,
+          null,
+          54.6,
+          51.9,
+          53.5,
+          54.2,
+          66.3,
+          66.4
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          60.0,
+          60.2,
+          60.9,
+          61.3,
+          71.2,
+          71.8
+        ]
+      },
+      "American Indian or Alaska Native": {
+        "cps": [
+          null,
+          24.8,
+          null,
+          22.1,
+          21.6,
+          23.9,
+          22.5,
+          29.6,
+          29.4
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          19.5,
+          19.1,
+          20.7,
+          23.3,
+          30.9,
+          31.6
+        ]
+      },
+      "Native Hawaiian or Other Pacific Islander": {
+        "cps": [
+          null,
+          51.8,
+          null,
+          41.1,
+          42.0,
+          40.7,
+          37.5,
+          44.6,
+          47.4
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          29.2,
+          33.4,
+          32.7,
+          34.7,
+          44.8,
+          46.5
+        ]
+      },
+      "Two or More Races": {
+        "cps": [
+          null,
+          47.1,
+          null,
+          42.5,
+          40.9,
+          45.7,
+          47.2,
+          57.0,
+          58.4
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          26.4,
+          28.5,
+          30.0,
+          30.6,
+          41.8,
+          43.4
+        ]
+      },
+      "MENA": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          46.3,
+          45.4
+        ]
+      },
+      "Male": {
+        "cps": [
+          null,
+          23.3,
+          null,
+          18.1,
+          16.6,
+          18.9,
+          19.5,
+          28.6,
+          30.2
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          27.1,
+          27.3,
+          28.4,
+          29.6,
+          40.3,
+          41.2
+        ]
+      },
+      "Female": {
+        "cps": [
+          null,
+          24.3,
+          null,
+          16.9,
+          14.9,
+          16.7,
+          17.3,
+          25.4,
+          26.9
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          24.5,
+          24.3,
+          25.2,
+          26.2,
+          36.3,
+          37.2
+        ]
+      },
+      "Non Binary": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          58.8,
+          55.6
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          56.3,
+          61.3
+        ]
+      },
+      "EL": {
+        "cps": [
+          null,
+          10.9,
+          null,
+          3.8,
+          4.9,
+          5.9,
+          6.2,
+          14.0,
+          13.0
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          5.3,
+          6.8,
+          7.7,
+          8.0,
+          16.0,
+          14.8
+        ]
+      },
+      "Former EL": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          52.6
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          55.6
+        ]
+      },
+      "Low Income": {
+        "cps": [
+          null,
+          18.2,
+          null,
+          9.9,
+          9.6,
+          11.1,
+          11.6,
+          18.8,
+          20.0
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          10.4,
+          11.4,
+          12.5,
+          13.7,
+          22.0,
+          22.5
+        ]
+      },
+      "Children with Disabilities": {
+        "cps": [
+          null,
+          11.2,
+          null,
+          10.8,
+          8.9,
+          10.8,
+          11.8,
+          12.0,
+          16.5
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          11.7,
+          12.2,
+          13.1,
+          13.7,
+          19.7,
+          21.6
+        ]
+      },
+      "IEP": {
+        "cps": [
+          null,
+          4.7,
+          null,
+          4.1,
+          3.8,
+          5.0,
+          5.2,
+          7.1,
+          7.5
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          7.2,
+          7.2,
+          7.9,
+          8.0,
+          12.3,
+          11.7
+        ]
+      },
+      "Youth in Care": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          3.6,
+          3.9,
+          6.0,
+          9.9,
+          9.6
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          null,
+          6.7,
+          6.7,
+          7.6,
+          13.6,
+          13.1
+        ]
+      },
+      "Homeless": {
+        "cps": [
+          null,
+          6.6,
+          null,
+          0.0,
+          3.0,
+          3.5,
+          3.0,
+          8.1,
+          9.4
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          6.1,
+          5.6,
+          6.2,
+          6.4,
+          12.8,
+          12.8
+        ]
+      },
+      "Migrant": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          4.5,
+          7.3,
+          6.5,
+          6.3,
+          10.8,
+          9.2
+        ]
+      },
+      "Military": {
+        "cps": [
+          null,
+          19.1,
+          null,
+          10.0,
+          10.0,
+          22.2,
+          null,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          23.2,
+          26.1,
+          28.9,
+          30.1,
+          39.1,
+          39.7
+        ]
+      }
+    },
+    "dropout_rate": {
+      "Total": {
+        "cps": [
+          4.7,
+          7.5,
+          4.9,
+          2.6,
+          4.3,
+          4.1,
+          4.0,
+          3.7,
+          3.8
+        ],
+        "state": [
+          null,
+          null,
+          3.5,
+          2.5,
+          3.4,
+          2.9,
+          2.7,
+          2.4,
+          2.3
+        ]
+      },
+      "White": {
+        "cps": [
+          2.3,
+          3.8,
+          3.3,
+          2.0,
+          1.9,
+          2.1,
+          2.7,
+          2.1,
+          2.3
+        ],
+        "state": [
+          null,
+          null,
+          2.5,
+          2.1,
+          2.6,
+          2.1,
+          1.9,
+          1.6,
+          1.4
+        ]
+      },
+      "Black or African American": {
+        "cps": [
+          6.3,
+          9.7,
+          6.3,
+          3.2,
+          5.6,
+          5.2,
+          4.5,
+          4.0,
+          4.1
+        ],
+        "state": [
+          null,
+          null,
+          6.2,
+          4.0,
+          5.4,
+          5.1,
+          4.5,
+          4.0,
+          3.8
+        ]
+      },
+      "Hispanic or Latino": {
+        "cps": [
+          4.3,
+          6.9,
+          4.4,
+          2.4,
+          4.2,
+          3.8,
+          4.0,
+          4.1,
+          4.1
+        ],
+        "state": [
+          null,
+          null,
+          3.8,
+          2.6,
+          3.7,
+          3.2,
+          3.2,
+          3.0,
+          2.8
+        ]
+      },
+      "Asian": {
+        "cps": [
+          1.4,
+          3.7,
+          2.5,
+          1.2,
+          1.2,
+          1.5,
+          1.5,
+          1.7,
+          1.4
+        ],
+        "state": [
+          null,
+          null,
+          1.4,
+          0.8,
+          0.7,
+          1.0,
+          1.0,
+          1.3,
+          0.9
+        ]
+      },
+      "American Indian or Alaska Native": {
+        "cps": [
+          3.1,
+          7.3,
+          5.7,
+          4.9,
+          5.9,
+          4.5,
+          3.5,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          null,
+          5.3,
+          4.7,
+          4.7,
+          4.6,
+          4.1,
+          2.2,
+          2.6
+        ]
+      },
+      "Native Hawaiian or Other Pacific Islander": {
+        "cps": [
+          2.7,
+          3.3,
+          1.0,
+          1.0,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          null,
+          4.0,
+          2.0,
+          2.5,
+          3.2,
+          2.3,
+          2.9,
+          1.8
+        ]
+      },
+      "Two or More Races": {
+        "cps": [
+          2.8,
+          5.5,
+          3.3,
+          3.1,
+          3.5,
+          6.4,
+          6.8,
+          3.0,
+          6.9
+        ],
+        "state": [
+          null,
+          null,
+          4.0,
+          3.3,
+          4.4,
+          3.7,
+          3.3,
+          2.7,
+          3.2
+        ]
+      },
+      "MENA": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0.6,
+          1.4
+        ]
+      },
+      "Male": {
+        "cps": [
+          5.4,
+          8.4,
+          5.6,
+          3.3,
+          4.9,
+          4.5,
+          4.3,
+          4.2,
+          4.3
+        ],
+        "state": [
+          null,
+          null,
+          3.9,
+          3.0,
+          3.9,
+          3.2,
+          2.9,
+          2.7,
+          2.5
+        ]
+      },
+      "Female": {
+        "cps": [
+          4.1,
+          6.6,
+          4.2,
+          2.0,
+          3.8,
+          3.7,
+          3.6,
+          null,
+          3.3
+        ],
+        "state": [
+          null,
+          null,
+          3.0,
+          2.0,
+          2.8,
+          2.6,
+          2.5,
+          2.2,
+          2.0
+        ]
+      },
+      "Non Binary": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          4.1,
+          2.5
+        ]
+      },
+      "EL": {
+        "cps": [
+          2.4,
+          2.0,
+          1.1,
+          3.5,
+          4.3,
+          3.9,
+          4.3,
+          5.2,
+          5.5
+        ],
+        "state": [
+          null,
+          null,
+          1.4,
+          4.1,
+          4.3,
+          3.7,
+          3.7,
+          3.8,
+          3.9
+        ]
+      },
+      "Former EL": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "Low Income": {
+        "cps": [
+          5.2,
+          7.6,
+          6.0,
+          2.8,
+          4.4,
+          4.3,
+          4.0,
+          4.1,
+          4.0
+        ],
+        "state": [
+          null,
+          null,
+          5.5,
+          3.8,
+          5.1,
+          4.3,
+          3.9,
+          3.7,
+          3.5
+        ]
+      },
+      "Children with Disabilities": {
+        "cps": [
+          null,
+          3.4,
+          3.0,
+          2.0,
+          2.9,
+          3.2,
+          2.7,
+          3.0,
+          2.2
+        ],
+        "state": [
+          null,
+          null,
+          2.5,
+          2.5,
+          3.0,
+          2.7,
+          2.4,
+          2.2,
+          1.8
+        ]
+      },
+      "IEP": {
+        "cps": [
+          1.8,
+          4.6,
+          4.5,
+          2.4,
+          3.4,
+          3.6,
+          3.2,
+          2.8,
+          2.7
+        ],
+        "state": [
+          null,
+          null,
+          3.8,
+          2.9,
+          3.6,
+          3.2,
+          2.8,
+          2.5,
+          2.3
+        ]
+      },
+      "Youth in Care": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "Homeless": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          8.5
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          7.8
+        ]
+      },
+      "Migrant": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "Military": {
+        "cps": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    }
+  }
+}
