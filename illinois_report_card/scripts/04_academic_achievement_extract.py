@@ -26,7 +26,10 @@ Writes: illinois_report_card/data/dashboard/academic_achievement.json
       "math_growth": {...},
       "iar_ela_rate": {...},
       "iar_math_rate": {...},
-      "dropout_rate": {...}
+      "dropout_rate": {...},
+      "ap_rate": {...},        # % of grades 9-12 who took an AP class; 2023-24+ only
+      "ib_rate": {...},        # % of grades 9-12 who took an IB class; 2023-24+ only
+      "dual_credit_rate": {...}  # % of grades 9-12 who took a Dual Credit class; 2023-24+ only
     },
     "subgroups_latest_year": "2025-2026",
     "subgroups": {
@@ -78,6 +81,45 @@ METRICS: dict[str, list[str]] = {
     "iar_math_rate": ["IAR Math Proficiency Rate"],
     "dropout_rate": ["High School Dropout Rate"],
 }
+
+# AP/IB/Dual Credit participation rate: % of grade 9-12 students who took at
+# least one class of that type. Unlike everything in METRICS above, ISBE
+# does not publish a single "all grades" column for these -- only per-grade
+# (9/10/11/12) counts -- so these are computed, not looked up directly:
+# rate = sum(took-class, grades 9-12) / sum(enrollment, grades 9-12) * 100.
+#
+# Important coverage gap: the General sheet only started reporting grade-
+# level enrollment ("# Student Enrollment -Grade 9", etc.) in 2023-24.
+# Before that, there is no HS-grade-specific enrollment denominator anywhere
+# in the source data (checked Discipline/CTE/other sheets too -- nothing
+# else gives grade 9-12 enrollment pre-2023-24), so these three rates are
+# only computable for 2023-24, 2024-25, 2025-26 and come back null for the
+# six years before that -- same null-for-unavailable-years convention as
+# iar_ela_rate/iar_math_rate.
+GRADE_RATE_METRICS: dict[str, str] = {
+    "ap_rate": "AP classes",
+    "ib_rate": "IB classes",
+    "dual_credit_rate": "Dual Credit classes",
+}
+GRADES = [9, 10, 11, 12]
+
+
+def find_grade_total_column(header: list, took_alias: str, grade: int) -> int | None:
+    """Column index for the Total (all-students) "took <X> classes Grade N"
+    count, trying both the 2017-18-only naming and the 2018-19+ naming."""
+    candidates = [
+        f"# Students who took {took_alias} Grade {grade} Total",
+        f"Number of Students who took {took_alias} Grade {grade} Total",
+    ]
+    for c in candidates:
+        if c in header:
+            return header.index(c)
+    return None
+
+
+def find_grade_enrollment_column(header: list, grade: int) -> int | None:
+    col = f"# Student Enrollment -Grade {grade}"
+    return header.index(col) if col in header else None
 
 # Subgroup label -> column suffix (as it appears after " - " in the
 # ELAMathScience/ELA Math Science sheet's all-grades columns, e.g.
@@ -246,12 +288,60 @@ def _to_float(val: object) -> float | None:
     return None
 
 
+def compute_grade_rate_series(wb: openpyxl.Workbook) -> dict[str, tuple[float | None, float | None]]:
+    """For this year's workbook, return {metric_key: (cps_rate, state_rate)}
+    for ap_rate/ib_rate/dual_credit_rate -- % of grade 9-12 students who took
+    at least one class of that type, computed by summing the Total column
+    across grades 9-12 and dividing by summed grade 9-12 enrollment. Returns
+    None for both years when grade-level enrollment isn't in this year's
+    General sheet at all (pre-2023-24).
+    """
+    if "General" not in wb.sheetnames:
+        return {mk: (None, None) for mk in GRADE_RATE_METRICS}
+    ws = wb["General"]
+    header = [c.value for c in next(ws.iter_rows(min_row=1, max_row=1))]
+    rcdts_idx = header.index("RCDTS")
+
+    enr_cols = {g: find_grade_enrollment_column(header, g) for g in GRADES}
+    took_cols = {
+        mk: {g: find_grade_total_column(header, alias, g) for g in GRADES}
+        for mk, alias in GRADE_RATE_METRICS.items()
+    }
+
+    cps_row, state_row = None, None
+    for row in ws.iter_rows(min_row=2, values_only=True):
+        rcdts = str(row[rcdts_idx]) if row[rcdts_idx] is not None else ""
+        if rcdts in CPS_RCDTS_CANDIDATES:
+            cps_row = row
+        elif rcdts in STATEWIDE_RCDTS_CANDIDATES:
+            state_row = row
+
+    def rate_for(row: tuple | None, metric_key: str) -> float | None:
+        if row is None or any(enr_cols[g] is None for g in GRADES):
+            return None
+        enr_sum = 0.0
+        took_sum = 0.0
+        for g in GRADES:
+            e = _to_float(row[enr_cols[g]]) if enr_cols[g] is not None else None
+            t_idx = took_cols[metric_key][g]
+            t = _to_float(row[t_idx]) if t_idx is not None else None
+            if e is not None:
+                enr_sum += e
+            if t is not None:
+                took_sum += t
+        if enr_sum == 0:
+            return None
+        return round(took_sum / enr_sum * 100, 1)
+
+    return {mk: (rate_for(cps_row, mk), rate_for(state_row, mk)) for mk in GRADE_RATE_METRICS}
+
+
 def extract_academic_achievement(input_dir: Path = INPUT_DIR, output_dir: Path = OUTPUT_DIR) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     years = sorted(p.stem for p in input_dir.glob("*.xlsx"))
     series: dict[str, dict[str, list[float | None]]] = {
-        key: {"cps": [], "state": []} for key in METRICS
+        key: {"cps": [], "state": []} for key in list(METRICS) + list(GRADE_RATE_METRICS)
     }
     # subgroup_trends[metric_key][subgroup_label] = {"cps": [...9 years...], "state": [...]}
     subgroup_trends: dict[str, dict[str, dict[str, list[float | None]]]] = {
@@ -300,6 +390,12 @@ def extract_academic_achievement(input_dir: Path = INPUT_DIR, output_dir: Path =
                 cps_val, state_val = values.get(label, (None, None))
                 subgroup_trends[metric_key][label]["cps"].append(cps_val)
                 subgroup_trends[metric_key][label]["state"].append(state_val)
+
+        grade_rates = compute_grade_rate_series(wb)
+        for metric_key, (cps_val, state_val) in grade_rates.items():
+            series[metric_key]["cps"].append(cps_val)
+            series[metric_key]["state"].append(state_val)
+            print(f"  {metric_key}: CPS={cps_val}, IL={state_val}")
 
         wb.close()
 

@@ -405,7 +405,7 @@
   <div class="header-inner">
     <span class="eyebrow">Illinois Report Card</span>
     <h1>Academic Achievement</h1>
-    <p>ELA, Math, and Science proficiency, student growth percentile, and the high school dropout rate for Chicago Public Schools (District 299) compared to the Illinois state average, 2017-18 to 2025-26.</p>
+    <p>ELA, Math, and Science proficiency, student growth percentile, the high school dropout rate, and AP/IB/Dual Credit participation for Chicago Public Schools (District 299) compared to the Illinois state average, 2017-18 to 2025-26.</p>
     <div class="header-pills">
       <span class="pill">Source: ISBE Illinois Report Card Public Data Set</span>
       <span class="pill">As of 2026-11-02</span>
@@ -435,6 +435,9 @@
       <label class="radio-row"><input type="radio" name="stat" value="ela_growth"> ELA growth percentile</label>
       <label class="radio-row"><input type="radio" name="stat" value="math_growth"> Math growth percentile</label>
       <label class="radio-row"><input type="radio" name="stat" value="dropout_rate"> High school dropout rate</label>
+      <label class="radio-row"><input type="radio" name="stat" value="ap_rate"> AP class participation</label>
+      <label class="radio-row"><input type="radio" name="stat" value="ib_rate"> IB class participation</label>
+      <label class="radio-row"><input type="radio" name="stat" value="dual_credit_rate"> Dual Credit participation</label>
     </div>
     <div class="sidebar-group">
       <h3>View</h3>
@@ -522,6 +525,24 @@ const DATA = {
       cps:   [4.7, 7.5, 4.9, 2.6, 4.3, 4.1, 4.0, 3.7, 3.8],
       state: [null, null, 3.5, 2.5, 3.4, 2.9, 2.7, 2.4, 2.3],
       note: "Illinois didn't report a statewide dropout rate until 2019-20; CPS's own rate is available back to 2017-18."
+    },
+    ap_rate: {
+      label: "AP class participation", unit: "%", eraSplit: false, scale: "narrow_percent",
+      cps:   [null, null, null, null, null, null, 29.6, 29.8, 30.8],
+      state: [null, null, null, null, null, null, 24.8, 26.4, 27.8],
+      note: "% of grades 9-12 enrollment who took at least one AP class. ISBE only began reporting grade-level enrollment in 2023-24, so this isn't computable for earlier years."
+    },
+    ib_rate: {
+      label: "IB class participation", unit: "%", eraSplit: false, scale: "narrow_percent",
+      cps:   [null, null, null, null, null, null, 6.2, 7.3, 7.8],
+      state: [null, null, null, null, null, null, 1.3, 1.5, 1.6],
+      note: "% of grades 9-12 enrollment who took at least one IB class. ISBE only began reporting grade-level enrollment in 2023-24, so this isn't computable for earlier years."
+    },
+    dual_credit_rate: {
+      label: "Dual Credit participation", unit: "%", eraSplit: false, scale: "narrow_percent",
+      cps:   [null, null, null, null, null, null, 5.9, 6.3, 6.8],
+      state: [null, null, null, null, null, null, 16.9, 18.3, 20.4],
+      note: "% of grades 9-12 enrollment who took at least one Dual Credit class. ISBE only began reporting grade-level enrollment in 2023-24, so this isn't computable for earlier years. CPS runs well below the state rate here -- Dual Credit leans on community-college partnerships that are more central to smaller/rural Illinois districts, while CPS has invested more heavily in AP and IB."
     }
   },
   subgroupsLatestYear: "2025-2026",
