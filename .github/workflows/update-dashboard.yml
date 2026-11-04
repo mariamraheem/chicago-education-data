@@ -25,6 +25,8 @@ on:
       - "yrbs/data/clean/**"
       - "five_essentials/data/clean/**"
       - "monitor/**"
+      - "illinois_report_card/site/**"
+      - "illinois_report_card/data/dashboard/**"
       - "site-landing/**"
       - "scripts/build_site_manifest.py"
       - "scripts/build_trends.py"
@@ -56,10 +58,11 @@ jobs:
 
       - name: Assemble Pages site
         run: |
-          mkdir -p site/enrollment site/budget site/monitor
+          mkdir -p site/enrollment site/budget site/monitor site/illinois_report_card
           cp -r site-landing/. site/
           cp -r enrollment/dashboard/. site/enrollment/
           cp -r budget/dashboard/. site/budget/
+          cp -r illinois_report_card/site/. site/illinois_report_card/
 
       - name: Build student well-being dashboard (5Essentials + YRBS by board district)
         run: |
