@@ -1,0 +1,361 @@
+{
+  "years": [
+    "2023-2024",
+    "2024-2025",
+    "2025-2026"
+  ],
+  "series": {
+    "readiness_all_three": {
+      "cps": [
+        29.5,
+        28.1,
+        31.9
+      ],
+      "state": [
+        null,
+        31.5,
+        33.1
+      ]
+    },
+    "readiness_zero": {
+      "cps": [
+        41.1,
+        40.7,
+        37.3
+      ],
+      "state": [
+        null,
+        34.9,
+        33.4
+      ]
+    },
+    "readiness_one": {
+      "cps": [
+        15.0,
+        16.0,
+        15.3
+      ],
+      "state": [
+        null,
+        16.5,
+        16.2
+      ]
+    },
+    "readiness_two": {
+      "cps": [
+        14.4,
+        15.1,
+        15.5
+      ],
+      "state": [
+        null,
+        17.1,
+        17.3
+      ]
+    },
+    "readiness_social_emotional": {
+      "cps": [
+        53.3,
+        53.7,
+        56.6
+      ],
+      "state": [
+        null,
+        58.7,
+        60.2
+      ]
+    },
+    "readiness_language_literacy": {
+      "cps": [
+        44.1,
+        43.6,
+        47.3
+      ],
+      "state": [
+        null,
+        49.5,
+        51.1
+      ]
+    },
+    "readiness_math": {
+      "cps": [
+        34.9,
+        33.3,
+        38.2
+      ],
+      "state": [
+        null,
+        36.9,
+        38.8
+      ]
+    },
+    "rated_rate": {
+      "cps": [
+        88.0,
+        73.3,
+        85.9
+      ],
+      "state": [
+        null,
+        87.1,
+        90.7
+      ]
+    }
+  },
+  "subgroups_latest_year": "2025-2026",
+  "subgroups": {
+    "readiness_all_three": {
+      "Total": 31.9,
+      "White": 45.2,
+      "Black or African American": 32.5,
+      "Hispanic or Latino": 24.5,
+      "Asian": 37.2,
+      "American Indian or Alaska Native": 21.9,
+      "Native Hawaiian or Other Pacific Islander": null,
+      "Two or More Races": 49.9,
+      "MENA": null,
+      "Female": 34.5,
+      "Male": 29.4,
+      "Non Binary": null,
+      "Low Income": 26.3,
+      "Children with Disabilities": 14.1,
+      "IEP": 14.1,
+      "EL": 18.8,
+      "Homeless": 24.8
+    }
+  },
+  "subgroup_groups": {
+    "race_ethnicity": [
+      "White",
+      "Black or African American",
+      "Hispanic or Latino",
+      "Asian",
+      "American Indian or Alaska Native",
+      "Native Hawaiian or Other Pacific Islander",
+      "Two or More Races",
+      "MENA"
+    ],
+    "sex": [
+      "Female",
+      "Male",
+      "Non Binary"
+    ],
+    "income_disability": [
+      "Low Income",
+      "Children with Disabilities",
+      "IEP",
+      "EL"
+    ],
+    "other_populations": [
+      "Homeless"
+    ]
+  },
+  "subgroup_trends": {
+    "readiness_all_three": {
+      "Total": {
+        "cps": [
+          29.5,
+          28.1,
+          31.9
+        ],
+        "state": [
+          null,
+          31.5,
+          33.1
+        ]
+      },
+      "White": {
+        "cps": [
+          43.8,
+          43.3,
+          45.2
+        ],
+        "state": [
+          null,
+          39.3,
+          41.0
+        ]
+      },
+      "Black or African American": {
+        "cps": [
+          31.1,
+          29.3,
+          32.5
+        ],
+        "state": [
+          null,
+          24.5,
+          26.9
+        ]
+      },
+      "Hispanic or Latino": {
+        "cps": [
+          22.5,
+          20.6,
+          24.5
+        ],
+        "state": [
+          null,
+          20.2,
+          22.1
+        ]
+      },
+      "Asian": {
+        "cps": [
+          35.8,
+          35.6,
+          37.2
+        ],
+        "state": [
+          null,
+          37.7,
+          37.3
+        ]
+      },
+      "American Indian or Alaska Native": {
+        "cps": [
+          null,
+          null,
+          21.9
+        ],
+        "state": [
+          null,
+          28.3,
+          23.9
+        ]
+      },
+      "Native Hawaiian or Other Pacific Islander": {
+        "cps": [
+          null,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          24.2,
+          26.3
+        ]
+      },
+      "Two or More Races": {
+        "cps": [
+          47.3,
+          50.3,
+          49.9
+        ],
+        "state": [
+          null,
+          34.4,
+          35.5
+        ]
+      },
+      "MENA": {
+        "cps": [
+          null,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          22.9,
+          24.4
+        ]
+      },
+      "Female": {
+        "cps": [
+          31.1,
+          29.6,
+          34.5
+        ],
+        "state": [
+          null,
+          32.8,
+          34.5
+        ]
+      },
+      "Male": {
+        "cps": [
+          28.0,
+          26.6,
+          29.4
+        ],
+        "state": [
+          null,
+          30.2,
+          31.8
+        ]
+      },
+      "Non Binary": {
+        "cps": [
+          null,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          40.0,
+          44.4
+        ]
+      },
+      "Low Income": {
+        "cps": [
+          24.6,
+          21.9,
+          26.3
+        ],
+        "state": [
+          null,
+          21.7,
+          23.8
+        ]
+      },
+      "Children with Disabilities": {
+        "cps": [
+          13.9,
+          11.8,
+          14.1
+        ],
+        "state": [
+          null,
+          15.5,
+          17.1
+        ]
+      },
+      "IEP": {
+        "cps": [
+          13.9,
+          11.8,
+          14.1
+        ],
+        "state": [
+          null,
+          15.5,
+          17.1
+        ]
+      },
+      "EL": {
+        "cps": [
+          15.6,
+          14.3,
+          18.8
+        ],
+        "state": [
+          null,
+          14.3,
+          16.5
+        ]
+      },
+      "Homeless": {
+        "cps": [
+          19.4,
+          17.7,
+          24.8
+        ],
+        "state": [
+          null,
+          17.2,
+          21.3
+        ]
+      }
+    }
+  }
+}

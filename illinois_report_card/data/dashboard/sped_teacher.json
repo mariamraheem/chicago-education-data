@@ -1,0 +1,584 @@
+{
+  "years": [
+    "2017-2018",
+    "2018-2019",
+    "2019-2020",
+    "2020-2021",
+    "2021-2022",
+    "2022-2023",
+    "2023-2024",
+    "2024-2025",
+    "2025-2026"
+  ],
+  "series": {
+    "iep_rate": {
+      "cps": [
+        14.1,
+        14.1,
+        13.7,
+        14.1,
+        16.1,
+        14.7,
+        15.6,
+        15.8,
+        16.7
+      ],
+      "state": [
+        null,
+        null,
+        14.8,
+        14.9,
+        16.5,
+        15.3,
+        16.0,
+        16.3,
+        16.7
+      ]
+    },
+    "inclusion_rate": {
+      "cps": [
+        null,
+        51.5,
+        52.0,
+        52.4,
+        52.4,
+        52.2,
+        51.6,
+        51.1,
+        51.0
+      ],
+      "state": [
+        null,
+        null,
+        null,
+        54.2,
+        54.2,
+        54.1,
+        54.5,
+        54.4,
+        54.2
+      ]
+    },
+    "separate_facility_rate": {
+      "cps": [
+        null,
+        4.0,
+        4.4,
+        4.7,
+        4.8,
+        4.9,
+        4.9,
+        4.7,
+        4.9
+      ],
+      "state": [
+        null,
+        null,
+        null,
+        6.4,
+        6.3,
+        6.5,
+        6.7,
+        6.9,
+        7.2
+      ]
+    },
+    "teacher_retention_rate": {
+      "cps": [
+        76.9,
+        82.0,
+        81.0,
+        85.8,
+        86.1,
+        88.1,
+        87.4,
+        88.6,
+        91.9
+      ],
+      "state": [
+        null,
+        null,
+        85.9,
+        87.1,
+        87.6,
+        90.2,
+        89.6,
+        89.5,
+        90.8
+      ]
+    },
+    "provisional_license_rate": {
+      "cps": [
+        null,
+        1.7,
+        2.6,
+        3.7,
+        4.2,
+        4.5,
+        4.2,
+        4.2,
+        4.6
+      ],
+      "state": [
+        null,
+        null,
+        1.4,
+        2.0,
+        2.6,
+        3.3,
+        3.1,
+        3.4,
+        3.8
+      ]
+    },
+    "out_of_field_rate": {
+      "cps": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        3.8,
+        3.3,
+        14.7,
+        6.9
+      ],
+      "state": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        4.2,
+        4.1,
+        9.7,
+        8.0
+      ]
+    },
+    "pupil_teacher_ratio_elem": {
+      "cps": [
+        24.5,
+        21.9,
+        21.0,
+        19.3,
+        19.2,
+        18.5,
+        17.6,
+        18.0,
+        18.0
+      ],
+      "state": [
+        null,
+        null,
+        18.1,
+        16.9,
+        16.9,
+        17.1,
+        17.1,
+        17.0,
+        17.0
+      ]
+    },
+    "pupil_teacher_ratio_hs": {
+      "cps": [
+        24.4,
+        22.0,
+        20.6,
+        21.0,
+        20.2,
+        19.9,
+        18.9,
+        19.0,
+        19.0
+      ],
+      "state": [
+        null,
+        null,
+        18.6,
+        18.4,
+        17.9,
+        17.7,
+        17.3,
+        17.0,
+        17.0
+      ]
+    }
+  },
+  "subgroups_latest_year": "2025-2026",
+  "subgroups": {
+    "disability_mix": {
+      "Autism": 18.9,
+      "Deafness": 0.2,
+      "Deaf-Blindness": null,
+      "Developmental Delay": 14.4,
+      "Emotional Disability": 3.0,
+      "Hearing Impairment": 0.3,
+      "Intellectual Disability": 6.0,
+      "Multiple Disabilities": 0.6,
+      "Orthopedic Impairment": 0.1,
+      "Other Health Impairment": 11.2,
+      "Specific Learning Disability": 36.8,
+      "Speech or Language Impairment": 8.2,
+      "Traumatic Brain Injury": 0.1,
+      "Visual Impairment": 0.2
+    }
+  },
+  "subgroup_groups": {
+    "disability_category": [
+      "Autism",
+      "Deafness",
+      "Deaf-Blindness",
+      "Developmental Delay",
+      "Emotional Disability",
+      "Hearing Impairment",
+      "Intellectual Disability",
+      "Multiple Disabilities",
+      "Orthopedic Impairment",
+      "Other Health Impairment",
+      "Specific Learning Disability",
+      "Speech or Language Impairment",
+      "Traumatic Brain Injury",
+      "Visual Impairment"
+    ]
+  },
+  "subgroup_trends": {
+    "disability_mix": {
+      "Autism": {
+        "cps": [
+          null,
+          10.1,
+          10.8,
+          11.2,
+          12.1,
+          13.2,
+          14.6,
+          16.8,
+          18.9
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          10.0,
+          10.5,
+          11.3,
+          12.2,
+          13.5,
+          14.9
+        ]
+      },
+      "Deafness": {
+        "cps": [
+          null,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.2,
+          0.2
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      },
+      "Deaf-Blindness": {
+        "cps": [
+          null,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          null,
+          null,
+          null
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "Developmental Delay": {
+        "cps": [
+          null,
+          11.5,
+          11.6,
+          12.3,
+          12.8,
+          13.1,
+          15.3,
+          15.3,
+          14.4
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          13.3,
+          13.5,
+          13.8,
+          14.4,
+          14.3,
+          13.7
+        ]
+      },
+      "Emotional Disability": {
+        "cps": [
+          null,
+          4.7,
+          4.7,
+          4.7,
+          4.1,
+          3.8,
+          3.6,
+          3.2,
+          3.0
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          6.2,
+          5.7,
+          5.4,
+          5.1,
+          4.7,
+          4.4
+        ]
+      },
+      "Hearing Impairment": {
+        "cps": [
+          null,
+          0.5,
+          0.5,
+          0.4,
+          0.4,
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          0.8,
+          0.8,
+          0.8,
+          0.7,
+          0.7,
+          0.7
+        ]
+      },
+      "Intellectual Disability": {
+        "cps": [
+          null,
+          7.6,
+          7.5,
+          6.9,
+          6.6,
+          6.5,
+          6.1,
+          6.0,
+          6.0
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          4.9,
+          4.8,
+          4.6,
+          4.4,
+          4.3,
+          4.3
+        ]
+      },
+      "Multiple Disabilities": {
+        "cps": [
+          null,
+          0.4,
+          0.4,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.6,
+          0.6
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "Orthopedic Impairment": {
+        "cps": [
+          null,
+          0.2,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          0.3,
+          0.3,
+          0.3,
+          0.2,
+          0.2,
+          0.2
+        ]
+      },
+      "Other Health Impairment": {
+        "cps": [
+          null,
+          9.5,
+          10.3,
+          10.7,
+          11.2,
+          11.4,
+          11.2,
+          11.1,
+          11.2
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          13.6,
+          13.8,
+          13.8,
+          13.7,
+          13.7,
+          13.9
+        ]
+      },
+      "Specific Learning Disability": {
+        "cps": [
+          null,
+          47.1,
+          46.6,
+          44.6,
+          43.6,
+          42.3,
+          39.3,
+          37.7,
+          36.8
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          33.5,
+          33.1,
+          32.3,
+          31.4,
+          30.9,
+          30.6
+        ]
+      },
+      "Speech or Language Impairment": {
+        "cps": [
+          null,
+          7.5,
+          6.7,
+          7.8,
+          7.8,
+          7.9,
+          8.2,
+          8.2,
+          8.2
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          15.7,
+          15.8,
+          16.2,
+          16.3,
+          16.0,
+          15.7
+        ]
+      },
+      "Traumatic Brain Injury": {
+        "cps": [
+          null,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.1
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      },
+      "Visual Impairment": {
+        "cps": [
+          null,
+          0.3,
+          0.3,
+          0.3,
+          0.2,
+          0.3,
+          0.2,
+          0.3,
+          0.2
+        ],
+        "state": [
+          null,
+          null,
+          null,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      }
+    }
+  }
+}
