@@ -1,0 +1,1356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Illinois Report Card: Academic Achievement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --k1c-green-dark: #1B4D25;
+    --k1c-green: #2C8C4C;
+    --k1c-green-deep: #276749;
+    --k1c-blue: #2B6CB0;
+    --k1c-orange: #C05621;
+    --k1c-pill-bg: #E8F5EE;
+    --k1c-bg: #F7F9F7;
+    --k1c-card: #FFFFFF;
+    --text-primary: #1A2E22;
+    --text-secondary: #4A5D52;
+    --text-muted: #8096888;
+    --text-muted: #80968A;
+    --border-hairline: #E2E8E4;
+    --gridline: #EEF2EF;
+    --surface: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--k1c-bg);
+    color: var(--text-primary);
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--k1c-green-deep); }
+
+  /* ---- header banner ---- */
+  .header {
+    background: var(--k1c-green-dark);
+    color: #fff;
+    padding: 28px 24px 24px;
+  }
+  .header-inner { max-width: 1180px; margin: 0 auto; }
+  .eyebrow {
+    display: inline-block;
+    background: rgba(255,255,255,0.14);
+    color: #EAF5EC;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 14px;
+    margin-bottom: 10px;
+  }
+  .header h1 {
+    margin: 0 0 6px;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .header p {
+    margin: 0;
+    font-size: 14.5px;
+    color: #CFE3D4;
+    max-width: 720px;
+    line-height: 1.5;
+  }
+  .header-pills { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill {
+    background: rgba(255,255,255,0.12);
+    color: #EAF5EC;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 14px;
+  }
+
+  /* ---- tab row ---- */
+  .tabs {
+    background: #fff;
+    border-bottom: 1px solid var(--border-hairline);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .tabs-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    padding: 0 24px;
+  }
+  .tab {
+    padding: 13px 16px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    cursor: default;
+  }
+  .tab.active {
+    color: var(--k1c-green-dark);
+    border-bottom-color: var(--k1c-green);
+  }
+  .tab.soon {
+    color: #B9C3BC;
+    cursor: default;
+  }
+  .tab.soon::after {
+    content: "soon";
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #B9C3BC;
+    background: #F1F3F1;
+    padding: 1px 6px;
+    border-radius: 8px;
+    vertical-align: middle;
+  }
+
+  /* ---- layout ---- */
+  .layout {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  @media (max-width: 820px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+
+  /* ---- sidebar ---- */
+  .sidebar {
+    background: var(--k1c-card);
+    border-radius: 10px;
+    padding: 18px 16px;
+    border: 1px solid var(--border-hairline);
+  }
+  .sidebar h3 {
+    margin: 0 0 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .sidebar-group { margin-bottom: 20px; }
+  .sidebar-group:last-child { margin-bottom: 0; }
+  .radio-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 4px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-primary);
+    line-height: 1.35;
+  }
+  .radio-row:hover { background: var(--k1c-pill-bg); }
+  .radio-row input { margin-top: 2px; accent-color: var(--k1c-green); cursor: pointer; }
+  .radio-row.disabled { color: #B9C3BC; cursor: not-allowed; }
+  .radio-row.disabled input { cursor: not-allowed; }
+
+  /* ---- main column ---- */
+  .main { min-width: 0; }
+
+  .takeaway {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--k1c-green-dark);
+    background: var(--k1c-pill-bg);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+  }
+  .takeaway .num { color: var(--k1c-green-deep); }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  @media (max-width: 560px) {
+    .stat-row { grid-template-columns: 1fr; }
+  }
+  .stat-tile {
+    background: var(--k1c-card);
+    border: 1px solid var(--border-hairline);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .stat-tile .label {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 6px;
+  }
+  .stat-tile .value {
+    font-size: 26px;
+    font-weight: 700;
+    font-variant-numeric: proportional-nums;
+  }
+  .stat-tile.cps .value { color: var(--k1c-green-deep); }
+  .stat-tile.state .value { color: var(--k1c-blue); }
+  .stat-tile.gap .value { color: var(--k1c-orange); }
+  .stat-tile .sub { font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
+
+  .card {
+    background: var(--k1c-card);
+    border: 1px solid var(--border-hairline);
+    border-radius: 10px;
+    padding: 18px 20px 14px;
+  }
+  .card h2 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 2px;
+    color: var(--text-primary);
+  }
+  .card .card-sub {
+    font-size: 12.5px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+  }
+
+  .legend {
+    display: flex;
+    gap: 6px 14px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+    font-size: 12.5px;
+    color: var(--text-secondary);
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-swatch { width: 14px; height: 2px; border-radius: 1px; flex-shrink: 0; }
+  /* toggleable legend items (breakdown-trend view): click to show/hide a line,
+     same interaction as the NAEP dashboard's subgroup legend */
+  .legend-item.toggle {
+    cursor: pointer;
+    padding: 3px 8px 3px 6px;
+    border-radius: 12px;
+    user-select: none;
+  }
+  .legend-item.toggle:hover { background: var(--gridline); }
+  .legend-item.toggle.off { color: #B9C3BC; }
+  .legend-item.toggle.off .legend-swatch { background: #D7DCD8 !important; }
+  .legend-item.toggle .legend-swatch { width: 10px; height: 10px; border-radius: 2px; }
+  .legend.lines-mode .legend-item.toggle .legend-swatch { width: 14px; height: 2px; border-radius: 1px; }
+
+  .chart-wrap { position: relative; }
+  svg.chart { width: 100%; height: auto; display: block; overflow: visible; }
+
+  .era-note {
+    font-size: 12px;
+    color: var(--k1c-orange);
+    background: #FBF0E7;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-top: 10px;
+    line-height: 1.45;
+  }
+  .footnote {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  .tooltip {
+    position: fixed;
+    pointer-events: none;
+    background: #1A2E22;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 8px;
+    padding: 8px 10px;
+    line-height: 1.5;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    opacity: 0;
+    transition: opacity 0.08s ease;
+    z-index: 20;
+    white-space: nowrap;
+  }
+  .tooltip .t-year { font-weight: 700; margin-bottom: 3px; }
+  .tooltip .t-row { display: flex; align-items: center; gap: 6px; }
+  .tooltip .t-key { width: 10px; height: 2px; border-radius: 1px; display: inline-block; }
+  .tooltip .t-val { font-weight: 700; }
+
+  .table-toggle {
+    font-size: 12px;
+    color: var(--k1c-green-deep);
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 10px;
+    display: inline-block;
+  }
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin-top: 10px;
+    display: none;
+  }
+  table.data-table.show { display: table; }
+  table.data-table th, table.data-table td {
+    text-align: right;
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--gridline);
+    font-variant-numeric: tabular-nums;
+  }
+  table.data-table th:first-child, table.data-table td:first-child { text-align: left; font-variant-numeric: normal; }
+  table.data-table th { color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; }
+
+  .bar-chart .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .bar-chart .bar-label { width: 150px; font-size: 12.5px; color: var(--text-secondary); flex-shrink: 0; }
+  .bar-chart .bar-track { flex: 1; height: 20px; background: var(--gridline); border-radius: 4px; position: relative; overflow: hidden; }
+  .bar-chart .bar-fill { height: 100%; border-radius: 4px; }
+  .bar-chart .bar-value { width: 48px; text-align: right; font-size: 12.5px; font-weight: 700; flex-shrink: 0; }
+
+  /* ---- breakdown subgroup selector (dropdown, NAEP-dashboard style) ---- */
+  .group-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .group-row label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .group-row select {
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+    background: var(--k1c-card);
+    border: 1px solid var(--border-hairline);
+    border-radius: 8px;
+    padding: 7px 30px 7px 12px;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M4 6l4 4 4-4' stroke='%234A5D52' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 9px center;
+  }
+  .group-row select:hover { border-color: var(--k1c-green); }
+
+  .chart-type-toggle {
+    display: flex;
+    margin-left: auto;
+    border: 1px solid var(--border-hairline);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .chart-type-toggle button {
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: var(--k1c-card);
+    border: none;
+    padding: 7px 14px;
+    cursor: pointer;
+  }
+  .chart-type-toggle button + button { border-left: 1px solid var(--border-hairline); }
+  .chart-type-toggle button:hover { background: var(--gridline); }
+  .chart-type-toggle button.active {
+    background: var(--k1c-pill-bg);
+    color: var(--k1c-green-dark);
+  }
+
+  footer.k1c-footer {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 20px 24px 40px;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body data-palette="#2C8C4C,#2B6CB0">
+
+<div class="header">
+  <div class="header-inner">
+    <span class="eyebrow">Illinois Report Card</span>
+    <h1>Academic Achievement</h1>
+    <p>ELA, Math, and Science proficiency, student growth percentile, and the high school dropout rate for Chicago Public Schools (District 299) compared to the Illinois state average, 2017-18 to 2025-26.</p>
+    <div class="header-pills">
+      <span class="pill">Source: ISBE Illinois Report Card Public Data Set</span>
+      <span class="pill">As of 2026-11-02</span>
+    </div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tabs-inner">
+    <div class="tab active">Academic Achievement</div>
+    <div class="tab soon">ACT</div>
+    <div class="tab soon">SPED &amp; Teacher Assignment</div>
+    <div class="tab soon">CTE</div>
+    <div class="tab soon">Discipline</div>
+    <div class="tab soon">Finance</div>
+    <div class="tab soon">KIDS</div>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sidebar-group">
+      <h3>Statistic</h3>
+      <label class="radio-row"><input type="radio" name="stat" value="ela_proficiency" checked> ELA proficiency</label>
+      <label class="radio-row"><input type="radio" name="stat" value="math_proficiency"> Math proficiency</label>
+      <label class="radio-row"><input type="radio" name="stat" value="science_proficiency"> Science proficiency</label>
+      <label class="radio-row"><input type="radio" name="stat" value="ela_growth"> ELA growth percentile</label>
+      <label class="radio-row"><input type="radio" name="stat" value="math_growth"> Math growth percentile</label>
+      <label class="radio-row"><input type="radio" name="stat" value="dropout_rate"> High school dropout rate</label>
+    </div>
+    <div class="sidebar-group">
+      <h3>View</h3>
+      <label class="radio-row"><input type="radio" name="view" value="trend" checked> Trend, 2017-18 to 2025-26</label>
+      <label class="radio-row" id="subgroup-view-row"><input type="radio" name="view" value="subgroup"> 2025-26 by subgroup (CPS)</label>
+      <label class="radio-row" id="breakdown-view-row"><input type="radio" name="view" value="breakdown"> Trend by subgroup</label>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="takeaway" id="takeaway"></div>
+
+    <div class="stat-row" id="stat-row"></div>
+
+    <div class="card" id="chart-card">
+      <h2 id="chart-title"></h2>
+      <div class="card-sub" id="chart-sub"></div>
+      <div class="group-row" id="group-row" style="display:none;">
+        <label for="subgroup-select">Subgroup</label>
+        <select id="subgroup-select"></select>
+        <div class="chart-type-toggle" id="chart-type-toggle">
+          <button type="button" data-type="bars">Bars</button>
+          <button type="button" data-type="lines">Lines</button>
+        </div>
+      </div>
+      <div class="legend" id="legend"></div>
+      <div class="chart-wrap">
+        <svg class="chart" id="chart" viewBox="0 0 900 360" preserveAspectRatio="xMidYMid meet"></svg>
+        <div class="tooltip" id="tooltip"></div>
+      </div>
+      <div class="era-note" id="era-note" style="display:none;"></div>
+      <div class="footnote" id="footnote"></div>
+      <span class="table-toggle" id="table-toggle">Show as table</span>
+      <table class="data-table" id="data-table"></table>
+    </div>
+  </div>
+</div>
+
+<footer class="k1c-footer">
+  Source: Illinois State Board of Education, Illinois Report Card Public Data Set, scraped directly from isbe.net.
+  "CPS" is Chicago Public Schools District 299; "Illinois" is the statewide total across all districts.
+  2019-20 has no assessment data (assessments were waived for COVID). ISBE reset IAR proficiency cut scores
+  starting 2024-25 -- ELA/Math/Science % proficient before and after that year are not directly comparable
+  and are shown as separate line segments. Growth percentile and the dropout rate are not affected by the
+  cut-score reset and are shown as one continuous line.
+</footer>
+
+<script>
+const DATA = {
+  years: ["2017-2018","2018-2019","2019-2020","2020-2021","2021-2022","2022-2023","2023-2024","2024-2025","2025-2026"],
+  eraBreakIndex: 6, // index of 2023-2024 -- the break falls between this index and the next, for era-split metrics
+  series: {
+    ela_proficiency: {
+      label: "ELA proficiency", unit: "%", eraSplit: true,
+      cps:   [null, 27.0, null, 21.5, 20.1, 25.2, 29.1, 42.0, 44.6],
+      state: [null, null, null, 30.6, 29.9, 34.6, 39.4, 52.4, 55.4],
+      note: "2019-20: no data (assessments waived for COVID)."
+    },
+    math_proficiency: {
+      label: "Math proficiency", unit: "%", eraSplit: true,
+      cps:   [null, 23.8, null, 17.5, 15.7, 17.8, 18.4, 27.0, 28.6],
+      state: [null, null, null, 25.8, 25.8, 26.9, 27.9, 38.4, 39.2],
+      note: "2019-20: no data (assessments waived for COVID)."
+    },
+    science_proficiency: {
+      label: "Science proficiency", unit: "%", eraSplit: true,
+      cps:   [null, 33.4, null, 29.1, 33.7, 36.8, 36.5, 32.6, 37.3],
+      state: [null, null, null, 42.3, 50.7, 51.8, 52.7, 44.6, 48.7],
+      note: "2019-20: no data (assessments waived for COVID)."
+    },
+    ela_growth: {
+      label: "ELA growth percentile", unit: "", eraSplit: false,
+      cps:   [44.9, 42.4, null, null, 48.9, 51.2, 50.3, 49.8, 50.0],
+      state: [null, null, null, null, 50.0, 50.0, 50.0, 50.0, 50.0],
+      note: "2019-20 and 2020-21: no growth percentile -- growth requires two consecutive years of testing, and COVID interrupted both."
+    },
+    math_growth: {
+      label: "Math growth percentile", unit: "", eraSplit: false,
+      cps:   [46.2, 48.5, null, null, 49.1, 52.2, 50.8, 50.1, 51.0],
+      state: [null, null, null, null, 49.9, 50.0, 50.0, 50.0, 50.0],
+      note: "2019-20 and 2020-21: no growth percentile -- growth requires two consecutive years of testing, and COVID interrupted both."
+    },
+    dropout_rate: {
+      label: "High school dropout rate", unit: "%", eraSplit: false, scale: "narrow_percent",
+      cps:   [4.7, 7.5, 4.9, 2.6, 4.3, 4.1, 4.0, 3.7, 3.8],
+      state: [null, null, 3.5, 2.5, 3.4, 2.9, 2.7, 2.4, 2.3],
+      note: "Illinois didn't report a statewide dropout rate until 2019-20; CPS's own rate is available back to 2017-18."
+    }
+  },
+  subgroupsLatestYear: "2025-2026",
+  subgroups: {
+    ela_proficiency: { "Total": 44.6, "White": 76.4, "Black or African American": 35.6, "Hispanic or Latino": 39.7, "Asian": 72.1, "EL": 20.0, "Former EL": 78.8, "Low Income": 36.3, "IEP": 12.4 },
+    math_proficiency: { "Total": 28.6, "White": 64.2, "Black or African American": 17.0, "Hispanic or Latino": 23.6, "Asian": 66.4, "EL": 13.0, "Former EL": 52.6, "Low Income": 20.0, "IEP": 7.5 },
+    dropout_rate: { "Total": 3.8, "White": 2.3, "Black or African American": 4.1, "Hispanic or Latino": 4.1, "Asian": 1.4, "Two or More Races": 6.9, "Male": 4.3, "Female": 3.3, "EL": 5.5, "Low Income": 4.0, "Children with Disabilities": 2.2, "IEP": 2.7, "Homeless": 8.5 }
+  },
+  // ---- subgroup breakdown trends (race/ethnicity, sex, EL status, income &
+  // disability, other populations), 2017-18 to 2025-26. Only ELA and Math
+  // proficiency carry subgroup columns in the source sheets; a subgroup not
+  // yet reportable in a given year (e.g. "Former EL" before 2025-26, "Non
+  // Binary"/"MENA" before recent years) comes back null, same null-handling
+  // as the main trend chart.
+  subgroupGroups: {
+    race_ethnicity: { label: "Race / Ethnicity", labels: ["White","Black or African American","Hispanic or Latino","Asian","American Indian or Alaska Native","Native Hawaiian or Other Pacific Islander","Two or More Races","MENA"] },
+    sex: { label: "Sex", labels: ["Male","Female","Non Binary"] },
+    el_status: { label: "EL status", labels: ["EL","Former EL"] },
+    income_disability: { label: "Income & disability", labels: ["Low Income","Children with Disabilities","IEP"] },
+    other_populations: { label: "Other populations", labels: ["Youth in Care","Homeless","Migrant","Military"] }
+  },
+  subgroupTrends: {
+    ela_proficiency: {
+      "Total": { cps: [null, 27.0, null, 21.5, 20.1, 25.2, 29.1, 42.0, 44.6], state: [null, null, null, 30.6, 29.9, 34.6, 39.4, 52.4, 55.4] },
+      "White": { cps: [null, 55.9, null, 48.6, 48.2, 54.3, 59.7, 72.6, 76.4], state: [null, null, null, 38.2, 39.4, 44.9, 50.2, 64.0, 67.3] },
+      "Black or African American": { cps: [null, 17.3, null, 10.7, 11.2, 16.5, 21.0, 32.4, 35.6], state: [null, null, null, 11.3, 12.1, 16.1, 20.3, 31.1, 34.1] },
+      "Hispanic or Latino": { cps: [null, 25.1, null, 17.4, 16.9, 21.2, 24.3, 38.0, 39.7], state: [null, null, null, 18.3, 18.4, 22.2, 26.7, 40.2, 42.6] },
+      "Asian": { cps: [null, 54.4, null, 49.6, 49.7, 54.7, 57.7, 71.1, 72.1], state: [null, null, null, 57.2, 58.6, 62.8, 66.9, 77.8, 79.6] },
+      "American Indian or Alaska Native": { cps: [null, 29.7, null, 28.7, 26.0, 31.2, 33.2, 43.9, 45.0], state: [null, null, null, 24.4, 23.5, 27.8, 31.0, 44.3, 47.8] },
+      "Native Hawaiian or Other Pacific Islander": { cps: [null, 56.4, null, 49.4, 45.4, 51.1, 55.3, 58.4, 64.1], state: [null, null, null, 35.4, 38.7, 41.9, 46.1, 62.1, 64.3] },
+      "Two or More Races": { cps: [null, 53.4, null, 48.6, 46.1, 53.9, 58.6, 69.1, 73.5], state: [null, null, null, 32.0, 33.6, 38.6, 42.5, 55.9, 59.9] },
+      "MENA": { cps: [null, null, null, null, null, null, null, null, null], state: [null, null, null, null, null, null, null, 59.3, 57.6] },
+      "Male": { cps: [null, 22.5, null, 18.3, 16.7, 21.8, 25.9, 37.7, 40.8], state: [null, null, null, 26.0, 25.5, 30.3, 35.3, 47.5, 51.0] },
+      "Female": { cps: [null, 31.6, null, 24.7, 23.5, 28.7, 32.4, 46.3, 48.4], state: [null, null, null, 35.5, 34.7, 39.1, 43.6, 57.6, 59.9] },
+      "Non Binary": { cps: [null, null, null, null, null, null, null, 82.4, 82.0], state: [null, null, null, null, null, null, null, 81.6, 83.9] },
+      "EL": { cps: [null, 9.9, null, 3.6, 5.3, 7.6, 9.7, 20.1, 20.0], state: [null, null, null, 5.1, 6.9, 9.4, 11.8, 22.2, 22.9] },
+      "Former EL": { cps: [null, null, null, null, null, null, null, null, 78.8], state: [null, null, null, null, null, null, null, null, 77.7] },
+      "Low Income": { cps: [null, 21.1, null, 13.7, 13.7, 18.1, 21.7, 33.9, 36.3], state: [null, null, null, 15.3, 15.9, 19.9, 24.6, 36.7, 39.3] },
+      "Children with Disabilities": { cps: [null, 12.4, null, 12.5, 10.5, 13.8, 17.5, 17.8, 25.4], state: [null, null, null, 12.5, 12.9, 15.6, 18.7, 26.0, 31.4] },
+      "IEP": { cps: [null, 5.1, null, 4.3, 3.9, 5.4, 7.1, 10.5, 12.4], state: [null, null, null, 7.2, 7.0, 8.7, 10.6, 16.0, 17.7] },
+      "Youth in Care": { cps: [null, null, null, null, 7.8, 9.2, 13.7, 19.0, 17.1], state: [null, null, null, null, 11.0, 12.6, 16.1, 24.1, 26.3] },
+      "Homeless": { cps: [null, 9.0, null, 6.9, 5.4, 7.6, 7.0, 18.3, 19.3], state: [null, null, null, 10.8, 9.3, 11.7, 13.0, 24.9, 26.1] },
+      "Migrant": { cps: [null, null, null, null, null, null, null, null, null], state: [null, null, null, 0.0, 10.2, 9.0, 7.9, 16.4, 13.1] },
+      "Military": { cps: [null, 27.3, null, 20.0, 18.2, 27.8, null, 47.6, null], state: [null, null, null, 27.8, 31.1, 38.3, 42.7, 55.0, 58.4] }
+    },
+    math_proficiency: {
+      "Total": { cps: [null, 23.8, null, 17.5, 15.7, 17.8, 18.4, 27.0, 28.6], state: [null, null, null, 25.8, 25.8, 26.9, 27.9, 38.4, 39.2] },
+      "White": { cps: [null, 53.0, null, 45.2, 45.7, 48.4, 49.0, 61.8, 64.2], state: [null, null, null, 33.0, 35.6, 36.7, 38.0, 50.4, 51.2] },
+      "Black or African American": { cps: [null, 12.8, null, 6.5, 6.2, 8.1, 9.3, 15.4, 17.0], state: [null, null, null, 6.2, 6.8, 8.0, 8.9, 15.3, 16.3] },
+      "Hispanic or Latino": { cps: [null, 22.0, null, 12.5, 12.1, 13.6, 13.6, 22.4, 23.6], state: [null, null, null, 12.7, 13.5, 14.3, 15.3, 24.9, 25.8] },
+      "Asian": { cps: [null, 61.2, null, 54.6, 51.9, 53.5, 54.2, 66.3, 66.4], state: [null, null, null, 60.0, 60.2, 60.9, 61.3, 71.2, 71.8] },
+      "American Indian or Alaska Native": { cps: [null, 24.8, null, 22.1, 21.6, 23.9, 22.5, 29.6, 29.4], state: [null, null, null, 19.5, 19.1, 20.7, 23.3, 30.9, 31.6] },
+      "Native Hawaiian or Other Pacific Islander": { cps: [null, 51.8, null, 41.1, 42.0, 40.7, 37.5, 44.6, 47.4], state: [null, null, null, 29.2, 33.4, 32.7, 34.7, 44.8, 46.5] },
+      "Two or More Races": { cps: [null, 47.1, null, 42.5, 40.9, 45.7, 47.2, 57.0, 58.4], state: [null, null, null, 26.4, 28.5, 30.0, 30.6, 41.8, 43.4] },
+      "MENA": { cps: [null, null, null, null, null, null, null, null, null], state: [null, null, null, null, null, null, null, 46.3, 45.4] },
+      "Male": { cps: [null, 23.3, null, 18.1, 16.6, 18.9, 19.5, 28.6, 30.2], state: [null, null, null, 27.1, 27.3, 28.4, 29.6, 40.3, 41.2] },
+      "Female": { cps: [null, 24.3, null, 16.9, 14.9, 16.7, 17.3, 25.4, 26.9], state: [null, null, null, 24.5, 24.3, 25.2, 26.2, 36.3, 37.2] },
+      "Non Binary": { cps: [null, null, null, null, null, null, null, 58.8, 55.6], state: [null, null, null, null, null, null, null, 56.3, 61.3] },
+      "EL": { cps: [null, 10.9, null, 3.8, 4.9, 5.9, 6.2, 14.0, 13.0], state: [null, null, null, 5.3, 6.8, 7.7, 8.0, 16.0, 14.8] },
+      "Former EL": { cps: [null, null, null, null, null, null, null, null, 52.6], state: [null, null, null, null, null, null, null, null, 55.6] },
+      "Low Income": { cps: [null, 18.2, null, 9.9, 9.6, 11.1, 11.6, 18.8, 20.0], state: [null, null, null, 10.4, 11.4, 12.5, 13.7, 22.0, 22.5] },
+      "Children with Disabilities": { cps: [null, 11.2, null, 10.8, 8.9, 10.8, 11.8, 12.0, 16.5], state: [null, null, null, 11.7, 12.2, 13.1, 13.7, 19.7, 21.6] },
+      "IEP": { cps: [null, 4.7, null, 4.1, 3.8, 5.0, 5.2, 7.1, 7.5], state: [null, null, null, 7.2, 7.2, 7.9, 8.0, 12.3, 11.7] },
+      "Youth in Care": { cps: [null, null, null, null, 3.6, 3.9, 6.0, 9.9, 9.6], state: [null, null, null, null, 6.7, 6.7, 7.6, 13.6, 13.1] },
+      "Homeless": { cps: [null, 6.6, null, 0.0, 3.0, 3.5, 3.0, 8.1, 9.4], state: [null, null, null, 6.1, 5.6, 6.2, 6.4, 12.8, 12.8] },
+      "Migrant": { cps: [null, null, null, null, null, null, null, null, null], state: [null, null, null, 4.5, 7.3, 6.5, 6.3, 10.8, 9.2] },
+      "Military": { cps: [null, 19.1, null, 10.0, 10.0, 22.2, null, null, null], state: [null, null, null, 23.2, 26.1, 28.9, 30.1, 39.1, 39.7] }
+    },
+    dropout_rate: {
+      "Total": { cps: [4.7, 7.5, 4.9, 2.6, 4.3, 4.1, 4.0, 3.7, 3.8], state: [null, null, 3.5, 2.5, 3.4, 2.9, 2.7, 2.4, 2.3] },
+      "White": { cps: [2.3, 3.8, 3.3, 2.0, 1.9, 2.1, 2.7, 2.1, 2.3], state: [null, null, 2.5, 2.1, 2.6, 2.1, 1.9, 1.6, 1.4] },
+      "Black or African American": { cps: [6.3, 9.7, 6.3, 3.2, 5.6, 5.2, 4.5, 4.0, 4.1], state: [null, null, 6.2, 4.0, 5.4, 5.1, 4.5, 4.0, 3.8] },
+      "Hispanic or Latino": { cps: [4.3, 6.9, 4.4, 2.4, 4.2, 3.8, 4.0, 4.1, 4.1], state: [null, null, 3.8, 2.6, 3.7, 3.2, 3.2, 3.0, 2.8] },
+      "Asian": { cps: [1.4, 3.7, 2.5, 1.2, 1.2, 1.5, 1.5, 1.7, 1.4], state: [null, null, 1.4, 0.8, 0.7, 1.0, 1.0, 1.3, 0.9] },
+      "American Indian or Alaska Native": { cps: [3.1, 7.3, 5.7, 4.9, 5.9, 4.5, 3.5, null, null], state: [null, null, 5.3, 4.7, 4.7, 4.6, 4.1, 2.2, 2.6] },
+      "Native Hawaiian or Other Pacific Islander": { cps: [2.7, 3.3, 1.0, 1.0, null, null, null, null, null], state: [null, null, 4.0, 2.0, 2.5, 3.2, 2.3, 2.9, 1.8] },
+      "Two or More Races": { cps: [2.8, 5.5, 3.3, 3.1, 3.5, 6.4, 6.8, 3.0, 6.9], state: [null, null, 4.0, 3.3, 4.4, 3.7, 3.3, 2.7, 3.2] },
+      "MENA": { cps: [null, null, null, null, null, null, null, null, null], state: [null, null, null, null, null, null, null, 0.6, 1.4] },
+      "Male": { cps: [5.4, 8.4, 5.6, 3.3, 4.9, 4.5, 4.3, 4.2, 4.3], state: [null, null, 3.9, 3.0, 3.9, 3.2, 2.9, 2.7, 2.5] },
+      "Female": { cps: [4.1, 6.6, 4.2, 2.0, 3.8, 3.7, 3.6, null, 3.3], state: [null, null, 3.0, 2.0, 2.8, 2.6, 2.5, 2.2, 2.0] },
+      "Non Binary": { cps: [null, null, null, null, null, null, null, null, null], state: [null, null, null, null, null, null, null, 4.1, 2.5] },
+      "EL": { cps: [2.4, 2.0, 1.1, 3.5, 4.3, 3.9, 4.3, 5.2, 5.5], state: [null, null, 1.4, 4.1, 4.3, 3.7, 3.7, 3.8, 3.9] },
+      "Former EL": { cps: [null, null, null, null, null, null, null, null, null], state: [null, null, null, null, null, null, null, null, null] },
+      "Low Income": { cps: [5.2, 7.6, 6.0, 2.8, 4.4, 4.3, 4.0, 4.1, 4.0], state: [null, null, 5.5, 3.8, 5.1, 4.3, 3.9, 3.7, 3.5] },
+      "Children with Disabilities": { cps: [null, 3.4, 3.0, 2.0, 2.9, 3.2, 2.7, 3.0, 2.2], state: [null, null, 2.5, 2.5, 3.0, 2.7, 2.4, 2.2, 1.8] },
+      "IEP": { cps: [1.8, 4.6, 4.5, 2.4, 3.4, 3.6, 3.2, 2.8, 2.7], state: [null, null, 3.8, 2.9, 3.6, 3.2, 2.8, 2.5, 2.3] },
+      "Youth in Care": { cps: [null, null, null, null, null, null, null, null, null], state: [null, null, null, null, null, null, null, null, null] },
+      "Homeless": { cps: [null, null, null, null, null, null, null, null, 8.5], state: [null, null, null, null, null, null, null, null, 7.8] },
+      "Migrant": { cps: [null, null, null, null, null, null, null, null, null], state: [null, null, null, null, null, null, null, null, null] },
+      "Military": { cps: [null, null, null, null, null, null, null, null, null], state: [null, null, null, null, null, null, null, null, null] }
+    }
+  }
+};
+
+const COLOR_CPS = "#2C8C4C";
+const COLOR_STATE = "#2B6CB0";
+const COLOR_SUBGROUP = "#2C8C4C";
+
+// Validated 8-hue categorical palette (dataviz skill's default: blue, orange,
+// aqua, yellow, magenta, green, violet, red) -- CVD-safe in fixed order for
+// up to 8 adjacent line series, which covers our largest breakdown group
+// (Race/Ethnicity, 8 subgroups). Assigned by position within each group's
+// label list, never cycled or re-sorted.
+const CATEGORICAL = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6", "#e34948"];
+
+function fmtVal(v, unit) {
+  if (v === null || v === undefined) return "—";
+  return v.toFixed(1) + (unit || "");
+}
+
+function shortYear(y) {
+  // "2017-2018" -> "'17-18"
+  const [a, b] = y.split("-");
+  return "'" + a.slice(2) + "-" + b.slice(2);
+}
+
+// Display-only relabeling: data keys stay ISBE's literal "Hispanic or
+// Latino" (so lookups into DATA.subgroupTrends / DATA.subgroups keep
+// working unchanged), but K1C's own house style -- already used on the
+// live NAEP dashboard -- shows this group as "Latine". Applied only where
+// a subgroup label is rendered as text, never where it's used as a key.
+const LABEL_DISPLAY_OVERRIDES = { "Hispanic or Latino": "Latine" };
+function displayLabel(label) {
+  return LABEL_DISPLAY_OVERRIDES[label] || label;
+}
+
+// Race/Ethnicity has 8 subgroups -- too many to usefully show at once by
+// default. Start with just these three (the rest are still in the legend,
+// one click away) and show everything by default for the smaller groups.
+const DEFAULT_VISIBLE_SUBGROUPS = {
+  race_ethnicity: ["White", "Black or African American", "Hispanic or Latino"],
+};
+function defaultHiddenForGroup(groupKey) {
+  const group = DATA.subgroupGroups[groupKey];
+  const visible = DEFAULT_VISIBLE_SUBGROUPS[groupKey];
+  if (!group || !visible) return new Set();
+  return new Set(group.labels.filter(l => !visible.includes(l)));
+}
+
+function positionTooltip(tooltip, ev) {
+  // keep the tooltip on-screen when hovering near the chart's right/bottom
+  // edge (e.g. the last year's bars/points) instead of letting it clip off
+  // the viewport.
+  const tw = tooltip.offsetWidth, th = tooltip.offsetHeight;
+  let left = ev.clientX + 14;
+  let top = ev.clientY - 10;
+  if (left + tw > window.innerWidth - 8) left = ev.clientX - tw - 14;
+  if (top + th > window.innerHeight - 8) top = window.innerHeight - th - 8;
+  if (top < 8) top = 8;
+  tooltip.style.left = left + "px";
+  tooltip.style.top = top + "px";
+}
+
+let state = { stat: "ela_proficiency", view: "trend", tableShown: false, breakdownGroup: "race_ethnicity", hiddenSubgroups: defaultHiddenForGroup("race_ethnicity"), breakdownChartType: "bars" };
+
+function currentMetric() { return DATA.series[state.stat]; }
+
+function render() {
+  const metric = currentMetric();
+  const hasSubgroup = !!DATA.subgroups[state.stat];
+  const hasTrends = !!DATA.subgroupTrends[state.stat];
+  document.getElementById("subgroup-view-row").classList.toggle("disabled", !hasSubgroup);
+  document.getElementById("subgroup-view-row").querySelector("input").disabled = !hasSubgroup;
+  document.getElementById("breakdown-view-row").classList.toggle("disabled", !hasTrends);
+  document.getElementById("breakdown-view-row").querySelector("input").disabled = !hasTrends;
+  if (!hasSubgroup && state.view === "subgroup") state.view = "trend";
+  if (!hasTrends && state.view === "breakdown") state.view = "trend";
+  document.querySelectorAll('input[name="view"]').forEach(r => { if (r.value === state.view) r.checked = true; });
+
+  document.getElementById("group-row").style.display = state.view === "breakdown" ? "flex" : "none";
+
+  renderTakeaway(metric);
+  renderStatTiles(metric);
+  if (state.view === "trend") {
+    renderTrendChart(metric);
+  } else if (state.view === "subgroup") {
+    renderSubgroupChart(metric);
+  } else {
+    renderBreakdownTrend(metric);
+  }
+}
+
+function lastValueIndex(arr) {
+  for (let i = arr.length - 1; i >= 0; i--) if (arr[i] !== null) return i;
+  return -1;
+}
+
+// Lowercase a label for mid-sentence use, but leave all-caps acronyms
+// (IAR, ELA, CPS, IEP, ...) alone rather than turning them into "iar ela
+// proficiency rate".
+function sentenceCase(label) {
+  return label.replace(/\S+/g, w => /^[A-Z]+$/.test(w) ? w : w.toLowerCase());
+}
+
+function renderTakeaway(metric) {
+  const el = document.getElementById("takeaway");
+  const cpsLastIdx = lastValueIndex(metric.cps);
+  const stateLastIdx = lastValueIndex(metric.state);
+  if (cpsLastIdx === -1) { el.textContent = "No data available for this statistic."; return; }
+  const cpsLast = metric.cps[cpsLastIdx];
+  const yearLabel = DATA.years[cpsLastIdx];
+  let sentence = `In ${yearLabel}, CPS's ${sentenceCase(metric.label)} was <span class="num">${fmtVal(cpsLast, metric.unit)}</span>`;
+  if (stateLastIdx === cpsLastIdx && metric.state[stateLastIdx] !== null) {
+    const stateLast = metric.state[stateLastIdx];
+    const diff = cpsLast - stateLast;
+    const dir = diff < 0 ? "below" : (diff > 0 ? "above" : "even with");
+    sentence += `, <span class="num">${fmtVal(Math.abs(diff), metric.unit)}</span> ${dir} the Illinois average of ${fmtVal(stateLast, metric.unit)}.`;
+  } else {
+    sentence += ".";
+  }
+  el.innerHTML = sentence;
+}
+
+function renderStatTiles(metric) {
+  const row = document.getElementById("stat-row");
+  row.innerHTML = "";
+  const cpsLastIdx = lastValueIndex(metric.cps);
+  const stateLastIdx = lastValueIndex(metric.state);
+  const cpsLast = cpsLastIdx >= 0 ? metric.cps[cpsLastIdx] : null;
+  const stateLast = stateLastIdx >= 0 ? metric.state[stateLastIdx] : null;
+  const gap = (cpsLast !== null && stateLast !== null) ? cpsLast - stateLast : null;
+
+  const tiles = [
+    { cls: "cps", label: `CPS (${cpsLastIdx >= 0 ? DATA.years[cpsLastIdx] : "—"})`, value: fmtVal(cpsLast, metric.unit) },
+    { cls: "state", label: `Illinois (${stateLastIdx >= 0 ? DATA.years[stateLastIdx] : "—"})`, value: fmtVal(stateLast, metric.unit) },
+    { cls: "gap", label: "Gap vs. Illinois", value: gap !== null ? (gap >= 0 ? "+" : "") + fmtVal(gap, metric.unit) : "—" }
+  ];
+  tiles.forEach(t => {
+    const d = document.createElement("div");
+    d.className = "stat-tile " + t.cls;
+    d.innerHTML = `<div class="label">${t.label}</div><div class="value">${t.value}</div>`;
+    row.appendChild(d);
+  });
+}
+
+// ---------------- Trend line chart (SVG) ----------------
+
+const CH = { w: 900, h: 360, padL: 44, padR: 16, padT: 16, padB: 36 };
+
+function renderTrendChart(metric) {
+  document.getElementById("chart-title").textContent = metric.label + ": CPS vs. Illinois";
+  const subNote = metric.scale === "narrow_percent" ? " · percent of students"
+    : metric.unit === "%" ? " · percent proficient"
+    : " · percentile, 50 = statewide median growth";
+  document.getElementById("chart-sub").textContent = "2017-18 to 2025-26" + subNote;
+
+  const legend = document.getElementById("legend");
+  legend.innerHTML = `
+    <span class="legend-item"><span class="legend-swatch" style="background:${COLOR_CPS}"></span>CPS</span>
+    <span class="legend-item"><span class="legend-swatch" style="background:${COLOR_STATE}"></span>Illinois</span>
+  `;
+
+  const eraNote = document.getElementById("era-note");
+  if (metric.eraSplit) {
+    eraNote.style.display = "block";
+    eraNote.textContent = "ISBE reset IAR proficiency cut scores starting 2024-25. The years before and after the break are not directly comparable, so they're drawn as two separate segments rather than one continuous trend.";
+  } else {
+    eraNote.style.display = "none";
+  }
+  document.getElementById("footnote").textContent = metric.note || "";
+
+  const svg = document.getElementById("chart");
+  svg.innerHTML = "";
+  svg.setAttribute("viewBox", `0 0 ${CH.w} ${CH.h}`);
+
+  const n = DATA.years.length;
+  const plotW = CH.w - CH.padL - CH.padR;
+  const plotH = CH.h - CH.padT - CH.padB;
+  const x = i => CH.padL + (plotW * i) / (n - 1);
+
+  // y domain
+  let allVals = metric.cps.concat(metric.state).filter(v => v !== null);
+  let yMin, yMax;
+  if (metric.scale === "narrow_percent") {
+    // Small-percentage metrics (e.g. dropout rate, single digits) would be
+    // squashed to a sliver on the 0-60%+ axis proficiency metrics use, so
+    // they get their own tight, data-driven domain instead.
+    const dMin = Math.min(...allVals), dMax = Math.max(...allVals);
+    yMin = 0;
+    yMax = Math.max(2, Math.ceil(dMax / 2) * 2);
+  } else if (metric.unit === "%") {
+    yMin = 0; yMax = Math.max(60, Math.ceil(Math.max(...allVals, 0) / 10) * 10);
+  } else {
+    yMin = Math.min(35, Math.floor(Math.min(...allVals, 40) / 5) * 5);
+    yMax = Math.max(65, Math.ceil(Math.max(...allVals, 60) / 5) * 5);
+  }
+  const y = v => CH.padT + plotH - ((v - yMin) / (yMax - yMin)) * plotH;
+
+  const svgns = "http://www.w3.org/2000/svg";
+  function el(tag, attrs) {
+    const e = document.createElementNS(svgns, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  // gridlines + y ticks
+  const ticks = metric.unit === "%" ? [0, (yMax)/2, yMax] : [yMin, (yMin+yMax)/2, yMax];
+  const niceTicks = metric.unit === "%"
+    ? [0, Math.round(yMax/2/5)*5, yMax]
+    : [yMin, 50, yMax];
+  niceTicks.forEach(t => {
+    const gy = y(t);
+    svg.appendChild(el("line", { x1: CH.padL, x2: CH.w - CH.padR, y1: gy, y2: gy, stroke: "#EEF2EF", "stroke-width": 1 }));
+    const lbl = el("text", { x: CH.padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 11, fill: "#8096888", class: "axis-label" });
+    lbl.setAttribute("fill", "#80968A");
+    lbl.textContent = Math.round(t) + (metric.unit || "");
+    svg.appendChild(lbl);
+  });
+
+  // x labels (every year, rotated-free since there are only 9)
+  DATA.years.forEach((yr, i) => {
+    const lbl = el("text", { x: x(i), y: CH.h - CH.padB + 18, "text-anchor": "middle", "font-size": 11 });
+    lbl.setAttribute("fill", "#80968A");
+    lbl.textContent = shortYear(yr);
+    svg.appendChild(lbl);
+  });
+
+  // era break marker
+  if (metric.eraSplit) {
+    const bx = (x(DATA.eraBreakIndex) + x(DATA.eraBreakIndex + 1)) / 2;
+    svg.appendChild(el("line", { x1: bx, x2: bx, y1: CH.padT, y2: CH.padT + plotH, stroke: "#C05621", "stroke-width": 1, "stroke-dasharray": "3,3", opacity: 0.6 }));
+  }
+
+  function drawSeries(arr, color) {
+    // break into contiguous non-null runs; also force-break across the era boundary
+    let runs = [];
+    let cur = [];
+    for (let i = 0; i < arr.length; i++) {
+      const breakHere = metric.eraSplit && i === DATA.eraBreakIndex + 1 && cur.length > 0;
+      if (arr[i] === null || breakHere) {
+        if (cur.length) runs.push(cur);
+        cur = [];
+      }
+      if (arr[i] !== null) cur.push(i);
+    }
+    if (cur.length) runs.push(cur);
+
+    runs.forEach(run => {
+      if (run.length > 1) {
+        const d = run.map((idx, k) => `${k === 0 ? "M" : "L"} ${x(idx).toFixed(1)} ${y(arr[idx]).toFixed(1)}`).join(" ");
+        svg.appendChild(el("path", { d, fill: "none", stroke: color, "stroke-width": 2, "stroke-linecap": "round", "stroke-linejoin": "round" }));
+      }
+      run.forEach((idx, k) => {
+        const isEnd = k === run.length - 1;
+        const r = isEnd ? 5 : 3.5;
+        svg.appendChild(el("circle", { cx: x(idx), cy: y(arr[idx]), r: r + 2, fill: "#fff" }));
+        svg.appendChild(el("circle", { cx: x(idx), cy: y(arr[idx]), r: r, fill: color }));
+      });
+      // end label on the last run's last point
+      if (run === runs[runs.length - 1]) {
+        const lastIdx = run[run.length - 1];
+        const lbl = el("text", { x: x(lastIdx) + 8, y: y(arr[lastIdx]) + 4, "font-size": 12, "font-weight": 700 });
+        lbl.setAttribute("fill", color);
+        lbl.textContent = fmtVal(arr[lastIdx], metric.unit);
+        svg.appendChild(lbl);
+      }
+    });
+  }
+
+  drawSeries(metric.state, COLOR_STATE);
+  drawSeries(metric.cps, COLOR_CPS);
+
+  // hover crosshair + tooltip
+  const hitLayer = el("rect", { x: CH.padL, y: CH.padT, width: plotW, height: plotH, fill: "transparent" });
+  const crosshair = el("line", { x1: 0, x2: 0, y1: CH.padT, y2: CH.padT + plotH, stroke: "#C8D2CC", "stroke-width": 1, opacity: 0 });
+  svg.appendChild(crosshair);
+  svg.appendChild(hitLayer);
+
+  const tooltip = document.getElementById("tooltip");
+  hitLayer.addEventListener("pointermove", (ev) => {
+    const rect = svg.getBoundingClientRect();
+    const scaleX = CH.w / rect.width;
+    const px = (ev.clientX - rect.left) * scaleX;
+    let idx = Math.round(((px - CH.padL) / plotW) * (n - 1));
+    idx = Math.max(0, Math.min(n - 1, idx));
+    crosshair.setAttribute("x1", x(idx));
+    crosshair.setAttribute("x2", x(idx));
+    crosshair.setAttribute("opacity", 1);
+
+    const cpsV = metric.cps[idx], stateV = metric.state[idx];
+    let rows = "";
+    if (cpsV !== null) rows += `<div class="t-row"><span class="t-key" style="background:${COLOR_CPS}"></span>CPS <span class="t-val">${fmtVal(cpsV, metric.unit)}</span></div>`;
+    if (stateV !== null) rows += `<div class="t-row"><span class="t-key" style="background:${COLOR_STATE}"></span>Illinois <span class="t-val">${fmtVal(stateV, metric.unit)}</span></div>`;
+    if (!rows) rows = `<div class="t-row">No data this year</div>`;
+    tooltip.innerHTML = `<div class="t-year">${DATA.years[idx]}</div>${rows}`;
+    tooltip.style.opacity = 1;
+    positionTooltip(tooltip, ev);
+  });
+  hitLayer.addEventListener("pointerleave", () => {
+    tooltip.style.opacity = 0;
+    crosshair.setAttribute("opacity", 0);
+  });
+
+  renderTable(metric);
+}
+
+function renderTable(metric) {
+  const table = document.getElementById("data-table");
+  let html = "<thead><tr><th>Year</th>";
+  DATA.years.forEach(y => html += `<th>${shortYear(y)}</th>`);
+  html += "</tr></thead><tbody>";
+  html += "<tr><td>CPS</td>" + metric.cps.map(v => `<td>${fmtVal(v, metric.unit)}</td>`).join("") + "</tr>";
+  html += "<tr><td>Illinois</td>" + metric.state.map(v => `<td>${fmtVal(v, metric.unit)}</td>`).join("") + "</tr>";
+  html += "</tbody>";
+  table.innerHTML = html;
+}
+
+// ---------------- Subgroup snapshot (horizontal bars) ----------------
+
+// Section order for the 2025-26 snapshot view. "Total" stays ungrouped at
+// the top as the overall reference; everything else is organized under a
+// subheader so related subgroups read together instead of as one flat list.
+const SNAPSHOT_GROUPS = [
+  { header: null, labels: ["Total"] },
+  { header: "Race", labels: ["White", "Black or African American", "Hispanic or Latino", "Asian"] },
+  { header: "English Learners", labels: ["EL", "Former EL"] },
+  { header: "Other demographics", labels: ["Low Income", "IEP"] },
+];
+
+function renderSubgroupChart(metric) {
+  document.getElementById("chart-title").textContent = metric.label + " by subgroup — CPS, " + DATA.subgroupsLatestYear;
+  document.getElementById("chart-sub").textContent = "Latest year only" + (metric.scale === "narrow_percent" ? " · percent of students" : " · percent proficient");
+  document.getElementById("legend").innerHTML = "";
+  document.getElementById("era-note").style.display = "none";
+  document.getElementById("footnote").textContent = metric.scale === "narrow_percent"
+    ? "A blank row means ISBE did not report that subgroup for CPS this year — usually because the group was too small to report, or not yet broken out separately."
+    : "\"Former EL\" became a reportable assessment subgroup starting 2025-26; earlier years don't have it.";
+
+  const svg = document.getElementById("chart");
+  svg.innerHTML = "";
+  const data = DATA.subgroups[state.stat];
+  const presentVals = Object.values(data).filter(v => v !== null && v !== undefined);
+  const maxV = metric.scale === "narrow_percent"
+    ? Math.max(2, Math.ceil(Math.max(...presentVals) / 2) * 2)
+    : 100;
+  const rowH = 30, headerH = 26, sectionGap = 8, padL = 170, padR = 50, padT = 14, chartW = CH.w - padL - padR;
+
+  const svgns = "http://www.w3.org/2000/svg";
+  function el(tag, attrs) {
+    const e = document.createElementNS(svgns, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  // lay out rows first (headers + bars), skipping any label this metric
+  // doesn't have, so the vertical rhythm and total height are both exact
+  const rows = [];
+  let cy = padT;
+  let firstSection = true;
+  SNAPSHOT_GROUPS.forEach(group => {
+    const groupLabels = group.labels.filter(l => data[l] !== undefined);
+    if (groupLabels.length === 0) return;
+    if (group.header) {
+      if (!firstSection) cy += sectionGap;
+      rows.push({ type: "header", text: group.header, y: cy });
+      cy += headerH;
+    }
+    groupLabels.forEach(label => {
+      rows.push({ type: "bar", label, y: cy + rowH / 2 });
+      cy += rowH;
+    });
+    firstSection = false;
+  });
+  const h = cy + 10;
+  svg.setAttribute("viewBox", `0 0 ${CH.w} ${h}`);
+
+  rows.forEach(row => {
+    if (row.type === "header") {
+      if (row.y > padT) {
+        svg.appendChild(el("line", { x1: 0, x2: CH.w, y1: row.y - sectionGap / 2, y2: row.y - sectionGap / 2, stroke: "#EEF2EF", "stroke-width": 1 }));
+      }
+      const lbl = el("text", { x: 0, y: row.y + headerH - 9, "font-size": 11, "font-weight": 700, "letter-spacing": "0.05em" });
+      lbl.setAttribute("fill", "#80968A");
+      lbl.textContent = row.text.toUpperCase();
+      svg.appendChild(lbl);
+      return;
+    }
+
+    const label = row.label, cy = row.y;
+    const v = data[label];
+    const barW = (v / maxV) * chartW;
+    const lbl = el("text", { x: padL - 10, y: cy + 4, "text-anchor": "end", "font-size": 12 });
+    lbl.setAttribute("fill", label === "Total" ? "#1A2E22" : "#4A5D52");
+    lbl.textContent = displayLabel(label);
+    svg.appendChild(lbl);
+
+    svg.appendChild(el("rect", { x: padL, y: cy - 8, width: chartW, height: 16, rx: 4, fill: "#EEF2EF" }));
+    svg.appendChild(el("rect", { x: padL, y: cy - 8, width: Math.max(barW, 2), height: 16, rx: 4, fill: label === "Total" ? "#1B4D25" : COLOR_SUBGROUP, opacity: label === "Total" ? 1 : 0.85 }));
+
+    const vlbl = el("text", { x: padL + chartW + 8, y: cy + 4, "font-size": 12, "font-weight": 700 });
+    vlbl.setAttribute("fill", "#1A2E22");
+    vlbl.textContent = v.toFixed(1) + "%";
+    svg.appendChild(vlbl);
+  });
+
+  // table for subgroup view too, grouped the same way with its own header rows
+  const table = document.getElementById("data-table");
+  let html = "<thead><tr><th>Subgroup</th><th>" + metric.label + "</th></tr></thead><tbody>";
+  SNAPSHOT_GROUPS.forEach(group => {
+    const groupLabels = group.labels.filter(l => data[l] !== undefined);
+    if (groupLabels.length === 0) return;
+    if (group.header) html += `<tr><th colspan="2" style="text-align:left;background:var(--k1c-bg);">${group.header}</th></tr>`;
+    groupLabels.forEach(l => html += `<tr><td>${displayLabel(l)}</td><td>${data[l].toFixed(1)}%</td></tr>`);
+  });
+  html += "</tbody>";
+  table.innerHTML = html;
+}
+
+// ---------------- Breakdown trend (NAEP-style: dropdown + multi-line chart
+// with a clickable, show/hide legend) ----------------
+//
+// One line per subgroup in the selected category, all CPS (district), all
+// drawn on a shared axis like the Chicago's NAEP Story "Who's Left Behind"
+// tab. Clicking a legend item hides that line and excludes it from the
+// y-domain, same behavior as the NAEP dashboard's legend.
+
+let breakdownSelectBuilt = false;
+
+function renderBreakdownTrend(metric) {
+  const subNote = metric.scale === "narrow_percent" ? " · percent of students, CPS only · click a name below to show or hide it" : " · percent proficient, CPS only · click a name below to show or hide it";
+  document.getElementById("chart-sub").textContent = "2017-18 to 2025-26" + subNote;
+  const eraNote = document.getElementById("era-note");
+  if (metric.eraSplit) {
+    eraNote.style.display = "block";
+    eraNote.textContent = "ISBE reset IAR proficiency cut scores starting 2024-25 — the dashed divider marks that break. Values before and after it aren't directly comparable for any subgroup.";
+  } else {
+    eraNote.style.display = "none";
+  }
+  document.getElementById("footnote").textContent = "A gap means ISBE did not report that subgroup for CPS that year — usually because the group wasn't yet broken out separately (e.g. “Former EL” starts 2025-26; “Non Binary” and “MENA” start in recent years) or the group was too small to report that year.";
+
+  // dropdown (built once, selection read each render)
+  const select = document.getElementById("subgroup-select");
+  if (!breakdownSelectBuilt) {
+    Object.keys(DATA.subgroupGroups).forEach(key => {
+      const opt = document.createElement("option");
+      opt.value = key;
+      opt.textContent = DATA.subgroupGroups[key].label;
+      select.appendChild(opt);
+    });
+    select.addEventListener("change", (e) => {
+      state.breakdownGroup = e.target.value;
+      state.hiddenSubgroups = defaultHiddenForGroup(state.breakdownGroup);
+      render();
+    });
+    document.querySelectorAll('#chart-type-toggle button').forEach(btn => {
+      btn.addEventListener("click", () => {
+        state.breakdownChartType = btn.dataset.type;
+        render();
+      });
+    });
+    breakdownSelectBuilt = true;
+  }
+  document.querySelectorAll('#chart-type-toggle button').forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.type === state.breakdownChartType);
+  });
+  select.value = state.breakdownGroup;
+
+  const trends = DATA.subgroupTrends[state.stat];
+  const group = DATA.subgroupGroups[state.breakdownGroup] || DATA.subgroupGroups.race_ethnicity;
+  const labels = group.labels.filter(l => trends[l]);
+
+  document.getElementById("chart-title").textContent = metric.label + " by " + group.label.toLowerCase() + ": CPS trend";
+
+  drawBreakdownChart(metric, labels, trends);
+  renderBreakdownTable(metric, labels, trends);
+}
+
+function drawBreakdownChart(metric, labels, trends) {
+  const svg = document.getElementById("chart");
+  svg.innerHTML = "";
+  svg.setAttribute("viewBox", `0 0 ${CH.w} ${CH.h}`);
+
+  const n = DATA.years.length;
+  const plotW = CH.w - CH.padL - CH.padR;
+  const plotH = CH.h - CH.padT - CH.padB;
+  // band scale: one band per year, bars for that year's visible subgroups
+  // cluster inside it (grouped/clustered bar chart, same x-axis as the
+  // line-chart views elsewhere in this tab).
+  const bandW = plotW / n;
+  const bandX0 = i => CH.padL + bandW * i;
+  const bandCenter = i => CH.padL + bandW * (i + 0.5);
+
+  const svgns = "http://www.w3.org/2000/svg";
+  function el(tag, attrs) {
+    const e = document.createElementNS(svgns, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  // legend (built fresh each render; toggling re-renders the whole chart so
+  // the y-domain always reflects only the visible series, same as NAEP)
+  const legend = document.getElementById("legend");
+  legend.innerHTML = "";
+  legend.classList.toggle("lines-mode", state.breakdownChartType === "lines");
+  labels.forEach((label, i) => {
+    const color = CATEGORICAL[i % CATEGORICAL.length];
+    const off = state.hiddenSubgroups.has(label);
+    const item = document.createElement("span");
+    item.className = "legend-item toggle" + (off ? " off" : "");
+    item.innerHTML = `<span class="legend-swatch" style="background:${off ? "" : color}"></span>${displayLabel(label)}`;
+    item.addEventListener("click", () => {
+      if (state.hiddenSubgroups.has(label)) state.hiddenSubgroups.delete(label);
+      else state.hiddenSubgroups.add(label);
+      drawBreakdownChart(metric, labels, trends);
+    });
+    legend.appendChild(item);
+  });
+
+  const visibleLabels = labels.filter(l => !state.hiddenSubgroups.has(l));
+
+  if (visibleLabels.length === 0) {
+    const msg = el("text", { x: CH.w / 2, y: CH.h / 2, "text-anchor": "middle", "font-size": 13 });
+    msg.setAttribute("fill", "#80968A");
+    msg.textContent = "All subgroups hidden — click a name above to show it again.";
+    svg.appendChild(msg);
+    return;
+  }
+
+  // y domain from visible series only
+  let allVals = [];
+  visibleLabels.forEach(l => { allVals = allVals.concat(trends[l].cps.filter(v => v !== null)); });
+  if (allVals.length === 0) allVals = [0, 100];
+  let yMin = 0, yMax = metric.scale === "narrow_percent"
+    ? Math.max(2, Math.ceil(Math.max(...allVals) / 2) * 2)
+    : Math.max(60, Math.ceil(Math.max(...allVals) / 10) * 10);
+
+  const y = v => CH.padT + plotH - ((v - yMin) / (yMax - yMin)) * plotH;
+
+  // gridlines + y ticks
+  const niceTicks = [0, Math.round(yMax / 2 / 5) * 5, yMax];
+  niceTicks.forEach(t => {
+    const gy = y(t);
+    svg.appendChild(el("line", { x1: CH.padL, x2: CH.w - CH.padR, y1: gy, y2: gy, stroke: "#EEF2EF", "stroke-width": 1 }));
+    const lbl = el("text", { x: CH.padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 11 });
+    lbl.setAttribute("fill", "#80968A");
+    lbl.textContent = Math.round(t) + "%";
+    svg.appendChild(lbl);
+  });
+
+  const tooltip = document.getElementById("tooltip");
+
+  if (state.breakdownChartType === "lines") {
+    // ---- line mode: point-anchored x positions (first year at the plot's
+    // left edge, last at its right edge), same convention as the Trend and
+    // Subgroup-snapshot views elsewhere in this tab. ----
+    const x = i => CH.padL + (plotW * i) / (n - 1);
+
+    DATA.years.forEach((yr, i) => {
+      const lbl = el("text", { x: x(i), y: CH.h - CH.padB + 18, "text-anchor": "middle", "font-size": 11 });
+      lbl.setAttribute("fill", "#80968A");
+      lbl.textContent = shortYear(yr);
+      svg.appendChild(lbl);
+    });
+
+    if (metric.eraSplit) {
+      const bx = (x(DATA.eraBreakIndex) + x(DATA.eraBreakIndex + 1)) / 2;
+      svg.appendChild(el("line", { x1: bx, x2: bx, y1: CH.padT, y2: CH.padT + plotH, stroke: "#C05621", "stroke-width": 1, "stroke-dasharray": "3,3", opacity: 0.6 }));
+    }
+
+    function drawSeries(arr, color) {
+      let runs = [], cur = [];
+      for (let i = 0; i < arr.length; i++) {
+        const breakHere = metric.eraSplit && i === DATA.eraBreakIndex + 1 && cur.length > 0;
+        if (arr[i] === null || breakHere) { if (cur.length) runs.push(cur); cur = []; }
+        if (arr[i] !== null) cur.push(i);
+      }
+      if (cur.length) runs.push(cur);
+      runs.forEach(run => {
+        if (run.length > 1) {
+          const d = run.map((idx, k) => `${k === 0 ? "M" : "L"} ${x(idx).toFixed(1)} ${y(arr[idx]).toFixed(1)}`).join(" ");
+          svg.appendChild(el("path", { d, fill: "none", stroke: color, "stroke-width": 2, "stroke-linecap": "round", "stroke-linejoin": "round" }));
+        }
+        run.forEach((idx, k) => {
+          const isEnd = k === run.length - 1;
+          const r = isEnd ? 4.5 : 3;
+          svg.appendChild(el("circle", { cx: x(idx), cy: y(arr[idx]), r: r + 1.8, fill: "#fff" }));
+          svg.appendChild(el("circle", { cx: x(idx), cy: y(arr[idx]), r: r, fill: color }));
+        });
+      });
+      // No inline end-of-line text labels: with up to 8 series the lines
+      // converge and cross (see Race/Ethnicity), so stacked end labels
+      // collide and clip past the chart edge. The legend + hover tooltip
+      // carry identification instead.
+    }
+
+    visibleLabels.forEach(label => {
+      const color = CATEGORICAL[labels.indexOf(label) % CATEGORICAL.length];
+      drawSeries(trends[label].cps, color);
+    });
+
+    const hitLayer = el("rect", { x: CH.padL, y: CH.padT, width: plotW, height: plotH, fill: "transparent" });
+    const crosshair = el("line", { x1: 0, x2: 0, y1: CH.padT, y2: CH.padT + plotH, stroke: "#C8D2CC", "stroke-width": 1, opacity: 0 });
+    svg.appendChild(crosshair);
+    svg.appendChild(hitLayer);
+
+    hitLayer.addEventListener("pointermove", (ev) => {
+      const rect = svg.getBoundingClientRect();
+      const scaleX = CH.w / rect.width;
+      const px = (ev.clientX - rect.left) * scaleX;
+      let idx = Math.round(((px - CH.padL) / plotW) * (n - 1));
+      idx = Math.max(0, Math.min(n - 1, idx));
+      crosshair.setAttribute("x1", x(idx));
+      crosshair.setAttribute("x2", x(idx));
+      crosshair.setAttribute("opacity", 1);
+
+      let rows = "";
+      visibleLabels.forEach(label => {
+        const color = CATEGORICAL[labels.indexOf(label) % CATEGORICAL.length];
+        const v = trends[label].cps[idx];
+        if (v !== null) rows += `<div class="t-row"><span class="t-key" style="background:${color}"></span>${displayLabel(label)} <span class="t-val">${fmtVal(v, metric.unit)}</span></div>`;
+      });
+      if (!rows) rows = `<div class="t-row">No data this year</div>`;
+      tooltip.innerHTML = `<div class="t-year">${DATA.years[idx]}</div>${rows}`;
+      tooltip.style.opacity = 1;
+      positionTooltip(tooltip, ev);
+    });
+    hitLayer.addEventListener("pointerleave", () => {
+      tooltip.style.opacity = 0;
+      crosshair.setAttribute("opacity", 0);
+    });
+    return;
+  }
+
+  // ---- bar mode (default): band-anchored x positions, one cluster of
+  // bars per year. ----
+
+  // x labels (centered under each year's band)
+  DATA.years.forEach((yr, i) => {
+    const lbl = el("text", { x: bandCenter(i), y: CH.h - CH.padB + 18, "text-anchor": "middle", "font-size": 11 });
+    lbl.setAttribute("fill", "#80968A");
+    lbl.textContent = shortYear(yr);
+    svg.appendChild(lbl);
+  });
+
+  // era break marker, at the actual band boundary
+  if (metric.eraSplit) {
+    const bx = bandX0(DATA.eraBreakIndex + 1);
+    svg.appendChild(el("line", { x1: bx, x2: bx, y1: CH.padT, y2: CH.padT + plotH, stroke: "#C05621", "stroke-width": 1, "stroke-dasharray": "3,3", opacity: 0.6 }));
+  }
+
+  // grouped/clustered bars: one cluster per year, one bar per visible
+  // subgroup within it. A null value just leaves that slot empty (no bar),
+  // same meaning as a gap in the line-chart views.
+  const GAP = 2;
+  const barW = Math.min(24, (bandW * 0.82 - GAP * (visibleLabels.length - 1)) / visibleLabels.length);
+  const clusterW = barW * visibleLabels.length + GAP * (visibleLabels.length - 1);
+
+  const barGroup = el("g", {});
+  svg.appendChild(barGroup);
+
+  function drawBars() {
+    barGroup.innerHTML = "";
+    DATA.years.forEach((yr, i) => {
+      const clusterStart = bandCenter(i) - clusterW / 2;
+      visibleLabels.forEach((label, k) => {
+        const v = trends[label].cps[i];
+        if (v === null) return;
+        const color = CATEGORICAL[labels.indexOf(label) % CATEGORICAL.length];
+        const barX = clusterStart + k * (barW + GAP);
+        const barTop = y(v);
+        const barH = (CH.padT + plotH) - barTop;
+        const rect = el("rect", { x: barX.toFixed(1), y: barTop.toFixed(1), width: barW.toFixed(1), height: Math.max(barH, 0).toFixed(1), rx: 2, fill: color, "data-year-idx": i, "data-label": label });
+        barGroup.appendChild(rect);
+      });
+    });
+  }
+  drawBars();
+
+  // hover: one hit rect per year band (bars are too thin at 8-wide groups
+  // for individual >=24px hit targets, so the whole band is the hit target,
+  // same "one tooltip, every series" readout as the line-chart views).
+  const highlight = el("rect", { y: CH.padT, width: bandW, height: plotH, fill: "#1B4D25", opacity: 0 });
+  svg.insertBefore(highlight, barGroup);
+
+  DATA.years.forEach((yr, i) => {
+    const hit = el("rect", { x: bandX0(i), y: CH.padT, width: bandW, height: plotH, fill: "transparent" });
+    hit.addEventListener("pointermove", (ev) => {
+      highlight.setAttribute("x", bandX0(i));
+      highlight.setAttribute("opacity", 0.05);
+
+      let rows = "";
+      visibleLabels.forEach(label => {
+        const color = CATEGORICAL[labels.indexOf(label) % CATEGORICAL.length];
+        const v = trends[label].cps[i];
+        if (v !== null) rows += `<div class="t-row"><span class="t-key" style="background:${color}"></span>${displayLabel(label)} <span class="t-val">${fmtVal(v, metric.unit)}</span></div>`;
+      });
+      if (!rows) rows = `<div class="t-row">No data this year</div>`;
+      tooltip.innerHTML = `<div class="t-year">${yr}</div>${rows}`;
+      tooltip.style.opacity = 1;
+      positionTooltip(tooltip, ev);
+    });
+    hit.addEventListener("pointerleave", () => {
+      tooltip.style.opacity = 0;
+      highlight.setAttribute("opacity", 0);
+    });
+    svg.appendChild(hit);
+  });
+}
+
+function renderBreakdownTable(metric, labels, trends) {
+  const table = document.getElementById("data-table");
+  let html = "<thead><tr><th>Subgroup</th>";
+  DATA.years.forEach(y => html += `<th>${shortYear(y)}</th>`);
+  html += "</tr></thead><tbody>";
+  labels.forEach(label => {
+    html += `<tr><td>${displayLabel(label)}</td>` + trends[label].cps.map(v => `<td>${fmtVal(v, metric.unit)}</td>`).join("") + "</tr>";
+  });
+  html += "</tbody>";
+  table.innerHTML = html;
+}
+
+// ---------------- wiring ----------------
+
+document.querySelectorAll('input[name="stat"]').forEach(r => r.addEventListener("change", (e) => {
+  state.stat = e.target.value;
+  state.hiddenSubgroups = defaultHiddenForGroup(state.breakdownGroup);
+  render();
+}));
+document.querySelectorAll('input[name="view"]').forEach(r => r.addEventListener("change", (e) => {
+  state.view = e.target.value;
+  render();
+}));
+document.getElementById("table-toggle").addEventListener("click", () => {
+  state.tableShown = !state.tableShown;
+  document.getElementById("data-table").classList.toggle("show", state.tableShown);
+  document.getElementById("table-toggle").textContent = state.tableShown ? "Hide table" : "Show as table";
+});
+
+render();
+</script>
+</body>
+</html>
