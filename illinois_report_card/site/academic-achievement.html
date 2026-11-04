@@ -405,7 +405,7 @@
   <div class="header-inner">
     <span class="eyebrow">Illinois Report Card</span>
     <h1>Academic Achievement</h1>
-    <p>ELA, Math, and Science proficiency, student growth percentile, and the IAR-specific proficiency rate for Chicago Public Schools (District 299) compared to the Illinois state average, 2017-18 to 2025-26.</p>
+    <p>ELA, Math, and Science proficiency, student growth percentile, and the high school dropout rate for Chicago Public Schools (District 299) compared to the Illinois state average, 2017-18 to 2025-26.</p>
     <div class="header-pills">
       <span class="pill">Source: ISBE Illinois Report Card Public Data Set</span>
       <span class="pill">As of 2026-11-02</span>
@@ -435,8 +435,6 @@
       <label class="radio-row"><input type="radio" name="stat" value="ela_growth"> ELA growth percentile</label>
       <label class="radio-row"><input type="radio" name="stat" value="math_growth"> Math growth percentile</label>
       <label class="radio-row"><input type="radio" name="stat" value="dropout_rate"> High school dropout rate</label>
-      <label class="radio-row"><input type="radio" name="stat" value="iar_ela_rate"> IAR ELA rate (separate from above)</label>
-      <label class="radio-row"><input type="radio" name="stat" value="iar_math_rate"> IAR Math rate (separate from above)</label>
     </div>
     <div class="sidebar-group">
       <h3>View</h3>
@@ -479,9 +477,9 @@
   Source: Illinois State Board of Education, Illinois Report Card Public Data Set, scraped directly from isbe.net.
   "CPS" is Chicago Public Schools District 299; "Illinois" is the statewide total across all districts.
   2019-20 has no assessment data (assessments were waived for COVID). ISBE reset IAR proficiency cut scores
-  starting 2024-25 -- proficiency rates (ELA/Math/Science % proficient and the IAR-specific rate) before and
-  after that year are not directly comparable and are shown as separate line segments. Growth percentile is
-  not affected by the cut-score reset and is shown as one continuous line.
+  starting 2024-25 -- ELA/Math/Science % proficient before and after that year are not directly comparable
+  and are shown as separate line segments. Growth percentile and the dropout rate are not affected by the
+  cut-score reset and are shown as one continuous line.
 </footer>
 
 <script>
@@ -518,18 +516,6 @@ const DATA = {
       cps:   [46.2, 48.5, null, null, 49.1, 52.2, 50.8, 50.1, 51.0],
       state: [null, null, null, null, 49.9, 50.0, 50.0, 50.0, 50.0],
       note: "2019-20 and 2020-21: no growth percentile -- growth requires two consecutive years of testing, and COVID interrupted both."
-    },
-    iar_ela_rate: {
-      label: "IAR ELA proficiency rate", unit: "%", eraSplit: true,
-      cps:   [null, null, null, null, null, null, 30.5, 42.8, 45.7],
-      state: [null, null, null, null, null, null, 41.2, 53.1, 56.3],
-      note: "IAR's proficiency rate is only broken out as its own metric starting 2023-24."
-    },
-    iar_math_rate: {
-      label: "IAR Math proficiency rate", unit: "%", eraSplit: true,
-      cps:   [null, null, null, null, null, null, 18.3, 27.3, 29.0],
-      state: [null, null, null, null, null, null, 28.4, 38.5, 39.6],
-      note: "IAR's proficiency rate is only broken out as its own metric starting 2023-24."
     },
     dropout_rate: {
       label: "High school dropout rate", unit: "%", eraSplit: false, scale: "narrow_percent",

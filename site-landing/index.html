@@ -378,7 +378,7 @@ function renderOverview() {
   }
   // Other sources
   const mf = state.manifest;
-  const src = mf ? mf.sources.filter(s => ["enrollment", "budget"].includes(s.id)) : [];
+  const src = mf ? mf.sources.filter(s => ["enrollment", "budget", "illinois_report_card"].includes(s.id)) : [];
   parts.push(`<section class="block">
     <div class="block-head"><div><div class="eyebrow">Enrollment & budget</div><h2>Other CPS data on this site</h2></div></div>
     <div class="cards-2">

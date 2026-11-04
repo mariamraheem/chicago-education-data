@@ -83,6 +83,18 @@ DOMAINS = [
         ],
     ),
     Domain(
+        id="illinois_report_card",
+        label="Illinois Report Card",
+        description="ISBE assessment results (ELA/Math/Science proficiency, ACT/SAT scores, dropout rate) for CPS vs. Illinois, 2017-18 to 2025-26.",
+        tab_url="illinois_report_card/academic-achievement.html",
+        refresh_workflow_url=(
+            "https://github.com/mariamraheem/chicago-education-data/"
+            "actions/workflows/update-dashboard.yml"
+        ),
+        source_dir=REPO_ROOT / "illinois_report_card" / "data" / "dashboard",
+        data_files=[],
+    ),
+    Domain(
         id="yrbs",
         label="Student health (YRBS)",
         description="CDC Youth Risk Behavior Survey: Chicago, Illinois and U.S. high school students, 1991 to the latest survey.",
